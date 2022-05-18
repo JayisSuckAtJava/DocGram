@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team2">
+
+<insert id="test">
+	INSERT INTO department VALUES ( <include refid="allCoulm"></include>)
+</insert>
+
+<sql id="allCoulm" resultType=" " parameterType="sibal">
+8,'설명',1,'별','주소','경로'
+incl
+</sql>
+
+</mapper>
