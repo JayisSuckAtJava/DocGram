@@ -19,7 +19,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Override
+	public String test() {
+		return boardDao.test();
+	}
 
+	
 	/**
 	 * 전체의 게시판 리스트를 조회
 	 * 
@@ -35,9 +41,64 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.readAllList(1);
 	}
 
+	/**
+	 * 한개의 게시글 조회 + 작성자 정보 통합 전달
+	 * 
+	 * @param num 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-18
+	 */
 	@Override
-	public String test() {
-		return boardDao.test();
+	public BoardDto readOne(Integer num) {
+		return boardDao.readOne(num);
 	}
 
+
+	/**
+	 * 게시글 작성 Board 객체를 받아 DB 에 저장
+	 * 
+	 * @param board 컨트롤러로 변환되어 전달받은 BoardDto
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-18
+	 */
+	@Override
+	public void createOne(BoardDto board) {
+		boardDao.createOne(board);
+		
+	}
+
+
+	/**
+	 * 게시글 수정 Board 객체를 받아 DB 에 변동
+	 * 
+	 * @param board 게시글의 정보를 담은 Board 객체
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-18
+	 */
+	@Override
+	public void updateOne(BoardDto board) {
+		boardDao.updateOne(board);
+	}
+
+
+	/**
+	 * 게시글 삭제를 위해 PK 를 받아 DB 에 지정 삭제
+	 * 
+	 * @param 구분을 위한 Board 의 PK 값
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-18
+	 */
+	@Override
+	public void deleteOne(Integer num) {
+		boardDao.deleteOne(num);
+	}
+	
+	
+
+	
 }

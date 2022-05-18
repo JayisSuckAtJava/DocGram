@@ -10,4 +10,12 @@ public interface BoardDao {
 
 	String test();
 
+	BoardDto readOne(Integer num);
+
+	void createOne(BoardDto board);
+
+	void updateOne(BoardDto board);
+
+	void deleteOne(Integer num);
+
 }
