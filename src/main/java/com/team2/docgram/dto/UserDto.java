@@ -23,6 +23,5 @@ public class UserDto {
 	private String email;
 	private String starmark;
 	private int team;
-
 	
 }
