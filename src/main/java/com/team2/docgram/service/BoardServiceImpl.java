@@ -1,11 +1,18 @@
 package com.team2.docgram.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dao.DepartMentDao;
+import com.team2.docgram.dao.FileDao;
+import com.team2.docgram.dao.HashtagDao;
+import com.team2.docgram.dao.TeamDao;
+import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
 
@@ -20,11 +27,21 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@Override
-	public String test() {
-		return boardDao.test();
-	}
-
+	@Autowired
+	private TeamDao teamDao;
+	
+	@Autowired
+	private HashtagDao hashtagDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private FileDao fileDao;
+	
+	@Autowired
+	private DepartMentDao deptDao;
+	
 	
 	/**
 	 * 전체의 게시판 리스트를 조회
@@ -36,15 +53,17 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public List<BoardDto> readAllList(UserDto user) {
-		//Integer num = user.getDeptNum;
-		return boardDao.readAllList(1);
+	public List<BoardDto> readBoardList(UserDto user) {
+		Integer teamNum = user.getTeam();
+		TeamDto team = teamDao.readOne(teamNum);
+		Integer deptNum = teamDao.getDepartMent();
+		return boardDao.readBoardList(dept);
 	}
 
 	/**
 	 * 한개의 게시글 조회 + 작성자 정보 통합 전달
 	 * 
-	 * @param num 
+	 * @param num 해당 Board 의 PK
 	 * @return
 	 * 
 	 * @author JAY - 이재범
@@ -52,7 +71,35 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
-		return boardDao.readOne(num);
+		
+		BoardDto board = boardDao.readOne(num);
+		
+//		Integer fileNum = boardDao.getFile();
+//		FileDto file = fileDao.readOne(fileNum);
+//		
+//		Integer hashtagNum = boardDao.getHashtag();
+//		List<HashtagDto> hashtag = hashtagDao.readList(hashtagNum);
+		FileDto file = readFileByBoardNum(num);
+		List<Hashtag> hashtagList = readHashtagByBoardNum(num);
+		
+		Integer userNum = board.getUser();
+		UserDto user = userDao.readOne(userNum);
+		UserDto userDetail = readTeamAndDept(user);
+		/*
+		 * String name = user.getName(); String dept_num = user.getDept_num(); //Integer
+		 * teamNum = user.getTeam();
+		 * 
+		 * TeamDto team = teamDao.readOne(teamNum); String rank = team.getRank();
+		 * 
+		 * Integer deptNum = team.getDept(); DepartmentDto dept =
+		 * deptDao.readOne(deptNum); String description = dept.getDescription();
+		 */
+		
+		board.setUserDeatil(userDeatil);
+		board.setFileDeatil(file);
+		board.setHashtagList(hashtagList);
+		
+		return board;
 	}
 
 
@@ -99,6 +146,66 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public FileDto readFileByBoardNum(Integer num) {
+		Integer fileNum = boardDao.getFile(num);
+		FileDto file = fileDao.readOne(fileNum);
+		return file;
+	}
+	
+	public List<HashtagDto> readHashtagByBoardNum(Integer num) {
+		Integer hashtagNum = boardDao.getHashtag(num);
+		List<HashtagDto> hashtagList = hashtagDao.readList(hashtagNum);
+		return hashtagList;
+	}
+	
+	public UserDto readTeamAndDept(UserDto user) {;
+		String dept_num = user.getDept();
+		Integer teamNum = user.getTeam();
+		
+		TeamDto team = teamDao.readOne(teamNum);
+		String rank = team.getRank();
+		
+		DepartmentDto dept = deptDao.readOne(deptNum);
+		String description = dept.getDescription();
+		String deptMark = dept.getStarMark();
+		
+		user.setRank(rank);
+		user.setDescription(description);
+		user.setDeptMark();
+		
+		return user;
+	}
 
 	
 }

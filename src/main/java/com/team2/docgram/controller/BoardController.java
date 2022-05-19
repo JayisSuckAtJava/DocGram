@@ -1,7 +1,9 @@
 package com.team2.docgram.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
+import com.team2.docgram.service.FileService;
 
 /** BoardController.java
  *  게시판 접속 처리 컨트롤러
@@ -29,11 +32,10 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/test")
-	@ResponseBody
-	public String test() {
-		return boardService.test();
-	}
+	@Autowired
+	private FileService fileService;
+	
+
 	
 	/** 
 	 *  최초 게시판 접근 - 전체 리스트 조회
@@ -52,7 +54,7 @@ public class BoardController {
 		
 		List<BoardDto> boardList = new ArrayList<BoardDto>();
 		
-		boardList = boardService.readAllList(user);
+		boardList = boardService.readBoardList(user);
 		
 		model.addAttribute("list", boardList);
 		return "board";
@@ -100,11 +102,15 @@ public class BoardController {
 	 * @since 2022-05-17
 	 */
 	@PostMapping("/board/create")
-	public String boardCreate(BoardDto board,HttpSession session) {
-		UserDto user;
-		user = (UserDto) session.getAttribute("user");
-		board.setUser(user);
-		boardService.createOne(board);
+	public String boardCreate(BoardDto board,HttpSession session,String hashtagArray,File file) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		board.setUser(user.getNum());
+		BoardDto createdBoard = boardService.createOne(board);
+		Integer num = createdBoard.getBoardNum();
+		// 파일 서비스로 파일 저장 로직 넘기기 fileService.
+		
+		// 해쉬태그 처리 로직
+		//hashtagArray
 		return "redirect:/board";
 	}
 	
