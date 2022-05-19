@@ -6,6 +6,6 @@ package com.team2.docgram.dao;
  * @author JAY - 이재범
  * @since 2022-05-19
  */
-public class DepartMentDaoImpl implements DepartMentDao {
+public class DepartmentDaoImpl implements DepartmentDao {
 
 }

@@ -96,13 +96,15 @@ public class BoardController {
 	 *  
 	 * @param board boardDto에 값 변환하여 저장
 	 * @param session 작성자의 사용자 정보 session 에서 값 추출 
+	 * @param hashtagList 작성시 입력된 hashtag 의 값들을 담은 List
+	 * @file 업로드된 문서 file 의 값
 	 * @return 작성 완료시 board 로 이동
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022-05-17
 	 */
 	@PostMapping("/board/create")
-	public String boardCreate(BoardDto board,HttpSession session,String hashtagArray,File file) {
+	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,File file) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		board.setUser(user.getNum());
 		BoardDto createdBoard = boardService.createOne(board);
@@ -161,6 +163,30 @@ public class BoardController {
 	public String boardDelete(@PathVariable("num")Integer num) {
 		boardService.deleteOne(num);
 		return "board";
+	}
+	
+	@GetMapping("/")
+	public String homePage(Model model,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		if(user.equals(null)) {
+			return "main";
+		}else {// 부서별 1(user의 현재 소속 Dept , 부서별 2 소속 Dept 의 teamUpperSt , 즐겨찾기 user의 starMark , 공지사항 - 어캐구분?
+			// + 유저 정보 소속정보 + 상위 기관 링크
+			
+			Integer teamPk = user.getTeam(); // 이거 userDto 에 upper 정보 다 실어서 할까?
+			
+			List<BoardDto> deptList = boardService.readBoardList(user);
+			List<BoardDto> deptUpperStList = boardService.readUpperStBoardList(user);
+			List<BoardDto> starMarkList = boardService.readStarMarkList(user);
+			List<BoardDto> noticeList = boardService.readNoticeList();
+			
+			model.addAttribute("deptUpperStList", deptList);
+			model.addAttribute("deptList", deptUpperStList);
+			model.addAttribute("starMarkList", starMarkList);
+			model.addAttribute("noticeList", noticeList);
+			
+			return "main";
+		}
 	}
 	
 	

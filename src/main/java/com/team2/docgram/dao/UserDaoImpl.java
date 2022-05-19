@@ -18,6 +18,17 @@ public class UserDaoImpl implements UserDao {
 	
 	private String mapper = "namespace.";
 
+	
+	
+	/**
+	 * User의 PK 값을 사용해 User 객체 반환
+	 * 
+	 * @param num 해당 User 테이블의 PK 값
+	 * @return UserDto PK값으로 조회한 1개의 User 객체
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-19
+	 */
 	@Override
 	public UserDto readOne(Integer num) {
 		return sqlSession.selectOne(mapper+"readOne", num);

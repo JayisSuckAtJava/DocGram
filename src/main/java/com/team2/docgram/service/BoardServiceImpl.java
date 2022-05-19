@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team2.docgram.dao.BoardDao;
-import com.team2.docgram.dao.DepartMentDao;
+import com.team2.docgram.dao.DepartmentDao;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dao.HashtagDao;
 import com.team2.docgram.dao.TeamDao;
@@ -40,11 +40,11 @@ public class BoardServiceImpl implements BoardService {
 	private FileDao fileDao;
 	
 	@Autowired
-	private DepartMentDao deptDao;
+	private DepartmentDao deptDao;
 	
 	
 	/**
-	 * 전체의 게시판 리스트를 조회
+	 * 전체의 게시판 리스트를 조회 - User의 정보를 이용해 team의 정보를 이용해 dept를 알아내고 dept를 like로 구분해 해당부서 게시글 조회
 	 * 
 	 * @param user 리스트 분류를 위한 user- 소속 정보에 따른 조회 검색 변경
 	 * @return 정보에 따른 검색 정보 목록.

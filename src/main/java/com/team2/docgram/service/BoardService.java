@@ -18,4 +18,10 @@ public interface BoardService {
 
 	void deleteOne(Integer num);
 
+	List<BoardDto> readUpperStBoardList(UserDto user);
+
+	List<BoardDto> readStarMarkList(UserDto user);
+
+	List<BoardDto> readNoticeList();
+
 }
