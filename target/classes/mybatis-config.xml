@@ -2,5 +2,18 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+<<<<<<< HEAD
 
 </configuration>
+=======
+<settings>
+ <setting name="mapUnderscoreToCamelCase" value="false"/>
+</settings>
+
+<typeAliases>
+ <typeAlias alias="sibal" type="map"/>
+ <typeAlias alias="board" type="com.team2.docgram.BoardDto"/>
+</typeAliases>
+</configuration>
+
+>>>>>>> moon
