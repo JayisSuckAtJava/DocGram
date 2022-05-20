@@ -1,8 +1,6 @@
 package com.team2.docgram.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +12,10 @@ import com.team2.docgram.dao.HashtagDao;
 import com.team2.docgram.dao.TeamDao;
 import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.DepartmentDto;
+import com.team2.docgram.dto.FileDto;
+import com.team2.docgram.dto.HashtagDto;
+import com.team2.docgram.dto.TeamDto;
 import com.team2.docgram.dto.UserDto;
 
 /** BoardServiceImpl.java
@@ -80,7 +82,7 @@ public class BoardServiceImpl implements BoardService {
 //		Integer hashtagNum = boardDao.getHashtag();
 //		List<HashtagDto> hashtag = hashtagDao.readList(hashtagNum);
 		FileDto file = readFileByBoardNum(num);
-		List<Hashtag> hashtagList = readHashtagByBoardNum(num);
+		List<HashtagDto> hashtagList = readHashtagByBoardNum(num);
 		
 		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
@@ -146,7 +148,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	
+	@Override
+	public List<BoardDto> readUpperStBoardList(UserDto user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BoardDto> readStarMarkList(UserDto user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BoardDto> readNoticeList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
@@ -190,11 +208,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	public UserDto readTeamAndDept(UserDto user) {;
-		String dept_num = user.getDept();
 		Integer teamNum = user.getTeam();
 		
 		TeamDto team = teamDao.readOne(teamNum);
 		String rank = team.getRank();
+		Integer deptNum = team.getDept();
 		
 		DepartmentDto dept = deptDao.readOne(deptNum);
 		String description = dept.getDescription();
@@ -206,6 +224,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		return user;
 	}
+
+	
 
 	
 }
