@@ -48,7 +48,6 @@
 	INSERT INTO department VALUES ()
 </insert>
 
-
 <sql id="userColumns">
 
 </sql>
@@ -57,6 +56,5 @@
 8,'설명',1,'별','주소','경로'
 incl
 </sql>
-
 
 </mapper>
