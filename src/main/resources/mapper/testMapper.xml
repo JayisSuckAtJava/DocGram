@@ -47,11 +47,6 @@
 <insert id="test">
 	INSERT INTO department VALUES ()
 </insert>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 98502f664fc9eece6d3c401065253e7fd6ecec0e
 
 <sql id="userColumns">
 
@@ -62,9 +57,4 @@
 incl
 </sql>
 
-<<<<<<< HEAD
->>>>>>> moon
-=======
-=======
->>>>>>> 98502f664fc9eece6d3c401065253e7fd6ecec0e
 </mapper>
