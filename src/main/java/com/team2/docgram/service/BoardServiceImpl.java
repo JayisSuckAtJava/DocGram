@@ -162,7 +162,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDto> readNoticeList() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 앙기모띠
 		return null;
 	}
 	
