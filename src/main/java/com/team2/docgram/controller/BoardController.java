@@ -106,9 +106,12 @@ public class BoardController {
 	@PostMapping("/board/create")
 	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,File file) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		board.setUser(user.getNum());
-		BoardDto createdBoard = boardService.createOne(board);
-		Integer num = createdBoard.getBoardNum();
+		board.setUser(user.getUser_pk());
+		boardService.createOne(board);
+		// 이부분 어떻게 처리하죠? subquery 에서 insert 안되는걸로 아는데..?
+		// 전에 저 혼자 프로젝트 할때는 제목 등등 pk 제외 모든 요소가 같은거 찾는걸로 했는데.
+		BoardDto createdBoard = boardService.readOne(null);
+		Integer num = createdBoard.getBoard_pk();
 		// 파일 서비스로 파일 저장 로직 넘기기 fileService.
 		
 		// 해쉬태그 처리 로직
@@ -145,7 +148,7 @@ public class BoardController {
 	 */
 	@PostMapping("/board/upadte/{num}")
 	public String boardUpdate(BoardDto board,@PathVariable("num")Integer num) {
-		board.setBoardNumber(num);
+		board.setBoard_pk(num);
 		boardService.updateOne(board);
 		return "board";
 	}
