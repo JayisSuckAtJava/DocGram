@@ -45,8 +45,9 @@
 
 
 <insert id="test">
-	INSERT INTO department VALUES ( <include refid="allCoulm"></include>)
+	INSERT INTO department VALUES ()
 </insert>
+
 
 <sql id="userColumns">
 
@@ -56,5 +57,7 @@
 8,'설명',1,'별','주소','경로'
 incl
 </sql>
+
+=======
 
 </mapper>
