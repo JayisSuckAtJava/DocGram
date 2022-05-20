@@ -3,7 +3,61 @@
 
 <mapper namespace="team2">
 
+<select id="selectUser" parameterType="int" resultType="hashmap">
+	SELECT name, id, password, phone_num, dept_num, email, starmark, team
+	FROM user
+	WHERE id = #{id}
+</select>
+
+<select id="team" parameterType="int" resultType="hashmap">
+	SELECT rank, dept
+	FROM team
+	WHERE pk = #{pk}
+</select>
+
+
+<!-- 
+	쿼리명 : 게시판 정보(rank)
+	설 명 : user테이블에서 team테이블의 rank를 뽑아오는 쿼리 (유저이름, 소속부서, 직급, 부서 번호)
+	작성자 : 문예빈
+ 	최초 작성일 : 2022-05-19
+ -->
+<select id="selectRank">
+	SELECT u.name, 
+		u.team, 
+		u.dept_num, 
+		t.rank
+	FROM user u, 
+		team t
+	WHERE u.team = #{t.pk}
+</select>
+
+<!--
+	쿼리명 : 게시판 정보(date)
+	설 명 : 
+	SELECT date,
+		start_date,
+		end_date
+	FROM board
+	where 
+  -->
+
+
+
 <insert id="test">
 	INSERT INTO department VALUES ()
 </insert>
+
+
+<sql id="userColumns">
+
+</sql>
+
+<sql id="allCoulm">
+8,'설명',1,'별','주소','경로'
+incl
+</sql>
+
+=======
+
 </mapper>

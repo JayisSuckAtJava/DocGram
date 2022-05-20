@@ -24,4 +24,6 @@ public class BoardDto {
 	private int file;
 	private int hashtag;
 	
+
 }
+
