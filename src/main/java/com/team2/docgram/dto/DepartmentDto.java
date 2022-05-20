@@ -19,4 +19,6 @@ public class DepartmentDto {
 	private String starMark;
 	private String address;
 	private String url;
+
 }
+

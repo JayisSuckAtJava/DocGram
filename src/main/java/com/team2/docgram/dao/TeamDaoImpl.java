@@ -3,6 +3,8 @@ package com.team2.docgram.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.team2.docgram.dto.TeamDto;
+
 /** TeamDaoImpl.java
  *   소속 DB에 연결되는 DAO 객체 구현체
  * 

@@ -1,4 +1,8 @@
 # DocGram
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 98502f664fc9eece6d3c401065253e7fd6ecec0e
 ## KDT _ HRD 풀스택 개발자 양성과정 ( JAVA )
 ### 최종 프로젝트
 - 2조
@@ -10,7 +14,12 @@ aaaa---
 
 # Readme 작성 예시.
 ## Readme 는 기능 설명 . 에 대한 내용을한다?
+<<<<<<< HEAD
 =======
 
 
 Jung Hyun
+=======
+
+Jung Hyun
+>>>>>>> 98502f664fc9eece6d3c401065253e7fd6ecec0e
