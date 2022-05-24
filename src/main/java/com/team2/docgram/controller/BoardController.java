@@ -1,21 +1,36 @@
 package com.team2.docgram.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
+import com.team2.docgram.service.FileService;
 
 /** BoardController.java
  *  게시판 접속 처리 컨트롤러
@@ -28,12 +43,23 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private FileService fileService;
+
 	
-	@GetMapping("/test")
-	@ResponseBody
-	public String test() {
-		return boardService.test();
+	
+	
+	
+	@GetMapping("/download/{path}")
+	public ResponseEntity<Resource> fileDownload(@PathVariable("path")Integer filePk){
+		return fileService.readOne(filePk);
 	}
+	
+	
+	
+	
+
 	
 	/** 
 	 *  최초 게시판 접근 - 전체 리스트 조회
@@ -52,7 +78,7 @@ public class BoardController {
 		
 		List<BoardDto> boardList = new ArrayList<BoardDto>();
 		
-		boardList = boardService.readAllList(user);
+		boardList = boardService.readBoardList(user);
 		
 		model.addAttribute("list", boardList);
 		return "board";
@@ -94,17 +120,25 @@ public class BoardController {
 	 *  
 	 * @param board boardDto에 값 변환하여 저장
 	 * @param session 작성자의 사용자 정보 session 에서 값 추출 
+	 * @param hashtagList 작성시 입력된 hashtag 의 값들을 담은 List
+	 * @file 업로드된 문서 file 의 값
 	 * @return 작성 완료시 board 로 이동
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022-05-17
 	 */
 	@PostMapping("/board/create")
-	public String boardCreate(BoardDto board,HttpSession session) {
-		UserDto user;
-		user = (UserDto) session.getAttribute("user");
-		board.setUser(user);
-		boardService.createOne(board);
+	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,MultipartFile file) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		board.setUser(user.getUser_pk());
+		String fileName = file.getOriginalFilename();
+		if(fileName == "") {
+			System.out.println(file.isEmpty());
+		}else {
+			String savedFileName = boardService.createOne(board,hashtagList,fileName);
+			fileService.createOne(savedFileName, file);
+		}
+		
 		return "redirect:/board";
 	}
 	
@@ -137,7 +171,7 @@ public class BoardController {
 	 */
 	@PostMapping("/board/upadte/{num}")
 	public String boardUpdate(BoardDto board,@PathVariable("num")Integer num) {
-		board.setBoardNumber(num);
+		board.setBoard_pk(num);
 		boardService.updateOne(board);
 		return "board";
 	}
@@ -155,6 +189,30 @@ public class BoardController {
 	public String boardDelete(@PathVariable("num")Integer num) {
 		boardService.deleteOne(num);
 		return "board";
+	}
+	
+	@GetMapping("/main")
+	public String homePage(Model model,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		if(user.equals(null)) {
+			return "main";
+		}else {// 부서별 1(user의 현재 소속 Dept , 부서별 2 소속 Dept 의 teamUpperSt , 즐겨찾기 user의 starMark , 공지사항 - 어캐구분?
+			// + 유저 정보 소속정보 + 상위 기관 링크
+			
+			Integer teamPk = user.getTeam(); // 이거 userDto 에 upper 정보 다 실어서 할까?
+			
+			List<BoardDto> deptList = boardService.readBoardList(user);
+			List<BoardDto> deptUpperStList = boardService.readUpperStBoardList(user);
+			List<BoardDto> starMarkList = boardService.readStarMarkList(user);
+			List<BoardDto> noticeList = boardService.readNoticeList();
+			
+			model.addAttribute("deptUpperStList", deptList);
+			model.addAttribute("deptList", deptUpperStList);
+			model.addAttribute("starMarkList", starMarkList);
+			model.addAttribute("noticeList", noticeList);
+			
+			return "main";
+		}
 	}
 	
 	

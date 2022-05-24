@@ -8,19 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.BoardDto;
 
+
 /** BoardDaoImpl.java
- *  게시글 CRUD에 관한 DB 와 연결하는 객체
+ *  게시글 DB에 연결되는 DAO 객체 구현체
  * 
  * @author JAY - 이재범
  * @since 2022-05-18
- */
-/**
- * @author user
- *
- */
-/**
- * @author user
- *
  */
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -28,33 +21,22 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Override
-	public String test() {
-		String text;
-		int a = sqlSession.insert("team2.test");
-		if(a==0) {
-			text = " yes ";
-		}else {
-			text = " not ";
-		}
-		
-		return text;
-	}
+	private String mapper = "namespace.";
+	
+	
 
 	/**
 	 * user 의 소속 정보에 따른 Board를 조회 List로 전달
 	 * 
-	 * @param num user 조회의 조건인 소속 정보
+	 * @param num user 조회의 조건인 Department 테이블의 PK
 	 * @return 조건에 맞게 검색되어 사용자에게 전달될 데이터 
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022-05-18
 	 */
 	@Override
-	public List<BoardDto> readAllList(Integer num) {
-		
-		
-		return null;
+	public List<BoardDto> readBoardList(Integer num) {
+		return sqlSession.selectList(mapper+"readBoardList", num);
 	}
 
 	/**
@@ -68,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
-		return sqlSession.selectOne(null, num);
+		return sqlSession.selectOne(mapper+"readOne", num);
 	}
 
 	/**
@@ -80,8 +62,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board) {
-		sqlSession.insert(null, board);
+	public Integer createOne(BoardDto board) {
+		return sqlSession.insert(null, board);
 	}
 
 	

@@ -40,12 +40,14 @@
 		end_date
 	FROM board
 	where 
+	작성자 : 문예빈
+	최초 작성일 : 2022-20
   -->
 
 
 
 <insert id="test">
-	INSERT INTO department VALUES ( <include refid="allCoulm"></include>)
+	INSERT INTO department VALUES ()
 </insert>
 
 <sql id="userColumns">
