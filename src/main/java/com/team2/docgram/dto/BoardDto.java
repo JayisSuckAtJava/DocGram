@@ -16,18 +16,20 @@ import lombok.Setter;
 @Setter
 public class BoardDto {
 	
-	private int board_pk;
+	private Long board_pk;
 	private String title;
 	private String content;
 	private Timestamp date;
-	private Timestamp start_date;
-	private Timestamp end_date;
 	private Long user;
+	private int boardSecurity;
 	private int file;
+	private int relatedBoard;
+	private int board_hashtagList;
 	private int hashtag;
 	private UserDto userDetail;
 	private FileDto fileDetail;
 	private String hashtagList;
+
 
 }
 

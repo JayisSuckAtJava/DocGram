@@ -17,11 +17,13 @@ public class UserDto {
 	private Long user_pk;
 	private String name;
 	private String id;
+	private String name;
 	private String password;
 	private String phone_num;
 	private String dept_num;
 	private String email;
 	private String starmark;
+	private String mytag;
 	private int team;
 	private String rank;
 	private String description;
