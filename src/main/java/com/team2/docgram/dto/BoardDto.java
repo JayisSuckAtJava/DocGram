@@ -22,7 +22,7 @@ public class BoardDto {
 	private Timestamp date;
 	private Timestamp start_date;
 	private Timestamp end_date;
-	private int user;
+	private Long user;
 	private int file;
 	private int hashtag;
 	private UserDto userDetail;

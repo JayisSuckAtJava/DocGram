@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -144,4 +146,26 @@ public class DBtest {
 				 .contentType(MediaType.parseMediaType("application/octet-stream"))
 				 .body(resource);
 }
+	
+	@Test
+	public void String() {
+		// String ac,ad 를 입력 받아서 배열로 혹은 List로
+		// front 에서 해시,태그,들은,이런,식으,로,옵니다
+		// 를 받으면 배열로 만들어서 db에 연동처리
+		String hashtagList = "안녕,모두,아니";
+		
+		
+		// 1번 split 을 사용하여 String[] 로
+		String[] list = hashtagList.split(",");
+		for(String i : list) {
+			System.out.println(i);
+		}
+		
+		// 2번 1번의 배열을 list에 넣는다
+		List<String> arrayList = new ArrayList<String>();
+		for(String i : list) {
+			arrayList.add(i);
+		}
+		System.out.println(arrayList);
+	}
 }
