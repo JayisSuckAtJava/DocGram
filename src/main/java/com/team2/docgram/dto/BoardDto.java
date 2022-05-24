@@ -27,7 +27,7 @@ public class BoardDto {
 	private int hashtag;
 	private UserDto userDetail;
 	private FileDto fileDetail;
-	private List<HashtagDto> hashtagList;
+	private String hashtagList;
 
 }
 

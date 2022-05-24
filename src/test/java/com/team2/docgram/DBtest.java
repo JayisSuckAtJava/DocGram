@@ -167,5 +167,11 @@ public class DBtest {
 			arrayList.add(i);
 		}
 		System.out.println(arrayList);
+		
+		
+		String test =arrayList.toString();
+		System.out.println(test);
+		String teste = test.substring(1, test.length()-1);
+		System.out.println(teste);
 	}
 }

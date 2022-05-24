@@ -51,6 +51,15 @@ public class BoardController {
 	
 	
 	
+	/**
+	 *  게시글에 첨부된 파일 다운로드
+	 *  
+	 * @param filePk 첨부된 파일의 PK
+	 * @return ResponseEntity 객체를 리턴하여 파일 다운로드 하게함
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@GetMapping("/download/{path}")
 	public ResponseEntity<Resource> fileDownload(@PathVariable("path")Integer filePk){
 		return fileService.readOne(filePk);
@@ -121,7 +130,7 @@ public class BoardController {
 	 * @param board boardDto에 값 변환하여 저장
 	 * @param session 작성자의 사용자 정보 session 에서 값 추출 
 	 * @param hashtagList 작성시 입력된 hashtag 의 값들을 담은 List
-	 * @file 업로드된 문서 file 의 값
+	 * @param file 업로드된 문서 file 의 값
 	 * @return 작성 완료시 board 로 이동
 	 * 
 	 * @author JAY - 이재범
@@ -132,9 +141,15 @@ public class BoardController {
 		UserDto user = (UserDto) session.getAttribute("user");
 		board.setUser(user.getUser_pk());
 		String fileName = file.getOriginalFilename();
+		
+		
+		
 		if(fileName == "") {
+			
 			System.out.println(file.isEmpty());
+			
 		}else {
+			
 			String savedFileName = boardService.createOne(board,hashtagList,fileName);
 			if(savedFileName == "") {
 				System.out.println("DB에 파일 저장 문제 발생");
@@ -205,7 +220,8 @@ public class BoardController {
 			
 			Integer teamPk = user.getTeam(); // 이거 userDto 에 upper 정보 다 실어서 할까?
 			
-			List<BoardDto> deptList = boardService.readBoardList(user);
+			List<BoardDto> boardList = boardService.readBoardList(user);
+			List<BoardDto> deptList = boardService.readDeptBoardList(user);
 			List<BoardDto> deptUpperStList = boardService.readUpperStBoardList(user);
 			List<BoardDto> starMarkList = boardService.readStarMarkList(user);
 			List<BoardDto> noticeList = boardService.readNoticeList();

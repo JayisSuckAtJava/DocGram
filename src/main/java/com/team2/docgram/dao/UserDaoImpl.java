@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 	 * @since 2022-05-19
 	 */
 	@Override
-	public UserDto readOne(Integer num) {
+	public UserDto readOne(Long num) {
 		return sqlSession.selectOne(mapper+"readOne", num);
 	}
 

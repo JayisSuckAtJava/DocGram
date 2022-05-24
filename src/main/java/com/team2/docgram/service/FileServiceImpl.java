@@ -27,6 +27,14 @@ public class FileServiceImpl implements FileService {
 
 	private String root = "C:\\ProjectTeam2\\file\\";
 	
+	/** 파일을 Root 에 저장하는 메소드
+	 * 
+	 * @param savedFileName 저장할 파일명 ( service에서 처리 후 넘어옴 )
+	 * @param file 업로드 한 실체 파일
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public void createOne(String savedFileName,MultipartFile file) {
 		File path = new File(root+savedFileName);
@@ -39,6 +47,14 @@ public class FileServiceImpl implements FileService {
 		}
 	}
 
+	/** 입력받은 file의 PK로 해당 객체 조회 후 download 메소드 사용 파일 다운로드 객체 리턴
+	 * 
+	 * @param filePk file의 저장 이름 조회를 위한 FILE 객체 PK 
+	 * @return ResponseEntity 해당 파일의 다운로드
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public ResponseEntity<Resource> readOne(Integer filePk) {
 		FileDto file =fileDaoImpl.readOne(filePk);
@@ -52,6 +68,14 @@ public class FileServiceImpl implements FileService {
 		return null;
 	}
 
+	/** FileName으로 Root 에 저장된 file 다운로드
+	 * 
+	 * @param fileName 저장된 file명으로 조회하여 파일 생성
+	 * @return ResponseEntity 를 리턴하여 바로 다운로드 받을수 있게 함
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	private ResponseEntity<Resource> download(String fileName) throws FileNotFoundException, UnsupportedEncodingException {
 		
 		File file = new File(root+fileName);
