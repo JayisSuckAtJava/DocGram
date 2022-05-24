@@ -24,4 +24,6 @@ public interface BoardService {
 
 	List<BoardDto> readNoticeList();
 
+	List<BoardDto> readDeptBoardList(UserDto user);
+
 }
