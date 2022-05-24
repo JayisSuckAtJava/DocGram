@@ -62,8 +62,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board) {
-		sqlSession.insert(null, board);
+	public Integer createOne(BoardDto board) {
+		return sqlSession.insert(null, board);
 	}
 
 	

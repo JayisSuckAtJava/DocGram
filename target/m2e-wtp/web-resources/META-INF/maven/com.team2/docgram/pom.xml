@@ -162,6 +162,15 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>${org.springframework-version}</version>
 	</dependency>
+
+	<!-- javax.servlet-api MultipartFile 을 제어하기 위한-->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>4.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+	
 	
 	
 	

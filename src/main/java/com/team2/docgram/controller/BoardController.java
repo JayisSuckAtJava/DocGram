@@ -1,6 +1,11 @@
 package com.team2.docgram.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +13,19 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
@@ -31,9 +43,21 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	
+
 	@Autowired
 	private FileService fileService;
+
+	
+	
+	
+	
+	@GetMapping("/download/{path}")
+	public ResponseEntity<Resource> fileDownload(@PathVariable("path")Integer filePk){
+		return fileService.readOne(filePk);
+	}
+	
+	
+	
 	
 
 	
@@ -104,18 +128,17 @@ public class BoardController {
 	 * @since 2022-05-17
 	 */
 	@PostMapping("/board/create")
-	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,File file) {
+	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,MultipartFile file) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		board.setUser(user.getUser_pk());
-		boardService.createOne(board);
-		// 이부분 어떻게 처리하죠? subquery 에서 insert 안되는걸로 아는데..?
-		// 전에 저 혼자 프로젝트 할때는 제목 등등 pk 제외 모든 요소가 같은거 찾는걸로 했는데.
-		BoardDto createdBoard = boardService.readOne(null);
-		Integer num = createdBoard.getBoard_pk();
-		// 파일 서비스로 파일 저장 로직 넘기기 fileService.
+		String fileName = file.getOriginalFilename();
+		if(fileName == "") {
+			System.out.println(file.isEmpty());
+		}else {
+			String savedFileName = boardService.createOne(board,hashtagList,fileName);
+			fileService.createOne(savedFileName, file);
+		}
 		
-		// 해쉬태그 처리 로직
-		//hashtagArray
 		return "redirect:/board";
 	}
 	
@@ -168,7 +191,7 @@ public class BoardController {
 		return "board";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String homePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		if(user.equals(null)) {
