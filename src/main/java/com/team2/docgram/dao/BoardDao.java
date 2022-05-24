@@ -16,4 +16,6 @@ public interface BoardDao {
 
 	void deleteOne(Integer num);
 
+	List<BoardDto> readNoticeList();
+
 }

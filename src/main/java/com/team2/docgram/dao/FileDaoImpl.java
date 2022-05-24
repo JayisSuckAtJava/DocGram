@@ -20,11 +20,29 @@ public class FileDaoImpl implements FileDao {
 	
 	private String mapper = "namespace.";
 
+	/** 
+	 * DB에 File 이름 저장
+	 * 
+	 * @param fileName 저장할 이름 ( 서비스에서 처리된 )
+	 * @return 해당 file 객체의 pk
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public Integer createOne(String fileName) {
 		return sqlSession.insert(mapper+"", fileName);
 	}
 
+	/**
+	 * DB 에 저장된 File 조회 객체 반환
+	 * 
+	 * @param filePk 조회할 객체의 pk
+	 * @return pk에 맞는 해당 file 객체
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public FileDto readOne(Integer filePk) {
 		return sqlSession.selectOne(mapper+"", filePk);
