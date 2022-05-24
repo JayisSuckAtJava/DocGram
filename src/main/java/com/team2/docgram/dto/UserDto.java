@@ -23,6 +23,6 @@ public class UserDto {
 	private String email;
 	private String starmark;
 	private String mytag;
-	private int team;
+	private Long team;
 	
 }
