@@ -6,13 +6,11 @@ import com.team2.docgram.dto.BoardDto;
 
 public interface BoardDao {
 
-	List<BoardDto> readAllList(Integer num);
-
-	String test();
+	List<BoardDto> readBoardList(Integer num);
 
 	BoardDto readOne(Integer num);
 
-	void createOne(BoardDto board);
+	Integer createOne(BoardDto board);
 
 	void updateOne(BoardDto board);
 

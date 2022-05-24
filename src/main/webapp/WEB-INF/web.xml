@@ -13,6 +13,22 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- 한글 인코딩 UTF-8로다가 -->
+	<filter>
+	<filter-name>encoding-filter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+	</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding-filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 
 	<!-- Processes application requests -->
 	<servlet>
@@ -29,5 +45,12 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<multipart-config>
+		<location>C:\\ProjectTeam2\\file</location>
+		<max-file-size>20971520</max-file-size> <!-- 최대크기 20M -->
+		<max-request-size>41943040</max-request-size> <!-- 한번에 올릴 최대 크기 40M -->
+		<file-size-threshold>20971520</file-size-threshold> <!-- 메모리 -->
+	</multipart-config>
 
 </web-app>

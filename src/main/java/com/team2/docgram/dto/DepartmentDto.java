@@ -13,10 +13,13 @@ import lombok.Setter;
 @Setter
 public class DepartmentDto {
 	
-	private int dept_pk;
+	private Long dept_pk;
 	private String description;
 	private int teamUpperSt;
 	private String starMark;
 	private String address;
 	private String url;
+	private int deptSecurity;
+
 }
+
