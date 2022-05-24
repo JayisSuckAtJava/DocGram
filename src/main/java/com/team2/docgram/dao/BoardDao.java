@@ -10,7 +10,7 @@ public interface BoardDao {
 
 	BoardDto readOne(Integer num);
 
-	void createOne(BoardDto board);
+	Integer createOne(BoardDto board);
 
 	void updateOne(BoardDto board);
 

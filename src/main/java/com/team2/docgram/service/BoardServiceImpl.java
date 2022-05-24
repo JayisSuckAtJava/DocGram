@@ -3,7 +3,9 @@ package com.team2.docgram.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dao.BoardDao;
 import com.team2.docgram.dao.DepartmentDao;
@@ -40,10 +42,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private FileDao fileDao;
-	
+	/*
 	@Autowired
 	private DepartmentDao deptDao;
-	
+	*/
 	
 	/**
 	 * 전체의 게시판 리스트를 조회 - User의 정보를 이용해 team의 정보를 이용해 dept를 알아내고 dept를 like로 구분해 해당부서 게시글 조회
@@ -58,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> readBoardList(UserDto user) {
 		Integer teamNum = user.getTeam();
 		TeamDto team = teamDao.readOne(teamNum);
-		Integer deptNum = teamDao.getDepartMent();
-		return boardDao.readBoardList(dept);
+		Integer deptNum = team.getDept();
+		return boardDao.readBoardList(deptNum);
 	}
 
 	/**
@@ -81,12 +83,20 @@ public class BoardServiceImpl implements BoardService {
 //		
 //		Integer hashtagNum = boardDao.getHashtag();
 //		List<HashtagDto> hashtag = hashtagDao.readList(hashtagNum);
+		
+		
+		
+		/*
 		FileDto file = readFileByBoardNum(num);
 		List<HashtagDto> hashtagList = readHashtagByBoardNum(num);
 		
 		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
 		UserDto userDetail = readTeamAndDept(user);
+		*/
+		
+		
+		
 		/*
 		 * String name = user.getName(); String dept_num = user.getDept_num(); //Integer
 		 * teamNum = user.getTeam();
@@ -96,11 +106,11 @@ public class BoardServiceImpl implements BoardService {
 		 * Integer deptNum = team.getDept(); DepartmentDto dept =
 		 * deptDao.readOne(deptNum); String description = dept.getDescription();
 		 */
-		
-		board.setUserDeatil(userDeatil);
-		board.setFileDeatil(file);
+		/*
+		board.setUserDetail(userDetail);
+		board.setFileDetail(file);
 		board.setHashtagList(hashtagList);
-		
+		*/
 		return board;
 	}
 
@@ -114,8 +124,29 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board) {
-		boardDao.createOne(board);
+	public String createOne(BoardDto board, String hashtagList, String fileName) {
+		String result = "";
+		
+		Integer hashtagPK;
+		if(hashtagList == "") {
+			hashtagPK = 0;
+		}else {
+			hashtagPK = hashtagDao.createList(hashtagList);
+		}
+		
+		board.setHashtag(hashtagPK);
+		Integer boardPk = boardDao.createOne(board);
+		
+		Integer fileResult;
+		if(fileName == "") {
+			fileResult = 0;
+		}else {
+			String savedFileName = boardPk+"_"+fileName;
+			fileResult = fileDao.createOne(fileName);
+			
+			result = savedFileName;
+		}
+		return result;
 		
 	}
 
@@ -150,19 +181,16 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardDto> readUpperStBoardList(UserDto user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<BoardDto> readStarMarkList(UserDto user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<BoardDto> readNoticeList() {
-		// TODO Auto-generated method stub 앙기모띠
 		return null;
 	}
 	
@@ -192,7 +220,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	
+	/*
 	
 	
 	public FileDto readFileByBoardNum(Integer num) {
@@ -220,12 +248,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		user.setRank(rank);
 		user.setDescription(description);
-		user.setDeptMark();
+		user.setDeptMark(deptMark);
 		
 		return user;
 	}
 
-	
+	*/
 
 	
 }

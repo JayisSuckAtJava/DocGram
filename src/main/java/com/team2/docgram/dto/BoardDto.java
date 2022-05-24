@@ -1,5 +1,7 @@
 package com.team2.docgram.dto;
 import java.security.Timestamp;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +25,9 @@ public class BoardDto {
 	private int user;
 	private int file;
 	private int hashtag;
-	
+	private UserDto userDetail;
+	private FileDto fileDetail;
+	private List<HashtagDto> hashtagList;
 
 }
 

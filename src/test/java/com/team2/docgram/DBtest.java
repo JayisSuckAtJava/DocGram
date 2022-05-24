@@ -17,6 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -81,7 +82,54 @@ public class DBtest {
 		System.out.println(result);
 		
 	
-	}**/	
+	}
+	
+	@GetMapping("/fileTest")
+	public String filetest() {
+		return "file";
+	}
+	
+	@PostMapping("/fileTest")
+	@ResponseBody
+	public String filetestpst(MultipartFile mFile,String text) {
+		String root = "C:\\ProjectTeam2\\file\\";
+		
+		
+		System.out.println("start");
+		
+		
+
+		System.out.println(text);
+		System.out.println(mFile.getOriginalFilename());
+		String oName = "pk_"+mFile.getOriginalFilename();
+
+		System.out.println(oName);
+		
+		String file_attach = root+oName;
+		
+		System.out.println(file_attach);
+		
+		File file = new File(file_attach);
+		
+		System.out.println(file.isFile());
+		System.out.println(mFile.isEmpty());
+		
+		try {
+			mFile.transferTo(file);
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println("end");
+		
+		
+		
+		return "file";
+	}
+	
+	**/	
 
 
 	public ResponseEntity<Resource> donwloadtest() throws FileNotFoundException, UnsupportedEncodingException {
