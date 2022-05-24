@@ -14,15 +14,15 @@ import lombok.Setter;
 @Setter
 public class BoardDto {
 	
-	private int board_pk;
+	private Long board_pk;
 	private String title;
 	private String content;
 	private Timestamp date;
-	private Timestamp start_date;
-	private Timestamp end_date;
+	private int boardSecurity;
 	private int user;
 	private int file;
-	private int hashtag;
+	private int relatedBoard;
+	private int board_hashtagList;
 	
 
 }
