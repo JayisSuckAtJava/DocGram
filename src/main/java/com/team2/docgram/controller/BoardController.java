@@ -136,7 +136,11 @@ public class BoardController {
 			System.out.println(file.isEmpty());
 		}else {
 			String savedFileName = boardService.createOne(board,hashtagList,fileName);
-			fileService.createOne(savedFileName, file);
+			if(savedFileName == "") {
+				System.out.println("DB에 파일 저장 문제 발생");
+			}else {
+				fileService.createOne(savedFileName, file);
+			}
 		}
 		
 		return "redirect:/board";
