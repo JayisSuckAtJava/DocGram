@@ -14,7 +14,8 @@ import lombok.Setter;
 @Setter
 public class FileDto {
 
-	private int file_pk;
+	private Long file_pk;
 	private String file_title;
-
+	private int file_num;
+	
 }
