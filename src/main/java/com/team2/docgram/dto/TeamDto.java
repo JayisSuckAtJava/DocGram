@@ -15,6 +15,6 @@ import lombok.Setter;
 public class TeamDto {
 	
 	private Long team_pk;
-	private int rank;
-	private int dept;
+	private Long rank;
+	private Long dept;
 }
