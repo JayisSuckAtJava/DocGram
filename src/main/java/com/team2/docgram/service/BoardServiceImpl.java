@@ -1,9 +1,12 @@
 package com.team2.docgram.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dao.BoardDao;
 import com.team2.docgram.dao.DepartmentDao;
@@ -40,10 +43,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private FileDao fileDao;
-	
+
 	@Autowired
 	private DepartmentDao deptDao;
-	
 	
 	/**
 	 * 전체의 게시판 리스트를 조회 - User의 정보를 이용해 team의 정보를 이용해 dept를 알아내고 dept를 like로 구분해 해당부서 게시글 조회
@@ -58,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> readBoardList(UserDto user) {
 		Integer teamNum = user.getTeam();
 		TeamDto team = teamDao.readOne(teamNum);
-		Integer deptNum = teamDao.getDepartMent();
-		return boardDao.readBoardList(dept);
+		Integer deptNum = team.getDept();
+		return boardDao.readBoardList(deptNum);
 	}
 
 	/**
@@ -75,30 +77,32 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDto readOne(Integer num) {
 		
 		BoardDto board = boardDao.readOne(num);
+
+		Integer filePk = board.getFile();
+		FileDto file = fileDao.readOne(filePk);
 		
-//		Integer fileNum = boardDao.getFile();
-//		FileDto file = fileDao.readOne(fileNum);
-//		
-//		Integer hashtagNum = boardDao.getHashtag();
-//		List<HashtagDto> hashtag = hashtagDao.readList(hashtagNum);
-		FileDto file = readFileByBoardNum(num);
-		List<HashtagDto> hashtagList = readHashtagByBoardNum(num);
+		Integer hashtagPk = board.getHashtag();
+		String hashtagList = hashtagDao.readList(hashtagPk);
 		
-		Integer userNum = board.getUser();
+		Long userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
-		UserDto userDetail = readTeamAndDept(user);
-		/*
-		 * String name = user.getName(); String dept_num = user.getDept_num(); //Integer
-		 * teamNum = user.getTeam();
-		 * 
-		 * TeamDto team = teamDao.readOne(teamNum); String rank = team.getRank();
-		 * 
-		 * Integer deptNum = team.getDept(); DepartmentDto dept =
-		 * deptDao.readOne(deptNum); String description = dept.getDescription();
-		 */
 		
-		board.setUserDeatil(userDeatil);
-		board.setFileDeatil(file);
+		Integer teamNum = user.getTeam();
+		
+		TeamDto team = teamDao.readOne(teamNum);
+		String rank = team.getRank();
+		
+		Integer deptNum = team.getDept();
+		DepartmentDto dept = deptDao.readOne(deptNum);
+		
+		String description = dept.getDescription();
+		
+		user.setRank(rank);
+		user.setDescription(description);
+		
+		
+		board.setUserDetail(user);
+		board.setFileDetail(file);
 		board.setHashtagList(hashtagList);
 		
 		return board;
@@ -114,8 +118,34 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board) {
-		boardDao.createOne(board);
+	public String createOne(BoardDto board, String hashtagList, String fileName) {
+		String result = "";
+		String[] hashtagArray = hashtagList.split(",");
+		List<Integer> hashtagPkList = null;
+		
+		Integer hashtagPK;
+		if(hashtagList == "") {
+			hashtagPK = null;
+		}else {
+			for(String i : hashtagArray) {
+				hashtagDao.createOne(i);				 
+			}
+			hashtagPK = hashtagDao.createList(hashtagList);
+		}
+		
+		board.setHashtag(hashtagPK);
+		Integer boardPk = boardDao.createOne(board);
+		
+		Integer fileResult;
+		if(fileName == "") {
+			fileResult = 0;
+		}else {
+			String savedFileName = boardPk+"_"+fileName;
+			fileResult = fileDao.createOne(fileName);
+			
+			result = savedFileName;
+		}
+		return result;
 		
 	}
 
@@ -146,86 +176,130 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteOne(Integer num) {
 		boardDao.deleteOne(num);
 	}
+
+	
+	// user 의 소속 부서 상위에 즐겨찾기
+	// user 의 소속 부서 즐겨찾기
+	// user 의 즐겨찾기 markList
+	// 공지사항 notice List
+	// 최근 user 의 소속 부서 에서 작성된 글. - 기본 boardlist
+
 	
 	
+	
+	 /**
+	 * user 의 소속 정보로 상위 부서의 즐겨찾기 사항 조회 반환
+	 * 
+	 * @param user 상위 부서조회를 위한 소속 정보를 조회 위한 user
+	 * @return deptUpperStList 해당 상위 부서의 즐겨찾기로 조회된 boardList
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public List<BoardDto> readUpperStBoardList(UserDto user) {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * Integer teamPk = user.getTeam(); TeamDto team = teamDao.readOne(teamPk);
+		 * Integer deptPk = team.getDept(); DepartmentDto dept =
+		 * deptDao.readOne(deptPk);
+		 */
+		DepartmentDto dept = readDept(user);
+		
+		Integer upperDeptPk = dept.getTeamUpperSt();
+		DepartmentDto upperDept = deptDao.readOne(upperDeptPk);
+		String upperDeptStarMark = upperDept.getStarMark();
+		String[] upperDpetBoardList = upperDeptStarMark.split(",");
+		
+		List<BoardDto> deptUpperStList = new ArrayList<>();
+		
+		for(String i : upperDpetBoardList) {
+			Integer boardPk = Integer.parseInt(i);
+			deptUpperStList.add(boardDao.readOne(boardPk));
+		}
+		
+		return deptUpperStList;
+	}
+	
+	/**
+	 * user 의 소속 정보로 즐겨찾기 사항 조회 반환
+	 * 
+	 * @param user 소속 정보를 조회 위한 user
+	 * @return depttList 해당 부서의 즐겨찾기로 조회된 boardList
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
+	@Override
+	public List<BoardDto> readDeptBoardList(UserDto user) {
+		/*
+		 * Integer teamPk = user.getTeam(); TeamDto team = teamDao.readOne(teamPk);
+		 * Integer deptPk = team.getDept(); DepartmentDto dept =
+		 * deptDao.readOne(deptPk);
+		 */
+		DepartmentDto dept = readDept(user);
+		
+		String deptStarMark = dept.getStarMark();
+		String[] deptBoardList = deptStarMark.split(",");
+
+		List<BoardDto> deptList = new ArrayList<>();
+
+		for(String i : deptBoardList) {
+			Integer boardPk = Integer.parseInt(i);
+			deptList.add(boardDao.readOne(boardPk));
+		}
+		return deptList;
 	}
 
+	 /**
+	 * user 의 즐겨찾기 목록을 조회-반환
+	 * 
+	 * @param user 즐겨찾기 목록을 조회위한 user
+	 * @return starMarkList 즐겨찾기 목록으로 조회된 boardList
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public List<BoardDto> readStarMarkList(UserDto user) {
-		// TODO Auto-generated method stub
-		return null;
+		String starMark = user.getStarmark();
+		String[] starMarkArray = starMark.split(",");
+		
+		List<BoardDto> starMarkList = new ArrayList<>();
+		
+		for(String i : starMarkArray) {
+			Integer boardPk = Integer.parseInt(i);
+			starMarkList.add(boardDao.readOne(boardPk));
+		}
+		return starMarkList;
 	}
 
+	 /**
+	 * 공지사항 조회-반환
+	 * 
+	 * @return 작성된 공지사항 boardList
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
 	@Override
 	public List<BoardDto> readNoticeList() {
-		// TODO Auto-generated method stub 앙기모띠
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public FileDto readFileByBoardNum(Integer num) {
-		Integer fileNum = boardDao.getFile(num);
-		FileDto file = fileDao.readOne(fileNum);
-		return file;
-	}
-	
-	public List<HashtagDto> readHashtagByBoardNum(Integer num) {
-		Integer hashtagNum = boardDao.getHashtag(num);
-		List<HashtagDto> hashtagList = hashtagDao.readList(hashtagNum);
-		return hashtagList;
-	}
-	
-	public UserDto readTeamAndDept(UserDto user) {;
-		Integer teamNum = user.getTeam();
-		
-		TeamDto team = teamDao.readOne(teamNum);
-		String rank = team.getRank();
-		Integer deptNum = team.getDept();
-		
-		DepartmentDto dept = deptDao.readOne(deptNum);
-		String description = dept.getDescription();
-		String deptMark = dept.getStarMark();
-		
-		user.setRank(rank);
-		user.setDescription(description);
-		user.setDeptMark();
-		
-		return user;
+		return boardDao.readNoticeList();
 	}
 
-	
+	/**
+	 *  사용자의 정보를 이용하여 소속 부서 객체 반환
+	 * 
+	 * @param user 소속 정보 조회를 위한 user
+	 * @return dept 해당 유저가 소속한 부서
+	 */
+	public DepartmentDto readDept(UserDto user) {
+		Integer teamPk = user.getTeam();
+		TeamDto team = teamDao.readOne(teamPk);
+		Integer deptPk = team.getDept();
+		DepartmentDto dept = deptDao.readOne(deptPk);
+		
+		return dept;
+	}
 
 	
 }

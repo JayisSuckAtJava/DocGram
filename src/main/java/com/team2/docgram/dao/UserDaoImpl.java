@@ -2,6 +2,7 @@ package com.team2.docgram.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.UserDto;
 
@@ -11,6 +12,7 @@ import com.team2.docgram.dto.UserDto;
  * @author JAY - 이재범
  * @since 2022-05-19
  */
+@Repository
 public class UserDaoImpl implements UserDao {
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 	 * @since 2022-05-19
 	 */
 	@Override
-	public UserDto readOne(Integer num) {
+	public UserDto readOne(Long num) {
 		return sqlSession.selectOne(mapper+"readOne", num);
 	}
 

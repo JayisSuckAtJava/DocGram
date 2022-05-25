@@ -12,7 +12,7 @@ public interface BoardService {
 
 	BoardDto readOne(Integer num);
 
-	void createOne(BoardDto board);
+	String createOne(BoardDto board, String hashtagList, String fileName);
 
 	void updateOne(BoardDto board);
 
@@ -23,5 +23,7 @@ public interface BoardService {
 	List<BoardDto> readStarMarkList(UserDto user);
 
 	List<BoardDto> readNoticeList();
+
+	List<BoardDto> readDeptBoardList(UserDto user);
 
 }

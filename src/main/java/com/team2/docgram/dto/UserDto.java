@@ -15,6 +15,7 @@ import lombok.Setter;
 public class UserDto {
 
 	private Long user_pk;
+	private String name;
 	private String id;
 	private String name;
 	private String password;
@@ -24,5 +25,7 @@ public class UserDto {
 	private String starmark;
 	private String mytag;
 	private Long team;
-	
+	private String rank;
+	private String description;
+	private String deptMark;
 }

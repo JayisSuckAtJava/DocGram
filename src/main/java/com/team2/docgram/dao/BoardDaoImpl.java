@@ -62,8 +62,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board) {
-		sqlSession.insert(null, board);
+	public Integer createOne(BoardDto board) {
+		return sqlSession.insert(null, board);
 	}
 
 	
@@ -95,6 +95,19 @@ public class BoardDaoImpl implements BoardDao {
 	public void deleteOne(Integer num) {
 		sqlSession.delete(null,num);
 	}
+
+	/**
+	 * Board 테이블의 공지사항만 조회
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022-05-24
+	 */
+	@Override
+	public List<BoardDto> readNoticeList() {
+		return sqlSession.selectList(mapper+"");
+	}
+	
+	
 
 
 }

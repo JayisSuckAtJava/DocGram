@@ -8,12 +8,7 @@
 </settings>
 
 <typeAliases>
- <typeAlias alias="sibal" type="map"/>
- <typeAlias alias="board" type="com.team2.docgram.BoardDto"/>
+ <typeAlias alias="board" type="com.team2.docgram.dto.BoardDto"/>
 </typeAliases>
-</configuration>
-
-=======
-
 </configuration>
 

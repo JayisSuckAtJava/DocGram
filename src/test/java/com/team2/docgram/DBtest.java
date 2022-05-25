@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +19,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -81,7 +84,54 @@ public class DBtest {
 		System.out.println(result);
 		
 	
-	}**/	
+	}
+	
+	@GetMapping("/fileTest")
+	public String filetest() {
+		return "file";
+	}
+	
+	@PostMapping("/fileTest")
+	@ResponseBody
+	public String filetestpst(MultipartFile mFile,String text) {
+		String root = "C:\\ProjectTeam2\\file\\";
+		
+		
+		System.out.println("start");
+		
+		
+
+		System.out.println(text);
+		System.out.println(mFile.getOriginalFilename());
+		String oName = "pk_"+mFile.getOriginalFilename();
+
+		System.out.println(oName);
+		
+		String file_attach = root+oName;
+		
+		System.out.println(file_attach);
+		
+		File file = new File(file_attach);
+		
+		System.out.println(file.isFile());
+		System.out.println(mFile.isEmpty());
+		
+		try {
+			mFile.transferTo(file);
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println("end");
+		
+		
+		
+		return "file";
+	}
+	
+	**/	
 
 
 	public ResponseEntity<Resource> donwloadtest() throws FileNotFoundException, UnsupportedEncodingException {
@@ -96,4 +146,32 @@ public class DBtest {
 				 .contentType(MediaType.parseMediaType("application/octet-stream"))
 				 .body(resource);
 }
+	
+	@Test
+	public void String() {
+		// String ac,ad 를 입력 받아서 배열로 혹은 List로
+		// front 에서 해시,태그,들은,이런,식으,로,옵니다
+		// 를 받으면 배열로 만들어서 db에 연동처리
+		String hashtagList = "안녕,모두,아니";
+		
+		
+		// 1번 split 을 사용하여 String[] 로
+		String[] list = hashtagList.split(",");
+		for(String i : list) {
+			System.out.println(i);
+		}
+		
+		// 2번 1번의 배열을 list에 넣는다
+		List<String> arrayList = new ArrayList<String>();
+		for(String i : list) {
+			arrayList.add(i);
+		}
+		System.out.println(arrayList);
+		
+		
+		String test =arrayList.toString();
+		System.out.println(test);
+		String teste = test.substring(1, test.length()-1);
+		System.out.println(teste);
+	}
 }

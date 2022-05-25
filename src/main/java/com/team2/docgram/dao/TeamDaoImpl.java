@@ -2,6 +2,7 @@ package com.team2.docgram.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.TeamDto;
 
@@ -11,6 +12,7 @@ import com.team2.docgram.dto.TeamDto;
  * @author JAY - 이재범
  * @since 2022-05-19
  */
+@Repository
 public class TeamDaoImpl implements TeamDao {
 	
 	@Autowired
