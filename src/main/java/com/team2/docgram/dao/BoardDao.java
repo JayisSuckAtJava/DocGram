@@ -18,4 +18,14 @@ public interface BoardDao {
 
 	List<BoardDto> readNoticeList();
 
+	List<BoardDto> searchByTitle(String text);
+
+	List<BoardDto> searchByContent(String text);
+
+	List<BoardDto> searchByName(String text);
+
+	List<BoardDto> searchByDept(Integer text);
+
+	void updateFile(Integer fileResult);
+
 }
