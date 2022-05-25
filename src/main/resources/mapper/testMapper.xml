@@ -92,13 +92,35 @@
 </select>
 
 
-<insert id="hashinsert">
-	<foreach item="var" collection="array"
+<insert id="hashinsert" parameterType="Map">
+	<foreach item="var" collection="arr"
 	open="INSERT INTO hashtag (description) VALUES" separator="," >
 	 ("${var}")		
 	</foreach>
 
 </insert>
+
+<select id="selectInfo" resultType="com.team2.docgram.dto.BoardDto" parameterType="Map">
+	 SELECT *
+	 FROM board
+	 <trim prefix="WHERE" prefixOverrides="AND">
+		<if test="title != null">AND title like "%${title}%"</if>
+		<if test="content != null">AND content like "%${content}%"</if>
+	</trim>
+</select>
+
+
+<insert id="hashtagInsert" parameterType="com.team2.docgram.dto.HashtagDto" useGeneratedKeys="true" keyProperty="pk">
+	INSERT INTO hashtag (description) VALUES ("${description}")
+</insert>
+
+<insert id="hashtagInsert2" parameterType="String">
+    INSERT INTO hashtag (description) VALUES ("${var}")
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+</insert>
+
 
 
 </mapper>
