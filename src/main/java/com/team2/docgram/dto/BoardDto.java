@@ -21,15 +21,12 @@ public class BoardDto {
 	private String content;
 	private Timestamp date;
 	private int boardSecurity;
-	private int user;
-	private int file;
-	private int relatedBoard;
-	private int board_hashtagList;
-	private int hashtag;
 	private UserDto userDetail;
 	private FileDto fileDetail;
 	private List<HashtagDto> hashtagList;
-
-
+	private Long user;
+	private Long file;
+	private Long relatedBoard;
+	private Long board_hashtagList;
 }
 
