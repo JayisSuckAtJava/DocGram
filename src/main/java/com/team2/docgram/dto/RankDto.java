@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RankDto {
-	private Long rank_pk;
-	private String hashtagList;
+	private Long pk;
+	private String security;
+	private String description;
 }

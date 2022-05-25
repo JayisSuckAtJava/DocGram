@@ -106,6 +106,33 @@ public class BoardDaoImpl implements BoardDao {
 	public List<BoardDto> readNoticeList() {
 		return sqlSession.selectList(mapper+"");
 	}
+
+	@Override
+	public List<BoardDto> searchByTitle(String title) {
+		return sqlSession.selectList(mapper+"", title);
+		// sel from where b.title = ${title}
+	}
+
+	@Override
+	public List<BoardDto> searchByContent(String content) {
+		return sqlSession.selectList(mapper+"", content);
+	}
+
+	@Override
+	public List<BoardDto> searchByName(String name) {
+		return sqlSession.selectList(mapper+"", name);
+	}
+
+	@Override
+	public List<BoardDto> searchByDept(Integer dept) {
+		return sqlSession.selectList(mapper+"", dept);
+	}
+
+	@Override
+	public void updateFile(Integer fileResult) {
+		sqlSession.update(mapper+"", fileResult);
+	}
+	
 	
 	
 

@@ -24,6 +24,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -146,16 +147,12 @@ public class BoardController {
 		
 		if(fileName == "") {
 			
-			System.out.println(file.isEmpty());
+			boardService.createOne(board, hashtagList);
 			
 		}else {
 			
-			String savedFileName = boardService.createOne(board,hashtagList,fileName);
-			if(savedFileName == "") {
-				System.out.println("DB에 파일 저장 문제 발생");
-			}else {
+			String savedFileName = boardService.createOneAndFile(board,hashtagList,fileName);
 				fileService.createOne(savedFileName, file);
-			}
 		}
 		
 		return "redirect:/board";
@@ -233,6 +230,15 @@ public class BoardController {
 			
 			return "main";
 		}
+	}
+	
+	@PostMapping("/board/search")
+	public String boardSearch(@RequestParam("key")String key,@RequestParam("text")String text, Model model) {
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.searchList(key,text);
+		model.addAttribute("boardList", boardList);
+		return "board/search";
+		
 	}
 	
 	
