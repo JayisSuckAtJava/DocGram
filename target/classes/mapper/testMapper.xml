@@ -15,6 +15,58 @@
 	WHERE pk = #{pk}
 </select>
 
+<!--
+ 쿼리명 : user columns 
+ 설명 : user의 컬럼
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+<sql id="userColumns">
+	${user}.id, ${user}.name, ${user}.password, ${user}.phone_num, ${user}.dept_num, ${user}.email, ${user}.starmark, ${user}.mytag, ${user}.team
+</sql>
+
+<!--
+ 쿼리명 : team cloumns
+ 설명 : team의 컬럼(rank, dept)
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+<sql id="teamColumns">
+	${team}.rank, ${team}.dept
+</sql>
+
+<!--
+ 쿼리명 : 소속부서 (team)
+ 설명 : 작성자의 소속부서를 찾는 쿼리(dept, rank)
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+ <select id="selectTeam">
+ 	SELECT
+ 		<include refid="teamColumns"></include>
+ </select>
+ 
+
+
+<!--
+ 쿼리명 : 문서리스트
+ 설명 : 문서리스트의 번호/제목/다운/기관/작성일/작성자 를 선택하는 쿼리문
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+ <select id="boardList">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			d.description,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	WHERE u.user_pk = b.user
+ </select>
 
 <!-- 
 	쿼리명 : 게시판 정보(rank)
