@@ -1,5 +1,9 @@
 package com.team2.docgram.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.team2.docgram.dao.TestDao;
+import com.team2.docgram.dto.DepartmentDto;
 
 @Controller
 public class TestContorller {
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+
+	
 
 	@Autowired
 	private TestDao testDao;
@@ -50,4 +60,47 @@ public class TestContorller {
 		
 		return null;
 	}
+	
+	@GetMapping("/dbTest")
+	@ResponseBody
+	public String dbTest() {
+		
+		String num = "10";
+		String result = sqlSession.selectOne("team2.ifTest", num);
+		
+		return result;
+	}
+	
+	@GetMapping("/dbTest2")
+	@ResponseBody
+	public Object dbTest2() {
+		
+		String ad = "중구,송파구,강남구";
+		String[] arr = ad.split(",");
+		System.out.println(arr);
+		
+		List<DepartmentDto> result = sqlSession.selectList("team2.foreachTest", arr);
+		
+		for(DepartmentDto i : result) {
+			System.out.println(i.getDescription());
+		}
+		
+		return result;
+	}
+	
+	@GetMapping("/dbTest3")
+	@ResponseBody
+	public Object dbTest3() {
+		
+		String ad = "윤구,재범,예빈";
+		String[] arr = ad.split(",");
+		System.out.println(arr);
+		
+		sqlSession.selectList("team2.hashinsert", arr);
+		
+	
+		
+		return "hi";
+	}
+	
 }

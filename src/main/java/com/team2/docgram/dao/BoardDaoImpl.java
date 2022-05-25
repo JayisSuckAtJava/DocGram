@@ -110,6 +110,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<BoardDto> searchByTitle(String title) {
 		return sqlSession.selectList(mapper+"", title);
+		// sel from where b.title = ${title}
 	}
 
 	@Override

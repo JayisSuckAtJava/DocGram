@@ -3,11 +3,7 @@
 
 <mapper namespace="team2">
 
-<select id="selectUser" parameterType="int" resultType="hashmap">
-	SELECT name, id, password, phone_num, dept_num, email, starmark, team
-	FROM user
-	WHERE id = #{id}
-</select>
+
 
 <select id="team" parameterType="int" resultType="hashmap">
 	SELECT rank, dept
@@ -15,15 +11,7 @@
 	WHERE pk = #{pk}
 </select>
 
-<!--
- 쿼리명 : user columns 
- 설명 : user의 컬럼
- 작성자 : 문예빈
- 최초작성일 : 2022-05-24
- -->
-<sql id="userColumns">
-	${user}.id, ${user}.name, ${user}.password, ${user}.phone_num, ${user}.dept_num, ${user}.email, ${user}.starmark, ${user}.mytag, ${user}.team
-</sql>
+
 
 <!--
  쿼리명 : team cloumns
@@ -48,25 +36,7 @@
  
 
 
-<!--
- 쿼리명 : 문서리스트
- 설명 : 문서리스트의 번호/제목/다운/기관/작성일/작성자 를 선택하는 쿼리문
- 작성자 : 문예빈
- 최초작성일 : 2022-05-24
- -->
- <select id="boardList">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			d.description,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE u.user_pk = b.user
- </select>
+
 
 <!-- 
 	쿼리명 : 게시판 정보(rank)
@@ -102,13 +72,33 @@
 	INSERT INTO department VALUES ()
 </insert>
 
-<sql id="userColumns">
+<select id="ifTest" resultType="String">
+	select deptSecurity
+	from department
+	<if test="num != null">
+		where pk = ${num}
+	</if>
+</select>
 
-</sql>
+<select id="foreachTest" resultType="com.team2.docgram.dto.DepartmentDto">
+  SELECT *
+  FROM department
+  <where>
+    <foreach item="var" collection="array"
+        open="address like " separator="or address like " close="" >
+         '%${var}%'
+    </foreach>
+  </where>
+</select>
 
-<sql id="allCoulm">
-8,'설명',1,'별','주소','경로'
-incl
-</sql>
+
+<insert id="hashinsert">
+	<foreach item="var" collection="array"
+	open="INSERT INTO hashtag (description) VALUES" separator="," >
+	 ("${var}")		
+	</foreach>
+
+</insert>
+
 
 </mapper>

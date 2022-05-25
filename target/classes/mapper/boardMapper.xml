@@ -2,5 +2,124 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="team2">
+<mapper namespace="board">
+
+<!--
+ 쿼리명 : 문서리스트
+ 설명 : 문서리스트의 번호/제목/다운/기관/작성일/작성자 를 선택하는 쿼리문
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+ <select id="boardList">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ </select>
+ 
+ <!--
+ 쿼리명 : 기본검색 1.제목
+ 설명 : 제목을 검색했을 때
+ 작성자 : 
+ 최초작성일 : 
+ -->
+ <select id="titleSearch">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	WHERE b.title like '%${title}%'
+ </select>
+ 
+ 
+  <!--
+ 쿼리명 : 기본검색 1.내용
+ 설명 : 제목을 검색했을 때
+ 작성자 : 
+ 최초작성일 : 
+ -->
+ <select id="contentSearch">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	WHERE b.content like '%${content}%'
+ </select>
+ 
+ 
+  <!--
+ 쿼리명 : 기본검색 1.제목0
+ 설명 : 제목을 검색했을 때
+ 작성자 : 
+ 최초작성일 : 
+ -->
+ <select id="nameSearch">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	WHERE u.name = ${name}
+ </select>
+ 
+ 
+  <!--
+ 쿼리명 : 기본검색 1.제목
+ 설명 : 제목을 검색했을 때
+ 작성자 : 
+ 최초작성일 : 
+ -->
+ <select id="deptSearch">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	WHERE d.description = '%${dept}%'
+ </select>
+ <!--  위에 기본 검색 4개를 mybatis- 동적쿼리 - if 로 1개로 만든다면 -->
+ <select id="if">
+ 	SELECT b.board_pk,
+ 			b.title,
+ 			b.file,
+ 			t.dept,
+ 			b.date,
+ 			u.name
+ 	FROM board b
+		JOIN user u ON b.user = u.user_pk
+		JOIN team t ON t.team_pk = u.team
+		JOIN department d ON d.dept_pk = t.dept
+ 	<if test=""></if>
+ </select>
+
+
+</mapper>
 

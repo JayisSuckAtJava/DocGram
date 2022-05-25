@@ -32,6 +32,7 @@ import lombok.ToString;
 
 public class DBtest {
 	String root = "C:\\ProjectTeam2\\file\\";
+	
 	/*
 	@Autowired
 	private SqlSessionTemplate sqlSession;
