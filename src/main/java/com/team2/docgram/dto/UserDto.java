@@ -22,9 +22,10 @@ public class UserDto {
 	private String dept_num;
 	private String email;
 	private String starmark;
-	private int team;
+	private String mytag;
 	private String rank;
 	private String description;
 	private String deptMark;
+	private Long team;
 	
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class TeamDto {
 	
-	private int team_pk;
-	private String rank;
-	private int dept;
+	private Long team_pk;
+	private Long rank;
+	private Long dept;
 }

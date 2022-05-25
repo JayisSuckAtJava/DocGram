@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class HashtagDto {
 
-	private int hashtag_pk;
-	private String tag_name;
+	private String hashtag_pk;
+	private String description;
 }
