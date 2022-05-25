@@ -20,6 +20,7 @@ public class BoardDto {
 	private String title;
 	private String content;
 	private Timestamp date;
+	private Long user;
 	private int boardSecurity;
 	private UserDto userDetail;
 	private FileDto fileDetail;
