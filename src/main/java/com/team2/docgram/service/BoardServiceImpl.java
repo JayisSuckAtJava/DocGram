@@ -10,6 +10,7 @@ import com.team2.docgram.dao.BoardDao;
 import com.team2.docgram.dao.DepartmentDao;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dao.HashtagDao;
+import com.team2.docgram.dao.RelatedBoardDao;
 import com.team2.docgram.dao.TeamDao;
 import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
@@ -44,6 +45,9 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private DepartmentDao deptDao;
 	
+	@Autowired
+	private RelatedBoardDao relatedDao;
+	
 	/**
 	 * 전체의 게시판 리스트를 조회 - User의 정보를 이용해 team의 정보를 이용해 dept를 알아내고 dept를 like로 구분해 해당부서 게시글 조회
 	 * 
@@ -74,19 +78,18 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
+		// null 로나옴
 		
 		BoardDto board = boardDao.readOne(num);
-/*
-		Integer filePk = board.getFile();
+		
+		Integer filePk = board.getFile(); 
 		FileDto file = fileDao.readOne(filePk);
 		
-		Integer hashtagPk = board.getHashtagList_pk();
+		Integer hashtagPk = board.getHashtagList_pk(); 
 		String hashtagList = hashtagDao.readList(hashtagPk);
-	*/	
+		 		
 		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
-		
-		
 		
 		Integer teamNum = user.getTeam();
 		
@@ -96,6 +99,17 @@ public class BoardServiceImpl implements BoardService {
 		String rankDes = rankIs(rank);
 		user.setRank(rankDes);
 		
+		Integer relatedBoard_pk = board.getRelatedBoard();
+		String relatedString = relatedDao.readList(relatedBoard_pk);
+		String[] relatedList = relatedString.split(","); 
+		List<BoardDto> relatedBoardList = null;
+		
+		for(String i : relatedList) {
+			Integer j = Integer.parseInt(i);
+			BoardDto result = boardDao.readRelatedBoard(j);
+			relatedBoardList.add(result); 			
+		}
+		
 		Integer deptNum = team.getDept();
 		
 		UserDto deptDetail = deptDao.readDeptList(deptNum);
@@ -104,23 +118,24 @@ public class BoardServiceImpl implements BoardService {
 		user.setUserDeptUpperSt(deptDetail.getUserDeptUpperSt());
 		user.setUserDeptUpperNd(deptDetail.getUserDeptUpperNd());
 		
-		/*
-		DepartmentDto dept = deptDao.readOne(deptNum);
-		
-		String description = dept.getDescription();
-		
-		
-		
-		user.setDescription(description);
-		*/
-		
+		String hashtagListDetail = hashtagListIs(hashtagList);
 		
 		board.setUserDetail(user);
-		//board.setFileDetail(file);
-		//board.setHashtagList(hashtagList);
+		board.setFileDetail(file);
+		board.setHashtagList(hashtagListDetail);
+		board.setRelatedBoardList(relatedBoardList);
 		
 		return board;
 	}
+	
+	public String hashtagListIs(String hashtagList) {
+		String proc = hashtagList.replace(",", "</tag> #<tag>");
+		System.out.println(proc);		
+		String hashtagListDetail="#<tag>"+proc+"</tag>";		
+		
+		return hashtagListDetail;
+	}
+	
 	
 	public String rankIs(Integer rank) {
 		String rankDes="";

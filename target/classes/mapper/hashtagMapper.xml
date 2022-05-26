@@ -4,5 +4,10 @@
 
 <mapper namespace="hashtag">
 
+<select id="readHashtagList" parameterType="int" resultType="string">
+select hashtagList
+from `hashtag:table`
+where pk = ${hashtagNum}
+</select>
 </mapper>
 

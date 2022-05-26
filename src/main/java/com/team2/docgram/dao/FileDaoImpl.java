@@ -18,7 +18,7 @@ public class FileDaoImpl implements FileDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "file.";
 
 	/** 
 	 * DB에 File 이름 저장
@@ -31,7 +31,7 @@ public class FileDaoImpl implements FileDao {
 	 */
 	@Override
 	public Integer createOne(String fileName) {
-		return sqlSession.insert(mapper+"", fileName);
+		return sqlSession.insert(mapper+"createOne", fileName);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class FileDaoImpl implements FileDao {
 	 */
 	@Override
 	public FileDto readOne(Integer filePk) {
-		return sqlSession.selectOne(mapper+"", filePk);
+		return sqlSession.selectOne(mapper+"readOne", filePk);
 	}
 	
 	

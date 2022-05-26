@@ -132,6 +132,13 @@ public class BoardDaoImpl implements BoardDao {
 	public void updateFile(Integer fileResult) {
 		sqlSession.update(mapper+"", fileResult);
 	}
+
+	@Override
+	public BoardDto readRelatedBoard(Integer relatedPk) {
+		return sqlSession.selectOne(mapper+"readRelatedBoard", relatedPk);
+	}
+	
+	
 	
 	
 	
