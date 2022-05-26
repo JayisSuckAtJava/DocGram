@@ -58,11 +58,12 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public List<BoardDto> readBoardList(UserDto user) {
-		Integer teamNum = user.getTeam();
-		TeamDto team = teamDao.readOne(teamNum);
-		Integer deptNum = team.getDept();
+		/*
+		 * Integer teamNum = user.getTeam(); TeamDto team = teamDao.readOne(teamNum);
+		 * Integer deptNum = team.getDept();
+		 */
 		
-		return boardDao.readBoardList(deptNum);
+		return boardDao.readBoardList();
 	}
 
 	/**

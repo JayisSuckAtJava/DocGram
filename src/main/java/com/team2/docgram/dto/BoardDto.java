@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 public class BoardDto {
 	
-	private int pk;
+	private Long pk;
 	private String title;
 	private String content;
 	private java.sql.Date date;
@@ -29,5 +29,7 @@ public class BoardDto {
 	private Long file;
 	private Long relatedBoard;
 	private Long board_hashtagList;
+	private String userName;
+	private String deptDescription;
 }
 

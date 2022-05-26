@@ -10,17 +10,17 @@
  작성자 : 문예빈
  최초작성일 : 2022-05-24
  -->
- <select id="boardList">
- 	SELECT b.board_pk,
+ <select id="boardList" resultType="board">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description AS deptdescription,
  			b.date,
- 			u.name
+ 			u.name AS username
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
  </select>
  
  <!--
