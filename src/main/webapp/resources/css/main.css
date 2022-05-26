@@ -1,0 +1,62 @@
+/* 메인 바 */
+td {
+  list-style: none;
+}
+
+.main_bar a {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  padding: 8px 10px 9px;
+  border-bottom: 1px solid #d6d6d6
+  text-decoration: none;
+  color:black;
+}
+
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+.main_notice, 
+.main_recentBoard_dept, 
+.main_recentBoard_all, 
+.main_recentBoard_team {
+  width: 400px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+  
+  border: 1px solid #bcbcbc;
+}
+
+
+.main_bar {
+  width: 1000px;
+  padding: 20px;
+  margin-bottom: 20px;
+  float: left;
+  border: 1px solid #bcbcbc;
+}
+
+/* 사이드 바 */
+
+.left-sidebar {
+  width: 160px;
+  padding: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  float: left;
+  border: 1px solid #bcbcbc;
+} 
+
+.right-sidebar {
+  width: 260px;
+  padding: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  float: left;
+  border: 1px solid #bcbcbc;
+}
