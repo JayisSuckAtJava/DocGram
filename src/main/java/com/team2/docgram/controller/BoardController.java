@@ -90,8 +90,8 @@ public class BoardController {
 		
 		boardList = boardService.readBoardList(user);
 		
-		model.addAttribute("list", boardList);
-		return "board";
+		model.addAttribute("boardList", boardList);
+		return "test2";
 	}
 	
 	
