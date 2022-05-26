@@ -10,5 +10,6 @@
 <typeAliases>
  <typeAlias alias="board" type="com.team2.docgram.dto.BoardDto"/>
 </typeAliases>
+
 </configuration>
 

@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class HashtagTableDto {
 	
-	private Long hashtagTable_pk;
+	private Long pk;
 	private String hashtagList;
 }

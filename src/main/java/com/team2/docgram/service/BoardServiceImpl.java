@@ -58,10 +58,12 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public List<BoardDto> readBoardList(UserDto user) {
-		Integer teamNum = user.getTeam();
-		TeamDto team = teamDao.readOne(teamNum);
-		Integer deptNum = team.getDept();
-		return boardDao.readBoardList(deptNum);
+		/*
+		 * Integer teamNum = user.getTeam(); TeamDto team = teamDao.readOne(teamNum);
+		 * Integer deptNum = team.getDept();
+		 */
+		
+		return boardDao.readBoardList();
 	}
 
 	/**
@@ -118,10 +120,28 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public String createOne(BoardDto board, String hashtagList, String fileName) {
+	public void createOne(BoardDto board, String hashtagList) {
+		String[] hashtagArray = hashtagList.split(",");
+		Integer hashtagPK;
+		
+		if(hashtagList == "") {
+			hashtagPK = null;
+			boardDao.createOne(board);
+		}else {
+			for(String i : hashtagArray) {
+				hashtagDao.createOne(i);				 
+			}
+			hashtagPK = hashtagDao.createList(hashtagList);
+			board.setHashtag(hashtagPK);
+			boardDao.createOne(board);	
+		}
+	}
+
+
+	@Override
+	public String createOneAndFile(BoardDto board, String hashtagList, String fileName) {
 		String result = "";
 		String[] hashtagArray = hashtagList.split(",");
-		List<Integer> hashtagPkList = null;
 		
 		Integer hashtagPK;
 		if(hashtagList == "") {
@@ -132,6 +152,7 @@ public class BoardServiceImpl implements BoardService {
 			}
 			hashtagPK = hashtagDao.createList(hashtagList);
 		}
+		
 		
 		board.setHashtag(hashtagPK);
 		Integer boardPk = boardDao.createOne(board);
@@ -145,10 +166,10 @@ public class BoardServiceImpl implements BoardService {
 			
 			result = savedFileName;
 		}
-		return result;
+			boardDao.updateFile(fileResult);
 		
+		return result;
 	}
-
 
 	/**
 	 * 게시글 수정 Board 객체를 받아 DB 에 변동
@@ -299,6 +320,32 @@ public class BoardServiceImpl implements BoardService {
 		DepartmentDto dept = deptDao.readOne(deptPk);
 		
 		return dept;
+	}
+
+	@Override
+	public List<BoardDto> searchList(String key, String text) {
+		List<BoardDto> boardList = new ArrayList<>();
+		
+		switch (key) {
+		case "title":
+			boardList = boardDao.searchByTitle(text);
+			break;
+		case "content":
+			boardList = boardDao.searchByContent(text);
+			break;
+		case "name":
+			boardList = boardDao.searchByName(text);
+			break;
+		case "dept":
+			Integer dept = Integer.parseInt(text);
+			boardList = boardDao.searchByDept(dept);
+			break;
+
+		default:
+			boardList = null;
+			break;
+		}
+		return null;
 	}
 
 	

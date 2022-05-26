@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class HashtagDto {
 
-	private String hashtag_pk;
+	private int pk;
 	private String description;
 }

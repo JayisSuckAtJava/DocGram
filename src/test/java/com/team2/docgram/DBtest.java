@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 public class DBtest {
 	String root = "C:\\ProjectTeam2\\file\\";
+	
 	/*
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -132,7 +138,7 @@ public class DBtest {
 	}
 	
 	**/	
-
+/*
 
 	public ResponseEntity<Resource> donwloadtest() throws FileNotFoundException, UnsupportedEncodingException {
 		String selFileName = ""; // 여기에는 board.file.getFileName 이다.
@@ -173,5 +179,50 @@ public class DBtest {
 		System.out.println(test);
 		String teste = test.substring(1, test.length()-1);
 		System.out.println(teste);
+	}
+	*/	
+	
+	@Test
+	public void testest() {
+		
+		testdb db = searchDetail();
+		System.out.println(db);
+		//db 라는 걸로 컨트롤러가 받았어 그럼 이제 어떻게 단계랑 그런걸 구분하냐?
+		
+	}
+
+	
+	//String key, String text, Date date, Date start, Date end, String file, String rank, String hashtagList
+	public testdb searchDetail() {
+		testdb db = new testdb();
+		
+		String dayis = "2022-05-25";
+		Date day = Date.valueOf(dayis);
+		
+		
+		String st = "2022-04-25";
+		String en = "2022-05-23";
+		Date start = Date.valueOf(st);
+		Date end = Date.valueOf(en);
+
+		db.setKey("title");
+		db.setText("세종시");
+		db.setFile("공문");
+		db.setRank(2);
+		db.setHashtagList("믿음,소망,사랑");
+		db.setDate(day);
+		db.setFileCode("D1005");
+		
+		return db;
+	}
+	
+	
+	@Setter
+	@Getter
+	@ToString
+	public class testdb {
+		Integer rank;
+		String key, text, file, hashtagList, fileCode;
+		Date date;
 	}
 }

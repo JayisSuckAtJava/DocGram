@@ -6,7 +6,7 @@ import com.team2.docgram.dto.BoardDto;
 
 public interface BoardDao {
 
-	List<BoardDto> readBoardList(Integer num);
+	List<BoardDto> readBoardList();
 
 	BoardDto readOne(Integer num);
 
@@ -17,5 +17,15 @@ public interface BoardDao {
 	void deleteOne(Integer num);
 
 	List<BoardDto> readNoticeList();
+
+	List<BoardDto> searchByTitle(String text);
+
+	List<BoardDto> searchByContent(String text);
+
+	List<BoardDto> searchByName(String text);
+
+	List<BoardDto> searchByDept(Integer text);
+
+	void updateFile(Integer fileResult);
 
 }
