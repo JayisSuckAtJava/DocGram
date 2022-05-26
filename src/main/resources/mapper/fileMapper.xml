@@ -4,5 +4,12 @@
 
 <mapper namespace="file">
 
+<select id="readOne" parameterType="int" resultType="file">
+select pk, file_title, file_num
+from file
+where pk = ${filePk}
+
+</select>
+
 </mapper>
 

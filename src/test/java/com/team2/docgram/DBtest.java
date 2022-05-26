@@ -180,7 +180,7 @@ public class DBtest {
 		String teste = test.substring(1, test.length()-1);
 		System.out.println(teste);
 	}
-	*/	
+		
 	
 	@Test
 	public void testest() {
@@ -224,5 +224,26 @@ public class DBtest {
 		Integer rank;
 		String key, text, file, hashtagList, fileCode;
 		Date date;
+	}*/
+	
+	@Test
+	public void test() {
+		String test = "재범,윤구,예빈";
+		String result = hashtagListIs(test);
+		System.out.println(result);
+	}
+	
+	
+	public String hashtagListIs(String hashtagList) {
+		// 표현되는 hashtag 는 ( #재범 #윤구 #예빈 )이렇게
+		
+		
+		String proc = hashtagList.replace(",", "</td> #<td>");
+		System.out.println(proc);
+		
+		String hashtagListDetail="#<td>"+proc+"</td>";
+		// 이렇게 넘어가면 js 에서 인식을 하냐?
+		
+		return hashtagListDetail;
 	}
 }
