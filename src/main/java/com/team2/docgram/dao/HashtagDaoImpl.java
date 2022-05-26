@@ -16,7 +16,7 @@ public class HashtagDaoImpl implements HashtagDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "hashtag.";
 
 	
 	/** 입력받은 hashtagList를
@@ -58,7 +58,7 @@ public class HashtagDaoImpl implements HashtagDao {
 	 */
 	@Override
 	public String readList(Integer hashtagNum) {
-		return sqlSession.selectOne(mapper+"", hashtagNum);
+		return sqlSession.selectOne(mapper+"readHashtagList", hashtagNum);
 	}
 	
 	

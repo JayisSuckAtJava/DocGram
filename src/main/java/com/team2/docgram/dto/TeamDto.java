@@ -1,6 +1,7 @@
 package com.team2.docgram.dto;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /** TeamDto.java
  *  
@@ -12,9 +13,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class TeamDto {
 	
-	private Long team_pk;
-	private Long rank;
-	private Long dept;
+	private Integer team_pk;
+	private Integer rank;
+	private Integer dept;
 }

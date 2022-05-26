@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dao.BoardDao;
 import com.team2.docgram.dao.DepartmentDao;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dao.HashtagDao;
+import com.team2.docgram.dao.RelatedBoardDao;
 import com.team2.docgram.dao.TeamDao;
 import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.DepartmentDto;
 import com.team2.docgram.dto.FileDto;
-import com.team2.docgram.dto.HashtagDto;
 import com.team2.docgram.dto.TeamDto;
 import com.team2.docgram.dto.UserDto;
 
@@ -46,6 +44,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private DepartmentDao deptDao;
+	
+	@Autowired
+	private RelatedBoardDao relatedDao;
 	
 	/**
 	 * 전체의 게시판 리스트를 조회 - User의 정보를 이용해 team의 정보를 이용해 dept를 알아내고 dept를 like로 구분해 해당부서 게시글 조회
@@ -77,37 +78,102 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
+		// null 로나옴
 		
 		BoardDto board = boardDao.readOne(num);
-
-		Integer filePk = board.getFile();
+		
+		Integer filePk = board.getFile(); 
 		FileDto file = fileDao.readOne(filePk);
 		
-		Integer hashtagPk = board.getHashtag();
+		Integer hashtagPk = board.getHashtagList_pk(); 
 		String hashtagList = hashtagDao.readList(hashtagPk);
-		
-		Long userNum = board.getUser();
+		 		
+		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
 		
 		Integer teamNum = user.getTeam();
 		
 		TeamDto team = teamDao.readOne(teamNum);
-		String rank = team.getRank();
+		Integer rank = team.getRank();
+		
+		String rankDes = rankIs(rank);
+		user.setRank(rankDes);
+		
+		Integer relatedBoard_pk = board.getRelatedBoard();
+		String relatedString = relatedDao.readList(relatedBoard_pk);
+		String[] relatedList = relatedString.split(","); 
+		List<BoardDto> relatedBoardList = new ArrayList<>();
+		
+		for(String i : relatedList) {
+			Integer j = Integer.parseInt(i);
+			BoardDto result = boardDao.readRelatedBoard(j);
+			relatedBoardList.add(result); 			
+		}
 		
 		Integer deptNum = team.getDept();
-		DepartmentDto dept = deptDao.readOne(deptNum);
 		
-		String description = dept.getDescription();
+		UserDto deptDetail = deptDao.readDeptList(deptNum);
 		
-		user.setRank(rank);
-		user.setDescription(description);
+		user.setUserDept(deptDetail.getUserDept());
+		user.setUserDeptUpperSt(deptDetail.getUserDeptUpperSt());
+		user.setUserDeptUpperNd(deptDetail.getUserDeptUpperNd());
 		
+		String hashtagListDetail = hashtagListIs(hashtagList);
 		
 		board.setUserDetail(user);
 		board.setFileDetail(file);
-		board.setHashtagList(hashtagList);
+		board.setHashtagList(hashtagListDetail);
+		board.setRelatedBoardList(relatedBoardList);
 		
 		return board;
+	}
+	
+	public String hashtagListIs(String hashtagList) {
+		String proc = hashtagList.replace(",", "</tag> #<tag>");
+		System.out.println(proc);		
+		String hashtagListDetail="#<tag>"+proc+"</tag>";		
+		
+		return hashtagListDetail;
+	}
+	
+	
+	public String rankIs(Integer rank) {
+		String rankDes="";
+		
+		switch (rank) {
+		case 1:
+			rankDes = "서기보";
+			break;
+		case 2:
+			rankDes = "서기";
+			break;
+		case 3:
+			rankDes = "주사보";
+			break;
+		case 4:
+			rankDes = "주사";
+			break;
+		case 5:
+			rankDes = "사무관";
+			break;
+		case 6:
+			rankDes = "서기관";
+			break;
+		case 7:
+			rankDes = "부이사관";
+			break;
+		case 8:
+			rankDes = "이사관";
+			break;
+		case 9:
+			rankDes = "관리관";
+			break;
+
+		default:
+			break;
+		}
+		
+		return rankDes;
 	}
 
 

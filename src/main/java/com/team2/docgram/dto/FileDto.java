@@ -1,6 +1,7 @@
 package com.team2.docgram.dto;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /** FileDto.java
  *  
@@ -12,11 +13,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class FileDto {
 
-	private Long file_pk;
+	private Integer pk;
 	private String file_title;
-	private int file_num;
+	private String file_num;
 	
 }
 

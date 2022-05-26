@@ -1,6 +1,7 @@
 package com.team2.docgram.dto;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /** UserDto.java
  *  
@@ -12,9 +13,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class UserDto {
 
-	private Long user_pk;
+	private Integer pk;
 	private String name;
 	private String id;
 	private String password;
@@ -26,6 +28,10 @@ public class UserDto {
 	private String rank;
 	private String description;
 	private String deptMark;
-	private Long team;
+	private Integer team;
+	private String userDept; 
+	private String userDeptUpperSt;
+	private String userDeptUpperNd;
+	
 	
 }

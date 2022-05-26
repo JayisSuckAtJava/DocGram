@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -151,6 +153,32 @@ public class TestContorller {
 
 		return result;
 		
+	}
+	
+	@GetMapping("/tagTest")
+	public String test232323(Model model) {
+		
+		String test = "재범,윤구,예빈";
+		String result = hashtagListIs(test);
+		System.out.println(result);
+		
+		model.addAttribute("result", result);
+		
+		return "tagTest";
+	}
+	
+	
+	public String hashtagListIs(String hashtagList) {
+		// 표현되는 hashtag 는 ( #재범 #윤구 #예빈 )이렇게
+		
+		
+		String proc = hashtagList.replace(",", "</tag> #<tag>");
+		System.out.println(proc);
+		
+		String hashtagListDetail="#<tag>"+proc+"</tag>";
+		// 이렇게 넘어가면 js 에서 인식을 하냐?
+		
+		return hashtagListDetail;
 	}
 	
 }
