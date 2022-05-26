@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.DepartmentDto;
+import com.team2.docgram.dto.UserDto;
 
 /** DepartMentDaoImpl.java
  *   부서 DB에 연결되는 DAO 객체 구현체

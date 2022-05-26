@@ -76,13 +76,13 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDto readOne(Integer num) {
 		
 		BoardDto board = boardDao.readOne(num);
-
+/*
 		Integer filePk = board.getFile();
 		FileDto file = fileDao.readOne(filePk);
 		
 		Integer hashtagPk = board.getHashtagList_pk();
 		String hashtagList = hashtagDao.readList(hashtagPk);
-		
+	*/	
 		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
 		
@@ -116,8 +116,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 		board.setUserDetail(user);
-		board.setFileDetail(file);
-		board.setHashtagList(hashtagList);
+		//board.setFileDetail(file);
+		//board.setHashtagList(hashtagList);
 		
 		return board;
 	}

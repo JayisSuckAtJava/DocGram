@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "user.";
 
 	
 	

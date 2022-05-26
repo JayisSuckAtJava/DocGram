@@ -50,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
-		return sqlSession.selectOne(mapper+"readOne", num);
+		return sqlSession.selectOne(mapper+"boardDetail", num);
 	}
 
 	/**
