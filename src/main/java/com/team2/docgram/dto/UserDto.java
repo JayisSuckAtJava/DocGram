@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
-	private Integer user_pk;
+	private Integer pk;
 	private String name;
 	private String id;
 	private String password;

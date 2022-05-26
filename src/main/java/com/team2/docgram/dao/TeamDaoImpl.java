@@ -18,7 +18,7 @@ public class TeamDaoImpl implements TeamDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "user.";
 	
 	
 	
@@ -34,7 +34,7 @@ public class TeamDaoImpl implements TeamDao {
 	 */
 	@Override
 	public TeamDto readOne(Integer num) {
-		return sqlSession.selectOne(mapper+"readOne", num);
+		return sqlSession.selectOne(mapper+"readTeam", num);
 	}
 
 }

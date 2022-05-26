@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +184,7 @@
 
 <body>
     <!-- 출력 문서 제목 -->
-    <h3 class="title-article">공공문서 관련한 문서 관리 (제목 )</h3>
+    <h3 class="title-article">${board.title}</h3>
 
 
 
@@ -203,23 +202,23 @@
 
                 <tr>
                     <th scope="row">작성자</th>
-                    <td> 윤구 </td>
+                    <td>${board.userDetail.name}     ${board.userDetail.rank}</td>
                     <th scope="row" class="tline" itemprop="contributor">작성일</th>
-                    <td class="tline">2022/5/5</td>
+                    <td class="tline">${board.date}</td>
                 </tr>
 
                 <tr>
                     <th scope="row" itemprop="accountablePerson">문서 관리 번호</th>
-                    <td>D2001245</td>
+                    <td>D2001245  *board.fileDetail.file_num* </td>
                     <th scope="row" itemprop="dateCreated">
                         전화번호
                     </th>
-                    <td>010-4393-2445</td>
+                    <td>${board.userDetail.dept_num}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">소속기관</th>
-                    <td colspan="3" style="flex-wrap: nowrap"> 세종청사 > 어저꾸저꾸부 > 무슨무슨팀 </td>
+                    <td colspan="3" style="flex-wrap: nowrap"> ${board.userDetail.userDeptUpperNd} > ${board.userDetail.userDeptUpperSt} > ${board.userDetail.userDept}</td>
                 </tr>
             </tbody>
         </table>
@@ -243,10 +242,7 @@
     <h4 class="hash"> 문서 내용 </h4>
 
     <div class="detail">
-        <p>
-            대충 문서 내용이 나와야하는 부분
-        </p>
-
+        <p>${board.content}</p>
     </div>
     <hr>
 

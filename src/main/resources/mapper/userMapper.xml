@@ -34,6 +34,18 @@ AND d1.pk = ${deptNum}
 
 </select>
 
+<select id="readOne" resultType="user" parameterType="int">
+select pk, id, name, password, phone_num, dept_num, email, starMark, mytag, team
+from user
+where pk = ${num}
+</select>
+
+<select id="readTeam" parameterType="int" resultType="team">
+select pk, rank, dept
+from team
+where pk = ${num}
+</select>
+
 
 </mapper>
 
