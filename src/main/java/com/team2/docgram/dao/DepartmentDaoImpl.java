@@ -18,7 +18,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "user.";
 
 
 
@@ -35,5 +35,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public DepartmentDto readOne(Integer deptPk) {
 		return sqlSession.selectOne(mapper+"",deptPk);
 	}
+
+
+
+	@Override
+	public UserDto readDeptList(Integer deptNum) {
+		return sqlSession.selectOne(mapper+"readDeptList", deptNum);
+	}
+	
+	
 
 }
