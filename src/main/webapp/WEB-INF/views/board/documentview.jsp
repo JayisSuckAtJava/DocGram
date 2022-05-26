@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<!-- 헤더 부분 -->
+
 <head>
-<meta charset="UTF-8">
-<title>DocumentView</title>
- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocumentView</title>
@@ -14,7 +15,9 @@
     <!-- css 부분 -->
     <style>
         .title-article {
-            display: inline-block;
+            display: block;
+            max-width: 40%;
+            margin: auto;
             border: solid;
             padding: 10px 0;
             font-size: 1.5em;
@@ -28,6 +31,20 @@
             margin-block-end: 1.33em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
+        }
+
+        /* 해쉬 팝업 */
+        .hashdetail {
+            border: 1px solid ;
+        }
+
+        /* 관련 문서 */
+
+        .relationlist {
+            padding: 33px 28px 40px;
+            border-bottom: 1px solid #bbbcbf;
+            line-height: 28px;
+            background-color: #fafafa;
         }
 
         /* 첨부된 문서 */
@@ -181,11 +198,13 @@
 
 </head>
 <!-- 헤더 부분 -->
+
+
 <!-- 바디 부분 -->
 
 <body>
     <!-- 출력 문서 제목 -->
-    <h3 class="title-article">공공문서 관련한 문서 관리 (제목 )</h3>
+        <h3 class="title-article">공공문서 관련한 문서 관리 (제목 )</h3>
 
 
 
@@ -228,49 +247,165 @@
     <hr>
 
     <!-- 해시태그 정보 -->
-    <div>
-        <h4 class="hash"> 해시태그 정보 </h4>
+    <div class="hashlist">
+        <div>
+            <h4 class="hash"> 해시태그 정보 </h4>
+        </div>
 
-        <form action="" method="post">
+        <div>
+            <ul class="hashdetail">
+                <li>
+                    <a>
+                        #윤구 #재범 #예빈
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>    
 
-            <input type="text" name="content" hidden="true" />
-            <input type="text" name="hash" hidden="true" />
-            <input type="text" name="text" placeholder="내용을 입력해 주세요" />
-
-        </form>
-    </div>
     <hr>
-    <h4 class="hash"> 문서 내용 </h4>
-
-    <div class="detail">
-        <p>
-            대충 문서 내용이 나와야하는 부분
-        </p>
-
+    <div>
+        <!-- 문서내용  -->
+        <div class="detaillsit">
+            <h4 class="detailarea"> 문서 내용 </h4>
+        </div>
+                <div class="detail">
+                    <p>
+                    대충 문서 내용이 나와야하는 부분
+                    </p>
+                </div>
     </div>
+        
     <hr>
 
 
     <!-- 문서 다운 파트 -->
-    <h4 id="attachment">첨부된 문서</h4>
+    <div>    
+        <div>
+            <h4 id="attachment">첨부된 문서 (다운로드)</h4>
+        </div>
+        <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
+                
+        </div>
+        <div>
+            <ul class="list-attachment">
+                <li>
+                    <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
+                        <p class="file-down"> </p>
+                        <p class="title-down">20220322142339618.hwp <span class="txt-gray">(185 KB)</span></p> <span
+                            class="btn-downset"> <button type="button" onclick="docview('F0000090178239', 'hview');"
+                                class="btn btn-view">문서보기</button>
+                            <a href="/og/com/download.php?uri=%2Ffiles%2Fdcdata%2F100049%2F20220322%2FF0000090178239.hwp&dname=20220322142339618.hwp"
+                                class="btn btn-download btn-original" style='margin-left:5px'><i class="icon-img icon-down"></i>
+                                <button class="element-invisible">다운로드</button></a> </span>
+                        <p></p>
+                </li>
+            </ul>
+        </div>
+    </div> 
+    <hr>
+    
+    <!-- 관련 문서 파트 -->
 
-    <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서"></div>
-    <ul class="list-attachment">
-        <li>
-            <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
-                <p class="file-down"> </p>
-                <p class="title-down">20220322142339618.hwp <span class="txt-gray">(185 KB)</span></p> <span
-                    class="btn-downset"> <button type="button" onclick="docview('F0000090178239', 'hview');"
-                        class="btn btn-view">문서보기</button>
-                    <a href="/og/com/download.php?uri=%2Ffiles%2Fdcdata%2F100049%2F20220322%2FF0000090178239.hwp&dname=20220322142339618.hwp"
-                        class="btn btn-download btn-original" style='margin-left:5px'><i class="icon-img icon-down"></i>
-                        <button class="element-invisible">다운로드</button></a> </span>
-                <p></p>
-        </li>
-    </ul>
+    <div>
+        <div>
+            <h4 class="relation">관련 문서</h4> 
+        </div>
+        
+        <div class="relationlist">
+            <ul>
+                <li>
+                    <div>
+                        <a href="">
+                                <strong>문서 제목</strong>
+                                세종 청사의 공공기관 관련한 보고서1
+                        </a>
+                    </div>
+                        <p>
+                            <span class="date">
+                                <strong>
+                                    작성(등록일)
+                                </strong>
+                                2022-03-22
+                            </span>
+                            <span>
+                                <strong>
+                                    기관
+                                </strong>
+                                시설부서
+                            </span>
+
+                        </p>
+                </li>
+
+                <li>
+                    <div>
+                        <a href="">
+                                <strong>문서 제목</strong>
+                                세종 청사의 공공기관 관련한 보고서1
+                        </a>
+                    </div>
+                        <p>
+                            <span class="date">
+                                <strong>
+                                    등록일
+                                </strong>
+                                2022-03-22
+                            </span>
+                            <span>
+                                <strong>
+                                    부서
+                                </strong>
+                                시설부서
+                            </span>
+
+                        </p>
+                </li>
+
+                <li>
+                    <div>
+                        <a href="">
+                                <strong>문서 제목</strong>
+                                세종 청사의 공공기관 관련한 보고서1
+                        </a>
+                    </div>
+                        <p>
+                            <span class="date">
+                                <strong>
+                                    등록일
+                                </strong>
+                                2022-03-22
+                            </span>
+                            <span>
+                                <strong>
+                                    부서
+                                </strong>
+                                시설부서
+                            </span>
+
+                        </p>
+                </li>
+
+            </ul>
+        </div>
     </div>
-
-
+    <hr>
 </body>
+
+    <!-- script 부분 -->
+
+        <script>
+  const trs = document.querySelectorAll(".list-body > tr");
+  trs.forEach((v) => {
+    console.log(v);
+    let first = v.firstElementChild.getAttribute("key");
+    console.log(first)
+    v.addEventListener("click", () => {
+      alert(`hi u are in ${first}`)
+      window.location.href = `board/${first}`
+    })
+  })
+</script>
+
 
 </html>
