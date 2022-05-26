@@ -102,7 +102,7 @@ public class BoardServiceImpl implements BoardService {
 		Integer relatedBoard_pk = board.getRelatedBoard();
 		String relatedString = relatedDao.readList(relatedBoard_pk);
 		String[] relatedList = relatedString.split(","); 
-		List<BoardDto> relatedBoardList = null;
+		List<BoardDto> relatedBoardList = new ArrayList<>();
 		
 		for(String i : relatedList) {
 			Integer j = Integer.parseInt(i);

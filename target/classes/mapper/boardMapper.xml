@@ -224,7 +224,7 @@
  </select>
  
  <select id="readRelatedBoard" resultType="board" parameterType="int">
- SELECT b.pk, b.title, b.DATE, d.description
+ SELECT b.pk, b.title, b.DATE, d.description as deptDescription
  	FROM board b, user u, team t,department d
  	where b.user = u.pk
  	AND u.team = t.pk

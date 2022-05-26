@@ -250,14 +250,8 @@
             <h4 class="hash"> 해시태그 정보 </h4>
         </div>
 
-        <div>
-            <ul class="hashdetail">
-                <li>
-                    <a>
-                        #윤구 #재범 #예빈
-                    </a>
-                </li>
-            </ul>
+        <div class="hashdetail">
+                ${board.hashtagList}
         </div>
     </div>    
 
@@ -310,78 +304,20 @@
         
         <div class="relationlist">
             <ul>
+            <!--  첫번쨰 문서-->
+               
+                
+				<c:forEach items="${board.relatedBoardList}" var="relatedBoard">
                 <li>
                     <div>
-                        <a href="">
-                                <strong>문서 제목</strong>
-                                세종 청사의 공공기관 관련한 보고서1
-                        </a>
+                        <a href="${relatedBoard.pk}">${relatedBoard.title}</a>
                     </div>
                         <p>
-                            <span class="date">
-                                <strong>
-                                    작성(등록일)
-                                </strong>
-                                2022-03-22
-                            </span>
-                            <span>
-                                <strong>
-                                    기관
-                                </strong>
-                                시설부서
-                            </span>
-
+                            <span class="date">${relatedBoard.date}</span>
+                            <span>${relatedBoard.deptDescription}</span>
                         </p>
                 </li>
-
-                <li>
-                    <div>
-                        <a href="">
-                                <strong>문서 제목</strong>
-                                세종 청사의 공공기관 관련한 보고서1
-                        </a>
-                    </div>
-                        <p>
-                            <span class="date">
-                                <strong>
-                                    등록일
-                                </strong>
-                                2022-03-22
-                            </span>
-                            <span>
-                                <strong>
-                                    부서
-                                </strong>
-                                시설부서
-                            </span>
-
-                        </p>
-                </li>
-
-                <li>
-                    <div>
-                        <a href="">
-                                <strong>문서 제목</strong>
-                                세종 청사의 공공기관 관련한 보고서1
-                        </a>
-                    </div>
-                        <p>
-                            <span class="date">
-                                <strong>
-                                    등록일
-                                </strong>
-                                2022-03-22
-                            </span>
-                            <span>
-                                <strong>
-                                    부서
-                                </strong>
-                                시설부서
-                            </span>
-
-                        </p>
-                </li>
-
+				</c:forEach>
             </ul>
         </div>
     </div>
@@ -391,16 +327,15 @@
     <!-- script 부분 -->
 
         <script>
-  const trs = document.querySelectorAll(".list-body > tr");
-  trs.forEach((v) => {
-    console.log(v);
-    let first = v.firstElementChild.getAttribute("key");
-    console.log(first)
-    v.addEventListener("click", () => {
-      alert(`hi u are in ${first}`)
-      window.location.href = `board/${first}`
-    })
-  })
+        const tds = document.querySelectorAll("tag");
+        tds.forEach((v) => {
+            console.log(v)
+            let text = v.innerHTML;
+            v.addEventListener("click" , ()=>{
+                alert(`\${text}`)
+            })
+            })
+  
 </script>
 
 
