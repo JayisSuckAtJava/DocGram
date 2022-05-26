@@ -28,4 +28,6 @@ public interface BoardDao {
 
 	void updateFile(Integer fileResult);
 
+	BoardDto readRelatedBoard(Integer relatedPk);
+
 }

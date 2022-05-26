@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "user.";
 
 	
 	
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 	 * @since 2022-05-19
 	 */
 	@Override
-	public UserDto readOne(Long num) {
+	public UserDto readOne(Integer num) {
 		return sqlSession.selectOne(mapper+"readOne", num);
 	}
 

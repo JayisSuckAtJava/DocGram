@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /** BoardDto.java
  *  게시판 Dto
@@ -15,21 +16,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class BoardDto {
 	
-	private Long pk;
+	private Integer pk;
 	private String title;
 	private String content;
 	private java.sql.Date date;
-	private Long user;
+	private Integer user;
 	private int boardSecurity;
 	private UserDto userDetail;
 	private FileDto fileDetail;
-	private List<HashtagDto> hashtagList;
-	private Long file;
-	private Long relatedBoard;
-	private Long board_hashtagList;
+	private Integer file;
+	private Integer relatedBoard;
+	private Integer hashtagList_pk;
 	private String userName;
 	private String deptDescription;
+	private String hashtagList;
+	private List<BoardDto> relatedBoardList;
 }
 

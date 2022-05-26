@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.DepartmentDto;
+import com.team2.docgram.dto.UserDto;
 
 /** DepartMentDaoImpl.java
  *   부서 DB에 연결되는 DAO 객체 구현체
@@ -18,7 +19,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "user.";
 
 
 
@@ -35,5 +36,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public DepartmentDto readOne(Integer deptPk) {
 		return sqlSession.selectOne(mapper+"",deptPk);
 	}
+
+
+
+	@Override
+	public UserDto readDeptList(Integer deptNum) {
+		return sqlSession.selectOne(mapper+"readDeptList", deptNum);
+	}
+	
+	
 
 }
