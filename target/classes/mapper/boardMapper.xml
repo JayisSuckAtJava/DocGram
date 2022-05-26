@@ -10,17 +10,17 @@
  작성자 : 문예빈
  최초작성일 : 2022-05-24
  -->
- <select id="boardList">
- 	SELECT b.board_pk,
+ <select id="boardList" resultType="board">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description AS deptdescription,
  			b.date,
- 			u.name
+ 			u.name AS username
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
  </select>
  
  <!--
@@ -197,15 +197,9 @@
 	최초 작성일 : 
 
 -->
- <select id="boardDetail">
- 	SELECT b.title, b.file, f.file_title, d.description, r.description, b.date, u.name, h.hashtagList, u.starMark
+ <select id="boardDetail" parameterType="int" resultType="board">
+ 	SELECT b.title, b.content, b.date , b.boardSecurity , b.user
  	FROM board b
- 		JOIN file f on f.pk = b.file
- 		JOIN user u on u.pk = b.user
- 		JOIN hashtag:table h on h.pk = b.hashtagList
- 		JOIN team t on t.pk = u.team
- 		JOIN rank r on r.pk = t.rank
- 		JOIN department d on d.pk = t.dept
  	WHERE b.pk = ${board_pk}
  </select>
  

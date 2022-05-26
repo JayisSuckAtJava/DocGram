@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,12 +206,14 @@ input::placeholder {color:#434343;}
           <td>부서관</td>
         </tr>
         <c:forEach items="${boardList}" var="board">
+        <tr>
         	<td>${board.pk}</td>
           	<td>${board.title}</td>
-          	<td>${board.file}</td>
           	<td></td>
-          	<td>${date}</td>
-          	<td>${la}</td>
+          	<td>${board.deptDescription}</td>
+          	<td>${board.date}</td>
+          	<td>${board.userName}</td>
+         </tr>
         </c:forEach>
        	
       </tbody>
@@ -227,8 +228,8 @@ input::placeholder {color:#434343;}
     let first = v.firstElementChild.innerHTML;
     console.log(first)
     v.addEventListener("click", () => {
-      alert(`hi u are in ${first}`)
-      window.location.href = `board/${first}`
+      alert(`hi u are in \${first}`)
+      window.location.href = `board/\${first}`
     })
   })
 </script>

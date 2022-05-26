@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dao.BoardDao;
 import com.team2.docgram.dao.DepartmentDao;
@@ -17,7 +15,6 @@ import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.DepartmentDto;
 import com.team2.docgram.dto.FileDto;
-import com.team2.docgram.dto.HashtagDto;
 import com.team2.docgram.dto.TeamDto;
 import com.team2.docgram.dto.UserDto;
 
@@ -58,11 +55,12 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public List<BoardDto> readBoardList(UserDto user) {
-		Integer teamNum = user.getTeam();
-		TeamDto team = teamDao.readOne(teamNum);
-		Integer deptNum = team.getDept();
+		/*
+		 * Integer teamNum = user.getTeam(); TeamDto team = teamDao.readOne(teamNum);
+		 * Integer deptNum = team.getDept();
+		 */
 		
-		return boardDao.readBoardList(deptNum);
+		return boardDao.readBoardList();
 	}
 
 	/**
@@ -78,35 +76,89 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDto readOne(Integer num) {
 		
 		BoardDto board = boardDao.readOne(num);
-
+/*
 		Integer filePk = board.getFile();
 		FileDto file = fileDao.readOne(filePk);
 		
-		Integer hashtagPk = board.getHashtag();
+		Integer hashtagPk = board.getHashtagList_pk();
 		String hashtagList = hashtagDao.readList(hashtagPk);
-		
-		Long userNum = board.getUser();
+	*/	
+		Integer userNum = board.getUser();
 		UserDto user = userDao.readOne(userNum);
+		
+		
 		
 		Integer teamNum = user.getTeam();
 		
 		TeamDto team = teamDao.readOne(teamNum);
-		String rank = team.getRank();
+		Integer rank = team.getRank();
+		
+		String rankDes = rankIs(rank);
+		user.setRank(rankDes);
 		
 		Integer deptNum = team.getDept();
+		
+		UserDto deptDetail = deptDao.readDeptList(deptNum);
+		
+		user.setUserDept(deptDetail.getUserDept());
+		user.setUserDeptUpperSt(deptDetail.getUserDeptUpperSt());
+		user.setUserDeptUpperNd(deptDetail.getUserDeptUpperNd());
+		
+		/*
 		DepartmentDto dept = deptDao.readOne(deptNum);
 		
 		String description = dept.getDescription();
 		
-		user.setRank(rank);
+		
+		
 		user.setDescription(description);
+		*/
 		
 		
 		board.setUserDetail(user);
-		board.setFileDetail(file);
-		board.setHashtagList(hashtagList);
+		//board.setFileDetail(file);
+		//board.setHashtagList(hashtagList);
 		
 		return board;
+	}
+	
+	public String rankIs(Integer rank) {
+		String rankDes="";
+		
+		switch (rank) {
+		case 1:
+			rankDes = "서기보";
+			break;
+		case 2:
+			rankDes = "서기";
+			break;
+		case 3:
+			rankDes = "주사보";
+			break;
+		case 4:
+			rankDes = "주사";
+			break;
+		case 5:
+			rankDes = "사무관";
+			break;
+		case 6:
+			rankDes = "서기관";
+			break;
+		case 7:
+			rankDes = "부이사관";
+			break;
+		case 8:
+			rankDes = "이사관";
+			break;
+		case 9:
+			rankDes = "관리관";
+			break;
+
+		default:
+			break;
+		}
+		
+		return rankDes;
 	}
 
 

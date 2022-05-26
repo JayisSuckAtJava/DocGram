@@ -90,8 +90,8 @@ public class BoardController {
 		
 		boardList = boardService.readBoardList(user);
 		
-		model.addAttribute("list", boardList);
-		return "board";
+		model.addAttribute("boardList", boardList);
+		return "test2";
 	}
 	
 	
@@ -109,7 +109,7 @@ public class BoardController {
 	public String board(Model model,@PathVariable("num")Integer num) {
 		BoardDto board = boardService.readOne(num);
 		model.addAttribute("board", board);
-		return "board";
+		return "board/documentview";
 	}
 	
 	/**

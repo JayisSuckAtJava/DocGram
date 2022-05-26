@@ -17,17 +17,19 @@ import lombok.Setter;
 @Setter
 public class BoardDto {
 	
-	private int pk;
+	private Integer pk;
 	private String title;
 	private String content;
 	private java.sql.Date date;
-	private Long user;
+	private Integer user;
 	private int boardSecurity;
 	private UserDto userDetail;
 	private FileDto fileDetail;
-	private List<HashtagDto> hashtagList;
-	private Long file;
+	private Integer file;
 	private Long relatedBoard;
-	private Long board_hashtagList;
+	private Integer hashtagList_pk;
+	private String userName;
+	private String deptDescription;
+	private String hashtagList;
 }
 

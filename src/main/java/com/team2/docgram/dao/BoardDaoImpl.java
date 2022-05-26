@@ -21,7 +21,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "board.";
 	
 	
 
@@ -35,8 +35,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public List<BoardDto> readBoardList(Integer num) {
-		return sqlSession.selectList(mapper+"readBoardList", num);
+	public List<BoardDto> readBoardList() {
+		return sqlSession.selectList(mapper+"boardList");
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public BoardDto readOne(Integer num) {
-		return sqlSession.selectOne(mapper+"readOne", num);
+		return sqlSession.selectOne(mapper+"boardDetail", num);
 	}
 
 	/**
