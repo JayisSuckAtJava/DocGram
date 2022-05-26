@@ -1,6 +1,7 @@
 package com.team2.docgram.dto;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /** DepartmentDto.java
  *  부서 Dto
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class DepartmentDto {
 	
 	private Long dept_pk;
