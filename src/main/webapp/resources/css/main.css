@@ -24,9 +24,10 @@ div {
 .main_recentBoard_dept, 
 .main_recentBoard_all, 
 .main_recentBoard_team {
-  width: 400px;
-  padding: 20px;
-  margin-bottom: 20px;
+  width: 28%;
+  padding: 5%;
+  margin-left: 5%;
+  margin-bottom: 15%;
   display: inline-block;
   
   border: 1px solid #bcbcbc;
@@ -34,29 +35,26 @@ div {
 
 
 .main_bar {
-  width: 1000px;
-  padding: 20px;
+  width: 70%;
+  margin-left: 5%;
   margin-bottom: 20px;
   float: left;
+  display: inline-block;
   border: 1px solid #bcbcbc;
 }
 
 /* 사이드 바 */
 
 .left-sidebar {
-  width: 160px;
-  padding: 20px;
-  margin-right: 20px;
+  width: 10%;
   margin-bottom: 20px;
   float: left;
   border: 1px solid #bcbcbc;
 } 
 
 .right-sidebar {
-  width: 260px;
-  padding: 20px;
-  margin-left: 20px;
+  width: 10%;
   margin-bottom: 20px;
-  float: left;
+  float: right;
   border: 1px solid #bcbcbc;
 }

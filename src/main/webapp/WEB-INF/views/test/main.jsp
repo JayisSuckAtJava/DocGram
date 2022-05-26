@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="resources/css/main.css">
 <title>Insert title here</title>
 </head>
 <body>

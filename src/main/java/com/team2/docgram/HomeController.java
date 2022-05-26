@@ -37,14 +37,14 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/sdsd")
+	@GetMapping("sdsd")
 	public String test() {
 		return "test2";
 	}
 	
-	@GetMapping("/main")
+	@GetMapping("main2")
 	public String test2() {
-		return "main";
+		return "test/main";
 	}
 	
 	
