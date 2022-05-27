@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class HashtagTableDto {
 	
-	private Long pk;
+	private Integer pk;
 	private String hashtagList;
 }

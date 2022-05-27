@@ -227,7 +227,7 @@
 
                 <tr>
                     <th scope="row" itemprop="accountablePerson">문서 관리 번호</th>
-                    <td>D2001245  *board.fileDetail.file_num* </td>
+                    <td>${board.fileDetail.file_num}</td>
                     <th scope="row" itemprop="dateCreated">
                         전화번호
                     </th>
@@ -269,7 +269,7 @@
     <hr>
 
 
-    <!-- 문서 다운 파트 -->
+        <!-- 문서 다운 파트 -->
     <div>    
         <div>
             <h4 id="attachment">첨부된 문서 (다운로드)</h4>
@@ -282,12 +282,16 @@
                 <li>
                     <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
                         <p class="file-down"> </p>
-                        <p class="title-down">20220322142339618.hwp <span class="txt-gray">(185 KB)</span></p> <span
-                            class="btn-downset"> <button type="button" onclick="docview('F0000090178239', 'hview');"
-                                class="btn btn-view">문서보기</button>
-                            <a href="/og/com/download.php?uri=%2Ffiles%2Fdcdata%2F100049%2F20220322%2FF0000090178239.hwp&dname=20220322142339618.hwp"
-                                class="btn btn-download btn-original" style='margin-left:5px'><i class="icon-img icon-down"></i>
-                                <button class="element-invisible">다운로드</button></a> </span>
+                        <p class="title-down">${board.fileDetail.file_title}</p> 
+                        <span class="btn-downset">
+                            <!-- 문서 보기 버튼-->
+                             <button type="button" class="btn btn-view">문서보기</button>
+
+                            <a href="/download/${board.fileDetail.pk}" class="btn btn-download btn-original" style='margin-left:5px'>
+                                <i class="icon-img icon-down"></i>
+                                <button class="element-invisible">다운로드</button>
+                            </a> 
+                        </span>
                         <p></p>
                 </li>
             </ul>

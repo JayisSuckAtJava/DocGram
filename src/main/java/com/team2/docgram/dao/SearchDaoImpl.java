@@ -15,11 +15,11 @@ public class SearchDaoImpl implements SearchDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private String mapper = "namespace.";
+	private String mapper = "board.";
 
 	@Override
 	public List<BoardDto> searchDetail(Map<String, Object> map) {
-		return sqlSession.selectList(mapper+"", map);
+		return sqlSession.selectList(mapper+"searchDetail", map);
 	}
 
 }

@@ -12,7 +12,7 @@ public interface BoardService {
 
 	BoardDto readOne(Integer num);
 
-	void createOne(BoardDto board, String hashtagList);
+	void createOne(BoardDto board, String hashtagList,String relatedboardList);
 
 	void updateOne(BoardDto board);
 
@@ -28,6 +28,8 @@ public interface BoardService {
 
 	List<BoardDto> searchList(String key, String text);
 
-	String createOneAndFile(BoardDto board, String hashtagList, String fileName);
+	String createOneAndFile(BoardDto board, String hashtagList, String fileName,String relatedboardList);
+
+	void updateInclude(Integer boardPk,String relatedboardList);
 
 }

@@ -246,4 +246,19 @@ public class DBtest {
 		
 		return hashtagListDetail;
 	}
+	
+	@Test
+	public void tsds() {
+		String til = "D";
+		String zero = "0";
+		Integer a = 315454;//PK 들어가는값
+		
+		
+		for(int i = a.toString().length(); i<13 ; i++) {
+			til = til + zero;
+		}
+		String test = til+a;
+		System.out.println(test);
+
+	}
 }

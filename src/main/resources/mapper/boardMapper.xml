@@ -29,17 +29,17 @@
  작성자 : 
  최초작성일 : 
  -->
- <select id="titleSearch">
- 	SELECT b.board_pk,
+ <select id="readTitle">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description,
  			b.date,
  			u.name
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
  	WHERE b.title like '%${title}%'
  </select>
  
@@ -50,17 +50,17 @@
  작성자 : 
  최초작성일 : 
  -->
- <select id="contentSearch">
- 	SELECT b.board_pk,
+ <select id="readContent">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description,
  			b.date,
  			u.name
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
  	WHERE b.content like '%${content}%'
  </select>
  
@@ -71,17 +71,17 @@
  작성자 : 
  최초작성일 : 
  -->
- <select id="nameSearch">
- 	SELECT b.board_pk,
+ <select id="readName">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description,
  			b.date,
  			u.name
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
  	WHERE u.name = ${name}
  </select>
  
@@ -92,18 +92,18 @@
  작성자 : 
  최초작성일 : 
  -->
- <select id="deptSearch">
- 	SELECT b.board_pk,
+ <select id="readDept">
+ 	SELECT b.pk,
  			b.title,
  			b.file,
- 			t.dept,
+ 			d.description,
  			b.date,
  			u.name
  	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE d.description = '%${dept}%'
+		JOIN user u ON b.user = u.pk
+		JOIN team t ON t.pk = u.team
+		JOIN department d ON d.pk = t.dept
+ 	WHERE d.description like '%${dept}%'
  </select>
  <!--  위에 기본 검색 4개를 mybatis- 동적쿼리 - if 로 1개로 만든다면 이건 실제 데이터가 있으면 테스트-->
  <select id="if">
@@ -138,7 +138,7 @@
  <!-- 2022-05-25 기본 날짜 형식. -->
  <!-- SELECT DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 3 MONTH); -->
  <!--  5-25 작성 조인 부분 하단 3개는 문제 발생시 필요에 따라 if 문 각각 거는걸로 -->
- <select id="" parameterType="Map">
+ <select id="searchDetail" parameterType="Map">
  	SELECT b.board_pk,
  			b.title,
  			b.file,
@@ -178,7 +178,7 @@
  		and r.description = ${rank}
  	</if>
  	<if test="hashtagList != null">
-    	<foreach item="var" collection="hashtagList" separator="and">
+    	<foreach item="var" collection="arr" separator="and">
       	   and h.hashtagList like '%${var}%'
    		 </foreach>
  	</if>
@@ -200,8 +200,12 @@
  <select id="boardDetail" parameterType="int" resultType="board">
  	SELECT b.title, b.content, b.date , b.boardSecurity , b.user , b.file , b.hashtagList as hashtagList_pk, b.relatedBoard
  	FROM board b
- 	WHERE b.pk = ${board_pk}
+ 	WHERE b.pk = ${pk}
  </select>
+ 
+ <update id="updateRelated" parameterType="map">
+ update board set relatedboard = ${relatedBoard} where pk = ${boardPk}
+ </update>
  
  
  <!--
@@ -211,11 +215,17 @@
 	최초 작성일 : 
 
 -->
- <insert id="boardCreate">
- 	INSERT INTO u.user, b.title, b.content, h.hashtagList, f.file, b.date
- 	FROM user u
- 		JOIN board b, hastag:tabel h , file f
+ <insert id="createOne" parameterType="board" useGeneratedKeys="true" keyProperty="pk">
+insert into board (title, content, DATE, boardSecurity, user) values ("${title}, ${content}, date_format(now(), '%Y-%m-%d'), ${boardSecurity}, ${user}")
  </insert>
+ 
+ <update id="updateOne" parameterType="board">
+ UPDATE board SET title = ${title} , content = ${content} WHERE pk = ${pk}
+ </update>
+ 
+ <delete id="deleteOne" parameterType="int">
+ delete from board where pk = ${pk}
+ </delete>
  
  <select id="readRelatedList" parameterType="int" resultType="String">
  SELECT boardList
@@ -231,6 +241,17 @@
  	AND t.dept = d.pk
  	and b.pk = ${relatedPk}
  </select>
+ 
+ <select id="readRelatedBoardList" resultType="related" parameterType="int">
+ select r.pk, r.boardList
+ from relatedboard r, board b
+ where b.relatedboard = r.pk
+ and b.pk = ${targetBoard}
+ </select>
+ 
+ <insert id="createRelatedOne" parameterType="related" useGeneratedKeys="true" keyProperty="pk">
+ insert into relatedboard (boardList) values ${boardList}
+ </insert>
 
 
 </mapper>

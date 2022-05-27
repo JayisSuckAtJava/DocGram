@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class RelatedBoardDto {
 	
-	private Integer relatedBoard_pk;
+	private Integer pk;
 	private String boardList;
 }

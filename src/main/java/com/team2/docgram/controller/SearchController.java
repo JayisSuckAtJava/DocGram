@@ -47,6 +47,8 @@ public class SearchController {
 	public String searchDetail(String key, String text, Date date, Date start, Date end, String file, String rank, String hashtagList,Model model) {
 		// 위의 모든 조합을 만드세요
 		// 일단 hashtagList 는 통으로 넘겨서 1개로 동적쿼리 수행
+		String[] arr = hashtagList.split(",");
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("date", date);
@@ -54,7 +56,7 @@ public class SearchController {
 		map.put("text", text);
 		map.put("file", file);
 		map.put("rank", rank);
-		map.put("hashtagList", hashtagList);
+		map.put("hashtagList", arr);
 		
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = searchService.searchDetail(map);

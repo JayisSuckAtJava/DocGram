@@ -46,6 +46,14 @@ from team
 where pk = ${num}
 </select>
 
+<update id="updateOne" parameterType="user">
+update user set name = ${name} , id = ${id} where pk = ${pk}
+</update>
+
+<delete id="deleteOne" parameterType="user">
+delete from user where pk = ${pk}
+</delete>
+
 
 </mapper>
 

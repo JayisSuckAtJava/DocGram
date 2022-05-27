@@ -8,4 +8,6 @@ public interface FileDao {
 
 	FileDto readOne(Integer filePk);
 
+	void updateFile_num(String file_num);
+
 }

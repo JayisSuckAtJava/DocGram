@@ -1,7 +1,9 @@
 package com.team2.docgram.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.DepartmentDto;
 import com.team2.docgram.dto.FileDto;
+import com.team2.docgram.dto.HashtagTableDto;
+import com.team2.docgram.dto.RelatedBoardDto;
 import com.team2.docgram.dto.TeamDto;
 import com.team2.docgram.dto.UserDto;
 
@@ -77,13 +81,18 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public BoardDto readOne(Integer num) {
+	public BoardDto readOne(Integer pk) {
 		// null 로나옴
 		
-		BoardDto board = boardDao.readOne(num);
+		BoardDto board = boardDao.readOne(pk);
 		
 		Integer filePk = board.getFile(); 
 		FileDto file = fileDao.readOne(filePk);
+		
+		String originalFileTitle = file.getFile_title();
+		Integer underbar = originalFileTitle.indexOf("_");
+		String file_title = originalFileTitle.substring(underbar+1);
+		file.setFile_title(file_title);
 		
 		Integer hashtagPk = board.getHashtagList_pk(); 
 		String hashtagList = hashtagDao.readList(hashtagPk);
@@ -129,8 +138,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	public String hashtagListIs(String hashtagList) {
-		String proc = hashtagList.replace(",", "</tag> #<tag>");
-		System.out.println(proc);		
+		String proc = hashtagList.replace(",", "</tag> #<tag>");		
 		String hashtagListDetail="#<tag>"+proc+"</tag>";		
 		
 		return hashtagListDetail;
@@ -172,7 +180,6 @@ public class BoardServiceImpl implements BoardService {
 		default:
 			break;
 		}
-		
 		return rankDes;
 	}
 
@@ -183,45 +190,67 @@ public class BoardServiceImpl implements BoardService {
 	 * @param board 컨트롤러로 변환되어 전달받은 BoardDto
 	 * 
 	 * @author JAY - 이재범
+	 * @return 
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void createOne(BoardDto board, String hashtagList) {
+	public void createOne(BoardDto board, String hashtagList,String relatedBoardList) {
 		String[] hashtagArray = hashtagList.split(",");
-		Integer hashtagPK;
-		
+				
+		Integer hashtagListPK;
 		if(hashtagList == "") {
-			hashtagPK = null;
-			boardDao.createOne(board);
+			hashtagListPK = null;
 		}else {
 			for(String i : hashtagArray) {
 				hashtagDao.createOne(i);				 
-			}
-			hashtagPK = hashtagDao.createList(hashtagList);
-			board.setHashtag(hashtagPK);
-			boardDao.createOne(board);	
+			}			
+			hashtagListPK = createHashtagTable(hashtagList);
 		}
+		
+		Integer relatedBoardPk;
+		if(relatedBoardList == "") {
+			relatedBoardPk = null;
+		}else {
+			relatedBoardPk = createRelatedBoard(relatedBoardList);
+		}
+		
+		board.setRelatedBoard(relatedBoardPk);
+		board.setHashtagList_pk(hashtagListPK);
+		board = boardDao.createOne(board);
+		Integer boardPk = board.getPk();
+		
+		updateInclude(boardPk, relatedBoardList);
 	}
 
 
 	@Override
-	public String createOneAndFile(BoardDto board, String hashtagList, String fileName) {
+	public String createOneAndFile(BoardDto board, String hashtagList, String fileName,String relatedBoardList) {
 		String result = "";
 		String[] hashtagArray = hashtagList.split(",");
 		
-		Integer hashtagPK;
+		Integer hashtagListPK;
 		if(hashtagList == "") {
-			hashtagPK = null;
+			hashtagListPK = null;
 		}else {
 			for(String i : hashtagArray) {
 				hashtagDao.createOne(i);				 
 			}
-			hashtagPK = hashtagDao.createList(hashtagList);
+			hashtagListPK = createHashtagTable(hashtagList);
 		}
 		
+		Integer relatedBoardPk;
+		if(relatedBoardList == "") {
+			relatedBoardPk = null;
+		}else {
+			relatedBoardPk = createRelatedBoard(relatedBoardList);
+		}
 		
-		board.setHashtag(hashtagPK);
-		Integer boardPk = boardDao.createOne(board);
+		board.setRelatedBoard(relatedBoardPk);
+		board.setHashtagList_pk(hashtagListPK);
+		board = boardDao.createOne(board);
+		Integer boardPk = board.getPk();
+		
+		updateInclude(boardPk, relatedBoardList);
 		
 		Integer fileResult;
 		if(fileName == "") {
@@ -229,12 +258,48 @@ public class BoardServiceImpl implements BoardService {
 		}else {
 			String savedFileName = boardPk+"_"+fileName;
 			fileResult = fileDao.createOne(fileName);
+			String file_num = createFileNum(fileResult);
+			fileDao.updateFile_num(file_num);
 			
 			result = savedFileName;
 		}
 			boardDao.updateFile(fileResult);
 		
 		return result;
+	}
+	
+	public Integer createRelatedBoard(String relatedBoardList) {
+		RelatedBoardDto relatedBoard = new RelatedBoardDto();
+		
+		relatedBoard.setBoardList(relatedBoardList);
+		relatedBoard = relatedDao.createOne(relatedBoard);
+		
+		Integer relatedBoardPk = relatedBoard.getPk();
+		return relatedBoardPk;
+		
+	}
+	
+	public Integer createHashtagTable(String hashtagList) {
+		HashtagTableDto hashtagTable = new HashtagTableDto();
+		
+		hashtagTable.setHashtagList(hashtagList);
+		hashtagTable = hashtagDao.createList(hashtagTable);
+		
+		Integer hashtagTablePk = hashtagTable.getPk();
+		return hashtagTablePk;
+		
+	}
+	
+	public String createFileNum(Integer filePk) {
+		String result = "D";
+		String zero = "0";	
+		
+		for(int i = filePk.toString().length(); i<13 ; i++) {
+			result = result + zero;
+		}
+		String file_num = result+filePk;
+		
+		return file_num;
 	}
 
 	/**
@@ -260,8 +325,8 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void deleteOne(Integer num) {
-		boardDao.deleteOne(num);
+	public void deleteOne(Integer pk) {
+		boardDao.deleteOne(pk);
 	}
 
 	
@@ -403,8 +468,7 @@ public class BoardServiceImpl implements BoardService {
 			boardList = boardDao.searchByName(text);
 			break;
 		case "dept":
-			Integer dept = Integer.parseInt(text);
-			boardList = boardDao.searchByDept(dept);
+			boardList = boardDao.searchByDept(text);
 			break;
 
 		default:
@@ -412,6 +476,34 @@ public class BoardServiceImpl implements BoardService {
 			break;
 		}
 		return null;
+	}
+
+	@Override
+	public void updateInclude(Integer boardPk,String relatedboardList) {
+		
+		String[] relatedArray = relatedboardList.split(",");
+		String resultList;
+		for(String i : relatedArray) {
+			Integer targetBoard = Integer.parseInt(i);
+			// 해당 board 의 rel list 를 읽어와서 없으면 만들어주고 있으면 가져온걸 수정해서 업데이트
+			
+			RelatedBoardDto relatedBoard = relatedDao.readBoardList(targetBoard);
+			
+			String list = relatedBoard.getBoardList();
+			if(relatedBoard.getPk() == null) {
+				relatedBoard.setBoardList(boardPk.toString());
+				relatedBoard = relatedDao.createOne(relatedBoard);
+				Integer relatedPk = relatedBoard.getPk(); 
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("boardPk", targetBoard);
+				map.put("relatedBoard", relatedPk);
+				boardDao.updateRelated(map);
+			}else {
+				String targetList = relatedBoard.getBoardList()+","+boardPk.toString();
+				relatedBoard.setBoardList(targetList);
+				relatedDao.updateRelated(relatedBoard);
+			}
+		}
 	}
 
 	

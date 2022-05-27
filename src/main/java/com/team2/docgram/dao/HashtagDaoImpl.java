@@ -4,6 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team2.docgram.dto.HashtagTableDto;
+
 /** HashtagDaoImpl.java
  *   해시태그 DB에 연결되는 DAO 객체 구현체
  * 
@@ -28,8 +30,9 @@ public class HashtagDaoImpl implements HashtagDao {
 	 * @since 2022-05-24
 	 */
 	@Override
-	public Integer createList(String hashtagList) {
-		return sqlSession.insert(mapper+"", hashtagList);
+	public HashtagTableDto createList(HashtagTableDto hashtagTable) {
+		sqlSession.insert(mapper+"createHashtagList", hashtagTable);
+		return hashtagTable;
 	}
 
 
@@ -42,8 +45,8 @@ public class HashtagDaoImpl implements HashtagDao {
 	 *@since 2022-05-24
 	 */
 	@Override
-	public void createOne(String tag_name) {
-		sqlSession.insert(mapper+"", tag_name);
+	public void createOne(String description) {
+		sqlSession.insert(mapper+"createOne", description);
 	}
 
 

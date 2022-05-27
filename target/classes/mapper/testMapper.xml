@@ -109,7 +109,7 @@
 	</trim>
 </select>
 
-
+<!--  이게 진짜로 되는거임. -->
 <insert id="hashtagInsert" parameterType="com.team2.docgram.dto.HashtagDto" useGeneratedKeys="true" keyProperty="pk">
 	INSERT INTO hashtag (description) VALUES ("${description}")
 </insert>

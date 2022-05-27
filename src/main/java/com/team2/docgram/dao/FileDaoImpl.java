@@ -47,6 +47,13 @@ public class FileDaoImpl implements FileDao {
 	public FileDto readOne(Integer filePk) {
 		return sqlSession.selectOne(mapper+"readOne", filePk);
 	}
+
+	@Override
+	public void updateFile_num(String file_num) {
+		sqlSession.update(mapper+"updateFile_num", file_num);
+	}
+	
+	
 	
 	
 

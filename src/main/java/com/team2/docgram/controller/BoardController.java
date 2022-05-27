@@ -138,20 +138,21 @@ public class BoardController {
 	 * @since 2022-05-17
 	 */
 	@PostMapping("/board/create")
-	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,MultipartFile file) {
+	public String boardCreate(BoardDto board,HttpSession session,String hashtagList,MultipartFile file,String relatedboardList) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		board.setUser(user.getUser_pk());
+		// 추후에 바꿔야함.
+		board.setUser(2);
 		String fileName = file.getOriginalFilename();
 		
 		
 		
 		if(fileName == "") {
 			
-			boardService.createOne(board, hashtagList);
+				boardService.createOne(board, hashtagList,relatedboardList);
 			
 		}else {
 			
-			String savedFileName = boardService.createOneAndFile(board,hashtagList,fileName);
+			String savedFileName = boardService.createOneAndFile(board,hashtagList,fileName,relatedboardList);
 				fileService.createOne(savedFileName, file);
 		}
 		
@@ -171,7 +172,7 @@ public class BoardController {
 	@GetMapping("/board/update/{num}")
 	public String boardUpdatePage(Model model,@PathVariable("num")Integer num) {
 		BoardDto board = boardService.readOne(num);
-		model.addAttribute(null, board);
+		model.addAttribute("board", board);
 		return "board";
 	}
 	
@@ -187,7 +188,7 @@ public class BoardController {
 	 */
 	@PostMapping("/board/upadte/{num}")
 	public String boardUpdate(BoardDto board,@PathVariable("num")Integer num) {
-		board.setBoard_pk(num);
+		board.setPk(num);
 		boardService.updateOne(board);
 		return "board";
 	}

@@ -1,6 +1,7 @@
 package com.team2.docgram.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public BoardDto readOne(Integer num) {
-		return sqlSession.selectOne(mapper+"boardDetail", num);
+	public BoardDto readOne(Integer pk) {
+		return sqlSession.selectOne(mapper+"boardDetail", pk);
 	}
 
 	/**
@@ -62,8 +63,9 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public Integer createOne(BoardDto board) {
-		return sqlSession.insert(null, board);
+	public BoardDto createOne(BoardDto board) {
+		sqlSession.insert(mapper+"createOne", board);
+		return board;
 	}
 
 	
@@ -78,7 +80,7 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public void updateOne(BoardDto board) {
-		sqlSession.update(null, board);
+		sqlSession.update(mapper+"updateOne", board);
 	}
 
 	
@@ -92,8 +94,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022-05-18
 	 */
 	@Override
-	public void deleteOne(Integer num) {
-		sqlSession.delete(null,num);
+	public void deleteOne(Integer pk) {
+		sqlSession.delete(mapper+"deleteOne",pk);
 	}
 
 	/**
@@ -109,23 +111,23 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<BoardDto> searchByTitle(String title) {
-		return sqlSession.selectList(mapper+"", title);
+		return sqlSession.selectList(mapper+"readTitle", title);
 		// sel from where b.title = ${title}
 	}
 
 	@Override
 	public List<BoardDto> searchByContent(String content) {
-		return sqlSession.selectList(mapper+"", content);
+		return sqlSession.selectList(mapper+"readContent", content);
 	}
 
 	@Override
 	public List<BoardDto> searchByName(String name) {
-		return sqlSession.selectList(mapper+"", name);
+		return sqlSession.selectList(mapper+"readName", name);
 	}
 
 	@Override
-	public List<BoardDto> searchByDept(Integer dept) {
-		return sqlSession.selectList(mapper+"", dept);
+	public List<BoardDto> searchByDept(String dept) {
+		return sqlSession.selectList(mapper+"readDept", dept);
 	}
 
 	@Override
@@ -136,6 +138,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public BoardDto readRelatedBoard(Integer relatedPk) {
 		return sqlSession.selectOne(mapper+"readRelatedBoard", relatedPk);
+	}
+
+	@Override
+	public void updateRelated(Map<String, Object> map) {
+		sqlSession.update(mapper+"updateRelated", map);
 	}
 	
 	
