@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @ToString
-public class HashtagTableDto {
-	
-	private Integer pk;
-	private String hashtagList;
+public class UserStarmarkDto {
+
+	private Long id;
+	private Long userId;
+	private Long boardId;
 }

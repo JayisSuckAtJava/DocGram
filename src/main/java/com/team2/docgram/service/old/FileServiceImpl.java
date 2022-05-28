@@ -1,4 +1,4 @@
-package com.team2.docgram.service;
+package com.team2.docgram.service.old;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,12 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dto.FileDto;
 
-@Service
+
 public class FileServiceImpl implements FileService {
-	
+/*	
 	@Autowired
 	private FileDao fileDaoImpl;
-
+*/
 	private String root = "C:\\ProjectTeam2\\file\\";
 	
 	/** 파일을 Root 에 저장하는 메소드

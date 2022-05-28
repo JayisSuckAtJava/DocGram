@@ -1,4 +1,4 @@
-package com.team2.docgram.service;
+package com.team2.docgram.service.old;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;

@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @ToString
-public class RankDto {
-	private Long pk;
-	private String security;
-	private String description;
+public class PositionDto {
+
+	private Long id; 
+	private String name;
+	private Integer security;
 }

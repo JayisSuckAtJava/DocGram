@@ -1,4 +1,4 @@
-package com.team2.docgram.controller;
+package com.team2.docgram.controller.old;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +20,9 @@ import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.DepartmentDto;
 import com.team2.docgram.dto.HashtagDto;
 
-@Controller
+
 public class TestContorller {
+	/*
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -30,7 +31,7 @@ public class TestContorller {
 
 	@Autowired
 	private TestDao testDao;
-	
+	*/
 	@GetMapping("/test")
 	@ResponseBody
 	public String test() {

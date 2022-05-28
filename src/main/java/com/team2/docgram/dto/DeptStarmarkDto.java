@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @ToString
-public class RelatedBoardDto {
-	
-	private Integer pk;
-	private String boardList;
+public class DeptStarmarkDto {
+
+	private Long id;
+	private Long deptId;
+	private Long boardId;
 }

@@ -1,21 +1,14 @@
 package com.team2.docgram.dto;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/** HashtagDto.java
- *  
- * 
- * @author 문예빈
- * @since 2022-05-19
- */
-
-
-@Getter
 @Setter
+@Getter
 @ToString
 public class HashtagDto {
 
-	private int pk;
-	private String description;
+	private Long id;
+	private String name;
 }

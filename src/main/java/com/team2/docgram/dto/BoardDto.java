@@ -1,38 +1,28 @@
 package com.team2.docgram.dto;
-import java.security.Timestamp;
-import java.util.Date;
-import java.util.List;
+
+import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/** BoardDto.java
- *  게시판 Dto
- * 
- * @author 문예빈
- * @since 2022-05-19
- */
-
-@Getter
 @Setter
+@Getter
 @ToString
 public class BoardDto {
-	
-	private Integer pk;
+
+	private Long id;
 	private String title;
 	private String content;
-	private java.sql.Date date;
-	private Integer user;
-	private int boardSecurity;
-	private UserDto userDetail;
-	private FileDto fileDetail;
-	private Integer file;
-	private Integer relatedBoard;
-	private Integer hashtagList_pk;
-	private String userName;
-	private String deptDescription;
-	private String hashtagList;
-	private List<BoardDto> relatedBoardList;
-}
+	private Date date;
+	private Integer security;
+	private Long userId;
+	private Long fileId;
+	private Long relation1;
+	private Long relation2;
+	private Long relation3;
+	
+	private String name;
+	private String deptName;
 
+}

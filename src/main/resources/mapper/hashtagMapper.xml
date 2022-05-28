@@ -4,18 +4,5 @@
 
 <mapper namespace="hashtag">
 
-<select id="readHashtagList" parameterType="int" resultType="string">
-select hashtagList
-from `hashtag:table`
-where pk = ${hashtagNum}
-</select>
-
-<insert id="createOne" parameterType="String">
-insert into hashtag (description) values ("${description}")
-</insert>
-
-<insert id="createHashtagList" parameterType="hashtagTable" useGeneratedKeys="true" keyProperty="pk">
-	insert into `hashtag:table` (hashtagList) values ("${hashtagList}")
-</insert>
 </mapper>
 
