@@ -4,48 +4,5 @@
 
 <mapper namespace="user">
 
-
-
-<select id="selectUser" parameterType="int" resultType="hashmap">
-	SELECT name, id, password, phone_num, dept_num, email, starmark, team
-	FROM user
-	WHERE id = #{id}
-</select>
-
-
-<!--
- 쿼리명 : user columns 
- 설명 : user의 컬럼
- 작성자 : 문예빈
- 최초작성일 : 2022-05-24
- -->
-<sql id="userColumns">
-	${user}.id, ${user}.name, ${user}.password, ${user}.phone_num, ${user}.dept_num, ${user}.email, ${user}.starmark, ${user}.mytag, ${user}.team
-</sql>
-
-<select id="readDeptList" resultType="user" parameterType="int">
-SELECT
- d1.description AS userDept
-, d2.description AS userDeptUpperSt
-, d3.description AS userDeptUpperNd
-FROM department d1 , department d2, department d3
-where d1.teamUpperSt = d2.pk AND d2.teamUpperSt = d3.pk
-AND d1.pk = ${deptNum}
-
-</select>
-
-<select id="readOne" resultType="user" parameterType="int">
-select pk, id, name, password, phone_num, dept_num, email, starMark, mytag, team
-from user
-where pk = ${num}
-</select>
-
-<select id="readTeam" parameterType="int" resultType="team">
-select pk, rank, dept
-from team
-where pk = ${num}
-</select>
-
-
 </mapper>
 

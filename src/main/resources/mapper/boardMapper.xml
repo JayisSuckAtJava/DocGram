@@ -4,234 +4,27 @@
 
 <mapper namespace="board">
 
-<!--
- 쿼리명 : 문서리스트
- 설명 : 문서리스트의 번호/제목/다운/기관/작성일/작성자 를 선택하는 쿼리문
- 작성자 : 문예빈
- 최초작성일 : 2022-05-24
- -->
- <select id="boardList" resultType="board">
- 	SELECT b.pk,
- 			b.title,
- 			b.file,
- 			d.description AS deptdescription,
- 			b.date,
- 			u.name AS username
- 	FROM board b
-		JOIN user u ON b.user = u.pk
-		JOIN team t ON t.pk = u.team
-		JOIN department d ON d.pk = t.dept
- </select>
- 
- <!--
- 쿼리명 : 기본검색 1.제목
- 설명 : 제목을 검색했을 때
- 작성자 : 
- 최초작성일 : 
- -->
- <select id="titleSearch">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE b.title like '%${title}%'
- </select>
- 
- 
-  <!--
- 쿼리명 : 기본검색 1.내용
- 설명 : 제목을 검색했을 때
- 작성자 : 
- 최초작성일 : 
- -->
- <select id="contentSearch">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE b.content like '%${content}%'
- </select>
- 
- 
-  <!--
- 쿼리명 : 기본검색 1.제목0
- 설명 : 제목을 검색했을 때
- 작성자 : 
- 최초작성일 : 
- -->
- <select id="nameSearch">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE u.name = ${name}
- </select>
- 
- 
-  <!--
- 쿼리명 : 기본검색 1.제목
- 설명 : 제목을 검색했을 때
- 작성자 : 
- 최초작성일 : 
- -->
- <select id="deptSearch">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	WHERE d.description = '%${dept}%'
- </select>
- <!--  위에 기본 검색 4개를 mybatis- 동적쿼리 - if 로 1개로 만든다면 이건 실제 데이터가 있으면 테스트-->
- <select id="if">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
- 	<choose>
- 		<when test="map.key == dept">
- 		WHERE d.description = '%${map.text}%'
- 		</when>
- 		<when test="map.key == name">
- 		WHERE u.name = ${map.text}
- 		</when>
- 		<when test="map.key == title">
- 		WHERE b.title like '%${map.text}%'
- 		</when>
- 		<when test="map.key == content">
- 		WHERE b.content like '%${map.text}%'
- 		</when>
- 	</choose>
- </select>
- 
- 
- <!--  SELECT * FROM board WHERE DATE = DATE_FORMAT(NOW(), '%Y-%m-%d'); -->
- <!-- 2022-05-25 기본 날짜 형식. -->
- <!-- SELECT DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 3 MONTH); -->
- <!--  5-25 작성 조인 부분 하단 3개는 문제 발생시 필요에 따라 if 문 각각 거는걸로 -->
- <select id="" parameterType="Map">
- 	SELECT b.board_pk,
- 			b.title,
- 			b.file,
- 			t.dept,
- 			b.date,
- 			u.name
- 	FROM board b
-		JOIN user u ON b.user = u.user_pk
-		JOIN team t ON t.team_pk = u.team
-		JOIN department d ON d.dept_pk = t.dept
-		
-		JOIN file f ON b.file = f.pk
-		JOIN rank r ON t.rank = r.pk
-		JOIN hashtag:table h ON b.hashtagList = h.pk
-		<trim prefix="where" prefixOverrides="and">
- 	<choose>
- 		<when test="key == dept">
- 		and d.description = '%${text}%'
- 		</when>
- 		<when test="key == name">
- 		and u.name = ${text}
- 		</when>
- 		<when test="key == title">
- 		and b.title like '%${text}%'
- 		</when>
- 		<when test="key == content">
- 		and b.content like '%${text}%'
- 		</when>
- 	</choose>
- 	<if test="date != null">
- 		and b.date between DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL ${date} MONTH) and DATE_FORMAT(NOW(), '%Y-%m-%d') 
- 	</if>
- 	<if test="file != null">
- 		and f.file_title like '%${file}%'
- 	</if>
- 	<if test="rank != null">
- 		and r.description = ${rank}
- 	</if>
- 	<if test="hashtagList != null">
-    	<foreach item="var" collection="hashtagList" separator="and">
-      	   and h.hashtagList like '%${var}%'
-   		 </foreach>
- 	</if>
- 	</trim>
- </select>
- 
- 
- 
- 
- 
- 
- <!--
-	쿼리명 : 문서상세
-	설 명:
-	작성자 :
-	최초 작성일 : 
+<select id="readBoardList" resultType="board">
+	select b.id,
+		b.title,
+		d.name as dept_name,
+		b.date,
+		u.name,
+		b.file_id
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+</select>
 
--->
- <select id="boardDetail" parameterType="int" resultType="board">
- 	SELECT b.title, b.content, b.date , b.boardSecurity , b.user , b.file , b.hashtagList as hashtagList_pk, b.relatedBoard
- 	FROM board b
- 	WHERE b.pk = ${board_pk}
- </select>
- 
- 
- <!--
-	쿼리명 : 문서작성
-	설 명:
-	작성자 :
-	최초 작성일 : 
 
--->
- <insert id="boardCreate">
- 	INSERT INTO u.user, b.title, b.content, h.hashtagList, f.file, b.date
- 	FROM user u
- 		JOIN board b, hastag:tabel h , file f
- </insert>
- 
- <select id="readRelatedList" parameterType="int" resultType="String">
- SELECT boardList
- FROM relatedboard
- WHERE pk = ${relatedBoard_pk}
- </select>
- 
- <select id="readRelatedBoard" resultType="board" parameterType="int">
- SELECT b.pk, b.title, b.DATE, d.description
- 	FROM board b, user u, team t,department d
- 	where b.user = u.pk
- 	AND u.team = t.pk
- 	AND t.dept = d.pk
- 	and b.pk = ${relatedPk}
- </select>
-
+<select id="readBoard" resultType="board" parameterType="Long">
+SELECT b.title, b.content, b.date, f.NAME, u.name, p.NAME, u.DEPT_NUMBER, f.Num
+FROM board b
+JOIN file f ON b.FILE_ID = f.ID
+JOIN user u ON b.USER_ID = u.id
+JOIN position p ON u.POSITION_ID = p.ID
+WHERE b.ID = ${id}
+</select>
 
 </mapper>
 
