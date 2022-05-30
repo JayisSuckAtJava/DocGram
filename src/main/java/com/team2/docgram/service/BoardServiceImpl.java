@@ -92,6 +92,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName) {
 		String[] hashtagListArray = hashtagList.split(",");
+		System.out.println(hashtagListArray.toString());
 		String[] relatedBoardListArray = relatedBoardList.split(",");
 		// board 에들어가는 fk = user,file 끝.
 		
@@ -117,8 +118,8 @@ public class BoardServiceImpl implements BoardService {
 		}else {
 			
 			for(String i : hashtagListArray) {
-				
-				HashtagDto hashtag = null;
+				System.out.println(i);
+				HashtagDto hashtag = new HashtagDto();
 				hashtag.setName(i);
 				hashtag = hashtagDao.createHashtag(hashtag);
 				
@@ -134,7 +135,7 @@ public class BoardServiceImpl implements BoardService {
 			return null;
 		}else {			
 			String savedFileName = boardId+"_"+fileName;
-			FileDto file = null;
+			FileDto file = new FileDto();
 			file.setName(savedFileName);
 			file = fileDao.createFile(file);
 			Long fileId = file.getId();

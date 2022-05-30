@@ -31,33 +31,37 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/board")
+	@GetMapping("board")
 	public String boardList(Model model) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList();
 		model.addAttribute("boardList", boardList);
-		return "test2";
+		return "detailsearch";
 	}
 	
-	@GetMapping("/board/{id}")
+	@GetMapping("board/{id}")
 	public String board(@PathVariable("id")Long id,Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map = boardService.readBoard(id);
 		
 		model.addAllAttributes(map);
-		return "board/documentview";
+		return "documentview";
 	}
 	
-	@GetMapping("/board/create")
+	@GetMapping("board/create")
 	public String boardCreatePage() {
-		return "";
+		return "write";
 	}
 	
-	@PostMapping("/board/create")
+	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long userId = user.getId();
-		board.setUserId(2L);
+		System.out.println(board);
+		System.out.println(hashtagList);
+		System.out.println(mFile.getOriginalFilename());
+		System.out.println(relatedBoardList);
+		//UserDto user = (UserDto) session.getAttribute("user");
+		//Long userId = user.getId();
+		board.setUserId(1L);
 		
 		String fileName = mFile.getOriginalFilename();
 			
@@ -75,15 +79,20 @@ public class BoardController {
 		return fileService.readFile(id);
 	}
 	
-	@GetMapping("/board/update/{id}")
+	@GetMapping("board/update/{id}")
 	public String boardUpdatePage(@PathVariable("id")Long id,Model model) {
 		BoardDto board = boardService.readBoardOne(id);
 		model.addAttribute("board", board);
 		return "update";
 	}
 	
-	@PostMapping("/board/update/{id}")
+	@PostMapping("board/update/{id}")
 	public String boardUpdate(@PathVariable("id")Long id,BoardDto board) {
 		
+	}
+	
+	@GetMapping("board/popup")
+	public String popup() {
+		return "popup";
 	}
 }
