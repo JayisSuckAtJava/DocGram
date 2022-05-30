@@ -55,10 +55,6 @@ public class BoardController {
 	
 	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
-		System.out.println(board);
-		System.out.println(hashtagList);
-		System.out.println(mFile.getOriginalFilename());
-		System.out.println(relatedBoardList);
 		//UserDto user = (UserDto) session.getAttribute("user");
 		//Long userId = user.getId();
 		board.setUserId(1L);
