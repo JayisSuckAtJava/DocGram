@@ -4,19 +4,19 @@
 
 
 <settings>
- <setting name="mapUnderscoreToCamelCase" value="false"/>
+ <setting name="mapUnderscoreToCamelCase" value="true"/>
 </settings>
 
 <typeAliases>
  <typeAlias alias="board" type="com.team2.docgram.dto.BoardDto"/>
- <typeAlias alias="user" type="com.team2.docgram.dto.UserDto"/>
- <typeAlias alias="team" type="com.team2.docgram.dto.TeamDto"/>
- <typeAlias alias="hashtag" type="com.team2.docgram.dto.HashtagDto"/>
- <typeAlias alias="rank" type="com.team2.docgram.dto.RankDto"/>
- <typeAlias alias="dept" type="com.team2.docgram.dto.DepartmentDto"/>
- <typeAlias alias="related" type="com.team2.docgram.dto.RelatedBoardDto"/>
- <typeAlias alias="hashtagTable" type="com.team2.docgram.dto.HashtagTableDto"/>
+ <typeAlias alias="dept" type="com.team2.docgram.dto.DeptDto"/>
+ <typeAlias alias="deptStarmark" type="com.team2.docgram.dto.DeptStarmarkDto"/>
  <typeAlias alias="file" type="com.team2.docgram.dto.FileDto"/>
+ <typeAlias alias="hashtag" type="com.team2.docgram.dto.HashtagDto"/>
+ <typeAlias alias="position" type="com.team2.docgram.dto.PositionDto"/>
+ <typeAlias alias="user" type="com.team2.docgram.dto.UserDto"/>
+ <typeAlias alias="userStarmark" type="com.team2.docgram.dto.UserStarmarkDto"/>
+ <typeAlias alias="boardHashtag" type="com.team2.docgram.dto.BoardHashtagDto"/>
 </typeAliases>
 
 </configuration>

@@ -8,26 +8,14 @@ public interface BoardDao {
 
 	List<BoardDto> readBoardList();
 
-	BoardDto readOne(Integer num);
+	BoardDto readBoard(Long id);
 
-	Integer createOne(BoardDto board);
+	BoardDto readRelationBoard(Long i);
 
-	void updateOne(BoardDto board);
+	BoardDto createBoard(BoardDto board);
 
-	void deleteOne(Integer num);
+	void updateBoardFile(BoardDto board);
 
-	List<BoardDto> readNoticeList();
-
-	List<BoardDto> searchByTitle(String text);
-
-	List<BoardDto> searchByContent(String text);
-
-	List<BoardDto> searchByName(String text);
-
-	List<BoardDto> searchByDept(Integer text);
-
-	void updateFile(Integer fileResult);
-
-	BoardDto readRelatedBoard(Integer relatedPk);
+	BoardDto readBoardOne(Long id);
 
 }

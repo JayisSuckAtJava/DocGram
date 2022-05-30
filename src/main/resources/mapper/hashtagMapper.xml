@@ -4,10 +4,19 @@
 
 <mapper namespace="hashtag">
 
-<select id="readHashtagList" parameterType="int" resultType="string">
-select hashtagList
-from `hashtag:table`
-where pk = ${hashtagNum}
+<select id="readList" parameterType="Long" resultType="hashtag">
+select h.id, h.name
+	from hashtag h
+	join board_hashtag bh on h.id = bh.hashtag_id
+	where bh.board_id = ${boardId}
 </select>
+
+<insert id="createHashtag" parameterType="hashtag" useGeneratedKeys="true" keyProperty="id">
+insert into hashtag (name) values (${name})
+</insert>
+
+<insert id="createBoardHashtag" parameterType="map">
+insert into board_hashtag (board_id,hashtag_id) values (${boardId},${hashtagId})
+</insert>
 </mapper>
 

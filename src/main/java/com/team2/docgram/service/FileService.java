@@ -6,8 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 
-	void createOne(String savedFileName, MultipartFile file);
+	void createFile(String savedFileName, MultipartFile file);
 
-	ResponseEntity<Resource> readOne(Integer filePk);
+	ResponseEntity<Resource> readFile(Long fileId);
 
 }

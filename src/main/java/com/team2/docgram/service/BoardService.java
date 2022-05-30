@@ -3,31 +3,19 @@ package com.team2.docgram.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.SQL;
+import org.springframework.ui.Model;
+
 import com.team2.docgram.dto.BoardDto;
-import com.team2.docgram.dto.UserDto;
 
 public interface BoardService {
 
-	List<BoardDto> readBoardList(UserDto user);
+	List<BoardDto> readBoardList();
 
-	BoardDto readOne(Integer num);
+	Map<String, Object> readBoard(Long id);
 
-	void createOne(BoardDto board, String hashtagList);
-
-	void updateOne(BoardDto board);
-
-	void deleteOne(Integer num);
-
-	List<BoardDto> readUpperStBoardList(UserDto user);
-
-	List<BoardDto> readStarMarkList(UserDto user);
-
-	List<BoardDto> readNoticeList();
-
-	List<BoardDto> readDeptBoardList(UserDto user);
-
-	List<BoardDto> searchList(String key, String text);
-
-	String createOneAndFile(BoardDto board, String hashtagList, String fileName);
+	String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName);
+	
+	BoardDto readBoardOne(Long id);
 
 }

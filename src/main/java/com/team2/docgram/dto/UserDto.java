@@ -1,37 +1,23 @@
 package com.team2.docgram.dto;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/** UserDto.java
- *  
- * 
- * @author 문예빈
- * @since 2022-05-19
- */
-
-
-@Getter
 @Setter
+@Getter
 @ToString
 public class UserDto {
 
-	private Integer pk;
-	private String name;
-	private String id;
-	private String password;
-	private String phone_num;
-	private String dept_num;
+	private Long id;
 	private String email;
-	private String starmark;
-	private String mytag;
-	private String rank;
-	private String description;
-	private String deptMark;
-	private Integer team;
-	private String userDept; 
-	private String userDeptUpperSt;
-	private String userDeptUpperNd;
+	private String name;
+	private String password;
+	private String phoneNumber;
+	private String deptNumber;
+	private Long positionId;
+	private Long deptId;
 	
-	
+	private PositionDto position;
+	private DeptDto dept;
 }

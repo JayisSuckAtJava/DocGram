@@ -1,12 +1,9 @@
 package com.team2.docgram.dao;
 
+import com.team2.docgram.dto.HashtagDto;
+
 public interface HashtagDao {
 
-	Integer createList(String hashtagList);
-
-	void createOne(String i);
-
-	String readList(Integer hashtagNum);
-
+	HashtagDto createHashtag(HashtagDto hashtag);
 
 }

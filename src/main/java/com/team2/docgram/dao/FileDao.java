@@ -4,8 +4,10 @@ import com.team2.docgram.dto.FileDto;
 
 public interface FileDao {
 
-	Integer createOne(String fileName);
+	FileDto readFile(Long fileId);
 
-	FileDto readOne(Integer filePk);
+	FileDto createFile(FileDto file);
+
+	void updateFile(FileDto file);
 
 }
