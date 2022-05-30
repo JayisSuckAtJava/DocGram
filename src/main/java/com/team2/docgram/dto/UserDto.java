@@ -17,4 +17,7 @@ public class UserDto {
 	private String deptNumber;
 	private Long positionId;
 	private Long deptId;
+	
+	private PositionDto position;
+	private DeptDto dept;
 }

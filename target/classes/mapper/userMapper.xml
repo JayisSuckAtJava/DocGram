@@ -4,5 +4,18 @@
 
 <mapper namespace="user">
 
+
+<select id="readDeptList" parameterType="Long" resultType="dept">
+select d1.id,
+	d1.name,
+	d2.id as upper_st_id,
+	d2.name as upper_st_name,
+	d3.id as upper_nd_id,
+	d3.name as upper_nd_name
+from dept d1, dept d2, dept d3
+where d1.upper_dept = d2.id
+and d2.upper_dept = d3.id
+and d1.id = ${deptId}
+</select>
 </mapper>
 

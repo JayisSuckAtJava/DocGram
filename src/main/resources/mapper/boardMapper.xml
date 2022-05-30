@@ -4,26 +4,123 @@
 
 <mapper namespace="board">
 
-<select id="readBoardList" resultType="board">
-	select b.id,
-		b.title,
+<select id="readBoardList" resultMap="detailBoard">
+	select b.id as board_id,
+		b.title as board_title,
 		d.name as dept_name,
-		b.date,
-		u.name,
-		b.file_id
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
 </select>
 
+<select id="readRelationBoard" parameterType="Long" resultMap="detailBoard">
+select b.id as board_id,
+	b.title as board_title,
+	b.date as board_date,
+	d.name as dept_name
+from board b
+join user u on u.id = b.user_id
+join dept d on d.id = u.dept_id
+where b.id = ${id}
+</select>
 
-<select id="readBoard" resultType="board" parameterType="Long">
-SELECT b.title, b.content, b.date, f.NAME, u.name, p.NAME, u.DEPT_NUMBER, f.Num
+<select id="readBoard" resultMap="detailBoard" parameterType="Long">
+SELECT b.ID AS board_id, 
+b.title as board_title,
+b.content as board_content,
+b.date as board_date,
+b.file_id as file_id,
+f.Num as file_num,
+f.NAME as file_name,
+u.name as user_name,
+u.DEPT_NUMBER as user_dept_number,
+p.NAME as position_name,
+u.DEPT_ID AS user_dept_id,
+b.RELATION_1 AS board_relation_1,
+b.RELATION_2 AS board_relation_2,
+b.RELATION_3 AS board_relation_3
 FROM board b
 JOIN file f ON b.FILE_ID = f.ID
 JOIN user u ON b.USER_ID = u.id
 JOIN position p ON u.POSITION_ID = p.ID
 WHERE b.ID = ${id}
+</select>
+
+<resultMap type="board" id="detailBoard">
+<id property="id" column="board_id"/>
+<result property="title" column="board_title"/>
+<result property="content" column="board_content"/>
+<result property="date" column="board_date"/>
+<result property="fileId" column="board_fileId"/>
+<result property="relation1" column="board_relation_1"/>
+<result property="relation2" column="board_relation_2"/>
+<result property="relation3" column="board_relation_3"/>
+
+<association property="file" javaType="file">
+<id property="id" column="file_id"/>
+<result property="num" column="file_num"/>
+<result property="name" column="file_name"/>
+</association>
+
+<association property="user" javaType="user">
+<result property="name" column="user_name"/>
+<result property="deptNumber" column="user_dept_number"/>
+<result property="deptId" column="user_dept_id"/>
+
+<association property="position" javaType="position">
+<result property="name" column="position_name"/>
+</association>
+
+<association property="dept" javaType="dept">
+<id property="id" column="user_dept_id"/>
+<result property="name" column="dept_name"/>
+</association>
+
+</association>
+
+</resultMap>
+
+<resultMap type="board" id="boardList">
+
+</resultMap>
+
+
+<select id="readFile" parameterType="Long" resultType="file">
+select id, name, num
+	from file
+	where id = ${fileId}
+</select>
+
+<insert id="createBoard" parameterType="Long" useGeneratedKeys="true" keyProperty="id">
+insert into board (title, content, date, user_id) values (${title},${content},date_format(now(), '%Y-%m-%d'),${userId})
+</insert>
+
+<insert id="createFile" parameterType="file" useGeneratedKeys="true" keyProperty="id">
+insert into file (name) values (${name})
+</insert>
+
+<update id="updateFile" parameterType="file">
+update file set num = ${num} where id = ${id}
+</update>
+
+<update id="updateBoardFile" parameterType="board">
+update board set file_id = ${fileId} where id = ${id}
+</update>
+
+<select id="readBoardOne" parameterType="Long" resultType="board">
+select id,
+	title,
+	content,
+	security,
+	file_id,
+	relation_1,
+	relation_2,
+	relation_3
+from board
+where id = ${id}
 </select>
 
 </mapper>

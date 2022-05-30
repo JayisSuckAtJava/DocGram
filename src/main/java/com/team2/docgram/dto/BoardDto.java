@@ -22,7 +22,7 @@ public class BoardDto {
 	private Long relation2;
 	private Long relation3;
 	
-	private String name;
-	private String deptName;
+	private FileDto file;
+	private UserDto user;
 
 }
