@@ -10,4 +10,12 @@ public interface BoardDao {
 
 	BoardDto readBoard(Long id);
 
+	BoardDto readRelationBoard(Long i);
+
+	BoardDto createBoard(BoardDto board);
+
+	void updateBoardFile(BoardDto board);
+
+	BoardDto readBoardOne(Long id);
+
 }

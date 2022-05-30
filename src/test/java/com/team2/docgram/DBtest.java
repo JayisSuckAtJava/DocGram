@@ -1,43 +1,37 @@
 package com.team2.docgram;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.jta.SpringJtaSynchronizationAdapter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.service.BoardService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={
+				"file:src/main/webapp/WEB-INF/spring/root-context.xml", 
+				"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
+		})
 public class DBtest {
 	String root = "C:\\ProjectTeam2\\file\\";
 	
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private BoardDao boardDao;
+	
+	
+	@Autowired
+	private BoardService boardService;
 	/*
 	@Test
 	public void teststst() {
@@ -262,11 +256,83 @@ public class DBtest {
 		String test = til+a;
 		System.out.println(test);
 
+	}
+	
+	@Test
+	public void tXss() {
+		List<BoardDto> list = new ArrayList<>();
+		list = sqlSession.selectList("board.readBoardList");
+		for(BoardDto i : list) {
+			System.out.println(i);
+		}
+		System.out.println("test");
+	}
+	
+	@Test
+	public void tst() {
+		Map<String,Object> map = new HashMap<>();
+		BoardDto board;
+		Long id = 1L;
+		
+		Object obj = sqlSession.selectOne("board.test",id);
+		System.out.println(obj);
+		board = sqlSession.selectOne("board.test",id);
+		//map = sqlSession.selectOne("board.test");
+		System.out.println(board);
+		System.out.println("here");
+		
+	}
+	@Test
+	public void tresd() {
+		List<BoardDto> board = sqlSession.selectList("board.readBoardList");
+		for (BoardDto i : board) {
+			System.out.println(i);
+		}
+	}
+	
+	@Test
+	public void hashtag() {
+		Long boardId = 1L;
+		List<HashtagDto> hashtagList = new ArrayList<>();
+		hashtagList = sqlSession.selectList("hashtag.readList", boardId);
+		
+		System.out.println(hashtagList);
+	}
+	
+	@Test
+	public void deptTest() {
+		Long deptId = 11000000L;
+		DeptDto dept = sqlSession.selectOne("user.readDeptList",deptId);
+		
+		System.out.println(dept);
+	}
+	
+	@Test
+	public void boardRelTest() {
+		Long[] relationListId = {2L,3L,4L};
+		
+		List<BoardDto> relationList = new ArrayList<>();
+		for(Long i : relationListId) {
+			relationList.add(sqlSession.selectOne("board.readRelationBoard", i));
+		}
+		for(BoardDto i : relationList) {
+			System.out.println(i);
+		}
+	}
+	
+	@Test
+	public void sdasdsd() {
+		Long id = 1L;
+		Map<String, Object> map = boardService.readBoard(id);
+		
+		System.out.println(map);
 	}*/
 	
 	@Test
-	public void tss() {
-		sqlSession.selectOne("board.readBoardList");
-		System.out.println("test");
+	public void stea() {
+		String in = "2,3,4";
+		String [] sa = in.split(",");
+		Stream<String> str = Stream.of(sa);
+		System.out.println(str.toString());
 	}
 }

@@ -15,4 +15,9 @@ public class DeptDto {
 	private String address;
 	private String url;
 	private Integer security;
+	
+	private Long upperStId;
+	private String upperStName;
+	private Long upperNdId;
+	private String upperNdName;
 }

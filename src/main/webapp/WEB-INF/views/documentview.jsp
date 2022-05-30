@@ -221,23 +221,23 @@
 
                 <tr>
                     <th scope="row">작성자</th>
-                    <td>${board.userDetail.name}     ${board.userDetail.rank}</td>
+                    <td>${board.user.name}     ${board.user.position.name}</td>
                     <th scope="row" class="tline" itemprop="contributor">작성일</th>
                     <td class="tline">${board.date}</td>
                 </tr>
 
                 <tr>
                     <th scope="row" itemprop="accountablePerson">문서 관리 번호</th>
-                    <td>${board.fileDetail.file_num}</td>
+                    <td>${board.file.num}</td>
                     <th scope="row" itemprop="dateCreated">
                         전화번호
                     </th>
-                    <td>${board.userDetail.dept_num}</td>
+                    <td>${board.user.deptNumber}</td>
                 </tr>
 
                 <tr>
                     <th scope="row">소속기관</th>
-                    <td colspan="3" style="flex-wrap: nowrap"> ${board.userDetail.userDeptUpperNd} > ${board.userDetail.userDeptUpperSt} > ${board.userDetail.userDept}</td>
+                    <td colspan="3" style="flex-wrap: nowrap"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
                 </tr>
             </tbody>
         </table>
@@ -252,7 +252,9 @@
         </div>
 
         <div class="hashdetail">
-                ${board.hashtagList}
+        <c:forEach items="${hashtagList}" var="hashtag">
+        <tag>#${hashtag.name} </tag>
+        </c:forEach>
         </div>
     </div>    
 
@@ -283,12 +285,12 @@
                 <li>
                     <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
                         <p class="file-down"> </p>
-                        <p class="title-down">${board.fileDetail.file_title}</p> 
+                        <p class="title-down">${board.file.name}</p> 
                         <span class="btn-downset">
                             <!-- 문서 보기 버튼-->
                              <button type="button" class="btn btn-view">문서보기</button>
 
-                            <a href="/download/${board.fileDetail.pk}" class="btn btn-download btn-original" style='margin-left:5px'>
+                            <a href="/download/${board.file.id}" class="btn btn-download btn-original" style='margin-left:5px'>
                                 <i class="icon-img icon-down"></i>
                                 <button class="element-invisible">다운로드</button>
                             </a> 
@@ -312,14 +314,14 @@
             <!--  첫번쨰 문서-->
                
                 
-				<c:forEach items="${board.relatedBoardList}" var="relatedBoard">
+				<c:forEach items="${relationList}" var="relatedBoard">
                 <li>
                     <div>
-                        <a href="${relatedBoard.pk}">${relatedBoard.title}</a>
+                        <a href="${relatedBoard.id}">${relatedBoard.title}</a>
                     </div>
                         <p>
                             <span class="date">${relatedBoard.date}</span>
-                            <span>${relatedBoard.deptDescription}</span>
+                            <span>${relatedBoard.user.dept.name}</span>
                         </p>
                 </li>
 				</c:forEach>
