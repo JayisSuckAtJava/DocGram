@@ -74,7 +74,7 @@
 
         <div>
             <h3> 해시태그 지정</h3>
-            <input type="text" placeholder="태그를 입력하세요" name="hashtagList">
+            <input type="text" placeholder="태그를 입력하세요 " name="hashtagList">
             
         </div>
             <hr>

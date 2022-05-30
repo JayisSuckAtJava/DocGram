@@ -88,7 +88,7 @@ public class BoardController {
 	
 	@PostMapping("board/update/{id}")
 	public String boardUpdate(@PathVariable("id")Long id,BoardDto board) {
-		
+		return "redirect:/board/content"+id;
 	}
 	
 	@GetMapping("board/popup")
