@@ -37,11 +37,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/sdsd")
+	@GetMapping("sdsd")
 	public String test() {
 		return "detailsearch";
 	}
 	
+<<<<<<< HEAD
 	@GetMapping("/sdsd2")
 	public String test2() {
 		return "header";
@@ -77,5 +78,24 @@ public class HomeController {
 		return "popup";
 	}
 
+=======
+	@GetMapping("main2")
+	public String test2() {
+		return "test/main";
+	}
+	
+	@GetMapping("bootstrap")
+	public String test3() {
+		return "test/bootstrapTest";
+	}
+	
+	@GetMapping("main3")
+	public String test4() {
+		return "test/signup";
+	}
+	
+	
+	
+>>>>>>> moon
 }
 
