@@ -39,7 +39,43 @@ public class HomeController {
 	
 	@GetMapping("/sdsd")
 	public String test() {
-		return "test2";
+		return "detailsearch";
 	}
 	
+	@GetMapping("/sdsd2")
+	public String test2() {
+		return "header";
+	}
+	
+	@GetMapping("/sdsd3")
+	public String test3() {
+		return "footer";
+	}
+	
+	@GetMapping("/sdsd4")
+	public String test4() {
+		return "documentview";
+	}
+	
+	@GetMapping("/loginmain")
+	public String test5() {
+		return "loginmain";
+	}
+	
+	@GetMapping("/page")
+	public String test6() {
+		return "page";
+	}
+	
+	@GetMapping("/write")
+	public String test7() {
+		return "write";
+	}
+	
+	@GetMapping("/popup")
+	public String test8() {
+		return "popup";
+	}
+
 }
+
