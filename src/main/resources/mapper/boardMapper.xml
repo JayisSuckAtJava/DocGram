@@ -94,8 +94,8 @@ select id, name, num
 	where id = ${fileId}
 </select>
 
-<insert id="createBoard" parameterType="Long" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),${userId})
+<insert id="createBoard" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),#{userId})
 </insert>
 
 <insert id="createFile" parameterType="file" useGeneratedKeys="true" keyProperty="id">
@@ -122,6 +122,7 @@ select id,
 from board
 where id = ${id}
 </select>
+
 
 </mapper>
 

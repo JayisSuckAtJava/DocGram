@@ -9,8 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>부트스트랩 기본 틀</title>
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap.css" rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.css" rel="stylesheet">
 
 	<!-- 부트 css -->
 <script
