@@ -1,0 +1,82 @@
+/* 메인 바 */
+td {
+  list-style: none;
+}
+
+.main_bar a {
+  display: block;
+  padding: 5% 5% 5%;
+  border-bottom: 1px solid #d6d6d6;
+  text-decoration: none;
+  color:black;
+}
+
+.main_bar {
+  width: 70%;
+  margin-bottom: 15%;
+  margin-left: 1%;
+  float: left;
+  border: 1px solid #bcbcbc;
+}
+
+.main_notice, 
+.main_recentBoard_dept, 
+.main_recentBoard_all, 
+.main_recentBoard_team {
+  width: 28%;
+  padding: 5%;
+  margin-top: 5;
+  margin-left: 5%;
+  margin-bottom: 10%;
+  display: inline-block;
+  border: 1px solid #bcbcbc;
+white-space: nowrap;
+overflow:hidden;
+text-overflow: ellipsis;
+}
+
+
+
+/* 사이드바(mypage) */
+.main-sidebar {
+  width: 10%;
+  padding: 1%;
+  margin-bottom: 15%;
+  margin-left: 1%;
+  margin-right: 1%;
+  float: left;
+  border: 1px solid #bcbcbc;
+  position: sticky;
+  top: 0px;
+} 
+
+li {
+  list-style: none;
+  text-decoration: none;
+  color:black;
+}
+
+
+.main-category-list ul li a {
+	padding:1px;
+}
+
+
+/* right sidebar */
+.right-sidebar {
+  width: 10%;
+  padding: 1%;
+  margin-left: 1%;
+  margin-bottom: 15%;
+  float: left;
+  border: 1px solid #bcbcbc;
+  position: sticky;
+  top: 0px;
+white-space: nowrap;
+overflow:hidden;
+text-overflow: ellipsis;
+}
+
+td {
+  list-style: none;
+}
