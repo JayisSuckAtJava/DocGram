@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>상세검색페이지</title>
 
   <!---------------- css 시작 부분 -------------------->
   <style>
     /* 문서 목록 리스트 css */
-    .document {
+    .table table-hover {
       border: solid;
       height: 100px;
       background-color: rgb(128, 197, 229);
-      margin-left: auto;
-      margin-right: auto;
     }
     #list_title {
       border: solid;
@@ -85,10 +83,21 @@ input::placeholder {color:#434343;}
 </head>
 <!--------- head 끝 --------------------->
 
-<!-- 상세 검색 부분 -->
+
+
+<!-- body 상세 검색 부분 -->
+
+
 
 <body>
-  <div class="Detail-search">
+
+	<jsp:include page="header.jsp"></jsp:include>
+
+	
+
+
+
+	<div class="Detail-search">
     <div class="test">
 
       <h2 id="page-title" style="color: rgb(0, 0, 0);">서울시의회 정보</h2>
@@ -101,6 +110,7 @@ input::placeholder {color:#434343;}
             정보</a><span>&gt;</span></li>
         <li class="step step3"><em class="element-invisible">현재 3depth 메뉴 :</em><a href="/council/list">서울시의회
             자료</a><span>&gt;</span></li>
+       </ul>
     </div>
   </div>
 
@@ -181,8 +191,12 @@ input::placeholder {color:#434343;}
     <!-- 상세 검색 부분 -->
 
 
+	<div classs="col"></div>
+
     <!-- 목록 리스트 -->
-    <table class="document">
+    <div class="col-8">
+    <table class="table table-hover">
+    
 
       <thead id="list_title">
 
@@ -218,7 +232,11 @@ input::placeholder {color:#434343;}
        	
       </tbody>
     </table>
+    </div>
     <!-- 목록 리스트 -->
+    
+    <!-- 푸터 -->
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 <script>
@@ -229,7 +247,9 @@ input::placeholder {color:#434343;}
     console.log(first)
     v.addEventListener("click", () => {
       alert(`hi u are in \${first}`)
-      window.location.href = `board/\${first}`
+      wind
+      
+      ow.location.href = `board/\${first}`
     })
   })
 </script>
