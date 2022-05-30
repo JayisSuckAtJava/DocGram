@@ -6,11 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>작성페이지</title>
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/bootstrap.css" rel="stylesheet">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
+    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
 
 <!-- css 부분 -->
     <style>
@@ -53,45 +52,42 @@
 <div class="all">
 
     <div class="writebody">
-
+		<form action="" method="post" enctype="multipart/form-data">
         <div class="titlename"> <!-- 제목 작성 부분-->
             <div>
-                <input class="title" type="text" name="제목" placeholder="제목을 입력해주세요">
+            	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요.">
             </div>
         </div>
         <hr>
         <div class="wirtearea"> <!-- 내용 작성 부분-->
-            <textarea class="size" placeholder="내용을 입력하세요." ></textarea>
+            <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
 
         </div>
         <hr>
         
         <div>
             <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
-            <input type="file" name="file" id="imageFileOpenInput" accept=".pdf">
+            <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
             <button>취소</button>
             <hr>
         </div>
 
         <div>
             <h3> 해시태그 지정</h3>
-            <input type="text" placeholder="태그를 입력하세요">
+            <input type="text" placeholder="태그를 입력하세요" name="hashtagList">
             
         </div>
             <hr>
-
-
-
-
         <div> <!-- 관계 게시글 설정-->
             <h3>관계 게시글 설정</h3>
-            <input type="text" id="boardList">
+            <input type="text" id="boardList" name="relatedBoardList">
             <button class="">리셋</button>
         </div>
     
     </div>
     <div>   <!-- 작성 완료, 뒤로가기-->
-    <button class="">작성 완료</button> <button>뒤로가기</button>
+    <button class="submit">작성 완료</button> <button>뒤로가기</button>
+    </form>
     </div>
 </div>
 <script>

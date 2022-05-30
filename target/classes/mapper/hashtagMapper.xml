@@ -12,11 +12,11 @@ select h.id, h.name
 </select>
 
 <insert id="createHashtag" parameterType="hashtag" useGeneratedKeys="true" keyProperty="id">
-insert into hashtag (name) values (${name})
+insert into hashtag (name) values (#{name})
 </insert>
 
 <insert id="createBoardHashtag" parameterType="map">
-insert into board_hashtag (board_id,hashtag_id) values (${boardId},${hashtagId})
+insert into board_hashtag (board_id,hashtag_id) values (#{boardId},#{hashtagId})
 </insert>
 </mapper>
 

@@ -247,9 +247,7 @@ input::placeholder {color:#434343;}
     console.log(first)
     v.addEventListener("click", () => {
       alert(`hi u are in \${first}`)
-      wind
-      
-      ow.location.href = `board/\${first}`
+      window.location.href = `board/\${first}`
     })
   })
 </script>
