@@ -30,8 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
+import com.team2.docgram.service.FileService;
 import com.team2.docgram.service.old.BoardService;
-import com.team2.docgram.service.old.FileService;
 
 /** BoardController.java
  *  게시판 접속 처리 컨트롤러
