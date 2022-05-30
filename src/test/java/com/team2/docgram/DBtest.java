@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,6 +33,19 @@ public class DBtest {
 	
 	@Autowired
 	private BoardService boardService;
+
+	@Test
+	public void teststst() {
+		BoardDto board = new BoardDto();
+		board.setTitle(" xptmxm");
+		board.setContent("내용");
+		board.setUserId(1l);
+		Long re = boardDao.createBoard(board);
+		System.out.println(re);
+//		BoardDto re = boardDao.createBoard(board);
+//		System.out.println(re);
+	}
+
 	/*
 	@Test
 	public void teststst() {

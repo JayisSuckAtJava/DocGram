@@ -97,5 +97,10 @@ public class HomeController {
 		return "test/signup";
 	}
 	
+	@GetMapping("/test/testest")
+	public String tdsds() {
+		return "loginmain";
+	}
+	
 }
 

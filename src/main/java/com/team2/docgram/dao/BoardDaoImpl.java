@@ -46,6 +46,6 @@ public class BoardDaoImpl implements BoardDao {
 	public BoardDto readBoardOne(Long id) {
 		return sqlSession.selectOne(mapper+"readBoardOne", id);
 	}
-	
+
 	
 }

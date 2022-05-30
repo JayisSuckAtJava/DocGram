@@ -16,6 +16,6 @@ public interface BoardService {
 
 	String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName);
 	
-	BoardDto readBoardOne(Long id);
+	Map<String, Object> readBoardOne(Long id);
 
 }
