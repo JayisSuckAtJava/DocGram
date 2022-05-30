@@ -47,6 +47,16 @@ public class HomeController {
 		return "test/main";
 	}
 	
+	@GetMapping("bootstrap")
+	public String test3() {
+		return "test/bootstrapTest";
+	}
+	
+	@GetMapping("main3")
+	public String test4() {
+		return "test/signup";
+	}
+	
 	
 	
 }
