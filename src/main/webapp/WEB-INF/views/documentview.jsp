@@ -207,6 +207,7 @@
 
 
     <!-- 문서 상세 정보 -->
+    
     <div class="table-wrap">
         <table class="table table-response">
             <caption> 문서상세 정보 - 작성자 /작성일 / 문서 관리 번호 / 전화번호 /소속기관 </caption>
