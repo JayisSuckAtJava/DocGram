@@ -95,15 +95,15 @@ select id, name, num
 </select>
 
 <insert id="createBoard" parameterType="Long" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, user_id) values (${title},${content},date_format(now(), '%Y-%m-%d'),${userId})
+insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),${userId})
 </insert>
 
 <insert id="createFile" parameterType="file" useGeneratedKeys="true" keyProperty="id">
-insert into file (name) values (${name})
+insert into file (name) values (#{name})
 </insert>
 
 <update id="updateFile" parameterType="file">
-update file set num = ${num} where id = ${id}
+update file set num = #{num} where id = ${id}
 </update>
 
 <update id="updateBoardFile" parameterType="board">

@@ -86,7 +86,7 @@
     
     </div>
     <div>   <!-- 작성 완료, 뒤로가기-->
-    <button class="submit">작성 완료</button> <button>뒤로가기</button>
+    <button class="submit">수정완료</button> <button>뒤로가기</button>
     </form>
     </div>
 </div>
