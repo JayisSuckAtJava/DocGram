@@ -42,7 +42,6 @@ public class HomeController {
 		return "detailsearch";
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/sdsd2")
 	public String test2() {
 		return "header";
@@ -78,24 +77,20 @@ public class HomeController {
 		return "popup";
 	}
 
-=======
 	@GetMapping("main2")
-	public String test2() {
+	public String test12() {
 		return "test/main";
 	}
 	
 	@GetMapping("bootstrap")
-	public String test3() {
+	public String test13() {
 		return "test/bootstrapTest";
 	}
 	
 	@GetMapping("main3")
-	public String test4() {
+	public String test14() {
 		return "test/signup";
 	}
 	
-	
-	
->>>>>>> moon
 }
 
