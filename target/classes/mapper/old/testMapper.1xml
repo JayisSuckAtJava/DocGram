@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team2">
+
+
+
+<select id="team" parameterType="int" resultType="hashmap">
+	SELECT rank, dept
+	FROM team
+	WHERE pk = #{pk}
+</select>
+
+
+
+<!--
+ 쿼리명 : team cloumns
+ 설명 : team의 컬럼(rank, dept)
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+<sql id="teamColumns">
+	${team}.rank, ${team}.dept
+</sql>
+
+<!--
+ 쿼리명 : 소속부서 (team)
+ 설명 : 작성자의 소속부서를 찾는 쿼리(dept, rank)
+ 작성자 : 문예빈
+ 최초작성일 : 2022-05-24
+ -->
+ <select id="selectTeam">
+ 	SELECT
+ 		<include refid="teamColumns"></include>
+ </select>
+ 
+
+
+
+
+<!-- 
+	쿼리명 : 게시판 정보(rank)
+	설 명 : user테이블에서 team테이블의 rank를 뽑아오는 쿼리 (유저이름, 소속부서, 직급, 부서 번호)
+	작성자 : 문예빈
+ 	최초 작성일 : 2022-05-19
+ -->
+<select id="selectRank">
+	SELECT u.name, 
+		u.team, 
+		u.dept_num, 
+		t.rank
+	FROM user u, 
+		team t
+	WHERE u.team = #{t.pk}
+</select>
+
+<!--
+	쿼리명 : 게시판 정보(date)
+	설 명 : 
+	SELECT date,
+		start_date,
+		end_date
+	FROM board
+	where 
+	작성자 : 문예빈
+	최초 작성일 : 2022-20
+  -->
+
+
+
+<insert id="test">
+	INSERT INTO department VALUES ()
+</insert>
+
+<select id="ifTest" resultType="String">
+	select deptSecurity
+	from department
+	<if test="num != null">
+		where pk = ${num}
+	</if>
+</select>
+
+<select id="foreachTest" resultType="com.team2.docgram.dto.DepartmentDto">
+  SELECT *
+  FROM department
+  <where>
+    <foreach item="var" collection="array"
+        open="address like " separator="or address like " close="" >
+         '%${var}%'
+    </foreach>
+  </where>
+</select>
+
+
+<insert id="hashinsert" parameterType="Map">
+	<foreach item="var" collection="arr"
+	open="INSERT INTO hashtag (description) VALUES" separator="," >
+	 ("${var}")		
+	</foreach>
+
+</insert>
+
+<select id="selectInfo" resultType="com.team2.docgram.dto.BoardDto" parameterType="Map">
+	 SELECT *
+	 FROM board
+	 <trim prefix="WHERE" prefixOverrides="AND">
+		<if test="title != null">AND title like "%${title}%"</if>
+		<if test="content != null">AND content like "%${content}%"</if>
+	</trim>
+</select>
+
+<!--  이게 진짜로 되는거임. -->
+<insert id="hashtagInsert" parameterType="com.team2.docgram.dto.HashtagDto" useGeneratedKeys="true" keyProperty="pk">
+	INSERT INTO hashtag (description) VALUES ("${description}")
+</insert>
+
+<insert id="hashtagInsert2" parameterType="String">
+    INSERT INTO hashtag (description) VALUES ("${var}")
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+</insert>
+
+
+
+</mapper>

@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.jta.SpringJtaSynchronizationAdapter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,10 +35,10 @@ import lombok.ToString;
 public class DBtest {
 	String root = "C:\\ProjectTeam2\\file\\";
 	
-	/*
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+	/*
 	@Test
 	public void teststst() {
 		int a =1 ;
@@ -224,7 +226,7 @@ public class DBtest {
 		Integer rank;
 		String key, text, file, hashtagList, fileCode;
 		Date date;
-	}*/
+	}
 	
 	@Test
 	public void test() {
@@ -245,5 +247,26 @@ public class DBtest {
 		// 이렇게 넘어가면 js 에서 인식을 하냐?
 		
 		return hashtagListDetail;
+	}
+	
+	@Test
+	public void tsds() {
+		String til = "D";
+		String zero = "0";
+		Integer a = 315454;//PK 들어가는값
+		
+		
+		for(int i = a.toString().length(); i<13 ; i++) {
+			til = til + zero;
+		}
+		String test = til+a;
+		System.out.println(test);
+
+	}*/
+	
+	@Test
+	public void tss() {
+		sqlSession.selectOne("board.readBoardList");
+		System.out.println("test");
 	}
 }
