@@ -186,5 +186,31 @@ public class BoardServiceImpl implements BoardService {
 		
 		return map;
 	}
+
+	@Override
+	public List<BoardDto> readStarmarkList(Long userId) {
+		
+		return boardDao.readStarmarkList(userId);
+	}
+
+	@Override
+	public List<BoardDto> readDeptmarkList(Long deptId) {
+		return boardDao.readDeptmarkList(deptId);
+	}
+
+	@Override
+	public List<BoardDto> readNoticeList() {
+		return boardDao.readNoticeList();
+	}
+
+	@Override
+	public BoardDto readNotice(Long boardId) {
+		return boardDao.readNotice(boardId);
+	}
+
+	@Override
+	public void createNotice(BoardDto board) {
+		boardDao.createNotice(board);
+	}
 	
 }

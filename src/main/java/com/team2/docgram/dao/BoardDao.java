@@ -18,4 +18,12 @@ public interface BoardDao {
 
 	BoardDto readBoardOne(Long id);
 
+	List<BoardDto> readStarmarkList(Long userId);
+
+	List<BoardDto> readDeptmarkList(Long deptId);
+
+	List<BoardDto> readNoticeList();
+
+	void createNotice(BoardDto board);
+
 }
