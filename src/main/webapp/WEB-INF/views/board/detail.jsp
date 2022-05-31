@@ -6,12 +6,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocumentView</title>
+        <link rel="stylesheet" href="css/mypage.css">
+        <title>문서상세보기</title>
+        <meta http-equiv="Content-Type" content="text/html;">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/main.css">
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
 
     <!-- css 부분 -->
     <style>
+    
+    	<style>
+        .all {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+    
         .title-article {
             display: block;
             max-width: 40%;
@@ -201,8 +213,10 @@
 <!-- 바디 부분 -->
 
 <body>
+   
+  <div class="all">
     <!-- 출력 문서 제목 -->
-
+	
     <h3 class="title-article">${board.title}</h3>
 
 
@@ -329,6 +343,7 @@
         </div>
     </div>
     <hr>
+   </div>
 </body>
 
     <!-- script 부분 -->
