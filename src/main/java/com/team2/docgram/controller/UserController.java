@@ -1,5 +1,7 @@
 package com.team2.docgram.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,35 +28,35 @@ public class UserController {
 	@Autowired
 	private StarmarkService starmarkService;
 	
-	@GetMapping("lp")
+	@GetMapping("signin")
 	public String loginPage() {
-		
+		return "login/login";
 	}
 	
-	@PostMapping("l")
+	@PostMapping("signin")
 	public String login(UserDto user,HttpSession session) {
 		
 		UserDto userDetail = userService.readUser(user);
 		if(userDetail == null) {
-			return "redirect:/";
+			return "redirect:/signin";
 		}else {
 			session.setAttribute("user", user);
 			return "redirect:/main";			
 		}
 	}
 	
-	@GetMapping("lo")
+	@GetMapping("signout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "";
+		return "redirect:/main";
 	}
 	
-	@GetMapping("sp")
+	@GetMapping("signup")
 	public String signupPage() {
-		return "";
+		return "login/join";
 	}
 	
-	@PostMapping("su")
+	@PostMapping("signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
 		
@@ -68,7 +70,7 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("up")
+	@GetMapping("mypage/update")
 	public String updatePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		UserDto dbUser = userService.readUser(user);
@@ -76,7 +78,7 @@ public class UserController {
 		return "";
 	}
 	
-	@PostMapping("u")
+	@PostMapping("mypage/update")
 	public String update(UserDto user,HttpSession session) {
 		UserDto updatedUser = userService.updateUser(user);
 		if(updatedUser == null) {
@@ -87,19 +89,20 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("su")
+	@GetMapping("mypage/user")
 	public String searchUserPage() {
+		List<UserDto> userList = userService.readUserList();
 		return "";
 	}
 	
-	@PostMapping("sus")
-	public String searchUser(Model model) {
-		
+	@PostMapping("mypage/user")
+	public String searchUser(Model model,String name) {
+		List<UserDto> userList = userService.readUserList(name);
 		model.addAttribute("", model);
 		return "";
 	}
 
-	@PostMapping("um")
+	@PostMapping("mypage/mytag")
 	public String updateMytag(String tagName,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long hashtagId = hashtagService.readHashtag(tagName);
@@ -107,21 +110,21 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@PostMapping("cs")
+	@PostMapping("starmark/create")
 	public void createStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		starmarkService.createStarmark(userId,boardId);
 	}
 	
-	@PostMapping("ds")
+	@PostMapping("starmark/delete")
 	public void deleteStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
-	@PostMapping("cd")
+	@PostMapping("deptmark/create")
 	public void createDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
@@ -131,7 +134,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("cdd")
+	@PostMapping("deptmark/delete")
 	public void deleteDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();

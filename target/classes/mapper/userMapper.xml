@@ -61,5 +61,18 @@ update user
 	</trim>
 </update>
 
+<select id="readUserList" parameterType="String">
+select u.name as user_name,
+	u.email as user_email,
+	u.phone_number as user_phone_number,
+	u.dept_number as user_dept_number,
+	d.name as dept_name
+from user u
+join dept d on d.id = u.dept_id
+<if test="name != null">
+where u.name = #{name}
+</if>
+</select>
+
 </mapper>
 

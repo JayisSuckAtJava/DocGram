@@ -52,7 +52,7 @@
 <div class="all">
 
     <div class="writebody">
-		<form action="board/" method="post" enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data">
         <div class="titlename"> <!-- 제목 작성 부분-->
             <div>
             	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요." value="${board.title}">

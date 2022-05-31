@@ -166,10 +166,10 @@ body, html {
         
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
+            <form class="form-signin" action="" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> 저장 하기
