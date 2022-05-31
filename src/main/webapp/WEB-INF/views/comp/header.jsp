@@ -30,8 +30,10 @@
 				<li class="nav-item"><a href="#" class="nav-link">공지 소식</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">상세 검색</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">최신 문서</a></li>
+				<li class="nav-item"><a href="#" class="nav-link">${mytage}</a></li>
 			</ul>
 		</header>
 	</div>
 </body>
 </html>
+
