@@ -37,50 +37,50 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/sdsd")
+	@GetMapping("/header")
 	public String test() {
-		return "detailsearch";
+		return "comp/header";
 	}
 	
-	@GetMapping("/sdsd2")
+	@GetMapping("/footer")
+	public String test1() {
+		return "comp/footer";
+	}
+	
+	@GetMapping("/create")
 	public String test2() {
-		return "header";
+		return "board/create";
 	}
 	
-	@GetMapping("/sdsd3")
+	@GetMapping("/detail")
 	public String test3() {
-		return "footer";
-	}
-	
-	@GetMapping("/sdsd4")
-	public String test4() {
-		return "documentview";
-	}
-	
-	@GetMapping("/loginmain")
-	public String test5() {
-		return "loginmain";
-	}
-	
-	@GetMapping("/page")
-	public String test6() {
-		return "page";
-	}
-	
-	@GetMapping("/write")
-	public String test7() {
-		return "write";
+		return "board/detail";
 	}
 	
 	@GetMapping("/popup")
-	public String test8() {
-		return "popup";
+	public String test4() {
+		return "board/popup";
 	}
 	
-	@GetMapping("/writeupdate")
-	public String test9() {
-		return "writeupdate";
+	@GetMapping("/update")
+	public String test5() {
+		return "board/update";
 	}
-
+	
+	@GetMapping("login")
+	public String test6() {
+		return "login/login";
+	}
+	
+	@GetMapping("/detail1")
+	public String test7() {
+		return "read/detail";
+	}
+	
+	@GetMapping("/popup1")
+	public String test9() {
+		return "test/popup";
+	}
+	
 }
 
