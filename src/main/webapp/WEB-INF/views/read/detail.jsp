@@ -136,12 +136,12 @@ input::placeholder {color:#434343;}
     <dl class="dl-table">
       <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
       <dd class="dd-keyword">
-        <form action="" method=""> <!-- form-->
-        <select name="searchField" id="searchCategory" title="검색어 분류 선택">
-          <option value="all" selected="selected">제목</option>
-          <option value="title">내용</option>
-          <option value="dept_nm">작성자</option>
-          <option value="writer">기관</option>
+        <form action="" method="post"> <!-- form-->
+        <select name="text" id="searchCategory" title="검색어 분류 선택">
+          <option value="title" selected="selected">제목</option>
+          <option value="content">내용</option>
+          <option value="name">작성자</option>
+          <option value="dept_name">기관</option>
         </select>
         <input name="searchKeyword" type="text" id="searchKeyword"
           placeholder="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)"
@@ -154,18 +154,22 @@ input::placeholder {color:#434343;}
       <dt class="dt-open"><span>항목<em>(다중선택)</em></span></dt>
       <dd class="dd-date">
         <form action="" method=""> <!-- form-->
-        <select name="rangeLevel" id="rangeDateUi" title="기간설정 선택">
-          <option value="all" selected="selected">직책(전체)</option>
-          <option value="31">대통령</option>
-          <option value="92">국회</option>
-          <option value="183">7급</option>
-          <option value="365">9급</option>
+        <select name="position_id" id="rangeDateUi">
+          <option value="1" selected="selected">직책(전체)</option>
+          <option value="2">서기</option>
+          <option value="3">주사보</option>
+          <option value="4">주사</option>
+          <option value="5">사무관</option>
+          <option value="6">서기관</option>
+          <option value="7">부이사관</option>
+          <option value="8">이사관</option>
+          <option value="9">관리관</option>
         </select>
         
-        <input name="searchFile" type="text" id="searchKeyword" 
+        <input name="file_name" type="text" id="searchKeyword" 
         placeholder="원하시는 파일명을 입력하세요"
           title="원하시는 파일명을 입력하세요" value="">
-          <input name="searchNumber" type="text" id="searchKeyword" 
+          <input name="file_num" type="text" id="searchKeyword" 
         placeholder="문서 번호"
           title="문서번호" value="">
         </form>
@@ -178,7 +182,7 @@ input::placeholder {color:#434343;}
       <dt class="dt-open"><span>태그검색<em>(다중입력 , 로 구분)</em></span></dt>
       <dd class="dd-date">
         <form action="" method=""> <!-- form-->
-        <input name="searchTag" type="text" id="searchKeyword" 
+        <input name="hashtagList" type="text" id="searchKeyword" 
         placeholder="태그를 입력하세요 (예 행정,공공기관 )"
           title="태그를 입력하세요 (예 #행정 #공공기관 )" value="">
         </form>
@@ -191,11 +195,11 @@ input::placeholder {color:#434343;}
       <dt class="dt-date"><label for="rangeDateUi">검색기간</label></dt>
       <dd class="dd-date">
         <form action="" method=""> <!-- form-->
-        <select name="rangeDate" id="rangeDateUi" title="기간설정 선택">
-          <option value="all" selected="selected">전체</option>
-          <option value="31">1개월</option>
-          <option value="92">3개월</option>
-          <option value="183">6개월</option>
+        <select name="date" id="rangeDateUi" title="기간설정 선택">
+          <option value="0" selected="selected">전체</option>
+          <option value="30">1개월</option>
+          <option value="90">3개월</option>
+          <option value="180">6개월</option>
           <option value="365">1년</option>
           <option value="custom">기간설정</option>
           <p><input type="date"></p>
@@ -277,7 +281,7 @@ input::placeholder {color:#434343;}
                 </ul>
               </nav>
             </div>
-    
+     
     
     <!-- 푸터 -->
     <jsp:include page="../comp/footer.jsp"></jsp:include>
