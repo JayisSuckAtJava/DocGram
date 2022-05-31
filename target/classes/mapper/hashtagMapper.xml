@@ -18,5 +18,12 @@ insert into hashtag (name) values (#{name})
 <insert id="createBoardHashtag" parameterType="map">
 insert into board_hashtag (board_id,hashtag_id) values (#{boardId},#{hashtagId})
 </insert>
+
+<select id="readHashtag" parameterType="String" resultType="Long">
+select id
+from hashtag
+where name = #{tagName}
+</select>
+
 </mapper>
 

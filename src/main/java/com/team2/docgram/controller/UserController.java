@@ -35,8 +35,12 @@ public class UserController {
 	public String login(UserDto user,HttpSession session) {
 		
 		UserDto userDetail = userService.readUser(user);
-		session.setAttribute("user", user);
-		return "redirect:/main";
+		if(userDetail == null) {
+			return "redirect:/";
+		}else {
+			session.setAttribute("user", user);
+			return "redirect:/main";			
+		}
 	}
 	
 	@GetMapping("lo")
@@ -67,23 +71,30 @@ public class UserController {
 	@GetMapping("up")
 	public String updatePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		userService.readUser();
+		UserDto dbUser = userService.readUser(user);
+		model.addAttribute("dbUser", dbUser);
 		return "";
 	}
 	
 	@PostMapping("u")
-	public String update(UserDto user) {
-		userService.updateUser();
-		return "redirect:/";
+	public String update(UserDto user,HttpSession session) {
+		UserDto updatedUser = userService.updateUser(user);
+		if(updatedUser == null) {
+			return "";
+		}else {
+			session.setAttribute("user", updatedUser);			
+			return "redirect:/";
+		}
 	}
 	
 	@GetMapping("su")
 	public String searchUserPage() {
-		
+		return "";
 	}
 	
 	@PostMapping("sus")
 	public String searchUser(Model model) {
+		
 		model.addAttribute("", model);
 		return "";
 	}
@@ -93,31 +104,41 @@ public class UserController {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		userService.updateHashtag(hashtagId);
-		
+		return "redirect:/";
 	}
 	
 	@PostMapping("cs")
-	public String createStarmark(Long boardId,HttpSession session) {
+	public void createStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.createStarmark(boardId);
+		Long userId = user.getId();
+		starmarkService.createStarmark(userId,boardId);
 	}
 	
 	@PostMapping("ds")
-	public String deleteStarmark(Long boardId,HttpSession session) {
+	public void deleteStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.deleteStarmark(boardId);
+		Long userId = user.getId();
+		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
 	@PostMapping("cd")
-	public String createDeptmark(Long boardId,HttpSession session) {
+	public void createDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.createDeptmark(boardId);
+		Long postionId = user.getPositionId();
+		if(postionId > 5) {
+			Long deptId = user.getDeptId();
+			starmarkService.createDeptmark(deptId,boardId);			
+		}
 	}
 	
 	@PostMapping("cdd")
-	public String deleteDeptmark(Long boardId,HttpSession session) {
+	public void deleteDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.deleteDeptmark(boardId);
+		Long postionId = user.getPositionId();
+		if(postionId > 5) {
+			Long deptId = user.getDeptId();
+			starmarkService.deleteDeptmark(deptId,boardId);			
+		}
 	}
 }
 

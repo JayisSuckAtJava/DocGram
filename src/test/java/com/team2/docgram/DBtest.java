@@ -1,6 +1,5 @@
 package com.team2.docgram;
 
-import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -11,7 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,30 +31,33 @@ public class DBtest {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Autowired
+	UserDao userDao;
+	
 	
 	@Autowired
 	private BoardService boardService;
-/*
 	@Test
 	public void teststst() {
 		BoardDto board = new BoardDto();
 		board.setTitle(" xptmxm");
 		board.setContent("내용");
 		board.setUserId(1l);
-		Long re = boardDao.createBoard(board);
-		System.out.println(re);
+//		Long re = boardDao.createBoard(board);
+//		System.out.println(re);
 //		BoardDto re = boardDao.createBoard(board);
 //		System.out.println(re);
 	}
 
 	
 	@Test
-	public void teststst() {
+	public void teststs2t() {
 		int a =1 ;
 		int b= 2;
 		System.out.println(a+b);
 	}
 
+/*
 	@Test
 	public void test() {
 		sqlSession.insert("team2.test");
@@ -348,7 +352,7 @@ public class DBtest {
 		String [] sa = in.split(",");
 		Stream<String> str = Stream.of(sa);
 		System.out.println(str.toString());
-	}*/
+	}
 	
 	@Test
 	public void longtest() {
@@ -357,5 +361,13 @@ public class DBtest {
 		Long a = 11110009L;
 		Long b = a%10;
 		System.out.println(b);
+	}*/
+	@Test
+	public void stea() {
+		UserDto user = new UserDto();
+		user.setEmail("ac");
+		user.setPassword("df");
+		UserDto u = userDao.readUser(user);
+		System.out.println(u);
 	}
 }
