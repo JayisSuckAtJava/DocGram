@@ -6,4 +6,6 @@ public interface HashtagDao {
 
 	HashtagDto createHashtag(HashtagDto hashtag);
 
+	Long readHashtag(String tagName);
+
 }
