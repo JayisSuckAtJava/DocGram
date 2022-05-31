@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +33,20 @@ public class DBtest {
 	
 	@Autowired
 	private BoardService boardService;
-	/*
+/*
+	@Test
+	public void teststst() {
+		BoardDto board = new BoardDto();
+		board.setTitle(" xptmxm");
+		board.setContent("내용");
+		board.setUserId(1l);
+		Long re = boardDao.createBoard(board);
+		System.out.println(re);
+//		BoardDto re = boardDao.createBoard(board);
+//		System.out.println(re);
+	}
+
+	
 	@Test
 	public void teststst() {
 		int a =1 ;
@@ -326,7 +340,7 @@ public class DBtest {
 		Map<String, Object> map = boardService.readBoard(id);
 		
 		System.out.println(map);
-	}*/
+	}
 	
 	@Test
 	public void stea() {
@@ -334,5 +348,14 @@ public class DBtest {
 		String [] sa = in.split(",");
 		Stream<String> str = Stream.of(sa);
 		System.out.println(str.toString());
+	}*/
+	
+	@Test
+	public void longtest() {
+		// 11110009 를 입력받아서 끝에 9인걸 받는다
+		
+		Long a = 11110009L;
+		Long b = a%10;
+		System.out.println(b);
 	}
 }

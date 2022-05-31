@@ -76,6 +76,11 @@ public class HomeController {
 	public String test8() {
 		return "popup";
 	}
+	
+	@GetMapping("/writeupdate")
+	public String test9() {
+		return "writeupdate";
+	}
 
 }
 

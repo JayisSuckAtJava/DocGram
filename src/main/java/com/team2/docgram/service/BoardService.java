@@ -16,6 +16,16 @@ public interface BoardService {
 
 	String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName);
 	
-	BoardDto readBoardOne(Long id);
+	Map<String, Object> readBoardOne(Long id);
+
+	List<BoardDto> readStarmarkList(Long userId);
+
+	List<BoardDto> readDeptmarkList(Long deptId);
+
+	List<BoardDto> readNoticeList();
+
+	BoardDto readNotice(Long boardId);
+
+	void createNotice(BoardDto board);
 
 }

@@ -52,41 +52,41 @@
 <div class="all">
 
     <div class="writebody">
-		<form action="board/create" method="post" enctype="multipart/form-data">
+		<form action="board/" method="post" enctype="multipart/form-data">
         <div class="titlename"> <!-- 제목 작성 부분-->
             <div>
-            	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요.">
+            	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요." value="${board.title}">
             </div>
         </div>
         <hr>
         <div class="wirtearea"> <!-- 내용 작성 부분-->
-            <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
+            <textarea class="size" placeholder="내용을 입력하세요." name="content">${board.content}</textarea>
 
         </div>
         <hr>
         
         <div>
             <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
-            <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
+            <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf" disabled="disabled">
             <button>취소</button>
             <hr>
         </div>
 
         <div>
             <h3> 해시태그 지정</h3>
-            <input type="text" placeholder="태그를 입력하세요 " name="hashtagList">
+            <input type="text" placeholder="태그를 입력하세요" name="hashtagList" value="${hashtagList}">
             
         </div>
             <hr>
         <div> <!-- 관계 게시글 설정-->
             <h3>관계 게시글 설정</h3>
-            <input type="text" id="boardList" name="relatedBoardList">
+            <input type="text" id="boardList" name="relatedBoardList" value="${relationList}">
             <button class="">리셋</button>
         </div>
     
     </div>
     <div>   <!-- 작성 완료, 뒤로가기-->
-    <button class="submit">작성 완료</button> <button>뒤로가기</button>
+    <button class="submit">수정완료</button> <button>뒤로가기</button>
     </form>
     </div>
 </div>

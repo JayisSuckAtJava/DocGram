@@ -163,8 +163,54 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDto readBoardOne(Long id) {
-		return boardDao.readBoardOne(id);
+	public Map<String, Object> readBoardOne(Long id) {
+		BoardDto board = new BoardDto();
+		board = boardDao.readBoardOne(id);
+
+		List<HashtagDto> hashtag = boardHashtagDao.readList(id);
+		String hashtagList = "";
+		for(HashtagDto i : hashtag) {
+			hashtagList = hashtagList + i.getName() + ",";
+		}
+		hashtagList = hashtagList.substring(0, hashtagList.length()-1);
+		
+		
+		String relationList = board.getRelation1().toString()+","+board.getRelation2().toString()+","+board.getRelation3().toString(); 
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("hashtagList", hashtagList);
+		map.put("relationList", relationList);
+		map.put("board", board);
+		
+		
+		
+		return map;
+	}
+
+	@Override
+	public List<BoardDto> readStarmarkList(Long userId) {
+		
+		return boardDao.readStarmarkList(userId);
+	}
+
+	@Override
+	public List<BoardDto> readDeptmarkList(Long deptId) {
+		return boardDao.readDeptmarkList(deptId);
+	}
+
+	@Override
+	public List<BoardDto> readNoticeList() {
+		return boardDao.readNoticeList();
+	}
+
+	@Override
+	public BoardDto readNotice(Long boardId) {
+		return boardDao.readNotice(boardId);
+	}
+
+	@Override
+	public void createNotice(BoardDto board) {
+		boardDao.createNotice(board);
 	}
 	
 }

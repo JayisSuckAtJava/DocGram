@@ -46,6 +46,26 @@ public class BoardDaoImpl implements BoardDao {
 	public BoardDto readBoardOne(Long id) {
 		return sqlSession.selectOne(mapper+"readBoardOne", id);
 	}
-	
+
+	@Override
+	public List<BoardDto> readStarmarkList(Long userId) {
+		return sqlSession.selectList(mapper+"readStarmarkList", userId);
+	}
+
+	@Override
+	public List<BoardDto> readDeptmarkList(Long deptId) {
+		return sqlSession.selectList(mapper+"readDeptmarkList", deptId);
+	}
+
+	@Override
+	public List<BoardDto> readNoticeList() {
+		return sqlSession.selectList(mapper+"readNoticeList");
+	}
+
+	@Override
+	public void createNotice(BoardDto board) {
+		sqlSession.selectOne(mapper+"createNotice", board);
+	}
+
 	
 }

@@ -55,10 +55,6 @@ public class BoardController {
 	
 	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
-		System.out.println(board);
-		System.out.println(hashtagList);
-		System.out.println(mFile.getOriginalFilename());
-		System.out.println(relatedBoardList);
 		//UserDto user = (UserDto) session.getAttribute("user");
 		//Long userId = user.getId();
 		board.setUserId(1L);
@@ -81,18 +77,67 @@ public class BoardController {
 	
 	@GetMapping("board/update/{id}")
 	public String boardUpdatePage(@PathVariable("id")Long id,Model model) {
-		BoardDto board = boardService.readBoardOne(id);
-		model.addAttribute("board", board);
-		return "update";
+		Map<String, Object> map = new HashMap<>();
+		map = boardService.readBoardOne(id);
+		model.addAllAttributes(map);
+		return "writeupdate";
 	}
 	
 	@PostMapping("board/update/{id}")
 	public String boardUpdate(@PathVariable("id")Long id,BoardDto board) {
-		
+		return "redirect:/board/content"+id;
 	}
 	
 	@GetMapping("board/popup")
 	public String popup() {
 		return "popup";
+	}
+	
+	
+	@GetMapping("mp")
+	public String mainPage(HttpSession session,Model model) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		Long deptId = user.getDeptId();
+		
+		List<BoardDto> starList = boardService.readStarmarkList(userId);
+		List<BoardDto> deptList = boardService.readDeptmarkList(deptId);
+		List<BoardDto> noticeList = boardService.readNoticeList();
+		
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("starList", starList);
+		model.addAttribute("noticeList", noticeList);
+		
+		return "main";
+	}
+	
+	@GetMapping("nl")
+	public String noticeList(Model model) {
+		List<BoardDto> noticeList = boardService.readNoticeList();
+		model.addAttribute("boardList", noticeList);
+		return "";
+	}
+	
+	@GetMapping("n")
+	public String notice(Model model,Long boardId) {
+		BoardDto notice = boardService.readNotice(boardId);
+		model.addAttribute("board", notice);
+		return "";
+	}
+	
+	@PostMapping("cn")
+	public String createNotice(BoardDto board,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		
+		board.setUserId(userId);
+		boardService.createNotice(board);
+		return "redirect:/";
+	}
+	
+	@GetMapping("un")
+	public String updateNotice() {
+		
 	}
 }

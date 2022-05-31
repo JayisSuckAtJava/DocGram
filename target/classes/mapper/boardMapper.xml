@@ -24,7 +24,7 @@ select b.id as board_id,
 from board b
 join user u on u.id = b.user_id
 join dept d on d.id = u.dept_id
-where b.id = ${id}
+where b.id = #{id}
 </select>
 
 <select id="readBoard" resultMap="detailBoard" parameterType="Long">
@@ -46,7 +46,76 @@ FROM board b
 JOIN file f ON b.FILE_ID = f.ID
 JOIN user u ON b.USER_ID = u.id
 JOIN position p ON u.POSITION_ID = p.ID
-WHERE b.ID = ${id}
+WHERE b.ID = #{id}
+</select>
+
+<select id="readStarmarkList" parameterType="Long" resultMap="detailBoard">
+select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	where b.id = (
+		select board_id
+		from user_starmark
+		where user_id = #{userId}
+	)
+</select>
+
+<select id="readDeptmarkList" parameterType="Long" resultMap="detailBoard">
+select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	where b.id = (
+		select board_id
+		from dept_starmark
+		where dept_id = #{deptId}
+	)
+</select>
+
+<select id="readMyBoardList" parameterType="Long" resultMap="detailBoard">
+	select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	where b.user_id = #{userId}
+</select>
+
+<select id="readNoticeList" parameterType="Long" resultMap="detailBoard">
+	select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	where b.title like "notice_%"
+</select>
+
+<insert id="createNotice2" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+</insert>
+
+<select id="createNotice" parameterType="board" resultType="Long">
+insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+returning id
 </select>
 
 <resultMap type="board" id="detailBoard">
@@ -91,11 +160,11 @@ WHERE b.ID = ${id}
 <select id="readFile" parameterType="Long" resultType="file">
 select id, name, num
 	from file
-	where id = ${fileId}
+	where id = #{fileId}
 </select>
 
-<insert id="createBoard" parameterType="Long" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),${userId})
+<insert id="createBoard" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),#{userId})
 </insert>
 
 <insert id="createFile" parameterType="file" useGeneratedKeys="true" keyProperty="id">
@@ -103,11 +172,11 @@ insert into file (name) values (#{name})
 </insert>
 
 <update id="updateFile" parameterType="file">
-update file set num = #{num} where id = ${id}
+update file set num = #{num} where id = #{id}
 </update>
 
 <update id="updateBoardFile" parameterType="board">
-update board set file_id = ${fileId} where id = ${id}
+update board set file_id = #{fileId} where id = #{id}
 </update>
 
 <select id="readBoardOne" parameterType="Long" resultType="board">
@@ -120,8 +189,9 @@ select id,
 	relation_2,
 	relation_3
 from board
-where id = ${id}
+where id = #{id}
 </select>
+
 
 </mapper>
 

@@ -76,6 +76,11 @@ public class HomeController {
 	public String test8() {
 		return "popup";
 	}
+	
+	@GetMapping("/writeupdate")
+	public String test9() {
+		return "writeupdate";
+	}
 
 	@GetMapping("main")
 	public String test101() {
@@ -92,9 +97,11 @@ public class HomeController {
 		return "test/signup";
 	}
 	
+
 	@GetMapping("dept_popup")
 	public String test104() {
 		return "test/dept_popup";
+
 	}
 	
 }
