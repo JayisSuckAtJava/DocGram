@@ -94,7 +94,7 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("")
+	@GetMapping("mp")
 	public String mainPage(HttpSession session,Model model) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
@@ -108,23 +108,25 @@ public class BoardController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("starList", starList);
 		model.addAttribute("noticeList", noticeList);
+		
+		return "main";
 	}
 	
-	@GetMapping("")
+	@GetMapping("nl")
 	public String noticeList(Model model) {
 		List<BoardDto> noticeList = boardService.readNoticeList();
 		model.addAttribute("boardList", noticeList);
 		return "";
 	}
 	
-	@GetMapping("")
+	@GetMapping("n")
 	public String notice(Model model,Long boardId) {
 		BoardDto notice = boardService.readNotice(boardId);
 		model.addAttribute("board", notice);
 		return "";
 	}
 	
-	@PostMapping("")
+	@PostMapping("cn")
 	public String createNotice(BoardDto board,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
@@ -134,7 +136,7 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("")
+	@GetMapping("un")
 	public String updateNotice() {
 		
 	}

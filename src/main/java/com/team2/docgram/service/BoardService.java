@@ -18,4 +18,14 @@ public interface BoardService {
 	
 	Map<String, Object> readBoardOne(Long id);
 
+	List<BoardDto> readStarmarkList(Long userId);
+
+	List<BoardDto> readDeptmarkList(Long deptId);
+
+	List<BoardDto> readNoticeList();
+
+	BoardDto readNotice(Long boardId);
+
+	void createNotice(BoardDto board);
+
 }

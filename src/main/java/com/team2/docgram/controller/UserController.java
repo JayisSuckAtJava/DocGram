@@ -26,60 +26,69 @@ public class UserController {
 	@Autowired
 	private StarmarkService starmarkService;
 	
-	@GetMapping("")
+	@GetMapping("lp")
 	public String loginPage() {
 		
 	}
 	
-	@PostMapping("")
+	@PostMapping("l")
 	public String login(UserDto user,HttpSession session) {
 		
-		UserDto u = userService.readUser();
+		UserDto userDetail = userService.readUser(user);
 		session.setAttribute("user", user);
 		return "redirect:/main";
 	}
 	
-	@GetMapping("")
+	@GetMapping("lo")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "";
 	}
 	
-	@GetMapping("")
+	@GetMapping("sp")
 	public String signupPage() {
 		return "";
 	}
 	
-	@PostMapping("")
-	public String signup(UserDto user) {
+	@PostMapping("su")
+	public String createUser(UserDto user,Long deptCode) {
+		// 입력받는 deptCode 값이 11 110 000 + position
+		
+		Long positionId = deptCode % 10;
+		Long deptId = deptCode - positionId;
+		user.setPositionId(positionId);
+		user.setDeptId(deptId);
+		
+		userService.createUser(user);
+		
 		return "redirect:/";
 	}
-	
-	@GetMapping("")
+
+	@GetMapping("up")
 	public String updatePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		userService.readUser();
 		return "";
 	}
 	
-	@PostMapping("")
+	@PostMapping("u")
 	public String update(UserDto user) {
 		userService.updateUser();
 		return "redirect:/";
 	}
 	
-	@GetMapping("")
+	@GetMapping("su")
 	public String searchUserPage() {
 		
 	}
 	
-	@PostMapping("")
+	@PostMapping("sus")
 	public String searchUser(Model model) {
 		model.addAttribute("", model);
 		return "";
 	}
 
-	@PostMapping("")
+	@PostMapping("um")
 	public String updateMytag(String tagName,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long hashtagId = hashtagService.readHashtag(tagName);
@@ -87,26 +96,26 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("")
+	@PostMapping("cs")
 	public String createStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		starmarkService.createStarmark(boardId);
 	}
 	
-	@PostMapping("")
+	@PostMapping("ds")
 	public String deleteStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		starmarkService.deleteStarmark(boardId);
 	}
 	
-	@PostMapping("")
+	@PostMapping("cd")
 	public String createDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		starmarkService.createDeptmark(boardId);
 	}
 	
-	@PostMapping("")
-	public String createDeptmark(Long boardId,HttpSession session) {
+	@PostMapping("cdd")
+	public String deleteDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		starmarkService.deleteDeptmark(boardId);
 	}
