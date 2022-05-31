@@ -4,7 +4,7 @@
 
 <mapper namespace="board">
 
-<select id="readBoardList" resultMap="detailBoard">
+<select id="readBoardList" resultMap="detailBoard" parameterType="board">
 	select b.id as board_id,
 		b.title as board_title,
 		d.name as dept_name,
@@ -14,6 +14,7 @@
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
+	limit #{start}, #{end}
 </select>
 
 <select id="readRelationBoard" parameterType="Long" resultMap="detailBoard">

@@ -17,8 +17,8 @@ public class BoardDaoImpl implements BoardDao {
 	private String mapper = "board.";
 
 	@Override
-	public List<BoardDto> readBoardList() {
-		return sqlSession.selectList(mapper+"readBoardList");
+	public List<BoardDto> readBoardList(BoardDto board) {
+		return sqlSession.selectList(mapper+"readBoardList",board);
 	}
 
 	@Override

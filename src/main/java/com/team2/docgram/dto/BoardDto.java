@@ -24,5 +24,6 @@ public class BoardDto {
 	
 	private FileDto file;
 	private UserDto user;
-
+	private Long start;
+	private Long end;
 }
