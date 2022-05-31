@@ -77,19 +77,24 @@ public class HomeController {
 		return "popup";
 	}
 
-	@GetMapping("main2")
-	public String test12() {
-		return "test/main";
+	@GetMapping("main")
+	public String test101() {
+		return "board/main";
 	}
 	
-	@GetMapping("bootstrap")
-	public String test13() {
+	@GetMapping("bootstrapTest")
+	public String test102() {
 		return "test/bootstrapTest";
 	}
 	
-	@GetMapping("main3")
-	public String test14() {
+	@GetMapping("signup")
+	public String test103() {
 		return "test/signup";
+	}
+	
+	@GetMapping("dept_popup")
+	public String test104() {
+		return "test/dept_popup";
 	}
 	
 }
