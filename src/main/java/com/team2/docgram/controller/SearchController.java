@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.service.BoardService;
@@ -24,9 +25,9 @@ public class SearchController {
 	private BoardService boardService;
 	
 	@GetMapping("read")
-	public String readPage(Model model) {
+	public String readPage(Model model,@RequestParam(defaultValue =  1L, required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList();
+		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
 		return "read/detail";
 	}

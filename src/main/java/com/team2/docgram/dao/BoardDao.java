@@ -6,7 +6,7 @@ import com.team2.docgram.dto.BoardDto;
 
 public interface BoardDao {
 
-	List<BoardDto> readBoardList();
+	List<BoardDto> readBoardList(BoardDto board);
 
 	BoardDto readBoard(Long id);
 

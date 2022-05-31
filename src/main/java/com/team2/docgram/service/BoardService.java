@@ -10,7 +10,7 @@ import com.team2.docgram.dto.BoardDto;
 
 public interface BoardService {
 
-	List<BoardDto> readBoardList();
+	List<BoardDto> readBoardList(Long page);
 
 	Map<String, Object> readBoard(Long id);
 
