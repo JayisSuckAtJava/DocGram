@@ -82,6 +82,27 @@ public class HomeController {
 	public String test9() {
 		return "test/popup";
 
+
+	@GetMapping("main")
+	public String test101() {
+		return "board/main";
+	}
+	
+	@GetMapping("bootstrapTest")
+	public String test102() {
+		return "test/bootstrapTest";
+	}
+	
+	@GetMapping("signup")
+	public String test103() {
+		return "test/signup";
+	}
+	
+
+	@GetMapping("dept_popup")
+	public String test104() {
+		return "test/dept_popup";
+
 	}
 	
 }

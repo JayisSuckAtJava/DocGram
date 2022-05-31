@@ -131,7 +131,7 @@
 <!--소속기관 찾는 팝업창-->
 <script>
   function showPopup() { 
-    window.open("team_popup.html", 
+    window.open("dept_popup.jsp", 
                 "a", 
                 "width=400, height=300, left=100, top=50"
                 ); 
