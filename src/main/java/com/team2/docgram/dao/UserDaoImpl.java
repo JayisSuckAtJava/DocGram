@@ -1,5 +1,7 @@
 package com.team2.docgram.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,16 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateHashtag(Long hashtagId) {
 		sqlSession.update(mapper+"updateUser", hashtagId);
+	}
+
+	@Override
+	public List<UserDto> readUserList() {
+		return sqlSession.selectList(mapper+"readUserList");
+	}
+
+	@Override
+	public List<UserDto> readUserList(String name) {
+		return sqlSession.selectList(mapper+"readUserList", name);
 	}
 	
 }
