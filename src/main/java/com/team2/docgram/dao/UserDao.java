@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.team2.docgram.dto.UserDto;
 
+/**  UserDao.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 public interface UserDao {
 
 	UserDto readUser(UserDto user);
@@ -17,5 +23,7 @@ public interface UserDao {
 	List<UserDto> readUserList();
 
 	List<UserDto> readUserList(String name);
+
+	void deleteUser(Long userId);
 
 }
