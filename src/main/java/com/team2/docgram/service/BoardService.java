@@ -34,4 +34,10 @@ public interface BoardService {
 
 	void createNotice(BoardDto board);
 
+	void boardUpdate(BoardDto board, String hashtagList, String relatedBoardList);
+
+	Long readBoardUserId(Long id);
+
+	void deleteBoard(Long id);
+
 }

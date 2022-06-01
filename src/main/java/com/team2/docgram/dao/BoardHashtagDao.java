@@ -17,4 +17,8 @@ public interface BoardHashtagDao {
 
 	void createBoardHashtag(Map<String, Object> map);
 
+	Long readBoardHashtag(Map<String, Object> map);
+
+	void deleteHashtagList(Long boardId);
+
 }

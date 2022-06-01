@@ -153,11 +153,38 @@ public class BoardDaoImpl implements BoardDao {
 	 * @param board 
 	 *
 	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
+	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public void createNotice(BoardDto board) {
-		sqlSession.selectOne(mapper+"createNotice", board);
+	public void updateBoard(BoardDto board) {
+		sqlSession.update(mapper+"updateBoard", board);
+	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public Long readBoardUserId(Long id) {
+		return sqlSession.selectOne(mapper+"readBoardUserId", id);
+	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param id 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public void deleteBoard(Long id) {
+		sqlSession.delete(mapper+"deleteBoard", id);
 	}
 
 	
