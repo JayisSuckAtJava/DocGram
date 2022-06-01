@@ -24,4 +24,6 @@ public interface UserDao {
 
 	List<UserDto> readUserList(String name);
 
+	void deleteUser(Long userId);
+
 }

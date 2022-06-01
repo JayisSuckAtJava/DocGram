@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.HashtagService;
@@ -151,12 +152,37 @@ public class UserController {
 	 */
 	@PostMapping("mypage/update")
 	public String update(UserDto user,HttpSession session) {
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		user.setId(userId);
 		UserDto updatedUser = userService.updateUser(user);
 		if(updatedUser == null) {
-			return "";
+			return "redirect:/";
 		}else {
 			session.setAttribute("user", updatedUser);			
-			return "redirect:/";
+			return "";
+		}
+	}
+	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @param confirm
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@PostMapping("mypage/quit")
+	public String delete(HttpSession session,@RequestParam(defaultValue = "1", name = "confirm") Integer confirm) {
+		if(confirm == 1) {
+			UserDto user = (UserDto) session.getAttribute("user");
+			Long userId = user.getId();
+			userService.deleteUser(userId);
+			return "signup";
+		}else {
+			return "mypage";
 		}
 	}
 	
@@ -169,8 +195,9 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@GetMapping("mypage/user")
-	public String searchUserPage() {
+	public String searchUserPage(Model model) {
 		List<UserDto> userList = userService.readUserList();
+		model.addAttribute("userList", userList);
 		return "";
 	}
 	
@@ -191,6 +218,15 @@ public class UserController {
 		return "";
 	}
 
+	@GetMapping("mypage/mytag")
+	public String mytag(HttpSession session,Model model) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long hashtagId = user.getHashtagId();
+		String mytag = hashtagService.readHashtag(hashtagId);
+		model.addAttribute("mytag", user);
+		return null;
+	}
+	
 	/**
 	 * 설명
 	 * 

@@ -1,7 +1,9 @@
 package com.team2.docgram;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -512,5 +514,19 @@ public class DBtest {
 			Stream<String> test = Arrays.stream(sameS);
 			Stream<String> te2 = Arrays.stream(plusS);
 			test.anyMatch(te2);
+	}
+	
+	@Test
+	public void sdsadasda() {
+		Long page = 1L;
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.readBoardList(page);
+		int all = boardList.size();
+		System.out.println(all);
+	}
+	
+	@Test
+	public void sadsadad() {
+		sqlSession.selectOne("boardMapper.test");
 	}
 }

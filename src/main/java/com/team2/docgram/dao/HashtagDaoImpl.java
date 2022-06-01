@@ -48,4 +48,18 @@ public class HashtagDaoImpl implements HashtagDao {
 	public Long readHashtag(String tagName) {
 		return sqlSession.selectOne(mapper+"readHashtag", tagName);
 	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param hashtagId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public String readHashtag(Long hashtagId) {
+		return sqlSession.selectOne(mapper+"readHashtagName", hashtagId);
+	}
 }

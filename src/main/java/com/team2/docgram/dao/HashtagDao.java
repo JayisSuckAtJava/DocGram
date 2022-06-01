@@ -14,4 +14,6 @@ public interface HashtagDao {
 
 	Long readHashtag(String tagName);
 
+	String readHashtag(Long hashtagId);
+
 }

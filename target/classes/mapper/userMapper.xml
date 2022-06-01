@@ -87,6 +87,7 @@ update user
 		<if test="deptId != null">dept_id = #{deptId}</if>
 		<if test="hashtagId != null">hashtag_id = #{hashtag_id}</if>
 	</trim>
+where id = #{id}
 </update>
 
 <!--
@@ -107,6 +108,16 @@ join dept d on d.id = u.dept_id
 where u.name = #{name}
 </if>
 </select>
+
+<!--
+	쿼리명 : deleteUser
+	설 명: 
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<delete id="deleteUser" parameterType="Long">
+delete from user where id = #{deleteUser}
+</delete>
 
 </mapper>
 
