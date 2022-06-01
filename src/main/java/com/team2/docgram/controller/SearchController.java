@@ -31,11 +31,11 @@ public class SearchController {
 	private BoardService boardService;
 	
 	/**
-	 * 설명
+	 * 검색 전 전체 리스트를 가져오는 기본 리스트 페이지
 	 * 
-	 * @param model
-	 * @param page
-	 * @return
+	 * @param model 값을 심기 위한 model
+	 * @param page 페이징 처리를 위한 함수
+	 * @return 전체 리스트 + 검색 페이지 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
@@ -49,7 +49,7 @@ public class SearchController {
 	}
 	
 	/**
-	 * 설명
+	 * 검색된 조건에 해당하는 값을 보여주는 로직
 	 * 
 	 * @param map
 	 * @return
