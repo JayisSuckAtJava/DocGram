@@ -1,0 +1,89 @@
+/* 마진부분 css */
+.all {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+/* 목록 리스트 css */
+.col-8 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#list_title {
+  border: solid;
+}
+
+#list_title>tr>th {
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+#page-title {
+  border: 1pxsolid;
+  text-align: right;
+}
+
+.sibalnoma {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 상단 검색 */
+.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
+.dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
+.dl-table-wrap .dl-table:first-child {  border-top: 0; }
+.dl-table-wrap .dl-table:last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table:not([style*="display: none"]):last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table.dl-organ dt {  border-bottom-left-radius: 5px; }
+.dl-table-wrap.open .dl-table.dl-organ dt { border-bottom-left-radius: 0 }
+.dl-table-wrap .dl-table:first-child dt { border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt { border-bottom-left-radius: 5px;}
+
+/* 상단검색 결과 */
+
+
+.dl-table {display: table;width: 100%;border-top: 1px dashed #b5b5b5;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+.dl-table dd { padding: 4px 10px; }
+
+input::placeholder {color:#434343;}
+/* .dl-table */
+
+.dl-table dd select {min-width: 19%;border: 1px solid #b5b5b5;border-radius: 5px;font-size: 1em;}
+.dl-table dd * {vertical-align: middle;}
+.dl-table dd input[type="text"],
+.dl-table dd select,
+.dl-table dd .date-box {float: left;}
+.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #f8eff3;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
+.dl-table dt label, .dl-table dt span {font-size: inherit;font-weight: inherit;}
+.dl-table dt span em {font-weight: 400;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+
+
+.dl-table-wrap .dl-table.dl-organ dt {border-bottom-left-radius: 5px;}
+.dl-table-wrap.open .dl-table.dl-organ dt {border-bottom-left-radius: 0}
+
+/* .dl-table  검색 크기 */
+.dl-table dd.dd-keyword input[type="text"] {width: 50%}
+
+.dl-table-wrap .dl-table:first-child dt {border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt {border-bottom-left-radius: 5px;}
+
+/* 페이징 */
+.item-list * {vertical-align: middle;}
+.item-list {padding: 20px 0 50px;text-align: center;}
+.item-list ul.pager {display: inline-block;}
+.item-list li {display: inline-block;width: 30px;height: 30px;color: #c72868;font-size: 1.125em;text-decoration: underline}
+.item-list li a {color: #000;font-size: 0.73em;text-decoration: none;}
+.item-list li.pager-first a,
+.item-list li.pager-previous a,
+.item-list li.pager-next a,
+.item-list li.pager-last a {display: inline-block;width: 30px;height: 30px;line-height: 30px;background-image: url("../image/pngwing.png") no-repeat 0 -20px;text-indent: -9999em;}
+.item-list li.pager-previous a {background-position: -30px -20px}
+.item-list li.pager-next a {background-position: -60px -20px}
+.item-list li.pager-last a {background-position: -90px -20px}
+.item-list a,
+.item-list strong {display: inline-block;}

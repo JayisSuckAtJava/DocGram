@@ -47,6 +47,10 @@ public class HomeController {
 		return "comp/footer";
 	}
 	
+	@GetMapping("/create2")
+	public String test22() {
+		return "board/create2";
+	}
 	@GetMapping("/create")
 	public String test2() {
 		return "board/create";
