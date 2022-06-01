@@ -18,7 +18,7 @@ import com.team2.docgram.service.UserService;
 
 
 /**  UserController.java
- *   설명
+ *   사용자 CRUD 에 관한 컨트롤러
  * 
  * @author JAY - 이재범
  * @since 2022. 5. 28.
@@ -36,9 +36,9 @@ public class UserController {
 	private StarmarkService starmarkService;
 	
 	/**
-	 * 설명
+	 * 로그인 페이지 전환
 	 * 
-	 * @return
+	 * @return 로그인 페이지
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
@@ -49,10 +49,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 로그인 처리
 	 * 
-	 * @param user
-	 * @param session
+	 * @param user 입력된 user 정보
+	 * @param session user 객체를 session에 심기 위한 session
 	 * @return
 	 * 
 	 * @author JAY - 이재범
@@ -71,10 +71,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 로그아웃 처리
 	 * 
-	 * @param session
-	 * @return
+	 * @param session user의 정보가 담겨있는 session
+	 * @return 다시 메인 페이지로 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -86,9 +86,9 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 가입 페이지로 전환
 	 * 
-	 * @return
+	 * @return 가입 페이지 view
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -99,11 +99,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 가입 처리
 	 * 
-	 * @param user
-	 * @param deptCode
-	 * @return
+	 * @param user 작성된 user 정보
+	 * @param deptCode dept_id 와 postion_id 가 포함된 정보
+	 * @return 다시 로그인 페이지로 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -123,11 +123,11 @@ public class UserController {
 	}
 
 	/**
-	 * 설명
+	 * 마이페이지 - 정보 조회 페이지
 	 * 
-	 * @param model
-	 * @param session
-	 * @return
+	 * @param model db에 저장된 해당 유저 값 표시를 위한 model
+	 * @param session user 정보를 조회하기 위한 session
+	 * @return 사용자 정보와 함께 조회 페이지 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -141,11 +141,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 사용자 정보 수정
 	 * 
-	 * @param user
-	 * @param session
-	 * @return
+	 * @param user 수정된 user 정보
+	 * @param session 다시 user의 정보를 심을 session
+	 * @return 수정된 session과 함께 다시 수정된 정보 조회로 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -165,11 +165,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 회원 탈퇴
 	 * 
-	 * @param session
-	 * @param confirm
-	 * @return
+	 * @param session 사용자의 정보를 담고있는 session
+	 * @param confirm 회원 탈퇴 재차 확인
+	 * @return session 초기화 + 가입 페이지로 전환
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
@@ -180,6 +180,7 @@ public class UserController {
 			UserDto user = (UserDto) session.getAttribute("user");
 			Long userId = user.getId();
 			userService.deleteUser(userId);
+			session.invalidate();
 			return "signup";
 		}else {
 			return "mypage";
@@ -187,9 +188,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 관리자 페이지 - 사용자 조회
 	 * 
-	 * @return
+	 * @param model 사용자 들의 값을 심기 위한 model
+	 * @return 사용자 목록 + 페이지
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -202,11 +204,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 사용자 목록중 이름으로 사용자 검색
 	 * 
-	 * @param model
-	 * @param name
-	 * @return
+	 * @param model 값 표현을 위한 model
+	 * @param name 검색할 사용자의 이름
+	 * @return 
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -218,6 +220,16 @@ public class UserController {
 		return "";
 	}
 
+	/**
+	 * 사용자 지정 태그 수정 페이지
+	 * 
+	 * @param session
+	 * @param model
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
 	@GetMapping("mypage/mytag")
 	public String mytag(HttpSession session,Model model) {
 		UserDto user = (UserDto) session.getAttribute("user");
