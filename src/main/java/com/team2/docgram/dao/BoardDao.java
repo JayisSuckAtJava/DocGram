@@ -30,8 +30,6 @@ public interface BoardDao {
 
 	List<BoardDto> readNoticeList();
 
-	void createNotice(BoardDto board);
-
 	void updateBoard(BoardDto board);
 
 	Long readBoardUserId(Long id);

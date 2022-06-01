@@ -30,10 +30,6 @@ public interface BoardService {
 
 	List<BoardDto> readNoticeList();
 
-	BoardDto readNotice(Long boardId);
-
-	void createNotice(BoardDto board);
-
 	void boardUpdate(BoardDto board, String hashtagList, String relatedBoardList);
 
 	Long readBoardUserId(Long id);

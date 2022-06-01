@@ -10,4 +10,6 @@ public interface HashtagService {
 
 	Long readHashtag(String tagName);
 
+	String readHashtag(Long hashtagId);
+
 }

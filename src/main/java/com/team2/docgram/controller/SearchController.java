@@ -59,6 +59,11 @@ public class SearchController {
 	 */
 	@PostMapping("read")
 	public String read(Map<String, Object> map) {
+		// 기본검색 4항 제목 내용 작성자 기관 (sel)
+		// 항목 검색 작성자의 직책, file의 이름, file 의 num
+		// 태그 검색 태그에 따른 중첩된 데이터 검색 and h.name = and h.name =
+		// 검색 기간 date -3month date -6month
+		// 그렇게 나온 리스트의 페이지 처리 + 전체 조회값 . size
 		System.out.println(map);
 		return "read/detail";
 	}

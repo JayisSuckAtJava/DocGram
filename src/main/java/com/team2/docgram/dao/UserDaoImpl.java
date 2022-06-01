@@ -102,5 +102,18 @@ public class UserDaoImpl implements UserDao {
 	public List<UserDto> readUserList(String name) {
 		return sqlSession.selectList(mapper+"readUserList", name);
 	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param userId 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public void deleteUser(Long userId) {
+		sqlSession.delete(mapper+"deleteUser", userId);
+	}
 	
 }

@@ -78,5 +78,17 @@ and h.id = #{hashtagId}
 delete from board_hashtag where board_id = #{boardId}
 </delete>
 
+<!--
+	쿼리명 : readHashtag
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<select id="readHashtagName" parameterType="Long">
+select name
+from hashtag
+where id = #{hashtagId}
+</select>
+
 </mapper>
 

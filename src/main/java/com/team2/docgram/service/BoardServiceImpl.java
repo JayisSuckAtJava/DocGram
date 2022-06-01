@@ -332,34 +332,6 @@ public class BoardServiceImpl implements BoardService {
 	 /**
 	 * 설명
 	 * 
-	 * @param boardId
-	 * @return 
-	 *
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 30.
-	 */
-	@Override
-	public BoardDto readNotice(Long boardId) {
-		return boardDao.readNotice(boardId);
-	}
-
-	 /**
-	 * 설명
-	 * 
-	 * @param board 
-	 *
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@Override
-	public void createNotice(BoardDto board) {
-		board.setSecurity(0);
-		boardDao.createBoard(board);
-	}
-
-	 /**
-	 * 설명
-	 * 
 	 * @param board
 	 * @param hashtagList
 	 * @param relatedBoardList 

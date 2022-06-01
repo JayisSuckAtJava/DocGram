@@ -30,4 +30,18 @@ public class HashtagServiceImpl implements HashtagService {
 		return hashtagDao.readHashtag(tagName);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param hashtagId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public String readHashtag(Long hashtagId) {
+		return hashtagDao.readHashtag(hashtagId);
+	}
+
 }

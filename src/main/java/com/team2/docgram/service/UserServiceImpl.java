@@ -92,7 +92,20 @@ public class UserServiceImpl implements UserService {
 		return userDao.readUserList();
 	}
 
-	 /**
+	  /**
+	 * 설명
+	 * 
+	 * @param userId 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public void deleteUser(Long userId) {
+		userDao.deleteUser(userId);
+	}
+
+	/**
 	 * 설명
 	 * 
 	 * @param name

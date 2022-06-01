@@ -238,8 +238,9 @@ public class BoardController {
 	 */
 	@GetMapping("notice/{id}")
 	public String notice(Model model,@PathVariable("id")Long boardId) {
-		BoardDto notice = boardService.readNotice(boardId);
-		model.addAttribute("board", notice);
+		Map<String, Object> notice = new HashMap<>();
+		notice = boardService.readBoard(boardId);
+		model.addAllAttributes(notice);
 		return "board/detail";
 	}
 	
@@ -254,12 +255,13 @@ public class BoardController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("notice/create")
-	public String createNotice(BoardDto board,HttpSession session) {
+	public String createNotice(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		
 		board.setUserId(userId);
-		boardService.createNotice(board);
+		board.setSecurity(0);
+		boardCreate(session,board,hashtagList,mFile,relatedBoardList);
 		return "redirect:../";
 	}
 	

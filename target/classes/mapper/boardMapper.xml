@@ -326,6 +326,9 @@ from board
 where id = #{id}
 </select>
 
+<select id="test" resultType="int">
+select count(*) from board
+</select>
 
 </mapper>
 
