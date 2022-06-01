@@ -49,5 +49,32 @@ public class BoardHashtagDaoImpl implements BoardHashtagDao {
 	public void createBoardHashtag(Map<String, Object> map) {
 		sqlSession.insert(mapper+"createBoardHashtag", map);
 	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param map
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public Long readBoardHashtag(Map<String, Object> map) {
+		return sqlSession.selectOne(mapper+"readBoardHashtag", map);
+	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param boardId 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public void deleteHashtagList(Long boardId) {
+		sqlSession.delete(mapper+"deleteHashtagList", boardId);
+	}
 	
 }

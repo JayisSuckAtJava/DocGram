@@ -24,6 +24,7 @@
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
+	where b.security >= 1
 	limit #{start}, 10
 </select>
 
@@ -66,7 +67,7 @@ b.RELATION_1 AS board_relation_1,
 b.RELATION_2 AS board_relation_2,
 b.RELATION_3 AS board_relation_3
 FROM board b
-JOIN file f ON b.FILE_ID = f.ID
+left outer JOIN file f ON b.FILE_ID = f.ID
 JOIN user u ON b.USER_ID = u.id
 JOIN position p ON u.POSITION_ID = p.ID
 WHERE b.ID = #{id}
@@ -153,7 +154,7 @@ select b.id as board_id,
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	where b.title like "notice_%"
+	where b.security = 0
 </select>
 
 <!--
@@ -163,7 +164,7 @@ select b.id as board_id,
 	최초 작성일 : 2022. 5. 31.
 -->
 <insert id="createNotice2" parameterType="board" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+insert into board (title, content, date, security, user_id) values ("${title}", #{content}, date_format(now(), '%Y-%m-%d'), 0, #{userId})
 </insert>
 
 <!--
@@ -173,7 +174,7 @@ insert into board (title, content, date, user_id) values ("notice_${title}",#{co
 	최초 작성일 : 2022. 5. 30.
 -->
 <select id="createNotice" parameterType="board" resultType="Long">
-	insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+	insert into board (title, content, date, security, user_id) values ("${title}", #{content}, date_format(now(), '%Y-%m-%d'), 0, #{userId})
 	returning id
 </select>
 
@@ -236,7 +237,7 @@ select id, name, num
 	최초 작성일 : 2022. 5. 30.
 -->
 <insert id="createBoard" parameterType="board" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+insert into board (title, content, date, security, user_id, relation_1, relation_2, relation_3) values (#{title},#{content},date_format(now(), '%Y-%m-%d'), #{security}, #{userId}, #{relation1}, #{relation2}, #{relation3})
 </insert>
 
 <!--
@@ -284,6 +285,43 @@ select id,
 	relation_1,
 	relation_2,
 	relation_3
+from board
+where id = #{id}
+</select>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<select id="updateBoard" parameterType="board">
+update board set title = #{title},
+	content = #{content},
+	relation_1 = #{relation1},
+	relation_2 = #{relation2},
+	relation_3 = #{relation3}
+where id = #{id}
+</select>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<delete id="deleteBoard" parameterType="Long">
+delete from board where id = #{id}
+</delete>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<select id="readBoardUserId" parameterType="Long" resultType="Long">
+select user_id
 from board
 where id = #{id}
 </select>

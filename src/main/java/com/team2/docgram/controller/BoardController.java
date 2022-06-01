@@ -110,10 +110,10 @@ public class BoardController {
 			
 		String savedFileName = boardService.createBoard(board,hashtagList,relatedBoardList,fileName);
 		if(savedFileName == null) {
-			return "redirect:../";
+			return "redirect:../read";
 		}else {
 			fileService.createFile(savedFileName, mFile);
-			return "redirect:create";
+			return "redirect:../read";
 		}
 	}
 	
@@ -160,7 +160,9 @@ public class BoardController {
 	 * @since 2022. 5. 30.
 	 */
 	@PostMapping("board/update/{id}")
-	public String boardUpdate(@PathVariable("id")Long id,BoardDto board) {
+	public String boardUpdate(@PathVariable("id")Long id,BoardDto board, String hashtagList, String relatedBoardList) {
+		board.setId(id);
+		boardService.boardUpdate(board, hashtagList, relatedBoardList);
 		return "redirect:../"+id;
 	}
 	
@@ -258,11 +260,36 @@ public class BoardController {
 		
 		board.setUserId(userId);
 		boardService.createNotice(board);
-		return "redirect:/";
+		return "redirect:../";
 	}
 	
-	@GetMapping("un")
-	public String updateNotice() {
-		
+	/**
+	 * 설명
+	 * 
+	 * @param id
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@PostMapping("board/delete/{id}")
+	public String delectBoard(@PathVariable("id")Long id,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		Long positionId = user.getPositionId();
+		Long boardUserId = boardService.readBoardUserId(id);
+		if(userId == boardUserId || positionId > 6) {
+			boardService.deleteBoard(id);
+			return "read";
+		}
+		return "";
 	}
+	
+	@GetMapping("bo/del/{id}")
+	public String dee(@PathVariable("id")Long id) {
+		boardService.deleteBoard(id);
+		return "redirect:../../read";
+	}
+	
 }

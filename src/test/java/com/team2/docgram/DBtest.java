@@ -1,5 +1,8 @@
 package com.team2.docgram;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -10,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dao.BoardHashtagDao;
 import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
@@ -33,6 +37,9 @@ public class DBtest {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	BoardHashtagDao bhDao;
 	
 	
 	@Autowired
@@ -369,5 +376,141 @@ public class DBtest {
 		user.setPassword("df");
 		UserDto u = userDao.readUser(user);
 		System.out.println(u);
+	}
+	
+	@Test
+	public void sdsdsd() {
+		Long page = 3L;
+		page = ( page - 1 ) * 10;
+		System.out.println(page);
+	}
+	
+	@Test
+	public void thhang() {
+		Long r = 1L;
+		Long rel1, rel2, rel3;
+		if(r==0) {
+			System.out.println(r+"은 0");
+		}else{
+			rel1 = ( r >= 1 ) ? 1L : null;
+			rel2 = ( r >= 2 ) ? 1L : null;
+			rel3 = ( r >= 3 ) ? 1L : null;
+		}
+	}
+	
+	@Test
+	public void sdsdssdsdd() {
+		Map<String,Object> map = new HashMap<>();				
+		map.put("boardId", 1L);
+		map.put("hashtagId", 5L);
+		
+		Long result = bhDao.readBoardHashtag(map);
+		System.out.println(result);
+	}
+	
+	@Test
+	public void sdsdssfd() {
+		// 제작 의도
+		// 게시글 수정에서 해시태그를 수정할 경우 원래 해시태그가 삭제 되는게 아니라
+		// 포함한 상태로 나옴
+		// array로 처리하니까 sort를 사용해볼 예정
+		
+		String[] a = {"믿음","소망","사랑"};
+		String[] b = {"사랑","탄식","믿음"};
+		String[] test = {"ㄱ","가","ㄴ","나"};
+
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(a);
+		Arrays.sort(b);
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(test);
+		for(String i : test) {
+			System.out.println(i);
+		}
+
+	}
+	
+	@Test
+	public void sdsad() {
+		// index 가 바뀌면 어카냐
+		
+		String[] a = {"가","나","라","마"};
+		String[] b = {"나","가","다","라"};
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(a);
+		Arrays.sort(b);
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+	}
+	
+	@Test
+	public void sdsadadasd() {
+		
+		String[] a = {"가","나","다","라","하"};
+		String[] b = {"나","다","라","마","하"};
+		
+			
+			String one = null;
+			String two = null;
+			Boolean result = false;
+			String same = "";
+			String plus = "";
+			String minus = "";
+			
+			for(String j : a) {
+				one = j;
+				
+				for(String k : b) {
+					two = k;
+					result = one.equals(two);
+					if(result == true) {
+						same = same + k + ",";
+						System.out.println(result);
+					}else {
+						plus = plus + k + ",";
+					}
+				}
+				System.out.println("--------------");
+			}
+			System.out.println(same);
+			System.out.println(plus);
+			
+			String[] sameS = same.split(",");
+			String[] plusS = plus.split(",");
+			for(String t : sameS) {
+				System.out.println(t);
+			}
+			Stream<String> test = Arrays.stream(sameS);
+			Stream<String> te2 = Arrays.stream(plusS);
+			test.anyMatch(te2);
 	}
 }

@@ -32,4 +32,10 @@ public interface BoardDao {
 
 	void createNotice(BoardDto board);
 
+	void updateBoard(BoardDto board);
+
+	Long readBoardUserId(Long id);
+
+	void deleteBoard(Long id);
+
 }
