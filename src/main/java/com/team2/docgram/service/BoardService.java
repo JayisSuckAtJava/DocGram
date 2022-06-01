@@ -8,6 +8,12 @@ import org.springframework.ui.Model;
 
 import com.team2.docgram.dto.BoardDto;
 
+/**  BoardService.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 public interface BoardService {
 
 	List<BoardDto> readBoardList(Long page);

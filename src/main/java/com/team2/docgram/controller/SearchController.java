@@ -15,6 +15,12 @@ import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
 
+/**  SearchController.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Controller
 public class SearchController {
 
@@ -24,14 +30,33 @@ public class SearchController {
 	@Autowired
 	private BoardService boardService;
 	
+	/**
+	 * 설명
+	 * 
+	 * @param model
+	 * @param page
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("read")
-	public String readPage(Model model,@RequestParam(defaultValue =  1L, required = false, name= "page")Long page) {
+	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
 		return "read/detail";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@PostMapping("read")
 	public String read(Map<String, Object> map) {
 		System.out.println(map);

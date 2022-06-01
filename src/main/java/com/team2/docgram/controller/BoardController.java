@@ -22,6 +22,14 @@ import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.FileService;
 
+
+
+/**  BoardController.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Controller
 public class BoardController {
 	
@@ -31,14 +39,35 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	/**
+	 * 설명
+	 * 
+	 * @param 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@GetMapping("board")
-	public String boardList(Model model) {
+	public String boardList(Model model,Long page) {
+		if(page == null) {
+			page = 1L;
+		}
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList();
+		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
 		return "detailsearch";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@GetMapping("board/{id}")
 	public String board(@PathVariable("id")Long id,Model model) {
 		Map<String, Object> map = new HashMap<>();
@@ -48,11 +77,29 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@GetMapping("board/create")
 	public String boardCreatePage() {
 		return "board/create";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
 		//UserDto user = (UserDto) session.getAttribute("user");
@@ -70,11 +117,30 @@ public class BoardController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("download/{id}")
 	public ResponseEntity<Resource> download(@PathVariable("id")Long id) {
 		return fileService.readFile(id);
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("board/update/{id}")
 	public String boardUpdatePage(@PathVariable("id")Long id,Model model) {
 		Map<String, Object> map = new HashMap<>();
@@ -82,18 +148,46 @@ public class BoardController {
 		model.addAllAttributes(map);
 		return "board/update";
 	}
-	
+
+	/**
+	 * 설명
+	 * 
+	 * @param id
+	 * @param board
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@PostMapping("board/update/{id}")
 	public String boardUpdate(@PathVariable("id")Long id,BoardDto board) {
 		return "redirect:../"+id;
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("board/popup")
 	public String popup() {
 		return "board/popup";
 	}
 	
 	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @param model
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("main")
 	public String mainPage(HttpSession session,Model model) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -114,6 +208,15 @@ public class BoardController {
 		return "board/main";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param model
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("notice")
 	public String noticeList(Model model) {
 		List<BoardDto> noticeList = boardService.readNoticeList();
@@ -121,6 +224,16 @@ public class BoardController {
 		return "board/notice";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param model
+	 * @param boardId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("notice/{id}")
 	public String notice(Model model,@PathVariable("id")Long boardId) {
 		BoardDto notice = boardService.readNotice(boardId);
@@ -128,6 +241,16 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param board
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("notice/create")
 	public String createNotice(BoardDto board,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");

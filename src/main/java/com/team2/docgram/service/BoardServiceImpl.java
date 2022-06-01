@@ -19,6 +19,12 @@ import com.team2.docgram.dto.FileDto;
 import com.team2.docgram.dto.HashtagDto;
 import com.team2.docgram.dto.UserDto;
 
+/**  BoardServiceImpl.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -38,16 +44,33 @@ public class BoardServiceImpl implements BoardService {
 	private FileDao fileDao;
 	
 	
+	 /**
+	 * 설명
+	 * 
+	 * @param page
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@Override
 	public List<BoardDto> readBoardList(Long page) {
 		BoardDto board = new BoardDto();
 		board.setStart(page-1);
-		board.setEnd(page*10);
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardDao.readBoardList(board);
 		return boardList;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@Override
 	public Map<String, Object> readBoard(Long id) {
 		BoardDto board = boardDao.readBoard(id);
@@ -80,6 +103,15 @@ public class BoardServiceImpl implements BoardService {
 		return map;
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param relationListId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	private List<BoardDto> readRelationList(Long[] relationListId) {
 		List<BoardDto> relationList = new ArrayList<>();
 		for(Long i : relationListId) {
@@ -92,6 +124,18 @@ public class BoardServiceImpl implements BoardService {
 		return relationList;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param board
+	 * @param hashtagList
+	 * @param relatedBoardList
+	 * @param fileName
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName) {
 		String[] hashtagListArray = hashtagList.split(",");
@@ -153,6 +197,15 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param fileId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	private String createFileNum(Long fileId) {
 		String result = "D";
 		String zero = "0";	
@@ -165,6 +218,15 @@ public class BoardServiceImpl implements BoardService {
 		return fileNum;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public Map<String, Object> readBoardOne(Long id) {
 		BoardDto board = new BoardDto();
@@ -190,27 +252,69 @@ public class BoardServiceImpl implements BoardService {
 		return map;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readStarmarkList(Long userId) {
-		
 		return boardDao.readStarmarkList(userId);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param deptId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readDeptmarkList(Long deptId) {
 		return boardDao.readDeptmarkList(deptId);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readNoticeList() {
 		return boardDao.readNoticeList();
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public BoardDto readNotice(Long boardId) {
 		return boardDao.readNotice(boardId);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param board 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public void createNotice(BoardDto board) {
 		boardDao.createNotice(board);
