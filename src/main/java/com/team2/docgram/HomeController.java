@@ -81,9 +81,9 @@ public class HomeController {
 	@GetMapping("/popup1")
 	public String test9() {
 		return "test/popup";
+	}
 
-
-	@GetMapping("main")
+	@GetMapping("1main")
 	public String test101() {
 		return "board/main";
 	}
@@ -93,17 +93,16 @@ public class HomeController {
 		return "test/bootstrapTest";
 	}
 	
-	@GetMapping("signup")
+
+	@GetMapping("join")
 	public String test103() {
-		return "test/signup";
+		return "login/join";
 	}
 	
 
-	@GetMapping("dept_popup")
+	@GetMapping("mypage")
 	public String test104() {
-		return "test/dept_popup";
-
-	}
+		return "mypage/mypage";
 	
 }
 

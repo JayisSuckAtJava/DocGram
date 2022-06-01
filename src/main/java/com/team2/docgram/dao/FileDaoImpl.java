@@ -7,6 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.FileDto;
 
+/**  FileDaoImpl.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Repository
 public class FileDaoImpl implements FileDao {
 

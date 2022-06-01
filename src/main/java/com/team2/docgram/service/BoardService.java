@@ -8,9 +8,15 @@ import org.springframework.ui.Model;
 
 import com.team2.docgram.dto.BoardDto;
 
+/**  BoardService.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 public interface BoardService {
 
-	List<BoardDto> readBoardList();
+	List<BoardDto> readBoardList(Long page);
 
 	Map<String, Object> readBoard(Long id);
 
@@ -24,8 +30,10 @@ public interface BoardService {
 
 	List<BoardDto> readNoticeList();
 
-	BoardDto readNotice(Long boardId);
+	void boardUpdate(BoardDto board, String hashtagList, String relatedBoardList);
 
-	void createNotice(BoardDto board);
+	Long readBoardUserId(Long id);
+
+	void deleteBoard(Long id);
 
 }

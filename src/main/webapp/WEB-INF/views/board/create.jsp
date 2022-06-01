@@ -1,3 +1,14 @@
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -52,7 +63,7 @@
 <div class="all">
 
     <div class="writebody">
-		<form action="board/create" method="post" enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data">
         <div class="titlename"> <!-- 제목 작성 부분-->
             <div>
             	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요.">
@@ -96,8 +107,9 @@
     hashinput.addEventListener("focusin",()=>{
         let option = "width=500, height=600, top=30, left=30, resizable=no, scrollbar=no, loaction=no";
 
-        window.open("./popup","해시태그 선택",option);
+        window.open("popup","해시태그 선택",option);
     })
 </script>
+
 </body>
 </html>
