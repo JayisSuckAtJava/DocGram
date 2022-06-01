@@ -19,6 +19,12 @@ import com.team2.docgram.dto.FileDto;
 import com.team2.docgram.dto.HashtagDto;
 import com.team2.docgram.dto.UserDto;
 
+/**  BoardServiceImpl.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -38,21 +44,52 @@ public class BoardServiceImpl implements BoardService {
 	private FileDao fileDao;
 	
 	
+	 /**
+	 * 설명
+	 * 
+	 * @param page
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@Override
-	public List<BoardDto> readBoardList() {
+	public List<BoardDto> readBoardList(Long page) {
+		BoardDto board = new BoardDto();
+		if(page > 0) {
+			page = ( page - 1 ) * 10; 
+		}
+		board.setStart(page);
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardDao.readBoardList();
+		boardList = boardDao.readBoardList(board);
 		return boardList;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 28.
+	 */
 	@Override
 	public Map<String, Object> readBoard(Long id) {
 		BoardDto board = boardDao.readBoard(id);
-		FileDto file = board.getFile();
-		String fileName = file.getName();
-		Integer underbar = fileName.indexOf("_");
-		file.setName(fileName.substring(underbar+1));
-		board.setFile(file);
+		System.out.println(board+"here");
+		
+		if(board.getFile() == null) {
+			board.setFile(null);
+		}else {
+			FileDto file = board.getFile();
+			String fileName = file.getName();
+			Integer underbar = fileName.indexOf("_");
+			file.setName(fileName.substring(underbar+1));
+			board.setFile(file);
+		}
+		
+		
 		
 		Long boardId = board.getId();
 		List<HashtagDto> hashtagList = new ArrayList<>();
@@ -77,6 +114,15 @@ public class BoardServiceImpl implements BoardService {
 		return map;
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param relationListId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	private List<BoardDto> readRelationList(Long[] relationListId) {
 		List<BoardDto> relationList = new ArrayList<>();
 		for(Long i : relationListId) {
@@ -89,41 +135,60 @@ public class BoardServiceImpl implements BoardService {
 		return relationList;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param board
+	 * @param hashtagList
+	 * @param relatedBoardList
+	 * @param fileName
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName) {
 		String[] hashtagListArray = hashtagList.split(",");
-		System.out.println(hashtagListArray.toString());
 		String[] relatedBoardListArray = relatedBoardList.split(",");
-		// board 에들어가는 fk = user,file 끝.
+		Integer relatedListArrayLength = relatedBoardListArray.length;
 		
-		if(relatedBoardList == "") {
+		if(relatedBoardList.isBlank()) {
 			board.setRelation1(null);
 			board.setRelation2(null);
 			board.setRelation3(null);
 		}else {
-			Long rel1 = Long.parseLong(relatedBoardListArray[0]);
-			Long rel2 = Long.parseLong(relatedBoardListArray[1]);
-			Long rel3 = Long.parseLong(relatedBoardListArray[2]);
+			Long rel1 = (relatedListArrayLength >= 1) ? Long.parseLong(relatedBoardListArray[0]) : null;
+			Long rel2 = (relatedListArrayLength >= 2) ? Long.parseLong(relatedBoardListArray[1]) : null;
+			Long rel3 = (relatedListArrayLength >= 3) ? Long.parseLong(relatedBoardListArray[2]) : null;
+			
 			board.setRelation1(rel1);
 			board.setRelation2(rel2);
 			board.setRelation3(rel3);
 		}
-		
+		if(board.getSecurity() == null) {
+			board.setSecurity(1);			
+		}
 		board = boardDao.createBoard(board);
 		Long boardId = board.getId();
 		
 		Long hashtagListId;
-		if (hashtagList == "") {
+		if (hashtagList.isBlank()) {
 			hashtagListId = null;
 		}else {
 			
 			for(String i : hashtagListArray) {
 				System.out.println(i);
-				HashtagDto hashtag = new HashtagDto();
-				hashtag.setName(i);
-				hashtag = hashtagDao.createHashtag(hashtag);
+								
+				Long hashtagId = hashtagDao.readHashtag(i);
 				
-				Long hashtagId = hashtag.getId();
+				if(hashtagId == null) {
+					HashtagDto hashtag = new HashtagDto();
+					hashtag.setName(i);
+					hashtag = hashtagDao.createHashtag(hashtag);					
+					hashtagId = hashtag.getId();
+				}
+				
 				Map<String,Object> map = new HashMap<>();
 				map.put("boardId", boardId);
 				map.put("hashtagId", hashtagId);
@@ -131,7 +196,7 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		
-		if(fileName == "") {
+		if(fileName.isBlank()) {
 			return null;
 		}else {			
 			String savedFileName = boardId+"_"+fileName;
@@ -150,6 +215,15 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param fileId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	private String createFileNum(Long fileId) {
 		String result = "D";
 		String zero = "0";	
@@ -162,6 +236,15 @@ public class BoardServiceImpl implements BoardService {
 		return fileNum;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public Map<String, Object> readBoardOne(Long id) {
 		BoardDto board = new BoardDto();
@@ -169,13 +252,31 @@ public class BoardServiceImpl implements BoardService {
 
 		List<HashtagDto> hashtag = boardHashtagDao.readList(id);
 		String hashtagList = "";
-		for(HashtagDto i : hashtag) {
-			hashtagList = hashtagList + i.getName() + ",";
+		if(hashtag.isEmpty()) {
+			hashtagList = null;
+		}else {
+			for(HashtagDto i : hashtag) {
+				hashtagList = hashtagList + i.getName() + ",";
+			}
+			hashtagList = hashtagList.substring(0, hashtagList.length()-1);
 		}
-		hashtagList = hashtagList.substring(0, hashtagList.length()-1);
-		
-		
-		String relationList = board.getRelation1().toString()+","+board.getRelation2().toString()+","+board.getRelation3().toString(); 
+		 
+
+		String relationList = "";
+		Long[] relationArray = {board.getRelation1(), board.getRelation2(), board.getRelation3()};
+		for(Long i : relationArray) {
+			if(i == null) {
+				break;
+			}else {
+				relationList = relationList + i + ",";
+			}
+		}
+		if(relationList == "") {
+			
+		}else {
+			relationList = relationList.substring(0, relationList.length()-1);			
+		}
+
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("hashtagList", hashtagList);
@@ -187,30 +288,137 @@ public class BoardServiceImpl implements BoardService {
 		return map;
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readStarmarkList(Long userId) {
-		
 		return boardDao.readStarmarkList(userId);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param deptId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readDeptmarkList(Long deptId) {
 		return boardDao.readDeptmarkList(deptId);
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@Override
 	public List<BoardDto> readNoticeList() {
 		return boardDao.readNoticeList();
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param board
+	 * @param hashtagList
+	 * @param relatedBoardList 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
 	@Override
-	public BoardDto readNotice(Long boardId) {
-		return boardDao.readNotice(boardId);
+	public void boardUpdate(BoardDto board, String hashtagList, String relatedBoardList) {
+		Long boardId = board.getId();
+		boardHashtagDao.deleteHashtagList(boardId);
+		
+		String[] relatedBoardListArray = relatedBoardList.split(",");
+		Integer relatedListArrayLength = relatedBoardListArray.length;
+		
+		if(relatedListArrayLength == 0) {
+			board.setRelation1(null);
+			board.setRelation2(null);
+			board.setRelation3(null);
+		}else {
+			Long rel1 = (relatedListArrayLength >= 1) ? Long.parseLong(relatedBoardListArray[0]) : null;
+			Long rel2 = (relatedListArrayLength >= 2) ? Long.parseLong(relatedBoardListArray[1]) : null;
+			Long rel3 = (relatedListArrayLength >= 3) ? Long.parseLong(relatedBoardListArray[2]) : null;
+			
+			board.setRelation1(rel1);
+			board.setRelation2(rel2);
+			board.setRelation3(rel3);
+		}		
+		
+		boardDao.updateBoard(board);
+	
+		String[] hashtagListArray = hashtagList.split(",");
+		Long hashtagListId;
+		if (hashtagList.isBlank()) {
+			hashtagListId = null;
+		}else {
+			
+			for(String i : hashtagListArray) {
+				Long hashtagId = hashtagDao.readHashtag(i);
+				
+				if(hashtagId == null) {
+					HashtagDto hashtag = new HashtagDto();
+					hashtag.setName(i);
+					hashtag = hashtagDao.createHashtag(hashtag);					
+					hashtagId = hashtag.getId();
+				}
+
+				Map<String,Object> map = new HashMap<>();				
+				map.put("boardId", boardId);
+				map.put("hashtagId", hashtagId);
+				Long result = boardHashtagDao.readBoardHashtag(map);
+				
+				if(result == null) {
+					boardHashtagDao.createBoardHashtag(map);										
+				}
+				
+			}
+		}
+		
+		
 	}
 
+	 /**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
 	@Override
-	public void createNotice(BoardDto board) {
-		boardDao.createNotice(board);
+	public Long readBoardUserId(Long id) {
+		return boardDao.readBoardUserId(id);
+	}
+
+	 /**
+	 * 설명
+	 * 
+	 * @param id 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 1.
+	 */
+	@Override
+	public void deleteBoard(Long id) {
+		boardDao.deleteBoard(id);
 	}
 	
 }
