@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.team2.docgram.dto.BoardDto;
 
+/**  BoardDao.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 public interface BoardDao {
 
 	List<BoardDto> readBoardList(BoardDto board);

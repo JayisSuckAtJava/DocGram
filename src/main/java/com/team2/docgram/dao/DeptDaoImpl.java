@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.team2.docgram.dto.DeptDto;
 
+/**  DeptDaoImpl.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Repository
 public class DeptDaoImpl implements DeptDao {
 
@@ -16,6 +22,15 @@ public class DeptDaoImpl implements DeptDao {
 	
 	private String mapper = "user.";
 
+	 /**
+	 * 설명
+	 * 
+	 * @param deptId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@Override
 	public DeptDto readDeptList(Long deptId) {
 		return sqlSession.selectOne(mapper+"readDeptList", deptId);

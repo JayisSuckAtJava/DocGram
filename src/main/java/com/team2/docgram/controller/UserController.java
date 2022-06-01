@@ -16,6 +16,12 @@ import com.team2.docgram.service.StarmarkService;
 import com.team2.docgram.service.UserService;
 
 
+/**  UserController.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 @Controller
 public class UserController {
 
@@ -28,11 +34,29 @@ public class UserController {
 	@Autowired
 	private StarmarkService starmarkService;
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 30.
+	 */
 	@GetMapping("signin")
 	public String loginPage() {
 		return "login/login";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("signin")
 	public String login(UserDto user,HttpSession session) {
 		
@@ -45,17 +69,44 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("signout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("signup")
 	public String signupPage() {
 		return "login/join";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @param deptCode
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
@@ -70,6 +121,16 @@ public class UserController {
 		return "redirect:/";
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param model
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("mypage/update")
 	public String updatePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -78,6 +139,16 @@ public class UserController {
 		return "";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("mypage/update")
 	public String update(UserDto user,HttpSession session) {
 		UserDto updatedUser = userService.updateUser(user);
@@ -89,12 +160,30 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@GetMapping("mypage/user")
 	public String searchUserPage() {
 		List<UserDto> userList = userService.readUserList();
 		return "";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param model
+	 * @param name
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("mypage/user")
 	public String searchUser(Model model,String name) {
 		List<UserDto> userList = userService.readUserList(name);
@@ -102,6 +191,16 @@ public class UserController {
 		return "";
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param tagName
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("mypage/mytag")
 	public String updateMytag(String tagName,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -110,6 +209,15 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param session
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("starmark/create")
 	public void createStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -117,6 +225,15 @@ public class UserController {
 		starmarkService.createStarmark(userId,boardId);
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param session
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("starmark/delete")
 	public void deleteStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -124,6 +241,15 @@ public class UserController {
 		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param session
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("deptmark/create")
 	public void createDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -134,6 +260,15 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param session
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 5. 31.
+	 */
 	@PostMapping("deptmark/delete")
 	public void deleteDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");

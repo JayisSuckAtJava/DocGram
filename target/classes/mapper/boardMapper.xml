@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
+<!--
+	SQL File Name : boardMapper.xml
+	Description :
+	Author : 문예빈
+	Since : 2022. 5. 20.
+-->
 <mapper namespace="board">
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 28.
+-->
 <select id="readBoardList" resultMap="detailBoard" parameterType="board">
 	select b.id as board_id,
 		b.title as board_title,
@@ -14,9 +24,15 @@
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	limit #{start}, #{end}
+	limit #{start}, 10
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <select id="readRelationBoard" parameterType="Long" resultMap="detailBoard">
 select b.id as board_id,
 	b.title as board_title,
@@ -28,6 +44,12 @@ join dept d on d.id = u.dept_id
 where b.id = #{id}
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 28.
+-->
 <select id="readBoard" resultMap="detailBoard" parameterType="Long">
 SELECT b.ID AS board_id, 
 b.title as board_title,
@@ -50,6 +72,12 @@ JOIN position p ON u.POSITION_ID = p.ID
 WHERE b.ID = #{id}
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
 <select id="readStarmarkList" parameterType="Long" resultMap="detailBoard">
 select b.id as board_id,
 		b.title as board_title,
@@ -67,6 +95,12 @@ select b.id as board_id,
 	)
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
 <select id="readDeptmarkList" parameterType="Long" resultMap="detailBoard">
 select b.id as board_id,
 		b.title as board_title,
@@ -84,6 +118,12 @@ select b.id as board_id,
 	)
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <select id="readMyBoardList" parameterType="Long" resultMap="detailBoard">
 	select b.id as board_id,
 		b.title as board_title,
@@ -97,6 +137,12 @@ select b.id as board_id,
 	where b.user_id = #{userId}
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
 <select id="readNoticeList" parameterType="Long" resultMap="detailBoard">
 	select b.id as board_id,
 		b.title as board_title,
@@ -110,76 +156,125 @@ select b.id as board_id,
 	where b.title like "notice_%"
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
 <insert id="createNotice2" parameterType="board" useGeneratedKeys="true" keyProperty="id">
 insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
 </insert>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <select id="createNotice" parameterType="board" resultType="Long">
-insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
-returning id
+	insert into board (title, content, date, user_id) values ("notice_${title}",#{content},date_format(now(), '%Y-%m-%d'),#{userId})
+	returning id
 </select>
 
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <resultMap type="board" id="detailBoard">
-<id property="id" column="board_id"/>
-<result property="title" column="board_title"/>
-<result property="content" column="board_content"/>
-<result property="date" column="board_date"/>
-<result property="fileId" column="board_fileId"/>
-<result property="relation1" column="board_relation_1"/>
-<result property="relation2" column="board_relation_2"/>
-<result property="relation3" column="board_relation_3"/>
-
-<association property="file" javaType="file">
-<id property="id" column="file_id"/>
-<result property="num" column="file_num"/>
-<result property="name" column="file_name"/>
-</association>
-
-<association property="user" javaType="user">
-<result property="name" column="user_name"/>
-<result property="deptNumber" column="user_dept_number"/>
-<result property="deptId" column="user_dept_id"/>
-
-<association property="position" javaType="position">
-<result property="name" column="position_name"/>
-</association>
-
-<association property="dept" javaType="dept">
-<id property="id" column="user_dept_id"/>
-<result property="name" column="dept_name"/>
-</association>
-
-</association>
-
-</resultMap>
-
-<resultMap type="board" id="boardList">
-
+	<id property="id" column="board_id"/>
+	<result property="title" column="board_title"/>
+	<result property="content" column="board_content"/>
+	<result property="date" column="board_date"/>
+	<result property="fileId" column="board_fileId"/>
+	<result property="relation1" column="board_relation_1"/>
+	<result property="relation2" column="board_relation_2"/>
+	<result property="relation3" column="board_relation_3"/>
+	
+	<association property="file" javaType="file">
+		<id property="id" column="file_id"/>
+		<result property="num" column="file_num"/>
+		<result property="name" column="file_name"/>
+	</association>
+	
+	<association property="user" javaType="user">
+		<result property="name" column="user_name"/>
+		<result property="deptNumber" column="user_dept_number"/>
+		<result property="deptId" column="user_dept_id"/>
+	
+		<association property="position" javaType="position">
+			<result property="name" column="position_name"/>
+		</association>
+	
+		<association property="dept" javaType="dept">
+			<id property="id" column="user_dept_id"/>
+			<result property="name" column="dept_name"/>
+		</association>	
+	</association>
 </resultMap>
 
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <select id="readFile" parameterType="Long" resultType="file">
 select id, name, num
 	from file
 	where id = #{fileId}
 </select>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <insert id="createBoard" parameterType="board" useGeneratedKeys="true" keyProperty="id">
 insert into board (title, content, date, user_id) values (#{title},#{content},date_format(now(), '%Y-%m-%d'),#{userId})
 </insert>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <insert id="createFile" parameterType="file" useGeneratedKeys="true" keyProperty="id">
 insert into file (name) values (#{name})
 </insert>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <update id="updateFile" parameterType="file">
 update file set num = #{num} where id = #{id}
 </update>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <update id="updateBoardFile" parameterType="board">
 update board set file_id = #{fileId} where id = #{id}
 </update>
 
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 30.
+-->
 <select id="readBoardOne" parameterType="Long" resultType="board">
 select id,
 	title,

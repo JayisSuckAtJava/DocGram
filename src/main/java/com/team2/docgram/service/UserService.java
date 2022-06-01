@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.team2.docgram.dto.UserDto;
 
+/**  UserService.java
+ *   설명
+ * 
+ * @author JAY - 이재범
+ * @since 2022. 5. 28.
+ */
 public interface UserService {
 
 	UserDto readUser(UserDto user);
