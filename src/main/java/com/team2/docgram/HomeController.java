@@ -103,18 +103,6 @@ public class HomeController {
 	public String test104() {
 		return "mypage/mypage";
 	}
-	
-	@GetMapping("header")
-	public String test105() {
-		return "comp/header";
-
-	}
-	
-	@GetMapping("footer")
-	public String test106() {
-		return "comp/footer";
-	
-	}
 
 
 }
