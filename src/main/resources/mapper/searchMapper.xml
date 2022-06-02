@@ -9,5 +9,145 @@
 
 <mapper namespace="search">
 
+<select id="searchDetail" parameterType="map" resultMap="detailBoard">
+select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	<if test="fileName != null or fileNum != null">	
+	left outer join file f on b.file_id = f.id
+	</if>
+	left outer join board_hashtag bh on b.id = bh.board_id
+	<if test="hashtagList != null">
+	left outer join hashtag h on bh.hashtag_id = h.id
+	</if>
+	<trim prefix="where" prefixOverrides="and">
+		<if test="sel != null and text != null"><choose>
+				<when test=' sel == "title" '>and b.title like "%${text}%"</when>
+				<when test=' sel == "content"'>and b.content like "%${text}%"</when>
+				<when test=' sel == "name" '>and u.name = #{text}</when>
+				<when test=' sel == "dept" '>and d.name like "%${text}%"</when></choose></if>
+		<if test="position != null">and u.position_id = #{position}</if>
+		<if test="fileName != null">and f.name like "%${fileName}%"</if>
+		<if test="fileNum != null">and f.num like "${fileNum}%"</if>
+		<if test="dateRange != null">and b.date >= (DATE_SUB(NOW(), INTERVAL #{dateRange} DAY))</if>
+		<if test="start != null and end != null">and b.date between #{start} and #{end}</if>
+		<if test="hashtagList != null">
+			<foreach collection="hashtagList" item="hashtagName" separator="and" open="and">
+				h.name = #{hashtagName}
+			</foreach>
+		</if>
+	</trim>
+	limit #{page}, 10
+</select>
+
+<select id="searchDetailSize" resultType="Long" parameterType="map">
+select count(b.id)
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	<if test="fileName != null or fileNum != null">	
+	left outer join file f on b.file_id = f.id
+	</if>
+	left outer join board_hashtag bh on b.id = bh.board_id
+	<if test="hashtagList != null">
+	left outer join hashtag h on bh.hashtag_id = h.id
+	</if>
+	<trim prefix="where" prefixOverrides="and">
+		<if test="sel != null and text != null"><choose>
+				<when test=' sel == "title" '>and b.title like "%${text}%"</when>
+				<when test=' sel == "content"'>and b.content like "%${text}%"</when>
+				<when test=' sel == "name" '>and u.name = #{text}</when>
+				<when test=' sel == "dept" '>and d.name like "%${text}%"</when></choose></if>
+		<if test="position != null">and u.position_id = #{position}</if>
+		<if test="fileName != null">and f.name like "%${fileName}%"</if>
+		<if test="fileNum != null">and f.num like "${fileNum}%"</if>
+		<if test="dateRange != null">and b.date >= (DATE_SUB(NOW(), INTERVAL #{dateRange} DAY))</if>
+		<if test="start != null and end != null">and b.date between #{start} and #{end}</if>
+		<if test="hashtagList != null">
+			<foreach collection="hashtagList" item="hashtagName" separator="and" open="and">
+				h.name = #{hashtagName}
+			</foreach>
+		</if>
+	</trim>
+</select>
+
+
+<select id="testSearch" parameterType="com.team2.docgram.searchDto" resultMap="detailBoard" >
+
+
+	select b.id as board_id,
+		b.title as board_title,
+		d.name as dept_name,
+		b.date as board_date,
+		u.name as user_name,
+		b.file_id as board_fileId
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	<if test="fileName != null or fileNum != null">	
+	left outer join file f on b.file_id = f.id
+	</if>
+	left outer join board_hashtag bh on b.id = bh.board_id
+	<if test="hashtagList != null">
+	left outer join hashtag h on bh.hashtag_id = h.id
+	</if>
+	<trim prefix="where" prefixOverrides="and">
+		<if test="sel != null and text != null"><choose>
+				<when test=' sel == "title" '>and b.title like "%${text}%"</when>
+				<when test=' sel == "content"'>and b.content like "%${text}%"</when>
+				<when test=' sel == "name" '>and u.name = #{text}</when>
+				<when test=' sel == "dept" '>and d.name like "%${text}%"</when></choose></if>
+		<if test="position != null">and u.position_id = #{position}</if>
+		<if test="fileName != null">and f.name like "%${fileName}%"</if>
+		<if test="fileNum != null">and f.num like "${fileNum}%"</if>
+		<if test="dateRange != null">and b.date >= (DATE_SUB(NOW(), INTERVAL #{dateRange} DAY))</if>
+		<if test="start != null and end != null">and b.date between #{start} and #{end}</if>
+		<if test="hashtagList != null">
+			<foreach collection="hashtagList" item="hashtagName" separator="and" open="and">
+				h.name = #{hashtagName}
+			</foreach>
+		</if>
+	</trim>
+</select>
+
+<resultMap type="board" id="detailBoard">
+	<id property="id" column="board_id"/>
+	<result property="title" column="board_title"/>
+	<result property="content" column="board_content"/>
+	<result property="date" column="board_date"/>
+	<result property="fileId" column="board_fileId"/>
+	<result property="relation1" column="board_relation_1"/>
+	<result property="relation2" column="board_relation_2"/>
+	<result property="relation3" column="board_relation_3"/>
+	
+	<association property="file" javaType="file">
+		<id property="id" column="file_id"/>
+		<result property="num" column="file_num"/>
+		<result property="name" column="file_name"/>
+	</association>
+	
+	<association property="user" javaType="user">
+		<result property="name" column="user_name"/>
+		<result property="deptNumber" column="user_dept_number"/>
+		<result property="deptId" column="user_dept_id"/>
+	
+		<association property="position" javaType="position">
+			<result property="name" column="position_name"/>
+		</association>
+	
+		<association property="dept" javaType="dept">
+			<id property="id" column="user_dept_id"/>
+			<result property="name" column="dept_name"/>
+		</association>	
+	</association>
+</resultMap>
+
+
 </mapper>
 
