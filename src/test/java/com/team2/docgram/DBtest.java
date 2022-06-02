@@ -1,5 +1,6 @@
 package com.team2.docgram;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +21,10 @@ import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
@@ -529,4 +534,37 @@ public class DBtest {
 	public void sadsadad() {
 		sqlSession.selectOne("boardMapper.test");
 	}
+	
+	@Test
+	public void searchDetail() {
+		
+		String [] arr;
+		String test = "내용";
+		arr = test.split(",");
+		
+		for(String i : arr) {
+			System.out.println(i);
+		}
+		System.out.println(arr.toString());
+		searchDto sd = new searchDto();
+		sd.setSel("title");
+		sd.setText("306");
+		sd.setPosition((long) 9);
+		sd.setFileName("임시회");
+		sd.setFileNum("D00000");
+		sd.setHashtagList(arr);
+		sd.setDateRange((long) 31);
+		
+		List<BoardDto> boardList = new ArrayList<>();
+		sqlSession.selectList("search.testSearch", sd);
+		
+		for(BoardDto i : boardList) {
+			System.out.println(i);
+		}
+		
+	}
+	
+	
+	
+	
 }

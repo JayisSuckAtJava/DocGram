@@ -103,6 +103,6 @@ public class HomeController {
 	@GetMapping("mypage")
 	public String test104() {
 		return "mypage/mypage";
-	
+	}
 }
 
