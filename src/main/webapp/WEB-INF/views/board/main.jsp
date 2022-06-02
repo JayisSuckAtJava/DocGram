@@ -39,13 +39,12 @@
           <div class="col-sm-6">
             <h2>공지사항</h2>
             <table class="table table-hover">
+            <tr>
               <c:forEach items="${noticeList}" var="board">
-              <tr>
                 <td>${board.id}</td>
                 <td>${board.title}</td>
                 <td>${board.user.dept.name}</td>
                 <td>${board.date}</td>
-              </tr>
               </c:forEach>
               </tr>
               <tr>
@@ -150,6 +149,7 @@
                 <td>${board.id}</td>
                 <td>${board.title}</td>
                 <td>${board.user.dept.name}</td>
+>>>>>>> moon
                 <td>${board.date}</td>
                </tr>
               </c:forEach>
@@ -161,13 +161,13 @@
         <div class="starmark-list">
           <h3>즐겨찾기</h3>
           <table class="table table-hover">
+            <tr>
             <c:forEach items="${starList}" var="board">
-             <tr>
               <td>${board.title}</td>
               <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
-             </tr>
             </c:forEach>
+            </tr>
           </table>
         </div>
       </div>
