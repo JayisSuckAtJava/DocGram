@@ -88,7 +88,7 @@
                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                          <!--Header-->
+                          <!--Modal Header-->
                           <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">
                               <a class="navbar-brand">
@@ -105,7 +105,7 @@
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
-                          <!--Body-->
+                          <!--Modal Body-->
                           <div class="modal-body">
 
                             <table class="table table-hover">
