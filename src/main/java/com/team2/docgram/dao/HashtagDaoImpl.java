@@ -19,4 +19,9 @@ public class HashtagDaoImpl implements HashtagDao {
 		sqlSession.insert(mapper+"createHashtag", hashtag);
 		return hashtag;
 	}
+
+	@Override
+	public Long readHashtag(String tagName) {
+		return sqlSession.selectOne(mapper+"readHashtag", tagName);
+	}
 }

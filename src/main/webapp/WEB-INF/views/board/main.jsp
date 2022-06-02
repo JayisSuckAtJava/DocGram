@@ -40,10 +40,10 @@
             <h2>공지사항</h2>
             <table class="table table-hover">
             <tr>
-              <c:forEach items="${boardList}" var="board">
+              <c:forEach items="${noticeList}" var="board">
                 <td>${board.id}</td>
-                <td class="title">${board.title}</td>
-                <td>${dept.name}</td>
+                <td>${board.title}</td>
+                <td>${board.user.dept.name}</td>
                 <td>${board.date}</td>
               </c:forEach>
               </tr>
@@ -144,10 +144,15 @@
           <div class="col-sm-6">
             <h2>부서별 알림</h2>
             <table class="table table-hover">
-              <c:forEach items="${boardList}" var="board">
+              <c:forEach items="${deptList}" var="board">
                 <td>${board.id}</td>
+<<<<<<< HEAD
                 <td class="title">${board.title}</td>
                 <td>${dept.name}</td>
+=======
+                <td>${board.title}</td>
+                <td>${board.user.dept.name}</td>
+>>>>>>> main
                 <td>${board.date}</td>
               </c:forEach>
             </table>
@@ -158,9 +163,9 @@
         <div class="starmark-list">
           <h3>즐겨찾기</h3>
           <table class="table table-hover">
-            <c:forEach items="${boardList}" var="board">
+            <c:forEach items="${starList}" var="board">
               <td>${board.title}</td>
-              <td>${dept.name}</td>
+              <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
             </c:forEach>
           </table>

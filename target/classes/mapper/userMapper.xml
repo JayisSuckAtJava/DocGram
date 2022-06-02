@@ -17,5 +17,62 @@ where d1.upper_dept = d2.id
 and d2.upper_dept = d3.id
 and d1.id = ${deptId}
 </select>
+
+<select id="readUser" parameterType="user" resultType="user">
+select id,
+	email,
+	name,
+	phone_number,
+	dept_number,
+	position_id,
+	dept_id,
+	hashtag_id
+from user
+where email = #{email}
+and password = #{password}
+</select>
+
+<insert id="createUser" parameterType="user">
+insert into user (
+	email,
+	name,
+	password,
+	phone_number,
+	dept_number
+)
+values (
+	#{email},
+	#{name},
+	#{password},
+	#{phoneNumber},
+	#{deptNumber}
+)
+</insert>
+
+<update id="updateUser" parameterType="user">
+update user
+	<trim prefix="set" prefixOverrides=",">
+		<if test="password != null">password = #{password}</if>
+		<if test="phoneNumber != null">phone_number = #{phoneNumber}</if>
+		<if test="deptNumber != null">dept_number = #{deptNumber}</if>
+		<if test="positionId != null">position_id = #{positionId}</if>
+		<if test="deptId != null">dept_id = #{deptId}</if>
+		<if test="hashtagId != null">hashtag_id = #{hashtag_id}</if>
+	</trim>
+</update>
+
+<select id="readUserList" parameterType="String">
+select u.name as user_name,
+	u.email as user_email,
+	u.phone_number as user_phone_number,
+	u.dept_number as user_dept_number,
+	d.name as dept_name
+from user u
+join dept d on d.id = u.dept_id
+<if test="name != null">
+where u.name = #{name}
+</if>
+</select>
+
 </mapper>
 

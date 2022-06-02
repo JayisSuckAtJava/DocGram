@@ -4,5 +4,21 @@
 
 <mapper namespace="starmark">
 
+<insert id="createStarmark" parameterType="userStarmark">
+insert into user_starmark (user_id, board_id) values (#{userId}, #{boardId})
+</insert>
+
+<delete id="deleteStarmark" parameterType="userStarmark">
+delete from user_starmark where user_id = #{userId} and board_id = #{boardId}
+</delete>
+
+<insert id="createDeptmark" parameterType="deptStarmark">
+insert into dept_starmark (dept_id, board_id) values (#{deptId}, #{boardId})
+</insert>
+
+<delete id="deleteDeptmark" parameterType="deptStarmark">
+delete from dept_starmark where dept_id = #{deptId} and board_id = #{boardId}
+</delete>
+
 </mapper>
 

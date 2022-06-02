@@ -1,5 +1,7 @@
 package com.team2.docgram.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,31 +28,35 @@ public class UserController {
 	@Autowired
 	private StarmarkService starmarkService;
 	
-	@GetMapping("lp")
+	@GetMapping("signin")
 	public String loginPage() {
-		
+		return "login/login";
 	}
 	
-	@PostMapping("l")
+	@PostMapping("signin")
 	public String login(UserDto user,HttpSession session) {
 		
 		UserDto userDetail = userService.readUser(user);
-		session.setAttribute("user", user);
+		if(userDetail == null) {
+			return "redirect:/signin";
+		}else {
+			session.setAttribute("user", user);
+			return "redirect:/main";			
+		}
+	}
+	
+	@GetMapping("signout")
+	public String logout(HttpSession session) {
+		session.invalidate();
 		return "redirect:/main";
 	}
 	
-	@GetMapping("lo")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "";
-	}
-	
-	@GetMapping("sp")
+	@GetMapping("signup")
 	public String signupPage() {
-		return "";
+		return "login/join";
 	}
 	
-	@PostMapping("su")
+	@PostMapping("signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
 		
@@ -64,60 +70,78 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("up")
+	@GetMapping("mypage/update")
 	public String updatePage(Model model,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		userService.readUser();
+		UserDto dbUser = userService.readUser(user);
+		model.addAttribute("dbUser", dbUser);
 		return "";
 	}
 	
-	@PostMapping("u")
-	public String update(UserDto user) {
-		userService.updateUser();
-		return "redirect:/";
+	@PostMapping("mypage/update")
+	public String update(UserDto user,HttpSession session) {
+		UserDto updatedUser = userService.updateUser(user);
+		if(updatedUser == null) {
+			return "";
+		}else {
+			session.setAttribute("user", updatedUser);			
+			return "redirect:/";
+		}
 	}
 	
-	@GetMapping("su")
+	@GetMapping("mypage/user")
 	public String searchUserPage() {
-		
+		List<UserDto> userList = userService.readUserList();
+		return "";
 	}
 	
-	@PostMapping("sus")
-	public String searchUser(Model model) {
+	@PostMapping("mypage/user")
+	public String searchUser(Model model,String name) {
+		List<UserDto> userList = userService.readUserList(name);
 		model.addAttribute("", model);
 		return "";
 	}
 
-	@PostMapping("um")
+	@PostMapping("mypage/mytag")
 	public String updateMytag(String tagName,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		userService.updateHashtag(hashtagId);
-		
+		return "redirect:/";
 	}
 	
-	@PostMapping("cs")
-	public String createStarmark(Long boardId,HttpSession session) {
+	@PostMapping("starmark/create")
+	public void createStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.createStarmark(boardId);
+		Long userId = user.getId();
+		starmarkService.createStarmark(userId,boardId);
 	}
 	
-	@PostMapping("ds")
-	public String deleteStarmark(Long boardId,HttpSession session) {
+	@PostMapping("starmark/delete")
+	public void deleteStarmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.deleteStarmark(boardId);
+		Long userId = user.getId();
+		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
-	@PostMapping("cd")
-	public String createDeptmark(Long boardId,HttpSession session) {
+	@PostMapping("deptmark/create")
+	public void createDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.createDeptmark(boardId);
+		Long postionId = user.getPositionId();
+		if(postionId > 5) {
+			Long deptId = user.getDeptId();
+			starmarkService.createDeptmark(deptId,boardId);			
+		}
 	}
 	
-	@PostMapping("cdd")
-	public String deleteDeptmark(Long boardId,HttpSession session) {
+	@PostMapping("deptmark/delete")
+	public void deleteDeptmark(Long boardId,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		starmarkService.deleteDeptmark(boardId);
+		Long postionId = user.getPositionId();
+		if(postionId > 5) {
+			Long deptId = user.getDeptId();
+			starmarkService.deleteDeptmark(deptId,boardId);			
+		}
 	}
 }
 
