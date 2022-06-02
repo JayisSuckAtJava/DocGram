@@ -1,6 +1,7 @@
 package com.team2.docgram.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,6 +186,16 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void deleteBoard(Long id) {
 		sqlSession.delete(mapper+"deleteBoard", id);
+	}
+
+	@Override
+	public List<BoardDto> searchDetail(Map<String, Object> map) {
+		return sqlSession.selectList("search.searchDetail", map);
+	}
+
+	@Override
+	public Long searchDetailSize(Map<String, Object> map) {
+		return sqlSession.selectOne("search.searchDetailSize", map);
 	}
 
 	
