@@ -218,7 +218,7 @@ input::placeholder {color:#434343;}
     <button type="submit" class="btn btn-search">검색</button>
         <button type="write" class="btn btn-search">작성하기</button> 
     <!-- 상세 검색 부분 -->
-
+	<p> 검색한 전체 갯수 : ${listSize}</p>
 
 	<div classs="col"></div>
 

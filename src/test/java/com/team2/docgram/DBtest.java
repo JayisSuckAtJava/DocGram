@@ -553,15 +553,41 @@ public class DBtest {
 		sd.setFileName("임시회");
 		sd.setFileNum("D00000");
 		sd.setHashtagList(arr);
+		
 		sd.setDateRange((long) 31);
+				
+		String st = "2022-05-01";
+		String en = "2022-06-01";
+		Date start = Date.valueOf(st);
+		Date end = Date.valueOf(en);
+		
+		sd.setStart(start);
+		sd.setEnd(end);
 		
 		List<BoardDto> boardList = new ArrayList<>();
-		sqlSession.selectList("search.testSearch", sd);
+		boardList = sqlSession.selectList("search.testSearch", sd);
 		
 		for(BoardDto i : boardList) {
 			System.out.println(i);
 		}
 		
+	}
+	
+	@Test
+	public void size() {
+		Map<String,Object> map = new HashMap<>();
+		
+		String[] arr = {"내용"};
+		
+		map.put("sel", "title");
+		map.put("text", "306");
+		map.put("position", 9);
+		map.put("fileName", "임시회");
+		map.put("dateRange", 30);
+		map.put("hashtagList", arr);
+		
+		Long size = sqlSession.selectOne("search.searchDetailSize", map);
+		System.out.println(size);
 	}
 	
 	

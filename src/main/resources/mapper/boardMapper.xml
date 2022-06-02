@@ -326,6 +326,5 @@ from board
 where id = #{id}
 </select>
 
-
 </mapper>
 
