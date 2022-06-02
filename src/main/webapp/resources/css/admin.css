@@ -1,4 +1,54 @@
-                                            /* admin */
+   
+     /* w3c */
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}
+                                /* w3c */
+   
+
+                                .title-article {
+                                  display: block;
+                                  max-width: 80%;
+                                  margin: auto;
+                                  margin-bottom: 15px;
+                                  border: solid 1px;
+                                  border-radius: 5px;
+                                  padding: 10px 0;
+                                  font-size: 1.5em;
+                                  font-weight: 700;
+                                  text-align: center;
+                                }
+   
+                   /* admin */
+
 
 .all {
   margin-left: 15%;
@@ -13,6 +63,10 @@
 
 .form-control-borderless {
   border: none;
+}
+
+.btn {
+  margin-left: 2%;
 }
 
 .form-control-borderless:hover,
@@ -30,6 +84,15 @@
 }
 
  /* 상단 검색 */
+ .dl-table{ 
+  border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
+
+.ss{
+  height: 38px;
+}
+
 .dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
 .dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
 .dl-table-wrap .dl-table:first-child {  border-top: 0; }

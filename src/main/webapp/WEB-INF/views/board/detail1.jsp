@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../resources/css/board.css">
     <script src="../resources/js/board.js"></script>
 
+
   
   <!-- <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -85,14 +86,14 @@
       
       <div class="all">
         <!-- 출력 문서 제목 -->
-            <h3 class="title-article">${문서 제목}<h3>
+            <h3 class="title-article">공공문서 관련한 문서 관리 (제목 )</h3>
     
     
     
         <!-- 문서 상세 정보 -->
         <div class="table-wrap">
             <table class="table table-response">
-          
+                <caption> 문서상세 정보 - 작성자 /작성일 / 문서 관리 번호 / 전화번호 /소속기관 </caption>
                 <colgroup>
                     <col style="width:15%">
                     <col style="width:35%">
@@ -128,8 +129,8 @@
     
         <hr>
         <div class="btnlist">
-            <button class="btn"><i class="bi bi-star-fill"></i></button> 
-            <button class="btn"><i class="bi bi-megaphone-fill"></i></button> 
+            <button class="btn"><i class="bi bi-star"></i></button> 
+            <button class="btn"><i class="bi bi-megaphone"></i></button> 
         </div>
         <hr>
     
@@ -161,6 +162,11 @@
                         대충 문서 내용이 나와야하는 부분
                         </p>
                     </div>
+                    <hr>
+            <div class="right">
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
         </div>
             
         <hr>

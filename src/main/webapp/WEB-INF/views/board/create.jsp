@@ -3,101 +3,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>작성페이지</title>
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../resources/css/bootstrap.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../resources/js/bootstrap.min.js"></script>
-
-<!-- css 부분 -->
-    <style>
-        /* 전체 마진 */
-        .all{
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-        /* 작성 부분 전체 */
-        .writebody{
-            border: 1px solid;
-        }
-        /* 제목 부분 */
-        .titlename {
-            margin-bottom: 15px;
-            
-        }
-
-        .title {
-            width: 80%;
-        }
-
-        /* 내용 작성 부분 */
-
-        .wirtearea {
-            margin-bottom: 15px;
-        }
-
-        .size{
-            width: 80%; height: 30%;
-        }
-    </style>
-
-</head>
-
-<!-- 헤더 끝 -->
-
-<!-- 바디 -->
-<body>
-<div class="all">
-
-    <div class="writebody">
-		<form action="board/create" method="post" enctype="multipart/form-data">
-        <div class="titlename"> <!-- 제목 작성 부분-->
-            <div>
-            	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요.">
-            </div>
-        </div>
-        <hr>
-        <div class="wirtearea"> <!-- 내용 작성 부분-->
-            <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
-
-        </div>
-        <hr>
-        
-        <div>
-            <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
-            <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
-            <button>취소</button>
-            <hr>
-        </div>
-
-        <div>
-            <h3> 해시태그 지정</h3>
-            <input type="text" placeholder="태그를 입력하세요 " name="hashtagList">
-            
-        </div>
-            <hr>
-        <div> <!-- 관계 게시글 설정-->
-            <h3>관계 게시글 설정</h3>
-            <input type="text" id="boardList" name="relatedBoardList">
-            <button class="">리셋</button>
-        </div>
+  <title>작성페이지</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+    <link rel="stylesheet" href="../resources/css/board.css">
+    <script src="../resources/js/board.js"></script>
+  
+  <!-- <style>
     
-    </div>
-    <div>   <!-- 작성 완료, 뒤로가기-->
-    <button class="submit">작성 완료</button> <button>뒤로가기</button>
-    </form>
-    </div>
-</div>
-<script>
-    const hashinput = document.querySelector("#boardList");
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style> -->
+</head>
+<body>
 
-    hashinput.addEventListener("focusin",()=>{
-        let option = "width=500, height=600, top=30, left=30, resizable=no, scrollbar=no, loaction=no";
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+      
+      <div class="all">
 
-        window.open("./popup","해시태그 선택",option);
-    })
-</script>
+        <div class="writebody">
+    
+            <div class="titlename"> <!-- 제목 작성 부분-->
+
+                <div>
+                    <input class="title" type="text" name="제목" placeholder="제목을 입력해주세요">
+                </div>
+            </div>
+            <hr>
+            <div class="wirtearea"> <!-- 내용 작성 부분-->
+                <textarea class="size" placeholder="내용을 입력하세요." ></textarea>
+    
+            </div>
+            <hr>
+            
+            <div>
+                <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
+                <input type="file" name="file" id="imageFileOpenInput" accept=".pdf">
+                <button>취소</button>
+                <hr>
+            </div>
+    
+            <div>
+                <h3> 해시태그 지정</h3>
+                <input type="text" placeholder="태그를 입력하세요">
+                
+            </div>
+                <hr>
+    
+    
+    
+    
+            <div> <!-- 관계 게시글 설정-->
+                <h3>관계 게시글 설정</h3>
+                <input type="text" id="boardList">
+                <button class="">리셋</button>
+            </div>
+            <script src="../../js/board.js"></script>
+          </div>
+          <div>   <!-- 작성 완료, 뒤로가기-->
+            <button class="">작성 완료</button> <button>뒤로가기</button>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-sm-2 sidenav">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+  <footer class="container-fluid text-center">
+    <p>Footer Text</p>
+  </footer>
+  
 </body>
 </html>
