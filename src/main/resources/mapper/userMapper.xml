@@ -60,14 +60,20 @@ insert into user (
 	name,
 	password,
 	phone_number,
-	dept_number
+	dept_number,
+	dept_id,
+	postion_id,
+	hashtag_id
 )
 values (
 	#{email},
 	#{name},
 	#{password},
 	#{phoneNumber},
-	#{deptNumber}
+	#{deptNumber},
+	#{deptId},
+	#{postionId},
+	1
 )
 </insert>
 
