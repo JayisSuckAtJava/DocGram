@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>공지 사항 페이지</title>
+  <title>공지사항 관리자</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,8 +12,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
+  
     <link rel="stylesheet" href="../resources/css/board.css">
     <script src="../resources/js/board.js"></script>
+
   
   <!-- <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -48,7 +50,6 @@
       .row.content {height:auto;} 
     }
   </style> -->
-  
 </head>
 <body>
 
@@ -84,70 +85,94 @@
     </div>
     <div class="col-sm-8 text-left"> 
       
-        <div class="all">
-            <!-- 타이틀 부분 -->
-    
-            <h3 class="title-article">공지사항 (모두알림) </h3>
-    
-            <!-- 공공문서 리스트 -->
-    
-             <!-- 목록 리스트 -->
-        <div class="col-8">
-          <table class="table table-hover">
-          
+      <div class="all">
+        <!-- 타이틀 부분 -->
+
+        <h3 class="title-article">공지사항 (모두알림) </h3>
+
+        <!-- 공공문서 리스트 -->
+
+         <!-- 목록 리스트 -->
+    <div class="col-8">
+      <table class="table table-hover">
       
-            <thead id="list_title">
-      
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>다운로드</th>
-                <th>소속 기관</th>
-                <th>작성일</th>
-                <th>작성자</th>
-              </tr>
-            </thead>
-      
-            <tbody class="list-body">
-              <tr>
-                <td>10</td>
-                <td>공공문서 관련한 문서 관리</td>
-                <td>파일</td>
-                <td>세종특별청사</td>
-                <td>5/19</td>
-                <td>부서관</td>
-              </tr>
-              
-              <c:forEach items="${boardList}" var="board">
-              <tr>
-                <td>${board.pk}</td>
-                  <td>${board.title}</td>
-                  <td></td>
-                  <td>${board.deptDescription}</td>
-                  <td>${board.date}</td>
-                  <td>${board.userName}</td>
-               </tr>
-               </c:forEach>
-    
-              </tr>
-              <c:forEach items="${boardList}" var="board">
-              <tr>
-                <td>${board.pk}</td>
-                  <td>${board.title}</td>
-                  <td></td>
-                  <td>${board.deptDescription}</td>
-                  <td>${board.date}</td>
-                  <td>${board.userName}</td>
-               </tr>
-              </c:forEach>
-               
-            </tbody>
-          </table>
-    
+  
+        <thead id="list_title">
+  
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>다운로드</th>
+            <th>소속 기관</th>
+            <th>작성일</th>
+            <th>작성자</th>
+            <th>수정하기</th>
+            <th>삭제하기</th>
+          </tr>
+        </thead>
+  
+        <tbody class="list-body">
+          <tr>
+            <td>10</td>
+            <td>공공문서 관련한 문서 관리</td>
+            <td>파일</td>
+            <td>세종특별청사</td>
+            <td>5/19</td>
+            <td>부서관</td>
+            <td>
+              <button class="btn btn-danger pull-right"  
+                      type="button" onclick="getUserName1()">수정</button>
+            </td>
+            <td>
+              <button class="btn btn-danger pull-right"  
+                      type="button" onclick="getUserName2()">삭제</button>
+            </td>
+          </tr>
           
-          </div>
+          <c:forEach items="${boardList}" var="board">
+          <tr>
+            <td>${board.pk}</td>
+              <td>${board.title}</td>
+              <td>${파일}</td>
+              <td>${board.deptDescription}</td>
+              <td>${board.date}</td>
+              <td>${board.userName}</td>
+              <td>
+                <button class="btn btn-danger pull-right"  
+                        type="button" onclick="getUserName1()">수정</button>
+              </td>
+              <td>
+                <button class="btn btn-danger pull-right"  
+                        type="button" onclick="getUserName2()">삭제</button>
+              </td>
+           </tr>
+           </c:forEach>
+
+          </tr>
+          <c:forEach items="${boardList}" var="board">
+          <tr>
+            <td>${board.pk}</td>
+              <td>${board.title}</td>
+              <td>${파일}</td>
+              <td>${board.deptDescription}</td>
+              <td>${board.date}</td>
+              <td>${board.userName}</td>
+              <td>
+                <button class="btn btn-danger pull-right"  
+                        type="button" onclick="getUserName1()">수정</button>
+              </td>
+              <td>
+                <button class="btn btn-danger pull-right"  
+                        type="button" onclick="getUserName2()">삭제</button>
+              </td>
+           </tr>
+          </c:forEach>
+           
+        </tbody>
+      </table>
+      </div>
+
     
-          
               <!-- 페이징 -->
               <div class="page">
                 <nav aria-label="Page navigation example" style="text-align: center;" >
@@ -166,11 +191,9 @@
                   </ul>
                 </nav>
               </div>
-    
-            
-    
-    
-          </div>
+
+
+      </div>
 
     </div>
     <div class="col-sm-2 sidenav">
