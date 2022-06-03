@@ -1,1 +1,481 @@
-@charset "UTF-8";
+/* 전체 마진 */
+.all {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+                    /* w3c */
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}
+                                /* w3c */
+
+                                                            /* detail css */
+
+.title-article {
+    display: block;
+    max-width: 80%;
+    margin: auto;
+    border: solid;
+    padding: 10px 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: center;
+}
+
+#attachment {
+    display: inline-block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+/* 해쉬 팝업 */
+.hashdetail {
+    border: 1px solid ;
+}
+
+/* 문서 작성 삭제 */
+
+.right{
+    text-align: right;
+    margin-right: 3%;
+}
+/* 관련 문서 */
+
+.relationlist {
+    padding: 33px 28px 40px;
+    border-bottom: 1px solid #bbbcbf;
+    line-height: 28px;
+    background-color: #fafafa;
+}
+
+/* 버튼 */
+.btn {
+    border: solid 1px;
+}
+
+/* 첨부된 문서 */
+.list-attachment {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #b5b5b5
+}
+
+.list-attachment li {
+    overflow: hidden;
+    padding: 5px;
+    border-top: 1px dashed #b5b5b5;
+    font-size: 0.8125em;
+}
+
+.list-attachment li:first-child {
+    border-top: 0;
+}
+
+.list-attachment li .title-down {
+    float: left;
+    margin-top: 5px
+}
+
+.list-attachment li .title-down span {
+    color: #757575;
+}
+
+.list-attachment li .btn-downset {
+    float: right;
+}
+
+.list-attachment li .btn-downset .btn {
+    padding: 0 10px
+}
+
+.list-attachment li .btn-downset .txt-notopen {
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+    padding-left: 18px;
+    color: #c72868;
+}
+
+.list-attachment li .btn-downset .txt-notopen:before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    background: url(../images/common/ico-sub.png) no-repeat -80px 0;
+}
+
+.table-wrap {
+    margin-bottom: 20px;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    margin: 15px 0;
+    border-spacing: 0;
+}
+
+.table-response {
+    border-collapse: inherit;
+    background: #f8eff3;
+}
+
+.table-response colgroup {
+    display: none
+}
+
+.table-response tr {
+    clear: both;
+    overflow: hidden
+}
+
+.table-response th,
+.table-response td {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    border: 1px dashed #b5b5b5;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    text-align: left
+}
+
+.table-response th {
+    width: 33%;
+    padding: 7px 0 0 10px;
+    line-height: 1.1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.table-response td {
+    width: 67%;
+    min-height: 40px;
+    padding: 5px 10px 8px 10px;
+    background: #fff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.table-response tr th,
+.table-response tr td {
+    padding: 0 10px;
+    min-height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.table-response tr td {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/* 2021-12-16 */
+.table-response tr td a.btn {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    text-align: center;
+}
+
+/* 문서 내용 */
+.detail {
+    padding: 33px 28px 40px;
+    border-bottom: 1px solid #bbbcbf;
+    line-height: 28px;
+    background-color: #fafafa;
+}
+
+                                                    /* detail css */
+
+
+                                                    /* create css */
+/* 작성 부분 전체 */
+.writebody{
+    margin-top: 5px;
+    border: 1px solid;
+}
+/* 제목 부분 */
+.titlename {
+    
+    margin-bottom: 15px;
+    
+}
+
+.title {
+    width: 80%;
+}
+
+/* 내용 작성 부분 */
+
+.wirtearea {
+    margin-bottom: 15px;
+}
+
+.size{
+    width: 80%; height: 30%;
+}
+                                                            /* create css */
+
+                                                            /* dept css  */
+
+
+.col-8 {
+margin: auto;
+}
+
+.title-article {
+  display: block;
+  max-width: 40%;
+  margin: auto;
+  margin-bottom: 15px;
+  border: solid;
+  padding: 10px 0;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+        /* 상단 검색 */
+.dl-table{ 
+  border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
+
+.ss{
+  height: 38px;}
+
+
+.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
+.dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
+.dl-table-wrap .dl-table:first-child {  border-top: 0; }
+.dl-table-wrap .dl-table:last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table:not([style*="display: none"]):last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table.dl-organ dt {  border-bottom-left-radius: 5px; }
+.dl-table-wrap.open .dl-table.dl-organ dt { border-bottom-left-radius: 0 }
+.dl-table-wrap .dl-table:first-child dt { border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt { border-bottom-left-radius: 5px;}
+
+/* 상단검색 결과 */
+
+
+.dl-table {display: table;width: 100%;border-top: 1px dashed #b5b5b5;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+.dl-table dd { padding: 4px 10px; }
+
+input::placeholder {color:#434343;}
+/* .dl-table */
+
+.dl-table dd select {min-width: 19%;border: 1px solid #b5b5b5;border-radius: 5px;font-size: 1em;}
+.dl-table dd * {vertical-align: middle;}
+.dl-table dd input[type="text"],
+.dl-table dd select,
+.dl-table dd .date-box {float: left;}
+.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #f8eff3;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
+.dl-table dt label, .dl-table dt span {font-size: inherit;font-weight: inherit;}
+.dl-table dt span em {font-weight: 400;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+
+
+.dl-table-wrap .dl-table.dl-organ dt {border-bottom-left-radius: 5px;}
+.dl-table-wrap.open .dl-table.dl-organ dt {border-bottom-left-radius: 0}
+
+/* .dl-table  검색 크기 */
+.dl-table dd.dd-keyword input[type="text"] {width: 50%}
+
+.dl-table-wrap .dl-table:first-child dt {border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt {border-bottom-left-radius: 5px;}
+
+                                                            /* dept css  */
+
+                                                            /* notice css */
+
+
+
+        .title-article {
+          display: block;
+          max-width: 80%;
+          margin: auto;
+          margin-bottom: 15px;
+          border: solid 1px;
+          border-radius: 5px;
+          padding: 10px 0;
+          font-size: 1.5em;
+          font-weight: 700;
+          text-align: center;
+        }
+
+                                                            /* notice css */   
+
+
+                                                            /* 페이징 부트 스트랩 */
+
+
+    .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+          }
+          
+          .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+          }
+          
+          .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+          }
+          
+          .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+          }
+
+          .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+          }
+          
+          .page-link:hover {
+            z-index: 2;
+            color: #0056b3;
+            text-decoration: none;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+          }
+          
+          .page-link:focus {
+            z-index: 3;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          }
+          
+          .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+          }
+          
+          .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+          }
+          
+          .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+          }
+          
+          .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+          }
+          
+          .pagination-lg .page-link {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+          }
+          
+          .pagination-lg .page-item:first-child .page-link {
+            border-top-left-radius: 0.3rem;
+            border-bottom-left-radius: 0.3rem;
+          }
+          
+          .pagination-lg .page-item:last-child .page-link {
+            border-top-right-radius: 0.3rem;
+            border-bottom-right-radius: 0.3rem;
+          }
+          
+          .pagination-sm .page-link {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+          }
+          
+          .pagination-sm .page-item:first-child .page-link {
+            border-top-left-radius: 0.2rem;
+            border-bottom-left-radius: 0.2rem;
+          }
+          
+          .pagination-sm .page-item:last-child .page-link {
+            border-top-right-radius: 0.2rem;
+            border-bottom-right-radius: 0.2rem;
+          }
+
+          /* 페이징 부트 스트랩 */

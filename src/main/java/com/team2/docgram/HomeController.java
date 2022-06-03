@@ -37,51 +37,58 @@ public class HomeController {
 		return "home";
 	}
 
-	@GetMapping("/header")
-	public String test() {
-		return "comp/header";
-	}
-	
-	@GetMapping("/footer")
-	public String test1() {
-		return "comp/footer";
-	}
 	
 	@GetMapping("/create")
 	public String test2() {
 		return "board/create";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/dept")
 	public String test3() {
+		return "board/dept";
+	}
+	
+	@GetMapping("/detail")
+	public String test4() {
 		return "board/detail";
 	}
 	
-	@GetMapping("/popup")
-	public String test4() {
-		return "board/popup";
+	@GetMapping("/detail1")
+	public String test5() {
+		return "board/detail1";
 	}
 	
-	@GetMapping("/update")
-	public String test5() {
-		return "board/update";
+	@GetMapping("/notice")
+	public String test6() {
+		return "board/notice";
 	}
 
 	
-	@GetMapping("login")
-	public String test6() {
+	@GetMapping("notice1")
+	public String test7() {
+		return "board/notice1";
+	}
+	
+	@GetMapping("/login")
+	public String test8() {
 		return "login/login";
 	}
 	
-	@GetMapping("/detail1")
-	public String test7() {
-		return "read/detail";
+	@GetMapping("/search")
+	public String test9() {
+		return "read/search";
 	}
 	
-	@GetMapping("/popup1")
-	public String test9() {
-		return "test/popup";
+	@GetMapping("/board")
+	public String test10() {
+		return "admin/board";
 	}
+	
+	@GetMapping("/user")
+	public String test11() {
+		return "admin/user";
+	}
+	
 
 	@GetMapping("1main")
 	public String test101() {
@@ -97,7 +104,6 @@ public class HomeController {
 	public String test103() {
 		return "login/join";
 	}
-	
 
 	@GetMapping("mypage")
 	public String test104() {
