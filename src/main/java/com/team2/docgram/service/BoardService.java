@@ -36,4 +36,6 @@ public interface BoardService {
 
 	void deleteBoard(Long id);
 
+	List<BoardDto> readMyBoardList(Long userId);
+
 }

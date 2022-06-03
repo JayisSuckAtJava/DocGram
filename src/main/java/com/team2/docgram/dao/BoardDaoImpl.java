@@ -216,5 +216,19 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("search.searchDetailSize", map);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 3.
+	 */
+	@Override
+	public List<BoardDto> readMyBoardList(Long userId) {
+		return sqlSession.selectList(mapper+"readMyBoardList", userId);
+	}
+
 	
 }
