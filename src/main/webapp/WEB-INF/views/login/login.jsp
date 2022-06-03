@@ -5,14 +5,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <title>Document</title>
+        <title>로그인 메인</title>
     <!--
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
     <link rel="stylesheet" href="../resources/css/login.css">
     <script src="../resources/js/login.js"></script>
+    
     
 
 
@@ -171,9 +173,7 @@ body, html {
                 <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required>
                 <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> 저장 하기
-                    </label>
+                    
                 </div>
                 <a href=" ">
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >로그인 하기</button>
