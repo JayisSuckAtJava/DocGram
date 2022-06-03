@@ -1,39 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>헤더</title>
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap.css" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--
+ Class Name : Header.JavaScript
+ Description : header
+ Author : 조윤구
+ Since : 2022-05-28
+--%>
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-</head>
-<body>
 
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
 
-	<div class="container">
-		<header
-			class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-			<a href="/"
-				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-				<svg class="bi me-2" width="40" height="32">
-							<use xlink:href="#bootstrap"></use></svg> <span class="fs-4">Docgram</span>
-			</a>
-
-			<ul class="nav nav-pills">
-				<li class="nav-item"><a href="#" class="nav-link">공지 소식</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">상세 검색</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">최신 문서</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">${mytage}</a></li>
-			</ul>
-		</header>
-	</div>
-</body>
-</html>
-
+      
+            
+              <a class="navbar-brand" href="#">
+                 <h1>Docgram</h1>
+              </a>
+              <div class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">공지 소식</a>
+                <span class="sr-only">(current)</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">상세 검색</a>
+                <span class="sr-only">(current)</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">최신 문서</a>
+                <span class="sr-only">(current)</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">${mytag}</a>
+                <span class="sr-only">(current)</span> 
+              </li>
+            </div>
+     
+        </div>
+      </nav>

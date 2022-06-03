@@ -86,14 +86,15 @@ select b.id as board_id,
 		b.date as board_date,
 		u.name as user_name,
 		b.file_id as board_fileId
-	from board b
+from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	where b.id = (
+where b.id = (
 		select board_id
 		from user_starmark
 		where user_id = #{userId}
 	)
+limit 0,15
 </select>
 
 <!--
@@ -109,14 +110,15 @@ select b.id as board_id,
 		b.date as board_date,
 		u.name as user_name,
 		b.file_id as board_fileId
-	from board b
+from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	where b.id = (
+where b.id = (
 		select board_id
 		from dept_starmark
 		where dept_id = #{deptId}
 	)
+limit 0,15
 </select>
 
 <!--
@@ -155,6 +157,7 @@ select b.id as board_id,
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
 	where b.security = 0
+	limit 0,15
 </select>
 
 <!--
@@ -324,10 +327,6 @@ delete from board where id = #{id}
 select user_id
 from board
 where id = #{id}
-</select>
-
-<select id="test" resultType="int">
-select count(*) from board
 </select>
 
 </mapper>

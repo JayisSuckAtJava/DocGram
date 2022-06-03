@@ -8,13 +8,14 @@
 --%>
 
 <!DOCTYPE html>
-
+<html>
 <head>
   <title>main-로그인</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../resources/css/bootstrap.css">
   <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/css/comp.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -23,38 +24,54 @@
 
 <body>
 
-  <header class="container-fluid text-center">
-    <p>Header Text</p>
-  </header>
+<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
+
 
   <div class="container-fluid text-center">
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <p>${user.name}/${dept.name}</p>
+        <c:if test="${session.user == null}">
+        <p><a href="login">로그인</a></p>
+        <p><a href="#">회원가입</a></p>
+        </c:if>
+        <c:if test="${session.user != null}">
+                <p>${user.name}/${dept.name}</p>
         <p><a href="#">My page</a></p>
         <p><a href="#">로그아웃</a></p>
+        </c:if>
       </div>
       <div class="col-sm-8 text-left">
         <div class="row">
+        
           <div class="col-sm-6">
-            <h2>공지사항</h2>
+            <h3>공지사항</h3>
+            
+            <c:if test="${session.user == null}">
+          <br><br><br><br><br><br><br><br>
+          <p>로그인 부탁 드립니다.</p>
+          <br><br><br><br><br><br><br><br>
+          </c:if>
+            
+            <c:if test="${session.user != null}">            
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
-              <tr>
+      		   <tr>
                 <td>${board.id}</td>
                 <td>${board.title}</td>
                 <td>${board.user.dept.name}</td>
                 <td>${board.date}</td>
-              </tr>
+          	  </tr>
               </c:forEach>
-              </tr>
               <tr>
               	<td>1</td>
               	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
               	<td>재정특별기획부</td>
               	<td>2022-06-01</td>
               </tr>
-                            <tr>
+              <tr>
               	<td>2</td>
               	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
               	<td>재정특별기획부</td>
@@ -107,43 +124,20 @@
               	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
               	<td>재정특별기획부</td>
               	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>11</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                                          <tr>
-              	<td>12</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                                          <tr>
-              	<td>13</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                                          <tr>
-              	<td>14</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                                          <tr>
-              	<td>15</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-              
-            </table>
-            
+              </tr>            
+            </table> 
+            </c:if>           
           </div>
+          
+          
           <div class="col-sm-6">
-            <h2>부서별 알림</h2>
+            <h3>부서별 알림</h3>
+            <c:if test="${session.user == null}">
+          <br><br><br><br><br><br><br><br>
+          <p>로그인 부탁 드립니다.</p>
+          <br><br><br><br><br><br><br><br>
+          </c:if>
+            <c:if test="${session.user != null}">
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
               <tr>
@@ -154,30 +148,42 @@
                </tr>
               </c:forEach>
             </table>
+            </c:if>
           </div>
+          
+          
         </div>
       </div>
+      
       <div class="col-sm-2 sidenav">
         <div class="starmark-list">
           <h3>즐겨찾기</h3>
+          <c:if test="${session.user == null}">
+          <br><br><br><br><br><br><br>
+          <p>로그인 부탁 드립니다.</p>
+          <br><br><br><br><br><br><br><br>
+          </c:if>
+          
+          <c:if test="${session.user != null}">
           <table class="table table-hover">
+            <tr>
             <c:forEach items="${starList}" var="board">
-             <tr>
               <td>${board.title}</td>
               <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
-             </tr>
             </c:forEach>
+            </tr>
           </table>
+          </c:if>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="container-fluid text-center">
-    <p>Footer Text</p>
-  </footer>
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
 
 </body>
-
-</html></html>
+</html>
