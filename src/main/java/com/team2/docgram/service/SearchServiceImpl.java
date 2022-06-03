@@ -47,6 +47,15 @@ public class SearchServiceImpl implements SearchService {
 		return boardDao.searchDetail(map);
 	}
 
+	/**
+	 * 상세 정보 검색 - 데이터 처리 로직
+	 * 
+	 * @param map 검색 조건이 담긴 map
+	 * @return 검색된 데이터 + 해당 데이터의 총 갯수
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 2.
+	 */
 	@Override
 	public Map<String, Object> searchDetail(Map<String, Object> map) {
 		

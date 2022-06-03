@@ -1,1 +1,143 @@
-@charset "UTF-8";
+     /* w3c */
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}
+                                /* w3c */
+   
+
+                                .title-article {
+                                  display: block;
+                                  max-width: 80%;
+                                  margin: auto;
+                                  margin-bottom: 15px;
+                                  border: solid 1px;
+                                  border-radius: 5px;
+                                  padding: 10px 0;
+                                  font-size: 1.5em;
+                                  font-weight: 700;
+                                  text-align: center;
+                                }
+   
+                   /* admin */
+
+
+.all {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.col-8 {
+  margin: auto;
+}
+
+.dd {}
+
+.form-control-borderless {
+  border: none;
+}
+
+.btn {
+  margin-left: 2%;
+}
+
+.form-control-borderless:hover,
+.form-control-borderless:active,
+.form-control-borderless:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-bottom: 15px;
+}
+.list-body > tr > td  {
+  
+}
+.list_title > tr > th {
+}
+
+ /* 상단 검색 */
+ .dl-table{ 
+  border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
+
+.ss{
+  height: 38px;
+}
+
+.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
+.dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
+.dl-table-wrap .dl-table:first-child {  border-top: 0; }
+.dl-table-wrap .dl-table:last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table:not([style*="display: none"]):last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
+.dl-table-wrap .dl-table.dl-organ dt {  border-bottom-left-radius: 5px; }
+.dl-table-wrap.open .dl-table.dl-organ dt { border-bottom-left-radius: 0 }
+.dl-table-wrap .dl-table:first-child dt { border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt { border-bottom-left-radius: 5px;}
+
+/* 상단검색 결과 */
+
+
+.dl-table {display: table;width: 100%;border-top: 1px dashed #b5b5b5;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+.dl-table dd { padding: 4px 10px; }
+
+input::placeholder {color:#434343;}
+/* .dl-table */
+
+.dl-table dd select {min-width: 19%;border: 1px solid #b5b5b5;border-radius: 5px;font-size: 1em;}
+.dl-table dd * {vertical-align: middle;}
+.dl-table dd input[type="text"],
+.dl-table dd select,
+.dl-table dd .date-box {float: left;}
+.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #f8eff3;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
+.dl-table dt label, .dl-table dt span {font-size: inherit;font-weight: inherit;}
+.dl-table dt span em {font-weight: 400;}
+.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
+
+
+.dl-table-wrap .dl-table.dl-organ dt {border-bottom-left-radius: 5px;}
+.dl-table-wrap.open .dl-table.dl-organ dt {border-bottom-left-radius: 0}
+
+/* .dl-table  검색 크기 */
+.dl-table dd.dd-keyword input[type="text"] {width: 50%}
+
+.dl-table-wrap .dl-table:first-child dt {border-top-left-radius: 5px;}
+.dl-table-wrap .dl-table:last-child dt {border-bottom-left-radius: 5px;}
+
+                                            /* admin */
+
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
