@@ -69,10 +69,12 @@ public class UserController {
 		System.out.println(user.getEmail());
 		System.out.println(user.getPassword());
 		UserDto userDetail = userService.readUser(user);
+		System.out.println(userDetail);
 		if(userDetail == null) {
-			return "redirect:/signin";
+			return "redirect:signin";
 		}else {
 			session.setAttribute("user", userDetail);
+			
 			return "redirect:../main";			
 		}
 	}
