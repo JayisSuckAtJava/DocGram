@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.DeptDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
 
@@ -66,5 +68,14 @@ public class SearchController {
 		resultMap = searchService.searchDetail(map); 
 		model.addAllAttributes(resultMap);
 		return "read/detail";
+	}
+	
+	@GetMapping("rest/dept")
+	@ResponseBody
+	public List<DeptDto> searchDept(String name) {
+		List<DeptDto> deptList = new ArrayList<>();
+		deptList = searchService.searchDept(name);
+		
+		return deptList;
 	}
 }

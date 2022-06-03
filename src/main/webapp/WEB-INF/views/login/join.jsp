@@ -27,8 +27,9 @@
 
 
     <body>
+
    <div class="all">
-      <form action="" method="" class="sign-form">
+      <form action="" method="post" class="sign-form">
         <div class="container">
           <div class="input-form-backgroud row">
             <div class="input-form col-md-12 mx-auto">
@@ -62,7 +63,8 @@
                   <label for="inputPasswordCheck">비밀번호확인</label>
                   &nbsp;
                   <input type="password" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인"
-                    reaquired></input>
+                    reaquired></input> 
+                    <input type="hidden" name="password" id="pwd"/>
                   <div class="col-md-10 mb-3">
                     &nbsp;
                     <div class="alert alert-success" id="alert-success" style="display: none;">비밀번호가 일치합니다.</div>
@@ -97,9 +99,9 @@
                               </a>
                             </h4>
                             <form class="d-flex" method="" action="" role="search">
-                              <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
                                 aria-label="Search">
-                              <button class="btn btn-outline-success" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
+                              <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
                             </form>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
@@ -111,15 +113,10 @@
                             <table class="table table-hover">
                               <thead>
                                 <tr>
-                                  <th>#</th>
                                   <th>기 관 명</th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>${dept.name}</td>
-                                </tr>
+                              <tbody id="deptList">
                               </tbody>
                             </table>
 
@@ -147,7 +144,7 @@
                       <option value="8">이사관</option>
                       <option value="9">관리관</option>
                    </select>
-
+					<input type="hidden" name="deptCode" id="deptCode" />
                   </div>
                 </div>
 
@@ -169,7 +166,7 @@
                   <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                 </div>
                 <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button class="btn btn-primary btn-lg btn-block" onclick="check()">가입 완료</button>
               </form>
             </div>
           </div>
@@ -180,6 +177,7 @@
     </body>
 
     <!--비밀번호 동일성 확인-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
       function test() {
         var p1 = document.getElementById('pwd1').value;
@@ -210,36 +208,71 @@
           wrong.style.display = "block";
         }
       })
-    </script>
-
-    <!-- <script>
-
-  // $('#btn').click(function(){
-  //   $('#alert-success').removeClass('hidden');
-  // })
-  // $('alert-success').focusout(function(){
-  //   $(this).addClass('hidden');
-  // });
-
-$(function(){
-    $("btn").click(function(){
-      var pwd1=$("#pwd1").val();
-      var pwd2=$("#pwd2").val();
-      if(pwd1 != "" || pwd2 != ""){
-        if(pwd1 == pwd2){
-          $("alert-success").show();
-          $("alert-danger").hide();
-          $("#submit").removeAttr("disabled");
-        } else {
-          $("alert-success").hide();
-          $("alert-danger").show();
-          $("#submit").removeAttr("disabled", "disabled");
+      
+        
+        function check() {
+      		const pwd1= document.querySelector("#pwd1");
+        	const pwd =document.querySelector("#pwd");
+        	const dept=document.querySelector("#inputdept");
+        	const po=document.querySelector("#position-select");
+        	const dc=document.querySelector("#deptCode");
+        
+        	pwd.value = pwd1.value;
+        	dc.value = Number(dept.value) + Number(po.value);
+        	console.log(dc.value);
+        	submit();
         }
-      }
-    });
-  });
+	      
+	      
+      function ajax() {
+      	  
+            const search = document.querySelector("#searchDept");
+            let text = searchDept.value;
+            
+            const data = axios({
+            url: '../rest/dept',
+            method: 'get',
+            params: {
+            'name': text
+            }
+            });
+            data.then(function (result) {
+            
+            let deptList = result.data;
+            const table = document.querySelector("#deptList")
+            let html = "";
+            
+            deptList.forEach((v)=>{
+                let id;
+                let name;
+            	id = v.id;
+            	name = v.name; 
 
-</script> -->
+	            html = html + "<tr>";
+    	        html = html + `<td value=\${id} scope="row" id="deptValue" data-dismiss="modal">\${name}</td>`
+        	    html = html + "</tr>";
+            })
+            table.innerHTML = html;
+
+     
+      			let deptId = document.querySelectorAll("#deptValue");
+           		deptId.forEach((v)=>{
+                v.addEventListener("click",()=>{
+                    let deptValue = v.getAttribute("value"); 
+                    
+                    const inputDept = document.querySelector("#inputdept");
+                    inputDept.value = deptValue;
+                })
+        })
+       })
+     }
+            
+            
+
+
+
+</script> 
+
 
 
 

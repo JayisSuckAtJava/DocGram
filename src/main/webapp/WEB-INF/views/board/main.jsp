@@ -29,15 +29,15 @@
 	<jsp:include page="../comp/header.jsp"></jsp:include>
 </header>
 
-
   <div class="container-fluid text-center">
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <c:if test="${session.user == null}">
+        <c:if test="${sessionScope.user == null}">
         <p><a href="login">로그인</a></p>
         <p><a href="join">회원가입</a></p>
+        
         </c:if>
-        <c:if test="${session.user != null}">
+        <c:if test="${sessionScope.user != null}">
                 <p>${user.name}/${dept.name}</p>
         <p><a href="mypage">My page</a></p>
         <p><a href="#">로그아웃</a></p>
@@ -49,13 +49,13 @@
           <div class="col-sm-6">
             <h3>공지사항</h3>
             
-            <c:if test="${session.user == null}">
+            <c:if test="${sessionScope.user == null}">
           <br><br><br><br><br><br><br><br>
           <p>로그인 부탁 드립니다.</p>
           <br><br><br><br><br><br><br><br>
           </c:if>
             
-            <c:if test="${session.user != null}">            
+            <c:if test="${sessionScope.user != null}">            
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
       		   <tr>
@@ -132,12 +132,12 @@
           
           <div class="col-sm-6">
             <h3>부서별 알림</h3>
-            <c:if test="${session.user == null}">
+            <c:if test="${sessionScope.user == null}">
           <br><br><br><br><br><br><br><br>
           <p>로그인 부탁 드립니다.</p>
           <br><br><br><br><br><br><br><br>
           </c:if>
-            <c:if test="${session.user != null}">
+            <c:if test="${sessionScope.user != null}">
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
               <tr>
@@ -158,13 +158,13 @@
       <div class="col-sm-2 sidenav">
         <div class="starmark-list">
           <h3>즐겨찾기</h3>
-          <c:if test="${session.user == null}">
+          <c:if test="${sessionScope.user == null}">
           <br><br><br><br><br><br><br>
           <p>로그인 부탁 드립니다.</p>
           <br><br><br><br><br><br><br><br>
           </c:if>
           
-          <c:if test="${session.user != null}">
+          <c:if test="${sessionScope.user != null}">
           <table class="table table-hover">
             <tr>
             <c:forEach items="${starList}" var="board">
