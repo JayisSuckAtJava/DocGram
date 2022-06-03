@@ -35,6 +35,11 @@ public class DeptDaoImpl implements DeptDao {
 	public DeptDto readDeptList(Long deptId) {
 		return sqlSession.selectOne(mapper+"readDeptList", deptId);
 	}
+
+	@Override
+	public List<DeptDto> searchDept(String name) {
+		return sqlSession.selectList(mapper+"searchDept",name);
+	}
 	
 	
 }

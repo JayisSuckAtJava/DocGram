@@ -185,7 +185,7 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("rest/dept")
+	@GetMapping("rest/rel")
 	public String popup(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);

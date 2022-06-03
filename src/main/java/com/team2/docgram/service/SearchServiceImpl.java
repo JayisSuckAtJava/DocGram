@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dao.DeptDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.DeptDto;
 
 /**  SearchServiceImpl.java
  *   설명
@@ -23,6 +25,9 @@ public class SearchServiceImpl implements SearchService {
 
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private DeptDao deptDao;
 	
 	@Override
 	public List<BoardDto> searchDetail(String sel, String text, Long position, String fileName, String fileNum,
@@ -94,6 +99,11 @@ public class SearchServiceImpl implements SearchService {
 		
 		
 		return resultMap;
+	}
+
+	@Override
+	public List<DeptDto> searchDept(String name) {
+		return deptDao.searchDept(name);
 	}
 	
 

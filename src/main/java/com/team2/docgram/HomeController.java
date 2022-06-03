@@ -105,9 +105,14 @@ public class HomeController {
 		return "login/join";
 	}
 
-	@GetMapping("mypage")
+	@GetMapping("mypagez")
 	public String test104() {
 		return "mypage/mypage";
+	}
+	
+	@GetMapping("tos")
+	public String test105() {
+		return "login/tos";
 	}
 
 
