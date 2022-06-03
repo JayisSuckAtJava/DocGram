@@ -77,6 +77,7 @@
 
 
 
+<<<<<<< HEAD
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -294,3 +295,6 @@
 
 </body>
 </html>
+=======
+</html>
+>>>>>>> 737b6579f9fc0c5d04e9cd85323a62155a815251

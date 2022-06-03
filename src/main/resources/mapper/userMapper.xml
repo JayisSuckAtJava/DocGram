@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
+<!--
+	SQL File Name : userMapper.xml
+	Description :
+	Author : 문예빈
+	Since : 2022. 5. 20.
+-->
 <mapper namespace="user">
 
-
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
 <select id="readDeptList" parameterType="Long" resultType="dept">
 select d1.id,
 	d1.name,
@@ -17,5 +27,103 @@ where d1.upper_dept = d2.id
 and d2.upper_dept = d3.id
 and d1.id = ${deptId}
 </select>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
+<select id="readUser" parameterType="user" resultType="user">
+select id,
+	email,
+	name,
+	phone_number,
+	dept_number,
+	position_id,
+	dept_id,
+	hashtag_id
+from user
+where email = #{email}
+and password = #{password}
+</select>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
+<insert id="createUser" parameterType="user">
+insert into user (
+	email,
+	name,
+	password,
+	phone_number,
+	dept_number,
+	dept_id,
+	postion_id,
+	hashtag_id
+)
+values (
+	#{email},
+	#{name},
+	#{password},
+	#{phoneNumber},
+	#{deptNumber},
+	#{deptId},
+	#{postionId},
+	1
+)
+</insert>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
+<update id="updateUser" parameterType="user">
+update user
+	<trim prefix="set" prefixOverrides=",">
+		<if test="password != null">password = #{password}</if>
+		<if test="phoneNumber != null">phone_number = #{phoneNumber}</if>
+		<if test="deptNumber != null">dept_number = #{deptNumber}</if>
+		<if test="positionId != null">position_id = #{positionId}</if>
+		<if test="deptId != null">dept_id = #{deptId}</if>
+		<if test="hashtagId != null">hashtag_id = #{hashtag_id}</if>
+	</trim>
+where id = #{id}
+</update>
+
+<!--
+	쿼리명 :
+	설 명:
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 5. 31.
+-->
+<select id="readUserList" parameterType="String">
+select u.name as user_name,
+	u.email as user_email,
+	u.phone_number as user_phone_number,
+	u.dept_number as user_dept_number,
+	d.name as dept_name
+from user u
+join dept d on d.id = u.dept_id
+<if test="name != null">
+where u.name = #{name}
+</if>
+</select>
+
+<!--
+	쿼리명 : deleteUser
+	설 명: 
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 1.
+-->
+<delete id="deleteUser" parameterType="Long">
+delete from user where id = #{deleteUser}
+</delete>
+
 </mapper>
 

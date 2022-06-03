@@ -90,5 +90,26 @@ public class HomeController {
 	}
 	
 
-}
+	@GetMapping("1main")
+	public String test101() {
+		return "board/main";
+	}
+	
+	@GetMapping("bootstrapTest")
+	public String test102() {
+		return "test/bootstrapTest";
+	}
+	
+	@GetMapping("join")
+	public String test103() {
+		return "login/join";
+	}
 
+	@GetMapping("mypage")
+	public String test104() {
+		return "mypage/mypage";
+	}
+
+
+
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 마진부분 css */
 .all {
   margin-left: 15%;
@@ -125,3 +126,6 @@ input::placeholder {color:#434343;}
 .item-list li.pager-last a {background-position: -90px -20px}
 .item-list a,
 .item-list strong {display: inline-block;}
+=======
+@charset "UTF-8";
+>>>>>>> 737b6579f9fc0c5d04e9cd85323a62155a815251

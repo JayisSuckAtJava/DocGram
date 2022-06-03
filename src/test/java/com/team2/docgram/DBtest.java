@@ -1,5 +1,10 @@
 package com.team2.docgram;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -11,8 +16,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.team2.docgram.dao.BoardDao;
+import com.team2.docgram.dao.BoardHashtagDao;
+import com.team2.docgram.dao.UserDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
@@ -30,30 +42,36 @@ public class DBtest {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Autowired
+	UserDao userDao;
+	
+	@Autowired
+	BoardHashtagDao bhDao;
+	
 	
 	@Autowired
 	private BoardService boardService;
-/*
 	@Test
 	public void teststst() {
 		BoardDto board = new BoardDto();
 		board.setTitle(" xptmxm");
 		board.setContent("내용");
 		board.setUserId(1l);
-		Long re = boardDao.createBoard(board);
-		System.out.println(re);
+//		Long re = boardDao.createBoard(board);
+//		System.out.println(re);
 //		BoardDto re = boardDao.createBoard(board);
 //		System.out.println(re);
 	}
 
 	
 	@Test
-	public void teststst() {
+	public void teststs2t() {
 		int a =1 ;
 		int b= 2;
 		System.out.println(a+b);
 	}
 
+/*
 	@Test
 	public void test() {
 		sqlSession.insert("team2.test");
@@ -348,7 +366,7 @@ public class DBtest {
 		String [] sa = in.split(",");
 		Stream<String> str = Stream.of(sa);
 		System.out.println(str.toString());
-	}*/
+	}
 	
 	@Test
 	public void longtest() {
@@ -357,5 +375,222 @@ public class DBtest {
 		Long a = 11110009L;
 		Long b = a%10;
 		System.out.println(b);
+	}*/
+	@Test
+	public void stea() {
+		UserDto user = new UserDto();
+		user.setEmail("ac");
+		user.setPassword("df");
+		UserDto u = userDao.readUser(user);
+		System.out.println(u);
 	}
+	
+	@Test
+	public void sdsdsd() {
+		Long page = 3L;
+		page = ( page - 1 ) * 10;
+		System.out.println(page);
+	}
+	
+	@Test
+	public void thhang() {
+		Long r = 1L;
+		Long rel1, rel2, rel3;
+		if(r==0) {
+			System.out.println(r+"은 0");
+		}else{
+			rel1 = ( r >= 1 ) ? 1L : null;
+			rel2 = ( r >= 2 ) ? 1L : null;
+			rel3 = ( r >= 3 ) ? 1L : null;
+		}
+	}
+	
+	@Test
+	public void sdsdssdsdd() {
+		Map<String,Object> map = new HashMap<>();				
+		map.put("boardId", 1L);
+		map.put("hashtagId", 5L);
+		
+		Long result = bhDao.readBoardHashtag(map);
+		System.out.println(result);
+	}
+	
+	@Test
+	public void sdsdssfd() {
+		// 제작 의도
+		// 게시글 수정에서 해시태그를 수정할 경우 원래 해시태그가 삭제 되는게 아니라
+		// 포함한 상태로 나옴
+		// array로 처리하니까 sort를 사용해볼 예정
+		
+		String[] a = {"믿음","소망","사랑"};
+		String[] b = {"사랑","탄식","믿음"};
+		String[] test = {"ㄱ","가","ㄴ","나"};
+
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(a);
+		Arrays.sort(b);
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(test);
+		for(String i : test) {
+			System.out.println(i);
+		}
+
+	}
+	
+	@Test
+	public void sdsad() {
+		// index 가 바뀌면 어카냐
+		
+		String[] a = {"가","나","라","마"};
+		String[] b = {"나","가","다","라"};
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		Arrays.sort(a);
+		Arrays.sort(b);
+		
+		for(String i : a) {
+			System.out.println(i);
+		}
+		System.out.println("---------");
+		for(String i : b) {
+			System.out.println(i);
+		}
+	}
+	
+	@Test
+	public void sdsadadasd() {
+		
+		String[] a = {"가","나","다","라","하"};
+		String[] b = {"나","다","라","마","하"};
+		
+			
+			String one = null;
+			String two = null;
+			Boolean result = false;
+			String same = "";
+			String plus = "";
+			String minus = "";
+			
+			for(String j : a) {
+				one = j;
+				
+				for(String k : b) {
+					two = k;
+					result = one.equals(two);
+					if(result == true) {
+						same = same + k + ",";
+						System.out.println(result);
+					}else {
+						plus = plus + k + ",";
+					}
+				}
+				System.out.println("--------------");
+			}
+			System.out.println(same);
+			System.out.println(plus);
+			
+			String[] sameS = same.split(",");
+			String[] plusS = plus.split(",");
+			for(String t : sameS) {
+				System.out.println(t);
+			}
+			Stream<String> test = Arrays.stream(sameS);
+			Stream<String> te2 = Arrays.stream(plusS);
+			test.anyMatch(te2);
+	}
+	
+	@Test
+	public void sdsadasda() {
+		Long page = 1L;
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.readBoardList(page);
+		int all = boardList.size();
+		System.out.println(all);
+	}
+	
+	@Test
+	public void sadsadad() {
+		sqlSession.selectOne("boardMapper.test");
+	}
+	
+	@Test
+	public void searchDetail() {
+		
+		String [] arr;
+		String test = "내용";
+		arr = test.split(",");
+		
+		for(String i : arr) {
+			System.out.println(i);
+		}
+		System.out.println(arr.toString());
+		searchDto sd = new searchDto();
+		sd.setSel("title");
+		sd.setText("306");
+		sd.setPosition((long) 9);
+		sd.setFileName("임시회");
+		sd.setFileNum("D00000");
+		sd.setHashtagList(arr);
+		
+		sd.setDateRange((long) 31);
+				
+		String st = "2022-05-01";
+		String en = "2022-06-01";
+		Date start = Date.valueOf(st);
+		Date end = Date.valueOf(en);
+		
+		sd.setStart(start);
+		sd.setEnd(end);
+		
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = sqlSession.selectList("search.testSearch", sd);
+		
+		for(BoardDto i : boardList) {
+			System.out.println(i);
+		}
+		
+	}
+	
+	@Test
+	public void size() {
+		Map<String,Object> map = new HashMap<>();
+		
+		String[] arr = {"내용"};
+		
+		map.put("sel", "title");
+		map.put("text", "306");
+		map.put("position", 9);
+		map.put("fileName", "임시회");
+		map.put("dateRange", 30);
+		map.put("hashtagList", arr);
+		
+		Long size = sqlSession.selectOne("search.searchDetailSize", map);
+		System.out.println(size);
+	}
+	
+	
+	
+	
 }

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  
   
     <link rel="stylesheet" href="../resources/css/board.css">
     <script src="../resources/js/board.js"></script>
@@ -116,9 +118,68 @@
     
     
             <div> <!-- 관계 게시글 설정-->
-                <h3>관계 게시글 설정</h3>
+                <h3>관계문서 지정</h3>
                 <input type="text" id="boardList">
-                <button class="">리셋</button>
+
+                <!-- 관련 문서 모달 -->
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">관련문서 지정</button>
+
+
+                <!-- Modal: modalCart -->
+                <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <!--Modal Header-->
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel">
+                        <a class="navbar-brand">
+                          <i class="bi bi-patch-question"></i>
+                          기관검색
+                        </a>
+                      </h4>
+                      <form class="d-flex" method="" action="" role="search">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                          aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
+                      </form>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <!--Modal Body-->
+                    <div class="modal-body">
+
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>소속 기관</th>
+                            <th>작성자</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">${board.id}</th>
+                            <td>${board.title}</td>
+                            <td>${dept.name}</td>
+                            <td>${user.name}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
             </div>
             <script src="../../js/board.js"></script>
           </div>

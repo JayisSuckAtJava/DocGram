@@ -1,0 +1,12 @@
+
+.nav-item .nav-link, .navbar-brand {
+    color: azure;
+}
+
+.container-fluid {
+    justify-content: space-between;
+}
+
+#footer-ul .nav-item a {
+    color: rgba(240, 255, 255, 0.658);
+}

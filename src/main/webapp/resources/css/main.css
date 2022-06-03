@@ -1,82 +1,64 @@
-/* 메인 바 */
-td {
-  list-style: none;
+ /* side bar ===================================================================== */
+ 
+ /* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
 }
 
-.main_bar a {
-  display: block;
-  padding: 5% 5% 5%;
-  border-bottom: 1px solid #d6d6d6;
-  text-decoration: none;
-  color:black;
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+height: 100%;
 }
 
-.main_bar {
-  width: 70%;
-  margin-bottom: 15%;
-  margin-left: 1%;
-  float: left;
-  border: 1px solid #bcbcbc;
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+margin-bottom: 20px;
 }
 
-.main_notice, 
-.main_recentBoard_dept, 
-.main_recentBoard_all, 
-.main_recentBoard_team {
-  width: 28%;
-  padding: 5%;
-  margin-top: 5;
-  margin-left: 5%;
-  margin-bottom: 10%;
-  display: inline-block;
-  border: 1px solid #bcbcbc;
+/* header, footer ===================================================================== */
+/* Set black background color, white text and some padding */
+footer,
+header {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+
+/* body ===================================================================== */
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+ height: auto;
+ padding: 15px;
+}
+
+.row.content {
+ height: auto;
+}
+}
+
+.col-sm-8 .text-left {
+justify-content: space-around;
+}
+
+.title {
+width: 20%;
 white-space: nowrap;
-overflow:hidden;
-text-overflow: ellipsis;
-}
-
-
-
-/* 사이드바(mypage) */
-.main-sidebar {
-  width: 10%;
-  padding: 1%;
-  margin-bottom: 15%;
-  margin-left: 1%;
-  margin-right: 1%;
-  float: left;
-  border: 1px solid #bcbcbc;
-  position: sticky;
-  top: 0px;
-} 
-
-li {
-  list-style: none;
-  text-decoration: none;
-  color:black;
-}
-
-
-.main-category-list ul li a {
-	padding:1px;
-}
-
-
-/* right sidebar */
-.right-sidebar {
-  width: 10%;
-  padding: 1%;
-  margin-left: 1%;
-  margin-bottom: 15%;
-  float: left;
-  border: 1px solid #bcbcbc;
-  position: sticky;
-  top: 0px;
-white-space: nowrap;
-overflow:hidden;
+overflow: hidden;
 text-overflow: ellipsis;
 }
 
 td {
-  list-style: none;
+width: 10px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.table {
+table-layout: fixed;
 }
