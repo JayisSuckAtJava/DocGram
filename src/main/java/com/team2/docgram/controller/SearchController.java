@@ -42,12 +42,12 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("readasdsad")
+	@GetMapping("asdsaddas")
 	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
-		return "read/detail";
+		return "read/search";
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("read")
+	@GetMapping("search")
 	public String read(Model model, @RequestParam Map<String, Object>map) {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 

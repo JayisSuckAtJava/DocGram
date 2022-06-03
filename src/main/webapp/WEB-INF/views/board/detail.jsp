@@ -25,7 +25,7 @@
       
       <div class="all">
         <!-- 출력 문서 제목 -->
-            <h3 class="title-article">${문서 제목}<h3>
+            <h3 class="title-article">${board.title}<h3>
     
     
     
