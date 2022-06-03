@@ -9,7 +9,7 @@
 
         <ul class="nav justify-content-center pb-3" id="footer-ul">
           <li class="nav-item">
-            <a href="" class="nav-link px-2">Home</a>
+            <a href="main" class="nav-link px-2">Home</a>
           </li>
           <li class="nav-item">
             <a href="https://github.com/JayisSuckAtJava/DocGram" class="nav-link px-2">github</a>
