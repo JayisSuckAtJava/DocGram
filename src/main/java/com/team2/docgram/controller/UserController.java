@@ -240,11 +240,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 사용자의 MYtag 수정 로직
 	 * 
-	 * @param tagName
-	 * @param session
-	 * @return
+	 * @param tagName 지정한 tag 이름 받음
+	 * @param session 수정된 데이터를 보여줄 session
+	 * @return 동일 페이지로 리턴 + 값 표시
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -258,10 +258,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 즐겨찾기 추가 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 즐겨찾기에 추가할 게시판 id
+	 * @param session user의 id를 포함한 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -274,10 +274,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 즐겨찾기 삭제 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 삭제할 대상 board의 id
+	 * @param session 사용자의 정보를 조회할 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -290,10 +290,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 부서 알림 추가 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 추가할 board 의 id
+	 * @param session 사용자가 속한 부서 정보를 가진 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -309,10 +309,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 부서 알림 삭제 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 삭제할 board 의 id
+	 * @param session 사용자가 속한 부서 정보를 가진 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.

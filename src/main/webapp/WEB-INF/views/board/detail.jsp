@@ -14,70 +14,9 @@
     <link rel="stylesheet" href="../resources/css/board.css">
     <script src="../resources/js/board.js"></script>
 
-  
-  <!-- <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style> -->
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-
-<<<<<<< HEAD
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -104,23 +43,23 @@
     
                     <tr>
                         <th scope="row">작성자</th>
-                        <td> 윤구 </td>
+                        <td>${board.user.name}     ${board.user.position.name}</td>
                         <th scope="row" class="tline" itemprop="contributor">작성일</th>
-                        <td class="tline">2022/5/5</td>
+                        <td class="tline">${board.date}</td>
                     </tr>
     
                     <tr>
                         <th scope="row" itemprop="accountablePerson">문서 관리 번호</th>
-                        <td>D2001245</td>
+                        <td>${board.file.num}</td>
                         <th scope="row" itemprop="dateCreated">
                             전화번호
                         </th>
-                        <td>010-4393-2445</td>
+                        <td>${board.user.deptNumber}</td>
                     </tr>
     
                     <tr>
                         <th scope="row">소속기관</th>
-                        <td colspan="3" style="flex-wrap: nowrap"> 세종청사 > 어저꾸저꾸부 > 무슨무슨팀 </td>
+                        <td colspan="3" style="flex-wrap: nowrap"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
                     </tr>
                 </tbody>
             </table>
@@ -140,16 +79,12 @@
                 <h4 class="hash"> 해시태그 정보 </h4>
             </div>
     
-            <div>
-                <ul class="hashdetail">
-                    <li>
-                        <a>
-                            #윤구 #재범 #예빈
-                        </a>
-                    </li>
-                </ul>
+            <div class="hashdetail">
+            <c:forEach items="${hashtagList}" var="hashtag">
+            <tag>#${hashtag.name} </tag>
+            </c:forEach>
             </div>
-        </div>    
+        </div>       
     
         <hr>
         <div>
@@ -179,13 +114,15 @@
                 <ul class="list-attachment">
                     <li>
                         <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
-                            <p class="file-down"> </p>
-                            <p class="title-down">20220322142339618.hwp <span class="txt-gray">(185 KB)</span></p> <span
-                                class="btn-downset"> <button type="button" onclick="docview('F0000090178239', 'hview');"
-                                    class="btn btn-view">문서보기</button>
-                                <a href="/og/com/download.php?uri=%2Ffiles%2Fdcdata%2F100049%2F20220322%2FF0000090178239.hwp&dname=20220322142339618.hwp"
-                                    class="btn btn-download btn-original" style='margin-left:5px'><i class="icon-img icon-down"></i>
-                                    <button class="element-invisible">다운로드</button></a> </span>
+                            <p class="title-down">${board.file.name}</p> 
+                            <span class="btn-downset">
+                                <!-- 문서 보기 버튼-->
+                                 <button type="button" class="btn btn-view" onclick="showDocs()">문서보기</button>    
+                                <a href="/download/${board.file.id}" class="btn btn-download btn-original" style='margin-left:5px'>
+                                    <i class="icon-img icon-down"></i>
+                                    <button class="element-invisible">다운로드</button>
+                                </a> 
+                            </span>
                             <p></p>
                     </li>
                 </ul>
@@ -199,102 +136,50 @@
             <div>
                 <h4 class="relation">관련 문서</h4> 
             </div>
-            
             <div class="relationlist">
                 <ul>
-                    <!-- 문서 시작 -->
+                <!--  첫번쨰 문서-->
+                   
+                    <c:if test="${relationList[0] != null}">
+                    <c:forEach items="${relationList}" var="relatedBoard">
+                    <c:if test="${relatedBoard != null}">
                     <li>
                         <div>
-                            <a href="">
-                                    세종 청사의 공공기관 관련한 보고서1
-                            </a>
+                            <a href="${relatedBoard.id}">${relatedBoard.title}</a>
                         </div>
                             <p>
-                                <span class="date">
-                                    <strong>
-                                        작성(등록일)
-                                    </strong>
-                                    2022-03-22
-                                </span>
-                                <span>
-                                    <strong>
-                                        기관
-                                    </strong>
-                                    시설부서
-                                </span>
-    
+                                <span class="date">${relatedBoard.date}</span>
+                                <span>${relatedBoard.user.dept.name}</span>
                             </p>
                     </li>
-                    <!-- 문서 끝 -->
-    
-                    <li>
-                        <div>
-                            <a href="">
-                                    <strong>문서 제목</strong>
-                                    세종 청사의 공공기관 관련한 보고서1
-                            </a>
-                        </div>
-                            <p>
-                                <span class="date">
-                                    <strong>
-                                        등록일
-                                    </strong>
-                                    2022-03-22
-                                </span>
-                                <span>
-                                    <strong>
-                                        부서
-                                    </strong>
-                                    시설부서
-                                    시설부서
-                                </span>
-    
-                            </p>
-                    </li>
-    
-                    <li>
-                        <div>
-                            <a href="">
-                                    <strong>문서 제목</strong>
-                                    세종 청사의 공공기관 관련한 보고서1
-                            </a>
-                        </div>
-                            <p>
-                                <span class="date">
-                                    <strong>
-                                        등록일
-                                    </strong>
-                                    2022-03-22
-                                </span>
-                                <span>
-                                    <strong>
-                                        부서
-                                    </strong>
-                                    시설부서
-                                </span>
-    
-                            </p>
-                    </li>
-    
+                    </c:if>
+                    </c:forEach>
+                    </c:if>
                 </ul>
             </div>
         </div>
-        <hr>
-    
-        </div>
-    </div>
-    <div class="col-sm-2 sidenav">
 
     </div>
-  </div>
-</div>
-
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
-
+    <hr>
+   </div>
 </body>
+
+    <!-- script 부분 -->
+
+        <script>
+        const tds = document.querySelectorAll("tag");
+        tds.forEach((v) => {
+            let text = v.innerHTML;
+            let tag = text.substring(1);
+            v.addEventListener("click" , ()=>{
+            	window.location.href = `../read?hashtagList=\${tag}`;     
+            })
+            })
+            
+        function showDocs() {
+			const url = window.location.host
+			window.open(`http://docs.google.com/viewer?url=http://\${url}/resources/static/pdf/${board.id}_${board.file.name}`);
+		} 
+  
+</script>
 </html>
-=======
-</html>
->>>>>>> 737b6579f9fc0c5d04e9cd85323a62155a815251
