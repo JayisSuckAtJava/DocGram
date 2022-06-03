@@ -112,6 +112,7 @@ public class UserController {
 	@PostMapping("user/signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
+		System.out.println(user);
 		
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
@@ -120,7 +121,7 @@ public class UserController {
 		
 		userService.createUser(user);
 		
-		return "redirect:/signin";
+		return "redirect:/user/signin";
 	}
 
 	/**
@@ -201,7 +202,7 @@ public class UserController {
 	public String searchUserPage(Model model) {
 		List<UserDto> userList = userService.readUserList();
 		model.addAttribute("userList", userList);
-		return "";
+		return "mypage/mypage";
 	}
 	
 	/**

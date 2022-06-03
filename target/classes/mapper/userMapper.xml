@@ -62,7 +62,7 @@ insert into user (
 	phone_number,
 	dept_number,
 	dept_id,
-	postion_id,
+	position_id,
 	hashtag_id
 )
 values (
@@ -72,7 +72,7 @@ values (
 	#{phoneNumber},
 	#{deptNumber},
 	#{deptId},
-	#{postionId},
+	#{positionId},
 	1
 )
 </insert>
