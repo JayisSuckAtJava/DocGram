@@ -35,11 +35,11 @@
       <div class="col-sm-2 sidenav">
         <c:if test="${session.user == null}">
         <p><a href="login">로그인</a></p>
-        <p><a href="#">회원가입</a></p>
+        <p><a href="join">회원가입</a></p>
         </c:if>
         <c:if test="${session.user != null}">
                 <p>${user.name}/${dept.name}</p>
-        <p><a href="#">My page</a></p>
+        <p><a href="mypage">My page</a></p>
         <p><a href="#">로그아웃</a></p>
         </c:if>
       </div>
