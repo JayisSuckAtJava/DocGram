@@ -18,7 +18,7 @@ import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
 
 /**  SearchController.java
- *   설명
+ *   상세 검색 기능 구현 컨트롤러
  * 
  * @author JAY - 이재범
  * @since 2022. 5. 28.
@@ -42,43 +42,29 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("readasdsad")
+	@GetMapping("asdsaddas")
 	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
-		return "read/detail";
+		return "read/search";
 	}
 	
 	/**
 	 * 검색된 조건에 해당하는 값을 보여주는 로직
 	 * 
-	 * @param map
-	 * @return
+	 * @param map 상세 검색에 필요한 9개 요소 모두 받는 map
+	 * @param model 값을 표현하기 위한 model
+	 * @return 검색 결과값 + 전체 리스트 수 와 함께 동일 페이지 리턴
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("read")
+	@GetMapping("search")
 	public String read(Model model, @RequestParam Map<String, Object>map) {
-		System.out.println(map);
-		if(map.get("page") == null) {
-			map.put("page", 1);
-		}
-		// 기본검색 4항 제목 내용 작성자 기관 (sel)
-		// 항목 검색 작성자의 직책, file의 이름, file 의 num
-		// 태그 검색 태그에 따른 중첩된 데이터 검색 and h.name = and h.name =
-		// 검색 기간 date -3month date -6month
-		// 그렇게 나온 리스트의 페이지 처리 + 전체 조회값 . size
-		
-		// sel 값에 따라 text가 뭘 지정할지 결정됨, position 은 board.user.position_id 로 fileName은
-		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 
 		model.addAllAttributes(resultMap);
-		//model.addAttribute("total", listSize);
-		// service 에서 map 으로 리턴할까? 다 처리해서? 담배피고 결정하는걸로
-		
 		return "read/detail";
 	}
 }

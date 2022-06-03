@@ -43,7 +43,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("signin")
+	@GetMapping("user/signin")
 	public String loginPage() {
 		return "login/login";
 	}
@@ -58,7 +58,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signin")
+	@PostMapping("user/signin")
 	public String login(UserDto user,HttpSession session) {
 		
 		UserDto userDetail = userService.readUser(user);
@@ -66,7 +66,7 @@ public class UserController {
 			return "redirect:/signin";
 		}else {
 			session.setAttribute("user", user);
-			return "redirect:/main";			
+			return "redirect:../main";			
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signout")
+	@GetMapping("user/signout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main";
@@ -93,7 +93,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signup")
+	@GetMapping("user/signup")
 	public String signupPage() {
 		return "login/join";
 	}
@@ -108,7 +108,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signup")
+	@PostMapping("user/signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
 		
@@ -119,7 +119,7 @@ public class UserController {
 		
 		userService.createUser(user);
 		
-		return "redirect:/";
+		return "redirect:/signin";
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class UserController {
 			Long userId = user.getId();
 			userService.deleteUser(userId);
 			session.invalidate();
-			return "signup";
+			return "../user/signup";
 		}else {
 			return "mypage";
 		}
@@ -240,11 +240,11 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 사용자의 MYtag 수정 로직
 	 * 
-	 * @param tagName
-	 * @param session
-	 * @return
+	 * @param tagName 지정한 tag 이름 받음
+	 * @param session 수정된 데이터를 보여줄 session
+	 * @return 동일 페이지로 리턴 + 값 표시
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -258,10 +258,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 즐겨찾기 추가 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 즐겨찾기에 추가할 게시판 id
+	 * @param session user의 id를 포함한 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -274,10 +274,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 즐겨찾기 삭제 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 삭제할 대상 board의 id
+	 * @param session 사용자의 정보를 조회할 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -290,10 +290,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 부서 알림 추가 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 추가할 board 의 id
+	 * @param session 사용자가 속한 부서 정보를 가진 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -309,10 +309,10 @@ public class UserController {
 	}
 	
 	/**
-	 * 설명
+	 * 부서 알림 삭제 로직
 	 * 
-	 * @param boardId
-	 * @param session
+	 * @param boardId 삭제할 board 의 id
+	 * @param session 사용자가 속한 부서 정보를 가진 session
 	 * 
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.

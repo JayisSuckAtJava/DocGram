@@ -24,7 +24,7 @@ public class BoardDaoImpl implements BoardDao {
 	private String mapper = "board.";
 
 	 /**
-	 * 설명
+	 * 
 	 * 
 	 * @param board
 	 * @return 
@@ -108,10 +108,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 즐겨찾기 게시글 조회
 	 * 
-	 * @param userId
-	 * @return 
+	 * @param userId user정보로 starMark 에 접근
+	 * @return 해당하는 board 의 list
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -122,10 +122,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 부서 알림 지정된 게시글 조회
 	 * 
-	 * @param deptId
-	 * @return 
+	 * @param deptId 조회를 위한 부서 id
+	 * @return 부서 id 즐겨찾기에 해당된 boardList
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -136,9 +136,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 공지사항 조회
 	 * 
-	 * @return 
+	 * @return 공지사항 리스트 반환 
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
@@ -149,9 +149,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 게시글 수정
 	 * 
-	 * @param board 
+	 * @param board 수정된 데이터를 담은 boardDto 
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
@@ -162,10 +162,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 게시글 id로 작성자 id를 반환
 	 * 
-	 * @param id
-	 * @return 
+	 * @param id 해당 게시글의 id
+	 * @return user_id
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
@@ -176,9 +176,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	 /**
-	 * 설명
+	 * 게시글 삭제
 	 * 
-	 * @param id 
+	 * @param id 해당 게시글의 id 
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
@@ -188,11 +188,29 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.delete(mapper+"deleteBoard", id);
 	}
 
+	/**
+	 * 상세 검색 기준으로 해당하는 board의 List 반환
+	 * 
+	 * @param map 검색 조건을 포함한 map
+	 * @return 검색 조건에 해당되는 Board의 List
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 2.
+	 */
 	@Override
 	public List<BoardDto> searchDetail(Map<String, Object> map) {
 		return sqlSession.selectList("search.searchDetail", map);
 	}
 
+	/**
+	 * 상세 검색 기준에 해당되는 전체 List 의 크기
+	 * 
+	 * @param map 검색 조건을 담은 map
+	 * @return List 의 크기
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 2.
+	 */
 	@Override
 	public Long searchDetailSize(Map<String, Object> map) {
 		return sqlSession.selectOne("search.searchDetailSize", map);
