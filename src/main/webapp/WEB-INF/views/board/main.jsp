@@ -33,14 +33,14 @@
     <div class="row content">
       <div class="col-sm-2 sidenav">
         <c:if test="${sessionScope.user == null}">
-        <p><a href="login">로그인</a></p>
-        <p><a href="join">회원가입</a></p>
+        <p><a href="user/signin">로그인</a></p>
+        <p><a href="user/signup">회원가입</a></p>
         
         </c:if>
         <c:if test="${sessionScope.user != null}">
-                <p>${user.name}/${dept.name}</p>
+                <p>${user.name}/${user.dept.name}</p>
         <p><a href="mypage">My page</a></p>
-        <p><a href="#">로그아웃</a></p>
+        <p><a href="user/signout">로그아웃</a></p>
         </c:if>
       </div>
       <div class="col-sm-8 text-left">
