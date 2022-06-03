@@ -58,7 +58,7 @@ public class HomeController {
 		return "board/detail1";
 	}
 	
-	@GetMapping("/notice")
+	@GetMapping("/noticeasdasd")
 	public String test6() {
 		return "board/notice";
 	}
@@ -74,12 +74,12 @@ public class HomeController {
 		return "login/login";
 	}
 	
-	@GetMapping("/search")
+	@GetMapping("/searchasdasdasda")
 	public String test9() {
 		return "read/search";
 	}
 	
-	@GetMapping("/board")
+	@GetMapping("/boardasdasdasd")
 	public String test10() {
 		return "admin/board";
 	}

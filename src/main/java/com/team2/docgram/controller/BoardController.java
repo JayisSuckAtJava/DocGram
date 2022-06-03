@@ -59,7 +59,7 @@ public class BoardController {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
-		return "detailsearch";
+		return "board/dept";
 	}
 	
 	/**
@@ -117,10 +117,10 @@ public class BoardController {
 			
 		String savedFileName = boardService.createBoard(board,hashtagList,relatedBoardList,fileName);
 		if(savedFileName == null) {
-			return "redirect:../read";
+			return "redirect:../board";
 		}else {
 			fileService.createFile(savedFileName, mFile);
-			return "redirect:../read";
+			return "redirect:../board";
 		}
 	}
 	
@@ -185,7 +185,7 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("board/popup")
+	@GetMapping("rest/dept")
 	public String popup(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
@@ -299,7 +299,7 @@ public class BoardController {
 		Long boardUserId = boardService.readBoardUserId(id);
 		if(userId == boardUserId || positionId > 6) {
 			boardService.deleteBoard(id);
-			return "redirect:../../read";
+			return "redirect:../../board";
 		}
 		return "";
 	}
