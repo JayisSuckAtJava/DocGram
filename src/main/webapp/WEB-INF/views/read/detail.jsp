@@ -252,7 +252,7 @@ input::placeholder {color:#434343;}
         <tr>
         	<td>${board.id}</td>
           	<td>${board.title}</td>
-          	<td>${board.fileId}</td>
+          	<td><a href="download/${board.fileId}">김치</a></td>
           	<td>${board.user.dept.name}</td>
           	<td>${board.date}</td>
           	<td>${board.user.name}</td>
