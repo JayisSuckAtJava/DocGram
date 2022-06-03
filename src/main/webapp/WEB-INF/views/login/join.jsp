@@ -56,13 +56,13 @@
 
                 <div class="col-md-10 mb-3">
                   <label for="inputPassword">비밀번호</label>
-                  <input type="password" name="pwd1" id="pwd1" class="form-control" required></input>
+                  <input type="password" id="pwd1" class="form-control" required></input>
                 </div>
 
                 <div class="col-md-10 mb-3">
                   <label for="inputPasswordCheck">비밀번호확인</label>
                   &nbsp;
-                  <input type="password" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인"
+                  <input type="password" id="pwd2" class="form-control" placeholder="비밀번호 확인"
                     reaquired></input> 
                     <input type="hidden" name="password" id="pwd"/>
                   <div class="col-md-10 mb-3">
@@ -77,7 +77,7 @@
                 <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" name="dept" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
                       required>
                     &nbsp;
 
@@ -132,7 +132,7 @@
                     
                       <!-- position Selection -->
                    <label for="position-select">직급 : </label>
-                   <select name="position" id="position-select">
+                   <select id="position-select">
                       <option value="">== 직급을 선택해주세요 ==</option>
                       <option value="1">서기보</option>
                       <option value="2">서기</option>
@@ -150,13 +150,13 @@
 
                 <div class="col-md-10 mb-3">
                   <label for="inputPhoneNum">휴대폰 번호</label>
-                  <input type="tel" name="phone_num" class="form-control" id="inputPhoneNum"
+                  <input type="tel" name="phoneNumber" class="form-control" id="inputPhoneNum"
                     placeholder="휴대폰번호를 입력해 주세요" required>
                 </div>
 
                 <div class="col-md-10 mb-3">
                   <label for="inputDeptNum">부서 번호</label>
-                  <input type="tel" name="dept_num" class="form-control" id="inputDeptNum" placeholder="사무실번호를 입력해 주세요"
+                  <input type="tel" name="deptNumber" class="form-control" id="inputDeptNum" placeholder="사무실번호를 입력해 주세요"
                     required>
                 </div>
 
