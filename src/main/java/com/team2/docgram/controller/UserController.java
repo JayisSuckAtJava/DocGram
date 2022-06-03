@@ -43,7 +43,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("signin")
+	@GetMapping("user/signin")
 	public String loginPage() {
 		return "login/login";
 	}
@@ -58,7 +58,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signin")
+	@PostMapping("user/signin")
 	public String login(UserDto user,HttpSession session) {
 		
 		UserDto userDetail = userService.readUser(user);
@@ -66,7 +66,7 @@ public class UserController {
 			return "redirect:/signin";
 		}else {
 			session.setAttribute("user", user);
-			return "redirect:/main";			
+			return "redirect:../main";			
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signout")
+	@GetMapping("user/signout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main";
@@ -93,7 +93,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signup")
+	@GetMapping("user/signup")
 	public String signupPage() {
 		return "login/join";
 	}
@@ -108,7 +108,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signup")
+	@PostMapping("user/signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
 		
@@ -119,7 +119,7 @@ public class UserController {
 		
 		userService.createUser(user);
 		
-		return "redirect:/";
+		return "redirect:/signin";
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class UserController {
 			Long userId = user.getId();
 			userService.deleteUser(userId);
 			session.invalidate();
-			return "signup";
+			return "../user/signup";
 		}else {
 			return "mypage";
 		}
