@@ -14,4 +14,6 @@ public interface DeptDao {
 
 	DeptDto readDeptList(Long deptId);
 
+	List<DeptDto> searchDept(String name);
+
 }

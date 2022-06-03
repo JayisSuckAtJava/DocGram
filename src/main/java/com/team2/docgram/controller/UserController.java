@@ -60,12 +60,13 @@ public class UserController {
 	 */
 	@PostMapping("user/signin")
 	public String login(UserDto user,HttpSession session) {
-		
+		System.out.println(user.getEmail());
+		System.out.println(user.getPassword());
 		UserDto userDetail = userService.readUser(user);
 		if(userDetail == null) {
 			return "redirect:/signin";
 		}else {
-			session.setAttribute("user", user);
+			session.setAttribute("user", userDetail);
 			return "redirect:../main";			
 		}
 	}

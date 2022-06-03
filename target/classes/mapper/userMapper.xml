@@ -125,5 +125,11 @@ where u.name = #{name}
 delete from user where id = #{deleteUser}
 </delete>
 
+<select id="searchDept" parameterType="String" resultType="dept">
+select id, name
+from dept
+where name like "%${name}%"
+</select>
+
 </mapper>
 
