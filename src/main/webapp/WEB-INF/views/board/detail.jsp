@@ -302,7 +302,7 @@
                         <p class="title-down">${board.file.name}</p> 
                         <span class="btn-downset">
                             <!-- 문서 보기 버튼-->
-                             <button type="button" class="btn btn-view">문서보기</button>
+                             <button type="button" class="btn btn-view" onclick="showDocs()">문서보기</button>
 
                             <a href="/download/${board.file.id}" class="btn btn-download btn-original" style='margin-left:5px'>
                                 <i class="icon-img icon-down"></i>
@@ -327,8 +327,9 @@
             <ul>
             <!--  첫번쨰 문서-->
                
-                
+                <c:if test="${relationList[0] != null}">
 				<c:forEach items="${relationList}" var="relatedBoard">
+				<c:if test="${relatedBoard != null}">
                 <li>
                     <div>
                         <a href="${relatedBoard.id}">${relatedBoard.title}</a>
@@ -338,7 +339,9 @@
                             <span>${relatedBoard.user.dept.name}</span>
                         </p>
                 </li>
+                </c:if>
 				</c:forEach>
+				</c:if>
             </ul>
         </div>
     </div>
@@ -351,12 +354,17 @@
         <script>
         const tds = document.querySelectorAll("tag");
         tds.forEach((v) => {
-            console.log(v)
             let text = v.innerHTML;
+            let tag = text.substring(1);
             v.addEventListener("click" , ()=>{
-                alert(`\${text}`)
+            	window.location.href = `../read?hashtagList=\${tag}`;     
             })
             })
+            
+        function showDocs() {
+			const url = window.location.host
+			window.open(`http://docs.google.com/viewer?url=http://\${url}/resources/static/pdf/${board.id}_${board.file.name}`);
+		} 
   
 </script>
 

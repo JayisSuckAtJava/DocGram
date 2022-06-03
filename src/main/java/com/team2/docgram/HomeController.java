@@ -105,4 +105,9 @@ public class HomeController {
 	}
 
 
+	@GetMapping("jay/test")
+	public String urltest() {
+		return "testforurl";
+	}
+	
 }
