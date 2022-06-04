@@ -1,5 +1,6 @@
 package com.team2.docgram.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
+import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.HashtagService;
 import com.team2.docgram.service.StarmarkService;
 import com.team2.docgram.service.UserService;
@@ -34,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	private StarmarkService starmarkService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	/**
 	 * 로그인 페이지 전환
@@ -63,10 +69,12 @@ public class UserController {
 		System.out.println(user.getEmail());
 		System.out.println(user.getPassword());
 		UserDto userDetail = userService.readUser(user);
+		System.out.println(userDetail);
 		if(userDetail == null) {
-			return "redirect:/signin";
+			return "redirect:signin";
 		}else {
 			session.setAttribute("user", userDetail);
+			
 			return "redirect:../main";			
 		}
 	}
@@ -257,6 +265,25 @@ public class UserController {
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		userService.updateHashtag(hashtagId);
 		return "redirect:/";
+	}
+	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 3.
+	 */
+	@GetMapping("mypage")
+	public String mypagePage(HttpSession session,Model model) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.readMyBoardList(userId);
+		model.addAttribute("boardList", boardList);
+		return "mypage/mypage";
 	}
 	
 	/**

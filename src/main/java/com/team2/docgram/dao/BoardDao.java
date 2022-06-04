@@ -41,4 +41,6 @@ public interface BoardDao {
 
 	Long searchDetailSize(Map<String, Object> map);
 
+	List<BoardDto> readMyBoardList(Long userId);
+
 }
