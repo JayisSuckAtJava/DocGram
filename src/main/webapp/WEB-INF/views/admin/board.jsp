@@ -1,83 +1,41 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+ Class Name : Board.JavaScript
+ Description : 관리자 게시물 관리 페이지
+ Author : 조윤구
+ Since : 2022-06-02
+--%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>게시물 관리</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <!-- css 링크 -->
+<link rel="stylesheet" href="../resources/css/admin.css">
 
-
-        <!-- css 링크 -->
-        <link rel="stylesheet" href="../../css/admin.css">
-
+<link rel="stylesheet" href="../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/css/main.css">
+<link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <!-- js 링크 -->
-        <script src="../../js/admin.js"></script>
+<script src="../resources/js/admin.js"></script>
 
-  <!-- <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style> -->
+
+
+
+
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+	<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
+
   
 <div class="container-fluid text-center">    
   <div class="row content">
@@ -149,11 +107,11 @@
             </tr>
             <c:forEach items="${boardList}" var="board">
               <tr>
-                <td>${numb}</td>
-                <td>${제목}</td>
-                <td>${기관}</td>
-                <td>${작성일}</td>
-                <td>${작성자}</td>
+                <td>${board.id}</td>
+                <td>${board.title}</td>
+                <td>${board.dept.name}</td>
+                <td>${board.date}</td>
+                <td>${board.user.name}</td>
                 <td>🗑</td>
                 <td>
                   <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">#</button>
@@ -221,7 +179,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>${태그}<button class="btn" ><i class="bi bi-x"></i></button></td>
+                    <td>${board.hashtag.name}<button class="btn" ><i class="bi bi-x"></i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -240,17 +198,20 @@
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
-        <a>개인정보관리</a>
+      						<!-- a태그 -->
+        <a href="user">개인정보관리</a>
       </div>
+      						<!-- a태그 -->
       <div class="well">
-        <a>게시물 관리</a>
+        <a href="/boarddd">게시물 관리</a>
       </div>
     </div>
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
 
 </body>
