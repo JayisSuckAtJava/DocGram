@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+ Class Name :  Search.JavaScript
+ Description : 상세 검색 페이지
+ Author : 조윤구
+ Since : 2022-05-20
+--%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>상세 검색</title>
   <meta charset="utf-8">
@@ -16,65 +22,13 @@
   <link rel="stylesheet" href="../resources/css/read.css">
   <script src="../resources/js/read.js"></script>
   
-  <!-- <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style> -->
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
   
 <div class="container-fluid text-center">    
   <div class="row content">
@@ -197,7 +151,12 @@
         </tr>
         <c:forEach items="${boardList}" var="board">
           <tr>
-            <td>${즐겨찾기(별체크유무)}</td>
+            <td>
+            <!--  아래 c:if를 통해서 즐찾 리스트가 맞으면 출력 하는걸로 -->
+            <c:if test="session != null">
+            <i class="bi bi-star-full"></i>  <!-- 왼쪽 찬별 / 오른쪽 안찬별 --> <i class="bi bi-star"></i>
+            </c:if>
+            </td>
             <td>${board.user.name}</td>
             <td>${유저 아이디 (이메일)}</td>
             <td>${개인번호}</td>
@@ -237,9 +196,11 @@
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
+
 
 </body>
 </html>

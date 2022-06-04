@@ -355,5 +355,16 @@ public class UserController {
 			starmarkService.deleteDeptmark(deptId,boardId);			
 		}
 	}
+	
+	@GetMapping("admin/user")
+	public String adminUserPage(HttpSession session) {
+		return "admin/user";
+	}
+	
+	@GetMapping("admin/board")
+	public String adminBoardPage(HttpSession session) {
+		return "admin/board";
+	}
+	
 }
 
