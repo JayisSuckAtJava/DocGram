@@ -1,47 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%--
+ Class Name : Create.JavaScript
+ Description : 작성 페이지 (업데이크)
+ Author : 조윤구
+ Since : 2022-05-25
+--%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>작성페이지</title>
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../resources/css/bootstrap.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../resources/js/bootstrap.min.js"></script>
-
-<!-- css 부분 -->
-    <style>
-        /* 전체 마진 */
-        .all{
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-        /* 작성 부분 전체 */
-        .writebody{
-            border: 1px solid;
-        }
-        /* 제목 부분 */
-        .titlename {
-            margin-bottom: 15px;
-            
-        }
-
-        .title {
-            width: 80%;
-        }
-
-        /* 내용 작성 부분 */
-
-        .wirtearea {
-            margin-bottom: 15px;
-        }
-
-        .size{
-            width: 80%; height: 30%;
-        }
-    </style>
+    <title>수정페이지</title>
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../resources/css/board.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/css/main.css">
+<link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="../resources/js/board.js"></script>
 
 </head>
 
@@ -49,6 +31,12 @@
 
 <!-- 바디 -->
 <body>
+
+	<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
+
 <div class="all">
 
     <div class="writebody">
@@ -85,19 +73,19 @@
         </div>
     
     </div>
-    <div>   <!-- 작성 완료, 뒤로가기-->
-    <button class="submit">수정완료</button> <button>뒤로가기</button>
+    <div>   <!-- 수정 완료, 뒤로가기-->
+     <button onclick="location.href='board/id'">수정 완료</button> 
+    
+    <button onclick="location.href='read/search'">뒤로가기</button>
+
     </form>
     </div>
 </div>
-<script>
-    const hashinput = document.querySelector("#boardList");
+	
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
 
-    hashinput.addEventListener("focusin",()=>{
-        let option = "width=500, height=600, top=30, left=30, resizable=no, scrollbar=no, loaction=no";
-
-        window.open("./popup","해시태그 선택",option);
-    })
-</script>
 </body>
 </html>
