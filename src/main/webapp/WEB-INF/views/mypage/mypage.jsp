@@ -204,85 +204,80 @@
                               <div class="alert alert-danger" id="alert-danger" style="display: none;">비밀번호가 일치하지 않습니다.</div>
                             </div>
                           </div>
-                          <div class="col-md-10 mb-3">
-                            <div class="department">
-                              <label for="department">소속기관</label>
-                              <input type="tel" name="dept" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
-                                required>
-                              &nbsp;
-          
-                              <!-- Button trigger modal-->
-                              <button type="button" class="btn btn-outline-dark" style="padding: .2rem;" data-toggle="modal" data-target="#modalCart">
-                                소속기관 찾기
-                              </button>
-                              &nbsp;
-                              <!-- Modal: modalCart -->
-                              <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <!--Header-->
-                                    <div class="modal-header">
-                                      <h4 class="modal-title" id="myModalLabel">
-                                        <a class="navbar-brand">
-                                          <i class="bi bi-patch-question"></i>
-                                          기관검색
-                                        </a>
-                                      </h4>
-                                      <form class="d-flex" method="" action="" role="search">
-                                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
-                                          aria-label="Search">
-                                        <button class="btn btn-outline-success" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
-                                      </form>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                      </button>
-                                    </div>
-                                    <!--Body-->
-                                    <div class="modal-body">
-          
-                                      <table class="table table-hover">
-                                        <thead>
-                                          <tr>
-                                            <th>#</th>
-                                            <th>기 관 명</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>${dept.name}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-          
-                                    </div>
-                                    <!--Footer-->
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- Modal: modalCart -->
-          
-                              <!-- position Selection -->
-                             <label for="position-select">직급 : </label>
-                             <select name="position" id="position-select">
-                                <option value="">== 직급을 선택해주세요 ==</option>
-                                <option value="1">서기보</option>
-                                <option value="2">서기</option>
-                                <option value="3">주사보</option>
-                                <option value="4">주사</option>
-                                <option value="5">사무관</option>
-                                <option value="6">서기관</option>
-                                <option value="7">부이사관</option>
-                                <option value="8">이사관</option>
-                                <option value="9">관리관</option>
-                             </select>
                           
-                            </div>
+                                          <div class="col-md-10 mb-3">
+                  <div class="department">
+                    <label for="department">소속기관</label>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
+                      required>
+                    &nbsp;
+
+                    <!-- Button trigger modal-->
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
+                      찾기</button>
+                    &nbsp;
+                    <!-- Modal: modalCart -->
+                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <!--Modal Header-->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                              <a class="navbar-brand">
+                                <i class="bi bi-patch-question"></i>
+                                기관검색
+                              </a>
+                            </h4>
+                            <form class="d-flex" method="" action="" role="search">
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
+                                aria-label="Search">
+                              <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
+                            </form>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
                           </div>
+                          <!--Modal Body-->
+                          <div class="modal-body">
+
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>기 관 명</th>
+                                </tr>
+                              </thead>
+                              <tbody id="deptList">
+                              </tbody>
+                            </table>
+
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal: modalCart -->
+                    
+                      <!-- position Selection -->
+                   <label for="position-select">직급 : </label>
+                   <select id="position-select">
+                      <option value="">== 직급을 선택해주세요 ==</option>
+                      <option value="1">서기보</option>
+                      <option value="2">서기</option>
+                      <option value="3">주사보</option>
+                      <option value="4">주사</option>
+                      <option value="5">사무관</option>
+                      <option value="6">서기관</option>
+                      <option value="7">부이사관</option>
+                      <option value="8">이사관</option>
+                      <option value="9">관리관</option>
+                   </select>
+					<input type="hidden" name="deptCode" id="deptCode" />
+                  </div>
+                </div>
 
                           <div class="col-md-10 mb-3">
                             <label for="inputPhoneNum">휴대폰 번호</label>
