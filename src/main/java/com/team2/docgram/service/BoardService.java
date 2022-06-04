@@ -16,7 +16,7 @@ import com.team2.docgram.dto.BoardDto;
  */
 public interface BoardService {
 
-	List<BoardDto> readBoardList(Long page);
+	List<BoardDto> readBoardList(Long page,Long userId);
 
 	Map<String, Object> readBoard(Long id);
 
@@ -35,5 +35,7 @@ public interface BoardService {
 	Long readBoardUserId(Long id);
 
 	void deleteBoard(Long id);
+
+	List<BoardDto> readMyBoardList(Long userId);
 
 }

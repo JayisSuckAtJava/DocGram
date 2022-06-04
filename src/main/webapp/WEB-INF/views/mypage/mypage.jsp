@@ -107,9 +107,9 @@
                         <td>${board.id}</td>
                         <td>${board.title}</td>
                         <td>${board.fileId}</td>
-                        <td>${dept.name}</td>
+                        <td>${board.user.dept.name}</td>
                         <td>${board.date}</td>
-                        <td>${board.userName}</td>
+                        <td>${board.user.name}</td>
                       </tr>
                     </c:forEach>
   
@@ -146,12 +146,12 @@
                     </tr>
                     <c:forEach items="${boardList}" var="board">
                       <tr>
-                        <td>${board.pk}</td>
+                        <td>${board.id}</td>
                         <td>${board.title}</td>
                         <td>${board.fileId}</td>
-                        <td>${dept.name}</td>
+                        <td>${board.user.dept.name}</td>
                         <td>${board.date}</td>
-                        <td>${board.userName}</td>
+                        <td>${board.user.name}</td>
                         <td><button>수정</button></td>
                       </tr>
                     </c:forEach>

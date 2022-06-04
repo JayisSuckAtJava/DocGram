@@ -54,12 +54,13 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public List<BoardDto> readBoardList(Long page) {
+	public List<BoardDto> readBoardList(Long page,Long userId) {
 		BoardDto board = new BoardDto();
 		if(page > 0) {
 			page = ( page - 1 ) * 10; 
 		}
 		board.setStart(page);
+		board.setUserId(userId);
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardDao.readBoardList(board);
 		return boardList;
@@ -419,6 +420,20 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(Long id) {
 		boardDao.deleteBoard(id);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 3.
+	 */
+	@Override
+	public List<BoardDto> readMyBoardList(Long userId) {
+		return boardDao.readMyBoardList(userId);
 	}
 	
 }
