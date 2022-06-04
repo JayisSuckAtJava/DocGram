@@ -2,6 +2,7 @@ package com.team2.docgram.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -67,10 +69,7 @@ public class UserController {
 	 */
 	@PostMapping("user/signin")
 	public String login(UserDto user,HttpSession session) {
-		System.out.println(user.getEmail());
-		System.out.println(user.getPassword());
 		UserDto userDetail = userService.readUser(user);
-		System.out.println(userDetail);
 		if(userDetail == null) {
 			return "redirect:signin";
 		}else {
@@ -120,9 +119,6 @@ public class UserController {
 	 */
 	@PostMapping("user/signup")
 	public String createUser(UserDto user,Long deptCode) {
-		// 입력받는 deptCode 값이 11 110 000 + position
-		System.out.println(user);
-		
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
 		user.setPositionId(positionId);
@@ -144,11 +140,12 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@GetMapping("mypage/update")
-	public String updatePage(Model model,HttpSession session) {
+	@ResponseBody
+	public UserDto updatePage(HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
-		UserDto dbUser = userService.readUser(user);
-		model.addAttribute("dbUser", dbUser);
-		return "";
+		UserDto dbUser = userService.readUserOne(user);
+		return dbUser;
+		
 	}
 	
 	/**
@@ -162,17 +159,22 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("mypage/update")
-	public String update(UserDto user,HttpSession session) {
+	public void update(@RequestBody Map<String, Object> map, HttpSession session) {
+		String password = (String) map.get("password");
+		String deptNumber = (String) map.get("deptNumber");
+		String phoneNumber= (String) map.get("phoneNumber");
+		UserDto user = new UserDto();
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
-		Long userId = user.getId();
+		Long userId = sessionUser.getId();
 		user.setId(userId);
-		UserDto updatedUser = userService.updateUser(user);
-		if(updatedUser == null) {
-			return "redirect:/";
+		if(password == "") {
+			user.setPassword(null);
 		}else {
-			session.setAttribute("user", updatedUser);			
-			return "";
+			user.setPassword(password);			
 		}
+		user.setDeptNumber(deptNumber);
+		user.setPhoneNumber(phoneNumber);
+		userService.updateUser(user);
 	}
 	
 	/**
@@ -242,13 +244,14 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@GetMapping("mypage/mytag")
-	public void updateMytag(String tagName,HttpSession session) {
-		System.out.println(tagName);
+	@ResponseBody
+	public String updateMytag(String tagName,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		user.setHashtagId(hashtagId);
 		userService.updateHashtag(user);
+		return tagName;
 	}
 	
 	/**
@@ -287,7 +290,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("starmark/create")
-	public void createStarmark(Long boardId,HttpSession session) {
+	public void createStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		starmarkService.createStarmark(userId,boardId);
@@ -303,9 +306,12 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("starmark/delete")
-	public void deleteStarmark(Long boardId,HttpSession session) {
+	@ResponseBody
+	public void deleteStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
+		Long boardId = Long.parseLong((String) map.get("boardId")); 
+		System.out.println(boardId);
 		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
@@ -319,10 +325,10 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("deptmark/create")
-	public void createDeptmark(Long boardId,HttpSession session) {
+	public void createDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
-		if(postionId > 5) {
+		if(postionId > 5) {d
 			Long deptId = user.getDeptId();
 			starmarkService.createDeptmark(deptId,boardId);			
 		}
@@ -338,7 +344,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("deptmark/delete")
-	public void deleteDeptmark(Long boardId,HttpSession session) {
+	public void deleteDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {
