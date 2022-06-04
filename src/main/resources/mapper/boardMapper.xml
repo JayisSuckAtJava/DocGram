@@ -20,10 +20,12 @@
 		d.name as dept_name,
 		b.date as board_date,
 		u.name as user_name,
-		b.file_id as board_fileId
+		b.file_id as board_fileId,
+		s.id as starmark_id
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
+	left join user_starmark s on b.id = s.board_id and s.user_id = {userId}
 	where b.security >= 1
 	limit #{start}, 10
 </select>
@@ -35,14 +37,14 @@
 	최초 작성일 : 2022. 5. 30.
 -->
 <select id="readRelationBoard" parameterType="Long" resultMap="detailBoard">
-select b.id as board_id,
-	b.title as board_title,
-	b.date as board_date,
-	d.name as dept_name
-from board b
-join user u on u.id = b.user_id
-join dept d on d.id = u.dept_id
-where b.id = #{id}
+	select b.id as board_id,
+		b.title as board_title,
+		b.date as board_date,
+		d.name as dept_name
+	from board b
+	join user u on u.id = b.user_id
+	join dept d on d.id = u.dept_id
+	where b.id = #{id}
 </select>
 
 <!--
@@ -52,25 +54,25 @@ where b.id = #{id}
 	최초 작성일 : 2022. 5. 28.
 -->
 <select id="readBoard" resultMap="detailBoard" parameterType="Long">
-SELECT b.ID AS board_id, 
-b.title as board_title,
-b.content as board_content,
-b.date as board_date,
-b.file_id as file_id,
-f.Num as file_num,
-f.NAME as file_name,
-u.name as user_name,
-u.DEPT_NUMBER as user_dept_number,
-p.NAME as position_name,
-u.DEPT_ID AS user_dept_id,
-b.RELATION_1 AS board_relation_1,
-b.RELATION_2 AS board_relation_2,
-b.RELATION_3 AS board_relation_3
-FROM board b
-left outer JOIN file f ON b.FILE_ID = f.ID
-JOIN user u ON b.USER_ID = u.id
-JOIN position p ON u.POSITION_ID = p.ID
-WHERE b.ID = #{id}
+	SELECT b.ID AS board_id, 
+		b.title as board_title,
+		b.content as board_content,
+		b.date as board_date,
+		b.file_id as file_id,
+		f.Num as file_num,
+		f.NAME as file_name,
+		u.name as user_name,
+		u.DEPT_NUMBER as user_dept_number,
+		p.NAME as position_name,
+		u.DEPT_ID AS user_dept_id,
+		b.RELATION_1 AS board_relation_1,
+		b.RELATION_2 AS board_relation_2,
+		b.RELATION_3 AS board_relation_3
+	FROM board b
+	left outer JOIN file f ON b.FILE_ID = f.ID
+	JOIN user u ON b.USER_ID = u.id
+	JOIN position p ON u.POSITION_ID = p.ID
+	WHERE b.ID = #{id}
 </select>
 
 <!--
@@ -80,21 +82,21 @@ WHERE b.ID = #{id}
 	최초 작성일 : 2022. 5. 31.
 -->
 <select id="readStarmarkList" parameterType="Long" resultMap="detailBoard">
-select b.id as board_id,
-		b.title as board_title,
-		d.name as dept_name,
-		b.date as board_date,
-		u.name as user_name,
-		b.file_id as board_fileId
-from board b
-	join user u on b.user_id = u.id
-	join dept d on u.dept_id = d.id
-where b.id = (
-		select board_id
-		from user_starmark
-		where user_id = #{userId}
-	)
-limit 0,15
+	select b.id as board_id,
+			b.title as board_title,
+			d.name as dept_name,
+			b.date as board_date,
+			u.name as user_name,
+			b.file_id as board_fileId
+	from board b
+		join user u on b.user_id = u.id
+		join dept d on u.dept_id = d.id
+		join (
+			select board_id
+			from user_starmark
+			where user_id = #{userId}
+		) s on b.id = s.board_id
+	limit 0,15
 </select>
 
 <!--
@@ -104,21 +106,21 @@ limit 0,15
 	최초 작성일 : 2022. 5. 31.
 -->
 <select id="readDeptmarkList" parameterType="Long" resultMap="detailBoard">
-select b.id as board_id,
-		b.title as board_title,
-		d.name as dept_name,
-		b.date as board_date,
-		u.name as user_name,
-		b.file_id as board_fileId
-from board b
-	join user u on b.user_id = u.id
-	join dept d on u.dept_id = d.id
-where b.id = (
-		select board_id
-		from dept_starmark
-		where dept_id = #{deptId}
-	)
-limit 0,15
+	select b.id as board_id,
+			b.title as board_title,
+			d.name as dept_name,
+			b.date as board_date,
+			u.name as user_name,
+			b.file_id as board_fileId
+	from board b
+		join user u on b.user_id = u.id
+		join dept d on u.dept_id = d.id
+		join (
+			select board_id
+			from dept_starmark
+			where dept_id = #{deptId}
+		) s on b.id = s.board_id
+	limit 0,15
 </select>
 
 <!--
@@ -167,7 +169,19 @@ limit 0,15
 	최초 작성일 : 2022. 5. 31.
 -->
 <insert id="createNotice2" parameterType="board" useGeneratedKeys="true" keyProperty="id">
-insert into board (title, content, date, security, user_id) values ("${title}", #{content}, date_format(now(), '%Y-%m-%d'), 0, #{userId})
+insert into board (
+	 title,
+	 content,
+	 date,
+	 security,
+	 user_id
+	 ) values (
+	 "${title}", 
+	 #{content},
+	 date_format(now(), '%Y-%m-%d'),
+	 0,
+	 #{userId}
+	 )
 </insert>
 
 <!--
@@ -197,6 +211,7 @@ insert into board (title, content, date, security, user_id) values ("${title}", 
 	<result property="relation1" column="board_relation_1"/>
 	<result property="relation2" column="board_relation_2"/>
 	<result property="relation3" column="board_relation_3"/>
+	<result property="starmarkId" column="starmark_id"/>
 	
 	<association property="file" javaType="file">
 		<id property="id" column="file_id"/>
@@ -280,16 +295,16 @@ update board set file_id = #{fileId} where id = #{id}
 	최초 작성일 : 2022. 5. 30.
 -->
 <select id="readBoardOne" parameterType="Long" resultType="board">
-select id,
-	title,
-	content,
-	security,
-	file_id,
-	relation_1,
-	relation_2,
-	relation_3
-from board
-where id = #{id}
+	select id,
+		title,
+		content,
+		security,
+		file_id,
+		relation_1,
+		relation_2,
+		relation_3
+	from board
+	where id = #{id}
 </select>
 
 <!--
@@ -299,12 +314,12 @@ where id = #{id}
 	최초 작성일 : 2022. 6. 1.
 -->
 <select id="updateBoard" parameterType="board">
-update board set title = #{title},
-	content = #{content},
-	relation_1 = #{relation1},
-	relation_2 = #{relation2},
-	relation_3 = #{relation3}
-where id = #{id}
+	update board set title = #{title},
+		content = #{content},
+		relation_1 = #{relation1},
+		relation_2 = #{relation2},
+		relation_3 = #{relation3}
+	where id = #{id}
 </select>
 
 <!--
@@ -314,7 +329,7 @@ where id = #{id}
 	최초 작성일 : 2022. 6. 1.
 -->
 <delete id="deleteBoard" parameterType="Long">
-delete from board where id = #{id}
+	delete from board where id = #{id}
 </delete>
 
 <!--
@@ -324,9 +339,9 @@ delete from board where id = #{id}
 	최초 작성일 : 2022. 6. 1.
 -->
 <select id="readBoardUserId" parameterType="Long" resultType="Long">
-select user_id
-from board
-where id = #{id}
+	select user_id
+	from board
+	where id = #{id}
 </select>
 
 </mapper>

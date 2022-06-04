@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.DeptDto;
+import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
 
@@ -45,9 +48,11 @@ public class SearchController {
 	 * @since 2022. 5. 30.
 	 */
 	@GetMapping("asdsaddas")
-	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
+	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList(page);
+		boardList = boardService.readBoardList(page,userId);
 		model.addAttribute("boardList", boardList);
 		return "read/search";
 	}

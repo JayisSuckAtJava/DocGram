@@ -590,6 +590,13 @@ public class DBtest {
 		System.out.println(size);
 	}
 	
+	@Test
+	public void hashtagSracg() {
+		String ab = "내용";
+		Long result = sqlSession.selectOne("hashtag.readHashtag", ab);
+		System.out.println(result);
+		
+	}
 	
 	
 	

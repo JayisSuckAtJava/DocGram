@@ -219,7 +219,6 @@
         
         	pwd.value = pwd1.value;
         	dc.value = Number(dept.value) + Number(po.value);
-        	console.log(dc.value);
         	submit();
         }
 	      

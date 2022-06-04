@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService {
 	 * @since 2022. 5. 31.
 	 */
 	@Override
-	public void updateHashtag(Long hashtagId) {
-		userDao.updateHashtag(hashtagId);
+	public void updateHashtag(UserDto user) {
+		userDao.updateHashtag(user);
 	}
 
 	 /**
@@ -117,6 +117,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> readUserList(String name) {
 		return userDao.readUserList(name);
+	}
+
+	@Override
+	public UserDto readUserOne(UserDto user) {
+		return userDao.readUserOne(user);
 	}
 
 }

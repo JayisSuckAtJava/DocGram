@@ -90,12 +90,24 @@ values (
 <update id="updateUser" parameterType="user">
 update user
 	<trim prefix="set" prefixOverrides=",">
-		<if test="password != null">password = #{password}</if>
-		<if test="phoneNumber != null">phone_number = #{phoneNumber}</if>
-		<if test="deptNumber != null">dept_number = #{deptNumber}</if>
-		<if test="positionId != null">position_id = #{positionId}</if>
-		<if test="deptId != null">dept_id = #{deptId}</if>
-		<if test="hashtagId != null">hashtag_id = #{hashtag_id}</if>
+		<if test="password != null">
+		, password = #{password}
+		</if>
+		<if test="phoneNumber != null">
+		, phone_number = #{phoneNumber}
+		</if>
+		<if test="deptNumber != null">
+		, dept_number = #{deptNumber}
+		</if>
+		<if test="positionId != null">
+		, position_id = #{positionId}
+		</if>
+		<if test="deptId != null">
+		, dept_id = #{deptId}
+		</if>
+		<if test="hashtagId != null">
+		, hashtag_id = #{hashtag_id}
+		</if>
 	</trim>
 where id = #{id}
 </update>
@@ -159,6 +171,22 @@ where name like "%${name}%"
 		<result column="hashtag_name" property="name"/>
 	</association>
 </resultMap>
+
+<update id="updateMytag" parameterType="user">
+update user set hashtag_id = #{hashtagId} where id = #{id}
+</update>
+
+<select id="readUserOne" parameterType="user" resultType="user">
+	select name,
+	email,
+	phone_number,
+	dept_number,
+	(dept_id + position_id ) as deptCode,
+	password
+	from user
+	where id = #{id}
+</select>
+
 
 </mapper>
 
