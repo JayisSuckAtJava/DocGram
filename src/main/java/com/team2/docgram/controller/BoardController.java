@@ -52,12 +52,14 @@ public class BoardController {
 	 * @since 2022. 5. 28.
 	 */
 	@GetMapping("board")
-	public String boardList(Model model,Long page) {
+	public String boardList(Model model,Long page,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
 		if(page == null) {
 			page = 1L;
 		}
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList(page);
+		boardList = boardService.readBoardList(page,userId);
 		model.addAttribute("boardList", boardList);
 		return "board/dept";
 	}

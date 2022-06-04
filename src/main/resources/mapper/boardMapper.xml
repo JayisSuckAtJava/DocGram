@@ -20,10 +20,12 @@
 		d.name as dept_name,
 		b.date as board_date,
 		u.name as user_name,
-		b.file_id as board_fileId
+		b.file_id as board_fileId,
+		s.id as starmark_id
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
+	left join user_starmark s on b.id = s.board_id and s.user_id = {userId}
 	where b.security >= 1
 	limit #{start}, 10
 </select>
@@ -197,6 +199,7 @@ insert into board (title, content, date, security, user_id) values ("${title}", 
 	<result property="relation1" column="board_relation_1"/>
 	<result property="relation2" column="board_relation_2"/>
 	<result property="relation3" column="board_relation_3"/>
+	<result property="starmarkId" column="starmark_id"/>
 	
 	<association property="file" javaType="file">
 		<id property="id" column="file_id"/>

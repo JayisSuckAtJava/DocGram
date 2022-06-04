@@ -54,12 +54,13 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public List<BoardDto> readBoardList(Long page) {
+	public List<BoardDto> readBoardList(Long page,Long userId) {
 		BoardDto board = new BoardDto();
 		if(page > 0) {
 			page = ( page - 1 ) * 10; 
 		}
 		board.setStart(page);
+		board.setUserId(userId);
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardDao.readBoardList(board);
 		return boardList;
