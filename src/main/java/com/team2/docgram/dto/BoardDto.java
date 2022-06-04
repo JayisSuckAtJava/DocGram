@@ -2,6 +2,8 @@ package com.team2.docgram.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,6 +22,7 @@ public class BoardDto {
 	private Long id;
 	private String title;
 	private String content;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 	private Integer security;
 	private Long userId;

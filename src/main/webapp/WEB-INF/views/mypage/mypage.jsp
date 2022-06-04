@@ -1,4 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
  Class Name : Mypage.JavaScript
@@ -134,7 +134,7 @@
                       <th>수 정</th>
                     </tr>
                   </thead>
-                  <tbody class="list-body">
+                  <tbody class="list-body" id="star-mark">
                     <tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>
@@ -144,17 +144,7 @@
                       <td>부서관</td>
                       <td><button>수정</button></td>
                     </tr>
-                    <c:forEach items="${boardList}" var="board">
-                      <tr>
-                        <td>${board.id}</td>
-                        <td>${board.title}</td>
-                        <td>${board.fileId}</td>
-                        <td>${board.user.dept.name}</td>
-                        <td>${board.date}</td>
-                        <td>${board.user.name}</td>
-                        <td><button>수정</button></td>
-                      </tr>
-                    </c:forEach>
+                    
                   </tbody>
                 </table>
   
@@ -204,85 +194,80 @@
                               <div class="alert alert-danger" id="alert-danger" style="display: none;">비밀번호가 일치하지 않습니다.</div>
                             </div>
                           </div>
-                          <div class="col-md-10 mb-3">
-                            <div class="department">
-                              <label for="department">소속기관</label>
-                              <input type="tel" name="dept" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
-                                required>
-                              &nbsp;
-          
-                              <!-- Button trigger modal-->
-                              <button type="button" class="btn btn-outline-dark" style="padding: .2rem;" data-toggle="modal" data-target="#modalCart">
-                                소속기관 찾기
-                              </button>
-                              &nbsp;
-                              <!-- Modal: modalCart -->
-                              <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <!--Header-->
-                                    <div class="modal-header">
-                                      <h4 class="modal-title" id="myModalLabel">
-                                        <a class="navbar-brand">
-                                          <i class="bi bi-patch-question"></i>
-                                          기관검색
-                                        </a>
-                                      </h4>
-                                      <form class="d-flex" method="" action="" role="search">
-                                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
-                                          aria-label="Search">
-                                        <button class="btn btn-outline-success" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
-                                      </form>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                      </button>
-                                    </div>
-                                    <!--Body-->
-                                    <div class="modal-body">
-          
-                                      <table class="table table-hover">
-                                        <thead>
-                                          <tr>
-                                            <th>#</th>
-                                            <th>기 관 명</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>${dept.name}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-          
-                                    </div>
-                                    <!--Footer-->
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- Modal: modalCart -->
-          
-                              <!-- position Selection -->
-                             <label for="position-select">직급 : </label>
-                             <select name="position" id="position-select">
-                                <option value="">== 직급을 선택해주세요 ==</option>
-                                <option value="1">서기보</option>
-                                <option value="2">서기</option>
-                                <option value="3">주사보</option>
-                                <option value="4">주사</option>
-                                <option value="5">사무관</option>
-                                <option value="6">서기관</option>
-                                <option value="7">부이사관</option>
-                                <option value="8">이사관</option>
-                                <option value="9">관리관</option>
-                             </select>
                           
-                            </div>
+                                          <div class="col-md-10 mb-3">
+                  <div class="department">
+                    <label for="department">소속기관</label>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
+                      required>
+                    &nbsp;
+
+                    <!-- Button trigger modal-->
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
+                      찾기</button>
+                    &nbsp;
+                    <!-- Modal: modalCart -->
+                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <!--Modal Header-->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                              <a class="navbar-brand">
+                                <i class="bi bi-patch-question"></i>
+                                기관검색
+                              </a>
+                            </h4>
+                            <form class="d-flex" method="" action="" role="search">
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
+                                aria-label="Search">
+                              <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
+                            </form>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
                           </div>
+                          <!--Modal Body-->
+                          <div class="modal-body">
+
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>기 관 명</th>
+                                </tr>
+                              </thead>
+                              <tbody id="deptList">
+                              </tbody>
+                            </table>
+
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal: modalCart -->
+                    
+                      <!-- position Selection -->
+                   <label for="position-select">직급 : </label>
+                   <select id="position-select">
+                      <option value="">== 직급을 선택해주세요 ==</option>
+                      <option value="1">서기보</option>
+                      <option value="2">서기</option>
+                      <option value="3">주사보</option>
+                      <option value="4">주사</option>
+                      <option value="5">사무관</option>
+                      <option value="6">서기관</option>
+                      <option value="7">부이사관</option>
+                      <option value="8">이사관</option>
+                      <option value="9">관리관</option>
+                   </select>
+					<input type="hidden" name="deptCode" id="deptCode" />
+                  </div>
+                </div>
 
                           <div class="col-md-10 mb-3">
                             <label for="inputPhoneNum">휴대폰 번호</label>
@@ -315,10 +300,11 @@
               <span id="mypage_mytag">
                 <h2> 마이태그 수정 </h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
-                  <div style="display: flex;">
-                    <input type="text" id="tag" size="20" placeholder="태그입력" disabled="" />
+                  <div style="display: flex;" id="tag-body">
+
+                    <input type="text" id="mytag" size="20" placeholder="태그입력" disabled="disabled" value="#${user.mytag.name}"/>
                   </div>
-  
+
                   <ul id="tag-list">
                   </ul>
   
@@ -346,7 +332,6 @@
       let var2 = document.querySelector("#mypage_starmark")
       let var3 = document.querySelector("#mypage_personalInfo")
       let var4 = document.querySelector("#mypage_mytag")
-      let html
   
       if (id == mypage_mywriting) {
         var1.style.display = "block";
@@ -359,7 +344,34 @@
         var2.style.display = "block";
         var3.style.display = "none";
         var4.style.display = "none";
-  
+        
+        // USER의 즐겨찾기 가져오기
+        const data = axios({
+            url: 'rest/star',
+            method: 'get',
+            params: {
+            'userId': ${sessionScope.user.id}
+            }
+        });
+        data.then(function (result) {
+            const data = result.data ;
+            let star = document.querySelector("#star-mark")
+            let html = "";
+            data.forEach((v) => {
+                
+                html = html + "<tr>";
+                html = html + `<td>\${v.id}</td>`;
+                html = html + `<td>\${v.title}</td>`;
+                html = html + `<td><a href="dwonalod/\${v.fileId}"></a></td>`;
+                html = html + `<td>\${v.user.dept.name}</td>`;
+                html = html + `<td>\${v.date}</td>`;
+                html = html + `<td>\${v.user.name}</td>`;
+                html = html + `<td><a href="starmark/delete?boardId=\${v.id}"><button>수정</button></a></td>`;
+                html = html + "</tr>";
+                
+        });
+            star.innerHTML = html;
+  	  });
       } else if (id == mypage_personalInfo) {
         var1.style.display = "none";
         var2.style.display = "none";
@@ -389,6 +401,10 @@
           if (tag != null) {
             // disabled 를 활용해 input 비활성화
             //test.setAttribute("disabled","true")
+              $( function () {
+			    $( '[data-toggle="popover"]' ).popover()
+			  } );
+            // 태그 disabled
             $('.tag') = $('.tag').attr('disabled', true);
           } else {
             tag[counter] = value; // 태그를 Object 안에 추가
@@ -404,37 +420,33 @@
             });
         }
   
-        $("#tag").on("keyup", function (e) {
-          var self = $(this);
-          console.log("keypress");
-  
-          // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
-          if (e.key === "Enter" || e.keyCode == 32) {
-  
-            var tagValue = self.val(); // 값 가져오기
-  
-            // 값이 없으면 동작 안합니다.
-            if (tagValue !== "") {
-              // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
-              var result = Object.values(tag)
-                .filter(function (word) {
-                  return word === tagValue;
-                })
-  
-              // 태그 중복 검사
-              if (result.length == 0) {
-                $("#tag-list")
-                  .append("<li class='tag-item'>" + tagValue + "<span class='del-btn' idx='" + counter + "'>x</span></li>");
-                addTag(tagValue);
-                self.val("");
-              } else {
-                alert("태그값이 중복됩니다.");
-              }
-            }
-            e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
-  
-          }
-        });
+       //mytag 비동기
+       let mytag = document.querySelector("#mytag");
+       const tagbody = document.querySelector("#tag-body");
+       tagbody.addEventListener("click", () => {
+    	   // bootstarp - bs4 popover 로 설명
+    	   // 설명 내용은 # 없이 하는거 그리고 엔터치면 완료 되는거 
+    	   console.log("test")
+    	   mytag.removeAttribute("disabled");
+       });
+       
+       mytag.addEventListener("keydown",(e)=>{
+    	   const keyCode = e.keyCode;
+    	   if(keyCode == 13){
+    		   
+    		   let tagName = mytag.value;
+    		   
+    		   const data = axios({
+    			   url: 'mypage/mytag',
+    			   method: 'get',
+    			   params: {
+    			   'tagName': `\${tagName}`
+    			   }
+    			   });
+    		   mytag.setAttribute("disabled","disabled");
+    		   e.preventDefault();
+    	   }
+       });
   
   
   

@@ -91,11 +91,11 @@ select b.id as board_id,
 from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-where b.id = (
+	join (
 		select board_id
 		from user_starmark
 		where user_id = #{userId}
-	)
+	) s ON b.id = s.board_id
 limit 0,15
 </select>
 
