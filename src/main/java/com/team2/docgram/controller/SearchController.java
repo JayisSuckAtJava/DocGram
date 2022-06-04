@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.DeptDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
 
@@ -42,12 +44,12 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("readasdsad")
+	@GetMapping("asdsaddas")
 	public String readPage(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readBoardList(page);
 		model.addAttribute("boardList", boardList);
-		return "read/detail";
+		return "read/search";
 	}
 	
 	/**
@@ -60,11 +62,20 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("read")
+	@GetMapping("search")
 	public String read(Model model, @RequestParam Map<String, Object>map) {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 
 		model.addAllAttributes(resultMap);
 		return "read/detail";
+	}
+	
+	@GetMapping("rest/dept")
+	@ResponseBody
+	public List<DeptDto> searchDept(String name) {
+		List<DeptDto> deptList = new ArrayList<>();
+		deptList = searchService.searchDept(name);
+		
+		return deptList;
 	}
 }

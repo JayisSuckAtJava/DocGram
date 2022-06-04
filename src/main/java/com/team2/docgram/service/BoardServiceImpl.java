@@ -420,5 +420,19 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoard(Long id) {
 		boardDao.deleteBoard(id);
 	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 3.
+	 */
+	@Override
+	public List<BoardDto> readMyBoardList(Long userId) {
+		return boardDao.readMyBoardList(userId);
+	}
 	
 }

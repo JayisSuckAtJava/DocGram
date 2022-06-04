@@ -34,18 +34,22 @@ and d1.id = ${deptId}
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 5. 31.
 -->
-<select id="readUser" parameterType="user" resultType="user">
-select id,
-	email,
-	name,
-	phone_number,
-	dept_number,
-	position_id,
-	dept_id,
-	hashtag_id
-from user
-where email = #{email}
-and password = #{password}
+<select id="readUser" parameterType="user" resultMap="userDetail">
+select u.id as user_id,
+	u.email as user_email,
+	u.name as user_name,
+	u.phone_number as user_phone_number,
+	u.dept_number as user_dept_number,
+	u.position_id as user_position_id,
+	u.dept_id as user_dept_id,
+	u.hashtag_id as user_hashtag_id,
+	d.name as dept_name,
+	h.name as hashtag_name
+from user u
+left outer join dept d on u.dept_id = d.id 
+left outer join hashtag h on u.hashtag_id = h.id
+where u.email = #{email}
+and u.password = #{password}
 </select>
 
 <!--
@@ -62,7 +66,7 @@ insert into user (
 	phone_number,
 	dept_number,
 	dept_id,
-	postion_id,
+	position_id,
 	hashtag_id
 )
 values (
@@ -72,7 +76,7 @@ values (
 	#{phoneNumber},
 	#{deptNumber},
 	#{deptId},
-	#{postionId},
+	#{positionId},
 	1
 )
 </insert>
@@ -124,6 +128,37 @@ where u.name = #{name}
 <delete id="deleteUser" parameterType="Long">
 delete from user where id = #{deleteUser}
 </delete>
+
+<!--
+	쿼리명 : 
+	설 명: 
+	작성자 : JAY - 이재범
+	최초 작성일 : 2022. 6. 3.
+-->
+<select id="searchDept" parameterType="String" resultType="dept">
+select id, name
+from dept
+where name like "%${name}%"
+</select>
+
+<resultMap type="user" id="userDetail">
+	<id column="user_id" property="id"/>
+	<result column="user_email" property="email"/>
+	<result column="user_name" property="name"/>
+	<result column="user_phone_number" property="phoneNumber"/>
+	<result column="user_dept_number" property="deptNumber"/>
+	<result column="user_position_id" property="positionId"/>
+	<result column="user_dept_id" property="deptId"/>
+	<result column="user_hashtag_id" property="hashtagId"/>
+	<association property="dept" javaType="dept">
+		<id column="user_dept_id" property="id"/>
+		<result column="dept_name" property="name"/>
+	</association>
+	<association property="mytag" javaType="hashtag">
+		<id column="user_hashtag_id" property="id"/>
+		<result column="hashtag_name" property="name"/>
+	</association>
+</resultMap>
 
 </mapper>
 

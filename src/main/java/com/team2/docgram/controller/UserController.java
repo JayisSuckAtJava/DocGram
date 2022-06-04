@@ -1,5 +1,6 @@
 package com.team2.docgram.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
+import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.HashtagService;
 import com.team2.docgram.service.StarmarkService;
 import com.team2.docgram.service.UserService;
@@ -35,6 +38,9 @@ public class UserController {
 	@Autowired
 	private StarmarkService starmarkService;
 	
+	@Autowired
+	private BoardService boardService;
+	
 	/**
 	 * 로그인 페이지 전환
 	 * 
@@ -43,7 +49,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("signin")
+	@GetMapping("user/signin")
 	public String loginPage() {
 		return "login/login";
 	}
@@ -58,15 +64,18 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signin")
+	@PostMapping("user/signin")
 	public String login(UserDto user,HttpSession session) {
-		
+		System.out.println(user.getEmail());
+		System.out.println(user.getPassword());
 		UserDto userDetail = userService.readUser(user);
+		System.out.println(userDetail);
 		if(userDetail == null) {
-			return "redirect:/signin";
+			return "redirect:signin";
 		}else {
-			session.setAttribute("user", user);
-			return "redirect:/main";			
+			session.setAttribute("user", userDetail);
+			
+			return "redirect:../main";			
 		}
 	}
 	
@@ -79,7 +88,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signout")
+	@GetMapping("user/signout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main";
@@ -93,7 +102,7 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("signup")
+	@GetMapping("user/signup")
 	public String signupPage() {
 		return "login/join";
 	}
@@ -108,9 +117,10 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("signup")
+	@PostMapping("user/signup")
 	public String createUser(UserDto user,Long deptCode) {
 		// 입력받는 deptCode 값이 11 110 000 + position
+		System.out.println(user);
 		
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
@@ -119,7 +129,7 @@ public class UserController {
 		
 		userService.createUser(user);
 		
-		return "redirect:/";
+		return "redirect:/user/signin";
 	}
 
 	/**
@@ -181,7 +191,7 @@ public class UserController {
 			Long userId = user.getId();
 			userService.deleteUser(userId);
 			session.invalidate();
-			return "signup";
+			return "../user/signup";
 		}else {
 			return "mypage";
 		}
@@ -200,7 +210,7 @@ public class UserController {
 	public String searchUserPage(Model model) {
 		List<UserDto> userList = userService.readUserList();
 		model.addAttribute("userList", userList);
-		return "";
+		return "mypage/mypage";
 	}
 	
 	/**
@@ -255,6 +265,25 @@ public class UserController {
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		userService.updateHashtag(hashtagId);
 		return "redirect:/";
+	}
+	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 3.
+	 */
+	@GetMapping("mypage")
+	public String mypagePage(HttpSession session,Model model) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.readMyBoardList(userId);
+		model.addAttribute("boardList", boardList);
+		return "mypage/mypage";
 	}
 	
 	/**

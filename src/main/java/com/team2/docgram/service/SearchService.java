@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.DeptDto;
 
 /**  SearchService.java
  *   설명
@@ -18,5 +19,7 @@ public interface SearchService {
 			String hashtagList, Long dateRange, Date start, Date end);
 
 	Map<String, Object> searchDetail(Map<String, Object> map);
+
+	List<DeptDto> searchDept(String name);
 
 }

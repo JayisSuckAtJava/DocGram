@@ -118,28 +118,18 @@
                 <td>부서관</td>
               </tr>
               
-              <c:forEach items="${boardList}" var="board">
+              <c:forEach items="${noticeList}" var="board">
               <tr>
-                <td>${board.pk}</td>
+                <td>${board.id}</td>
                   <td>${board.title}</td>
                   <td></td>
-                  <td>${board.deptDescription}</td>
+                  <td>${board.user.dept.name}</td>
                   <td>${board.date}</td>
-                  <td>${board.userName}</td>
+                  <td>${board.user.name}</td>
                </tr>
                </c:forEach>
     
               </tr>
-              <c:forEach items="${boardList}" var="board">
-              <tr>
-                <td>${board.pk}</td>
-                  <td>${board.title}</td>
-                  <td></td>
-                  <td>${board.deptDescription}</td>
-                  <td>${board.date}</td>
-                  <td>${board.userName}</td>
-               </tr>
-              </c:forEach>
                
             </tbody>
           </table>
