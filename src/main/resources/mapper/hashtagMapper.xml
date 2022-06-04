@@ -84,7 +84,7 @@ delete from board_hashtag where board_id = #{boardId}
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 6. 1.
 -->
-<select id="readHashtagName" parameterType="Long">
+<select id="readHashtagName" parameterType="Long" resultType="String">
 select name
 from hashtag
 where id = #{hashtagId}

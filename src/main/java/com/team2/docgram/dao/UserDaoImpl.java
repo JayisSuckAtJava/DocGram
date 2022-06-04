@@ -72,8 +72,8 @@ public class UserDaoImpl implements UserDao {
 	 * @since 2022. 5. 31.
 	 */
 	@Override
-	public void updateHashtag(Long hashtagId) {
-		sqlSession.update(mapper+"updateUser", hashtagId);
+	public void updateHashtag(UserDto user) {
+		sqlSession.update(mapper+"updateMytag", user);
 	}
 
 	 /**

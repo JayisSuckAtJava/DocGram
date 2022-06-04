@@ -255,17 +255,3 @@
 
 </body>
 </html>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
->>>>>>> 737b6579f9fc0c5d04e9cd85323a62155a815251
