@@ -75,6 +75,14 @@
     color: aqua;
   }
   
+  /* 칸넘어가는 길이는 ..으로 변환 */
+  td {
+	width: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
+  
   /* 회원정보 수정 */
   .input-form {
     max-width: 680px;

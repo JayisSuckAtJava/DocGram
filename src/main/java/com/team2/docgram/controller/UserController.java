@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
@@ -231,25 +232,6 @@ public class UserController {
 	}
 
 	/**
-	 * 사용자 지정 태그 수정 페이지
-	 * 
-	 * @param session
-	 * @param model
-	 * @return
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 6. 1.
-	 */
-	@GetMapping("mypage/mytag")
-	public String mytag(HttpSession session,Model model) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long hashtagId = user.getHashtagId();
-		String mytag = hashtagService.readHashtag(hashtagId);
-		model.addAttribute("mytag", user);
-		return null;
-	}
-	
-	/**
 	 * 사용자의 MYtag 수정 로직
 	 * 
 	 * @param tagName 지정한 tag 이름 받음
@@ -259,12 +241,17 @@ public class UserController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("mypage/mytag")
-	public String updateMytag(String tagName,HttpSession session) {
+	@GetMapping("mypage/mytag")
+	public void updateMytag(String tagName,HttpSession session) {
+		System.out.println(tagName);
 		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		System.out.println("자업중");
 		Long hashtagId = hashtagService.readHashtag(tagName);
-		userService.updateHashtag(hashtagId);
-		return "redirect:/";
+		System.out.println("작업 이상무"   + hashtagId);
+		user.setHashtagId(hashtagId);
+		System.out.println("setter 이상무.");
+		userService.updateHashtag(user);
 	}
 	
 	/**
@@ -284,6 +271,13 @@ public class UserController {
 		boardList = boardService.readMyBoardList(userId);
 		model.addAttribute("boardList", boardList);
 		return "mypage/mypage";
+	}
+	
+	@GetMapping("rest/star")
+	@ResponseBody
+	public List<BoardDto> mypageStarmark(Long userId) {
+		List<BoardDto> starList = boardService.readStarmarkList(userId);
+		return starList;
 	}
 	
 	/**

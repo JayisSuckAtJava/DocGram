@@ -160,5 +160,9 @@ where name like "%${name}%"
 	</association>
 </resultMap>
 
+<update id="updateMytag" parameterType="user">
+update user set hashtag_id = #{hashtagId} where id = #{id}
+</update>
+
 </mapper>
 

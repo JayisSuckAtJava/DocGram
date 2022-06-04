@@ -18,7 +18,7 @@ public interface UserService {
 
 	UserDto updateUser(UserDto user);
 
-	void updateHashtag(Long hashtagId);
+	void updateHashtag(UserDto user);
 
 	List<UserDto> readUserList();
 

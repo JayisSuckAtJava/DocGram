@@ -18,7 +18,7 @@ public interface UserDao {
 
 	Integer updateUser(UserDto user);
 
-	void updateHashtag(Long hashtagId);
+	void updateHashtag(UserDto user);
 
 	List<UserDto> readUserList();
 
