@@ -301,8 +301,8 @@
                 <h2> 마이태그 수정 </h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
                   <div style="display: flex;" id="tag-body">
-
-                    <input type="text" id="mytag" size="20" placeholder="태그입력" disabled="disabled" value="#${user.mytag.name}"/>
+                    <input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
+                    data-bs-toggle="tooltip" title=""/>
                   </div>
 
                   <ul id="tag-list">
