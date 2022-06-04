@@ -119,4 +119,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.readUserList(name);
 	}
 
+	@Override
+	public UserDto readUserOne(UserDto user) {
+		return userDao.readUserOne(user);
+	}
+
 }

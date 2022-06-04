@@ -115,5 +115,10 @@ public class UserDaoImpl implements UserDao {
 	public void deleteUser(Long userId) {
 		sqlSession.delete(mapper+"deleteUser", userId);
 	}
+
+	@Override
+	public UserDto readUserOne(UserDto user) {
+		return sqlSession.selectOne(mapper+"readUserOne", user);
+	}
 	
 }

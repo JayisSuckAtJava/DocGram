@@ -28,4 +28,5 @@ public class UserDto {
 	private PositionDto position;
 	private DeptDto dept;
 	private HashtagDto mytag;
+	private Long deptCode;
 }
