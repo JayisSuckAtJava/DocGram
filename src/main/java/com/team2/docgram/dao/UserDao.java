@@ -26,4 +26,6 @@ public interface UserDao {
 
 	void deleteUser(Long userId);
 
+	UserDto readUserOne(UserDto user);
+
 }
