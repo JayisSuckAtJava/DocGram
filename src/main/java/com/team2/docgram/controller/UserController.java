@@ -246,11 +246,8 @@ public class UserController {
 		System.out.println(tagName);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
-		System.out.println("자업중");
 		Long hashtagId = hashtagService.readHashtag(tagName);
-		System.out.println("작업 이상무"   + hashtagId);
 		user.setHashtagId(hashtagId);
-		System.out.println("setter 이상무.");
 		userService.updateHashtag(user);
 	}
 	
