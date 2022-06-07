@@ -109,7 +109,7 @@
                       <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                         <td>${board.id}</td>
                         <td>${board.title}</td>
-                        <td>${board.fileId}</td>
+                        <td><a href="download/${board.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>
                         <td>${board.user.dept.name}</td>
                         <td>${board.date}</td>
                         <td>${board.user.name}</td>
