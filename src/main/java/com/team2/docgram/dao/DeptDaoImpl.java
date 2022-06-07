@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.team2.docgram.dto.DeptDto;
 
 /**  DeptDaoImpl.java
- *   설명
+ *   Dept Table 에 접근하는 DAO
  * 
  * @author JAY - 이재범
  * @since 2022. 5. 28.
@@ -23,10 +23,10 @@ public class DeptDaoImpl implements DeptDao {
 	private String mapper = "user.";
 
 	 /**
-	 * 설명
+	 * Dept 객체의 id 로 정보 조회
 	 * 
-	 * @param deptId
-	 * @return 
+	 * @param deptId PK 인 id
+	 * @return 해당 Dept의 모든 정보를 담은 객체
 	 *
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
@@ -36,6 +36,15 @@ public class DeptDaoImpl implements DeptDao {
 		return sqlSession.selectOne(mapper+"readDeptList", deptId);
 	}
 
+	/**
+	 * 부서 검색
+	 * 
+	 * @param name Dept 의 이름에 포함되는 단어
+	 * @return 검색된 부서들의 List
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public List<DeptDto> searchDept(String name) {
 		return sqlSession.selectList(mapper+"searchDept",name);
