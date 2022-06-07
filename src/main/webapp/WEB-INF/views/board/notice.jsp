@@ -101,7 +101,12 @@
            <script src="../resources/js/read.js"></script>
         </tbody>
       </table>
+      <div class="bb">
+          	<a href="create"><button>작성하기</button></a>
+          </div>
       </div>
+      
+      
 
     
               <!-- 페이징 -->

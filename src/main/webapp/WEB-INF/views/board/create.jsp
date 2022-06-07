@@ -237,6 +237,8 @@
                         <tbody id="board_list_search_body">
                         </tbody>
                       </table>
+                      
+                      
 
                     </div>
                     <!--Footer-->
