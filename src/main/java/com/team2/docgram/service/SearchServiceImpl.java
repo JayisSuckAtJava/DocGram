@@ -125,11 +125,30 @@ public class SearchServiceImpl implements SearchService {
 		return resultMap;
 	}
 
+	/**
+	 * 소속 부서 검색 로직
+	 * 
+	 * @param name 해당 부서의 이름 또는 이름에 포함된 단어
+	 * @return 검색된 Dept 객체의 List
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public List<DeptDto> searchDept(String name) {
 		return deptDao.searchDept(name);
 	}
 
+	/**
+	 * 연관 게시글 검색 로직
+	 * 
+	 * @param text 검색될 텍스트
+	 * @param sel 검색될 테스트의 종류를 선택하는 sel 
+	 * @return 검색되어진 board 객체의 List
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public List<BoardDto> searchRelation(String text, String sel) {
 		Map<String, Object> map = new HashMap<String, Object>();
