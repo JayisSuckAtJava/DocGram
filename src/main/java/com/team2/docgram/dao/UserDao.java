@@ -1,6 +1,7 @@
 package com.team2.docgram.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.team2.docgram.dto.UserDto;
 
@@ -27,5 +28,7 @@ public interface UserDao {
 	void deleteUser(Long userId);
 
 	UserDto readUserOne(UserDto user);
+
+	Integer updateDept(Map<String, Object> map);
 
 }
