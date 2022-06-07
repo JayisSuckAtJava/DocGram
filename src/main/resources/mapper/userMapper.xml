@@ -118,8 +118,9 @@ where id = #{id}
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 5. 31.
 -->
-<select id="readUserList" parameterType="String">
-select u.name as user_name,
+<select id="readUserList" parameterType="String" resultMap="userDetail">
+select u.id as user_id, 
+	u.name as user_name,
 	u.email as user_email,
 	u.phone_number as user_phone_number,
 	u.dept_number as user_dept_number,
@@ -187,6 +188,9 @@ update user set hashtag_id = #{hashtagId} where id = #{id}
 	where id = #{id}
 </select>
 
+<update id="updateDept" parameterType="map">
+update user set dept_id = #{deptId} where id = #{userId}
+</update>
 
 </mapper>
 
