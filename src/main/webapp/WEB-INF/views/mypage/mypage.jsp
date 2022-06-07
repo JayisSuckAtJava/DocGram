@@ -73,40 +73,8 @@
                       <td>5/19</td>
                       <td>부서관</td>
                     </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
                     <c:forEach items="${boardList}" var="board">
-                      <tr>
+                      <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                         <td>${board.id}</td>
                         <td>${board.title}</td>
                         <td>${board.fileId}</td>
@@ -126,7 +94,6 @@
                 <h2> 즐겨찾기 <i class="bi bi-star-fill" style="color: yellow;"></i></h2>
                 <table class="table table-hover">
                   <thead id="list_title">
-  
                     <tr>
                       <th>번호</th>
                       <th>제목</th>
@@ -138,6 +105,17 @@
                     </tr>
                   </thead>
                   <tbody class="list-body" id="star-mark">
+                   <c:forEach items="${boardList}" var="board">
+                      <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
+                        <td>${board.id}</td>
+                        <td>${board.title}</td>
+                        <td>${board.fileId}</td>
+                        <td>${board.user.dept.name}</td>
+                        <td>${board.date}</td>
+                        <td>${board.user.name}</td>
+                        <td><button>삭제</button></td>
+                      </tr>
+                    </c:forEach>
                     <tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>

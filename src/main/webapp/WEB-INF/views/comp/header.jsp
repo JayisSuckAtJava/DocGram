@@ -13,24 +13,24 @@
 
       
             
-              <a class="navbar-brand" href="main">
+              <a class="navbar-brand" href="/main">
                  <h1>Docgram</h1>
               </a>
               <div class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="notice">공지 소식</a>
+                <a class="nav-link" href="/notice/list">공지 소식</a>
                 <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="search">상세 검색</a>
+                <a class="nav-link" href="/search">상세 검색</a>
                 <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
-              <a class="nav-link" href="board">부서별 알림</a>
+              <a class="nav-link" href="/board/list">부서별 알림</a>
                 <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">${mytag}</a>
+                <a class="nav-link" href="/search?hashtagList=${user.mytag.name}">mytag : ${user.mytag.name}</a>
                 <span class="sr-only">(current)</span> 
               </li>
             </div>
