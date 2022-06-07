@@ -125,7 +125,6 @@
                       </select>
                         <input class="form-control me-2" type="search" name="search" placeholder="Search"
                           aria-label="Search" id="search-text">
-
                         <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
