@@ -51,7 +51,7 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 28.
 	 */
-	@GetMapping("board")
+	@GetMapping("board/list")
 	public String boardList(Model model,Long page,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
@@ -234,10 +234,11 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("notice")
+	@GetMapping("notice/list")
 	public String noticeList(Model model) {
 		List<BoardDto> noticeList = boardService.readNoticeList();
-		model.addAttribute("boardList", noticeList);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("test","ab");
 		return "board/notice";
 	}
 	
