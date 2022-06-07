@@ -28,4 +28,6 @@ public interface UserService {
 
 	UserDto readUserOne(UserDto user);
 
+	Integer updateDept(Long deptId, Long userId);
+
 }

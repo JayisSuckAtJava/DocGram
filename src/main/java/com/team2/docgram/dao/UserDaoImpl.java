@@ -1,6 +1,7 @@
 package com.team2.docgram.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserDto readUserOne(UserDto user) {
 		return sqlSession.selectOne(mapper+"readUserOne", user);
+	}
+
+	@Override
+	public Integer updateDept(Map<String, Object> map) {
+		return sqlSession.update(mapper+"updateDept", map);
 	}
 	
 }

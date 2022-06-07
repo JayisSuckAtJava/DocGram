@@ -353,6 +353,7 @@ update board set file_id = #{fileId} where id = #{id}
 -->
 <select id="searchRelation" parameterType="map" resultMap="detailBoard">
 select b.title as board_title,
+	b.id as board_id,
 	d.name dept_name,
 	u.name user_name
 from board b
