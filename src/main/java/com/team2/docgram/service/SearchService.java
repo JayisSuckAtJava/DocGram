@@ -22,4 +22,6 @@ public interface SearchService {
 
 	List<DeptDto> searchDept(String name);
 
+	List<BoardDto> searchRelation(String text, String sel);
+
 }
