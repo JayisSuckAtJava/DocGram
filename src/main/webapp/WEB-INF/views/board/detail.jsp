@@ -113,6 +113,7 @@
             <div class="right">
                 <a href="update/${board.id}"><button>수정</button></a>
                 <button>삭제</button>
+                <button onclick="history.back()">목록</button>
             </div>
         </div>
             
@@ -141,12 +142,12 @@
                                     <button class="element-invisible">다운로드</button>
                                 </a> 
                             </span>
-                            <p></p>
                     </li>
                 </ul>
             </div>
         </div> 
         <hr>
+       
         
         <!-- 관련 문서 파트 -->
     

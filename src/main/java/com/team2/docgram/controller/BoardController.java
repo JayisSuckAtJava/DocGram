@@ -111,18 +111,18 @@ public class BoardController {
 	 */
 	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
-		//UserDto user = (UserDto) session.getAttribute("user");
-		//Long userId = user.getId();
-		board.setUserId(1L);
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		board.setUserId(userId);
 		
 		String fileName = mFile.getOriginalFilename();
 			
 		String savedFileName = boardService.createBoard(board,hashtagList,relatedBoardList,fileName);
 		if(savedFileName == null) {
-			return "redirect:../board";
+			return "redirect:/board/list";
 		}else {
 			fileService.createFile(savedFileName, mFile);
-			return "redirect:../board";
+			return "redirect:/board/list";
 		}
 	}
 	
@@ -175,7 +175,7 @@ public class BoardController {
 	public String boardUpdate(@PathVariable("id")Long id,BoardDto board, String hashtagList, String relatedBoardList, MultipartFile mFile) {
 		board.setId(id);
 		boardService.boardUpdate(board, hashtagList, relatedBoardList);
-		return "redirect:../"+id;
+		return "redirect:/board/"+id;
 	}
 	
 	/**
@@ -190,11 +190,13 @@ public class BoardController {
 	 */
 	@GetMapping("main")
 	public String mainPage(HttpSession session,Model model) {
+		
 		UserDto user = (UserDto) session.getAttribute("user");
-		//Long userId = user.getId();
-		//Long deptId = user.getDeptId();
-		Long userId = 1L;
-		Long deptId = 11110000L;
+		if(user == null) {
+			return "board/main";
+		}else {
+		Long userId = user.getId();
+		Long deptId = user.getDeptId();
 		
 		List<BoardDto> starList = boardService.readStarmarkList(userId);
 		List<BoardDto> deptList = boardService.readDeptmarkList(deptId);
@@ -204,8 +206,8 @@ public class BoardController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("starList", starList);
 		model.addAttribute("noticeList", noticeList);
-		
 		return "board/main";
+		}
 	}
 	
 	/**
@@ -221,7 +223,6 @@ public class BoardController {
 	public String noticeList(Model model) {
 		List<BoardDto> noticeList = boardService.readNoticeList();
 		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("test","ab");
 		return "board/notice";
 	}
 	
@@ -241,6 +242,11 @@ public class BoardController {
 		notice = boardService.readBoard(boardId);
 		model.addAllAttributes(notice);
 		return "board/detail";
+	}
+	
+	@GetMapping("notice/create")
+	public String noticeCreate() {
+		return "board/create";
 	}
 	
 	/**
@@ -264,7 +270,7 @@ public class BoardController {
 		board.setUserId(userId);
 		board.setSecurity(0);
 		boardCreate(session,board,hashtagList,mFile,relatedBoardList);
-		return "redirect:../notice";
+		return "redirect:/notice/list";
 	}
 	
 	/**
@@ -277,23 +283,15 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
 	 */
-	@PostMapping("board/delete/{id}")
-	public String delectBoard(@PathVariable("id")Long id,HttpSession session) {
+	@GetMapping("board/delete/{id}")
+	public void delectBoard(@PathVariable("id")Long id,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long positionId = user.getPositionId();
 		Long boardUserId = boardService.readBoardUserId(id);
 		if(userId == boardUserId || positionId > 6) {
 			boardService.deleteBoard(id);
-			return "redirect:../../board";
 		}
-		return "";
-	}
-	
-	@GetMapping("bo/del/{id}")
-	public String dee(@PathVariable("id")Long id) {
-		boardService.deleteBoard(id);
-		return "redirect:../../read";
 	}
 	
 }
