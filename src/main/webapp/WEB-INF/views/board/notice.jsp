@@ -19,11 +19,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
 
-  
-    <link rel="stylesheet" href="../resources/css/board.css">
-    <script src="../resources/js/board.js"></script>
-
-
 </head>
 <body>
 
@@ -85,14 +80,14 @@
           </tr>
 
           </tr>
-          <c:forEach items="${boardList}" var="board">
+          <c:forEach items="${noticeList}" var="board">
           <tr>
-            <td>${board.pk}</td>
+              <td>${board.id}</td>
               <td>${board.title}</td>
-              <td>${파일}<i class="bi bi-file-earmark-pdf"></i></td>
-              <td>${board.deptDescription}</td>
+              <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
+              <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
-              <td>${board.userName}</td>
+              <td>${board.user.name}</td>
               <td>
                 <button class="btn btn-danger pull-right"  
                         type="button" onclick="getUserName1()">수정</button>
@@ -103,7 +98,7 @@
               </td>
            </tr>
           </c:forEach> 
-           
+           <script src="../resources/js/read.js"></script>
         </tbody>
       </table>
       </div>

@@ -45,7 +45,7 @@
        <div class="all">
             <!-- 타이틀 부분 -->
     
-            <h3 class="title-article">${소속}의 알림  </h3>
+            <h3 class="title-article">${sessionScope.user.dept.name}의 알림  </h3>
     
 
 
@@ -89,7 +89,7 @@
               </tr>
             </thead>
       
-            <tbody class="list-body">
+            <tbody class="list-body-star">
               <tr>
                 <td><i class="bi bi-star-fill"></i></td>
                 <td>10</td>
@@ -103,29 +103,21 @@
               
               <c:forEach items="${boardList}" var="board">
               <tr>
-                <td>${별}<i class="bi bi-star-fill"></i></td>
-                <td>${board.pk}</td>
+               <c:if test="${board.starmarkId == null}">
+               <td><i class="bi bi-star"></i></td>
+               </c:if>
+               <c:if test="${board.starmarkId != null}">
+               <td><i class="bi bi-star-fill"></i></td>
+               </c:if>
+                <td>${board.id}</td>
                   <td>${board.title}</td>
-                  <td></td>
-                  <td>${board.deptDescription}</td>
-                  <td>${board.date}</td>
-                  <td>${board.userName}</td>
+                  <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></a></td>
+                  <td>${board.user.dept.name}</td>
+              	  <td>${board.date}</td>
+              	  <td>${board.user.name}</td>
                </tr>
                </c:forEach>
-    
-              </tr>
-              <c:forEach items="${boardList}" var="board">
-              <tr>
-                <td>${별}<i class="bi bi-star-fill"></i></td>
-                <td>${board.pk}</td>
-                  <td>${board.title}</td>
-                  <td></td>
-                  <td>${board.deptDescription}</td>
-                  <td>${board.date}</td>
-                  <td>${board.userName}</td>
-               </tr>
-              </c:forEach> 
-               
+                   <script src="../resources/js/read.js"></script>
             </tbody>
           </table>
     
