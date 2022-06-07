@@ -230,5 +230,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(mapper+"readMyBoardList", userId);
 	}
 
+	@Override
+	public List<BoardDto> searchRelation(Map<String, Object> map) {
+		return sqlSession.selectList(mapper+"searchRelation", map);
+	}
+
 	
 }

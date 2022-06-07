@@ -15,7 +15,9 @@
 <title>Mypage</title>
 
 	<link rel="stylesheet" href="../resources/css/mypage.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../resources/css/comp.css">
+	<link rel="stylesheet" href="../resources/css/main.css">
+	<link rel="stylesheet" href="../resources/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
@@ -23,9 +25,10 @@
 
 </head>
 <body>
-<header class="container-fluid text-center">
-    <p>Header Text</p>
-  </header>
+<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
     
   <div class="container-fluid text-center">    
     <div class="row content">
@@ -131,7 +134,7 @@
                       <th>소속 기관</th>
                       <th>작성일</th>
                       <th>작성자</th>
-                      <th>수 정</th>
+                      <th>삭 제</th>
                     </tr>
                   </thead>
                   <tbody class="list-body" id="star-mark">
@@ -142,7 +145,7 @@
                       <td>세종특별청사</td>
                       <td>5/19</td>
                       <td>부서관</td>
-                      <td><button>수정</button></td>
+                      <td><button>삭제</button></td>
                     </tr>
                     
                   </tbody>
@@ -153,41 +156,39 @@
               <!-- 개인정보 조회 및 수정 -->
               <span id="mypage_personalInfo">
                 <h2>개인정보 조회</h2>
-                <form action="" method="" class="form-example">
                   <div class="container">
                     <div class="input-form-backgroud row">
                       <div class="input-form col-md-12 mx-auto">
-                        <h4 class="mb-4">회원가입</h4>
-                        <form class="validation-form" novalidate>
-          
+                        <h4 class="mb-4">회원가입</h4>        
                           <div class="col-md-10 mb-3">
                             <label for="name">이름</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력해주세요." value=""
-                              required>
-                            <div class="invalid-feedback">
-                              이름을 입력해주세요.
-                            </div>
+                            <input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요." value=""
+                              required disabled="disabled">
                           </div>
           
                           <div class="col-md-10 mb-3">
                             <label for="email">이메일</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com"
-                              required>
-                            <div class="invalid-feedback">
-                              이메일을 입력해주세요.
-                            </div>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                              required disabled="disabled">
+                          </div>
+          
+          					<div class="col-md-10 mb-3">
+	                            <label for="inputPassword">기존 사용 비밀번호</label>
+    	                        <input type="password" id="pwd0" class="form-control" required value=""></input>
+        	                  </div>
+          
+                          <div class="col-md-10 mb-3">
+                            <label for="inputPassword">변경할 비밀번호</label>
+                            <input type="password" id="pwd1" class="form-control" required></input>
                           </div>
           
                           <div class="col-md-10 mb-3">
-                            <label for="inputPassword">비밀번호</label>
-                            <input type="password" name="pwd1" id="pwd1" class="form-control" required></input>
-                          </div>
-          
-                          <div class="col-md-10 mb-3">
-                            <label for="inputPasswordCheck">비밀번호확인</label>
+                            <label for="inputPasswordCheck">변경할 비밀번호확인</label>
                             &nbsp;
                             <input type="password" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인"
                               reaquired></input>
+                              <input type="hidden" name="password" id="pwd"/>
+                              <input type="hidden" name="password" id="dbPwd"/>
                             <div class="col-md-10 mb-3">
                               &nbsp;
                               <div class="alert alert-success" id="alert-success" style="display: none;">비밀번호가 일치합니다.</div>
@@ -198,20 +199,21 @@
                                           <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" disabled="disabled" 
                       required>
                     &nbsp;
 
-                    <!-- Button trigger modal-->
+                    <!-- Button trigger modal
                     <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
-                      찾기</button>
+                      찾기</button>-->
                     &nbsp;
                     <!-- Modal: modalCart -->
+                    <!-- 
                     <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                          <!--Modal Header-->
+                          Modal Header
                           <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">
                               <a class="navbar-brand">
@@ -228,7 +230,7 @@
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
-                          <!--Modal Body-->
+                          Modal Body
                           <div class="modal-body">
 
                             <table class="table table-hover">
@@ -242,16 +244,17 @@
                             </table>
 
                           </div>
-                          <!--Footer-->
+                          Footer
                           <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
                           </div>
                         </div>
                       </div>
                     </div>
+                     -->
                     <!-- Modal: modalCart -->
                     
-                      <!-- position Selection -->
+                      <!-- position Selection 
                    <label for="position-select">직급 : </label>
                    <select id="position-select">
                       <option value="">== 직급을 선택해주세요 ==</option>
@@ -265,7 +268,7 @@
                       <option value="8">이사관</option>
                       <option value="9">관리관</option>
                    </select>
-					<input type="hidden" name="deptCode" id="deptCode" />
+					<input type="hidden" name="deptCode" id="deptCode" />-->
                   </div>
                 </div>
 
@@ -282,9 +285,8 @@
           
                           <div class="mb-4">
                             <br>
-                          <button class="btn btn-primary btn-lg btn-block" type="submit">수정 완료</button>
+                          <button class="btn btn-primary btn-lg btn-block" onclick="check()">수정 완료</button>
                         </div>
-                        </form>
                       </div>
                     </div>
           
@@ -301,8 +303,8 @@
                 <h2> 마이태그 수정 </h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
                   <div style="display: flex;" id="tag-body">
-
-                    <input type="text" id="mytag" size="20" placeholder="태그입력" disabled="disabled" value="#${user.mytag.name}"/>
+                    <input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
+                    data-bs-toggle="tooltip" title="tooltip"/>
                   </div>
 
                   <ul id="tag-list">
@@ -319,10 +321,12 @@
     </div>
   </div>
   
-  <footer class="container-fluid text-center">
-    <p>Footer Text</p>
-  </footer>
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
 </body>
+
 <!--script-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
@@ -355,7 +359,7 @@
         });
         data.then(function (result) {
             const data = result.data ;
-            let star = document.querySelector("#star-mark")
+            let star = document.querySelector("#star-mark");
             let html = "";
             data.forEach((v) => {
                 
@@ -366,7 +370,7 @@
                 html = html + `<td>\${v.user.dept.name}</td>`;
                 html = html + `<td>\${v.date}</td>`;
                 html = html + `<td>\${v.user.name}</td>`;
-                html = html + `<td><a href="starmark/delete?boardId=\${v.id}"><button>수정</button></a></td>`;
+                html = html + `<td><a onclick="starDelete(\${v.id})"><button>수정</button></a></td>`;
                 html = html + "</tr>";
                 
         });
@@ -377,6 +381,29 @@
         var2.style.display = "none";
         var3.style.display = "block";
         var4.style.display = "none";
+        
+        const data = axios({
+        	url: 'mypage/update',
+        	method: 'get'
+        	});
+        	data.then(function (result) {
+        	const v = result.data;
+        	
+        	const name = document.querySelector("#name");
+        	const email = document.querySelector("#email");
+        	const deptCode = document.querySelector("#inputdept");
+        	const phoneNum = document.querySelector("#inputPhoneNum");
+        	const deptNum = document.querySelector("#inputDeptNum");
+        	const dbPwd = document.querySelector("#dbPwd");
+        	
+        	name.value = v.name;
+        	email.value = v.email;
+        	phoneNum.value = v.phoneNumber;
+        	deptNum.value = v.deptNumber;
+        	deptCode.value = v.deptCode;
+        	dbPwd.value = v.password
+        	});
+
   
       } else {
         var1.style.display = "none";
@@ -426,7 +453,6 @@
        tagbody.addEventListener("click", () => {
     	   // bootstarp - bs4 popover 로 설명
     	   // 설명 내용은 # 없이 하는거 그리고 엔터치면 완료 되는거 
-    	   console.log("test")
     	   mytag.removeAttribute("disabled");
        });
        
@@ -442,6 +468,9 @@
     			   params: {
     			   'tagName': `\${tagName}`
     			   }
+    			   });
+    		   data.then(function (result) {
+					mytag.value = result.data;    			   
     			   });
     		   mytag.setAttribute("disabled","disabled");
     		   e.preventDefault();
@@ -498,8 +527,60 @@
       }
     })
 
+   function check() {
+      		const pwd1 = document.querySelector("#pwd1");
+        	const pwd = document.querySelector("#pwd");
+        	const pwd0 = document.querySelector("#pwd0");
+        	pwd.value = pwd1.value;
+        	
+        	const dbPwd = document.querySelector("#dbPwd");
+        	if(pwd0.value == ""){
+        		alert("기존 사용 비밀번호를 입력해 주세요.");
+        	}else{
+        	if(pwd0.value == dbPwd.value) {
+        		
+        	
+
+        	const phoneNum = document.querySelector("#inputPhoneNum");
+        	const deptNum = document.querySelector("#inputDeptNum");
+        	
+        	
+        	
+        	const data = axios({
+        	url: 'mypage/update',
+        	data : {
+        		'password' : `\${pwd.value}`,
+        		'phoneNumber' : `\${phoneNum.value}`,
+        		'deptNumber' : `\${deptNum.value}`
+        	},
+        	dataType : 'text',
+        	method: 'post'
+        	});
+        	}else {
+        		alert("기존 사용 비밀번호를 틀리셨습니다.");
+        	}
+        	}
+        }
   
-  
+    <!-- 즐겨찾기 삭제 -->
+    function starDelete(id) {
+    	let check = confirm("정말로 삭제 하시겠습니까?");
+    	if(check) {
+
+        	const data = axios({
+    			   url: 'starmark/delete',
+    			   data: {
+    			   'boardId': `\${id}`
+    			   },
+    			   dataType : 'text',
+    				   method: 'post'
+    			   });
+	        	data.then(function (result) {
+        			body_convert(mypage_starmark);
+        		});
+    	} 
+    }
+    
   <!--소속기관 찾는 팝업창-->
 
     function showPopup() {

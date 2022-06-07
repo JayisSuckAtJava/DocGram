@@ -1,49 +1,8 @@
- /* side bar ===================================================================== */
- 
- /* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-margin-bottom: 0;
-border-radius: 0;
-}
 
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-height: 100%;
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-padding-top: 20px;
-background-color: #f1f1f1;
-margin-bottom: 20px;
-}
-
-/* header, footer ===================================================================== */
-/* Set black background color, white text and some padding */
-footer,
-header {
-background-color: #555;
-color: white;
-padding: 15px;
-}
 
 
 /* body ===================================================================== */
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-.sidenav {
- height: auto;
- padding: 15px;
-}
 
-.row.content {
- height: auto;
-}
-}
-
-.col-sm-8 .text-left {
-justify-content: space-around;
-}
 
 .title {
 width: 20%;
@@ -59,6 +18,12 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
+
 .table {
 table-layout: fixed;
 }
+
+.col-sm-8 .text-left {
+justify-content: space-around;
+}
+

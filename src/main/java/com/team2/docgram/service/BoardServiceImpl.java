@@ -344,9 +344,13 @@ public class BoardServiceImpl implements BoardService {
 	public void boardUpdate(BoardDto board, String hashtagList, String relatedBoardList) {
 		Long boardId = board.getId();
 		boardHashtagDao.deleteHashtagList(boardId);
-		
+		Integer relatedListArrayLength;
 		String[] relatedBoardListArray = relatedBoardList.split(",");
-		Integer relatedListArrayLength = relatedBoardListArray.length;
+		if(relatedBoardList.equals("")) {
+			relatedListArrayLength = 0; 
+		}else {
+			relatedListArrayLength = relatedBoardListArray.length;			
+		}
 		
 		if(relatedListArrayLength == 0) {
 			board.setRelation1(null);

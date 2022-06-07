@@ -1,21 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+ Class Name : Detail.JavaScript
+ Description : 문서 상세 보기
+ Author : 조윤구
+ Since : 2022-05-20
+--%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>문서상세보기</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <meta charset="utf-8">  
   
-    <link rel="stylesheet" href="../resources/css/board.css">
-    <script src="../resources/js/board.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../resources/css/board.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="../resources/js/board.js"></script>
+  <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/css/comp.css">
 
-</head>
+
+  </head>
 <body>
+
+	<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
 
 <div class="container-fluid text-center">    
   <div class="row content">
@@ -26,13 +39,12 @@
       <div class="all">
         <!-- 출력 문서 제목 -->
             <h3 class="title-article">${board.title}<h3>
-    
-    
+
     
         <!-- 문서 상세 정보 -->
         <div class="table-wrap">
             <table class="table table-response">
-          
+                <caption> 문서상세 정보 - 작성자 /작성일 / 문서 관리 번호 / 전화번호 /소속기관 </caption>
                 <colgroup>
                     <col style="width:15%">
                     <col style="width:35%">
@@ -68,8 +80,8 @@
     
         <hr>
         <div class="btnlist">
-            <button class="btn"><i class="bi bi-star-fill"></i></button> 
-            <button class="btn"><i class="bi bi-megaphone-fill"></i></button> 
+            <button class="btn"><i class="bi bi-star"></i></button> 
+            <button class="btn"><i class="bi bi-megaphone"></i></button> 
         </div>
         <hr>
     
@@ -94,9 +106,14 @@
             </div>
                     <div class="detail">
                         <p>
-                        대충 문서 내용이 나와야하는 부분
+                        ${board.content}
                         </p>
                     </div>
+                    <hr>
+            <div class="right">
+                <a href="update/${board.id}"><button>수정</button></a>
+                <button>삭제</button>
+            </div>
         </div>
             
         <hr>
@@ -118,6 +135,7 @@
                             <span class="btn-downset">
                                 <!-- 문서 보기 버튼-->
                                  <button type="button" class="btn btn-view" onclick="showDocs()">문서보기</button>    
+                                 <!-- 다운로드 a테그 -->
                                 <a href="/download/${board.file.id}" class="btn btn-download btn-original" style='margin-left:5px'>
                                     <i class="icon-img icon-down"></i>
                                     <button class="element-invisible">다운로드</button>
@@ -145,6 +163,7 @@
                     <c:if test="${relatedBoard != null}">
                     <li>
                         <div>
+                        	<!-- 관련 문서 a 태그 -->
                             <a href="${relatedBoard.id}">${relatedBoard.title}</a>
                         </div>
                             <p>
@@ -160,19 +179,20 @@
         </div>
 
     </div>
-    <hr>
-   </div>
-</body>
+  </div>
+</div>
 
-    <!-- script 부분 -->
-
-        <script>
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+<script>
         const tds = document.querySelectorAll("tag");
         tds.forEach((v) => {
             let text = v.innerHTML;
             let tag = text.substring(1);
             v.addEventListener("click" , ()=>{
-            	window.location.href = `../read?hashtagList=\${tag}`;     
+            	window.location.href = `../search?hashtagList=\${tag}`;     
             })
             })
             
@@ -182,4 +202,6 @@
 		} 
   
 </script>
+</body>
 </html>
+

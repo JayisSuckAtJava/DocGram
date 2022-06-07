@@ -26,4 +26,6 @@ public interface UserService {
 
 	void deleteUser(Long userId);
 
+	UserDto readUserOne(UserDto user);
+
 }
