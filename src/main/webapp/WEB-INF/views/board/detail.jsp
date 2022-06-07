@@ -186,22 +186,7 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
-<script>
-        const tds = document.querySelectorAll("tag");
-        tds.forEach((v) => {
-            let text = v.innerHTML;
-            let tag = text.substring(1);
-            v.addEventListener("click" , ()=>{
-            	window.location.href = `../read?hashtagList=\${tag}`;     
-            })
-            })
-            
-        function showDocs() {
-			const url = window.location.host
-			window.open(`http://docs.google.com/viewer?url=http://\${url}/resources/static/pdf/${board.id}_${board.file.name}`);
-		} 
-  
-</script>
+
 </body>
 </html>
 

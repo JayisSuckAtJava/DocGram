@@ -17,9 +17,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../resources/css/read.css">
   <script src="../resources/js/read.js"></script>
-    <link rel="stylesheet" href="../resources/css/main.css">
+  <link rel="stylesheet" href="../resources/css/bootstrap.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
   
 </head>
@@ -157,12 +159,12 @@
             <i class="bi bi-star-full"></i>  <!-- 왼쪽 찬별 / 오른쪽 안찬별 --> <i class="bi bi-star"></i>
             </c:if>
             </td>
+            <td>${board.id}</td>
+            <td>${board.title}</td>
+            <td><a href="download/${board.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>
+            <td>${board.user.dept.name}</td>
+            <td>${board.date}</td>
             <td>${board.user.name}</td>
-            <td>${board.user.email}</td>
-            <td>${board.user.phoneNumber}</td>
-            <td>${board.user.deptNumber}</td>
-            <td>${board.user.deptId}</td>
-            <td>부서관</td>
           </tr>
         </c:forEach>
 
