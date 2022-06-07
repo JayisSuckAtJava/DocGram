@@ -66,7 +66,9 @@ public class SearchController {
 	 * @since 2022. 5. 30.
 	 */
 	@GetMapping("search/list")
-	public String read(Model model, @RequestParam Map<String, Object>map) {
+	public String read(Model model, @RequestParam Map<String, Object>map, HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		map.put("userId", user.getId());
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 
 		model.addAllAttributes(resultMap);

@@ -333,7 +333,7 @@ public class UserController {
 	public void createDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
-		if(postionId > 5) {d
+		if(postionId > 5) {
 			Long deptId = user.getDeptId();
 			starmarkService.createDeptmark(deptId,boardId);			
 		}
