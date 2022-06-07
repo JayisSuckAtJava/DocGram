@@ -8,7 +8,9 @@ public class sss {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		String s = "";
+		System.out.println(s.split(", ").length);
+		System.out.println(s.split(", "));
 	}
 
 }

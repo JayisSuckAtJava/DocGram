@@ -13,10 +13,10 @@
   <meta charset="utf-8">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="../resources/css/board.css">
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="/resources/css/board.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -42,31 +42,30 @@
       
       <div class="all">
 
-        <div class="writebody">
-    
+        <div class="writebody">    
+       <form action="" method="post" enctype="multipart/form-data">
             <div class="titlename"> <!-- 제목 작성 부분-->
-					<form action="" method="get">
                 <div>
-                    <input class="size" type="text" name="제목" placeholder="제목을 입력해주세요">
+                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요">
                 </div>
             </div>
             <hr>
             <div class="wirtearea"> <!-- 내용 작성 부분-->
-                <textarea class="size" placeholder="내용을 입력하세요." ></textarea>
+                <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
     
             </div>
             <hr>
             
             <div>
                 <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
-                <input type="file" name="file" id="imageFileOpenInput" accept=".pdf">
+                <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
                 <button>취소</button>
                 <hr>
             </div>
     
             <div>
                 <h3> 해시태그 지정</h3>
-                <input class="size" type="text" placeholder="태그를 입력하세요">
+                <input class="size" type="text" placeholder="태그를 입력하세요" name="hashtagList">
                 
             </div>
                 <hr>
@@ -76,7 +75,7 @@
     			
             <div> <!-- 관계 게시글 설정-->
                 <h3>관계문서 지정</h3>
-                <input class="size" class="tt" type="text" placeholder="관련 문서들">
+                <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList">
 		
                 <!-- 관련 문서 모달 -->
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">관련문서 지정</button>
@@ -138,15 +137,15 @@
 
             </div>
 
-          </div>
-          <div>   <!-- 작성 완료, 뒤로가기-->
-          						
+          	<div>
             <button type="submit">작성 완료</button> 
-            </form>
-            <button onclick=" location.href='read/search' " >뒤로가기</button>
+            <button onclick="history.back()" >뒤로가기</button>
+            </div>
+          	</form>
           </div>
+          
+          						
         </div>
-        
       </div>
       <div class="col-sm-2 sidenav">
         
