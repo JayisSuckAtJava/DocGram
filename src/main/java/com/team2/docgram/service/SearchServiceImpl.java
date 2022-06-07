@@ -105,6 +105,14 @@ public class SearchServiceImpl implements SearchService {
 	public List<DeptDto> searchDept(String name) {
 		return deptDao.searchDept(name);
 	}
+
+	@Override
+	public List<BoardDto> searchRelation(String text, String sel) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("text", text);
+		map.put("sel", sel);
+		return boardDao.searchRelation(map);
+	}
 	
 
 }
