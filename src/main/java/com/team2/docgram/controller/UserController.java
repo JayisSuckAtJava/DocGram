@@ -168,6 +168,7 @@ public class UserController {
 		String password = (String) map.get("password");
 		String deptNumber = (String) map.get("deptNumber");
 		String phoneNumber= (String) map.get("phoneNumber");
+		
 		UserDto user = new UserDto();
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		Long userId = sessionUser.getId();
@@ -359,8 +360,27 @@ public class UserController {
 	}
 	
 	@GetMapping("admin/user")
-	public String adminUserPage(HttpSession session) {
+	public String adminUserPage(HttpSession session, Model model, String name) {
+		List<UserDto> userList = new ArrayList<UserDto>();
+		if(name == null) {
+			userList = userService.readUserList();			
+		}else {
+			userList = userService.readUserList(name);
+		}
+		model.addAttribute("userList",userList);
 		return "admin/user";
+	}
+	
+	@PostMapping("admin/user/update")
+	@ResponseBody
+	public Integer adminUserUpdate(@RequestBody Map<String, Object> map, HttpSession session) {
+		String deptString = (String) map.get("deptId");
+		String userString = (String) map.get("userId");
+		Long deptId = Long.parseLong(deptString);
+		Long userId = Long.parseLong(userString);
+		Integer result = userService.updateDept(deptId,userId);
+		return result;
+		
 	}
 	
 	@GetMapping("admin/board")
