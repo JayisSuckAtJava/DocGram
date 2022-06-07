@@ -25,27 +25,17 @@
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required>
-                <div id="remember" class="checkbox">
-                    
-                </div>
                 
-                <a href=" ">
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >로그인 하기</button>
-            </a>
             </form><!-- /form -->
             
             <!-- 회원가입 a태그 -->
-            <a href="join" class="join">
+            <a href="signup" class="join">
                 회원가입
             </a>
             
         </div><!-- /card-container -->
     </div><!-- /container -->
-    
-    <!-- footer -->
-<footer class="container-fluid text-center py-3" >
-	<jsp:include page="../comp/footer.jsp"></jsp:include>
-</footer>
 
 </body>
 

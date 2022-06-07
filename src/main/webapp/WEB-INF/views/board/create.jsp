@@ -45,7 +45,7 @@
         <div class="writebody">
     
             <div class="titlename"> <!-- 제목 작성 부분-->
-
+					<form action="" method="get">
                 <div>
                     <input class="size" type="text" name="제목" placeholder="제목을 입력해주세요">
                 </div>
@@ -73,11 +73,11 @@
     
     
     
-    
+    			
             <div> <!-- 관계 게시글 설정-->
                 <h3>관계문서 지정</h3>
                 <input class="size" class="tt" type="text" placeholder="관련 문서들">
-
+		
                 <!-- 관련 문서 모달 -->
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">관련문서 지정</button>
 
@@ -95,11 +95,9 @@
                           관련문서
                         </a>
                       </h4>
-                      <form class="d-flex" method="" action="" role="search">
                         <input class="form-control me-2" type="search" name="search" placeholder="Search"
                           aria-label="Search">
                         <button class="btn btn-outline-success" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
-                      </form>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
@@ -134,6 +132,7 @@
                   </div>
                 </div>
               </div>
+              
 
 
 
@@ -142,8 +141,8 @@
           </div>
           <div>   <!-- 작성 완료, 뒤로가기-->
           						
-            <button onclick=" location.href='board/id' " >작성 완료</button> 
-            
+            <button type="submit">작성 완료</button> 
+            </form>
             <button onclick=" location.href='read/search' " >뒤로가기</button>
           </div>
         </div>
