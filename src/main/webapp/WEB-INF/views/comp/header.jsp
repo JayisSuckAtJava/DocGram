@@ -13,7 +13,7 @@
 
       
             
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="main">
                  <h1>Docgram</h1>
               </a>
               <div class="navbar-nav mr-auto">
@@ -26,7 +26,7 @@
                 <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="board">부서별 알림</a>
+              <a class="nav-link" href="board">부서별 알림</a>
                 <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">

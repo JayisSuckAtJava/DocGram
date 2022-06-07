@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>main-로그인</title>
+  <title>main</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../resources/css/bootstrap.css">
@@ -33,12 +33,13 @@
     <div class="row content">
       <div class="col-sm-2 sidenav">
         <c:if test="${sessionScope.user == null}">
+        <p>로그인이 필요합니다.</p>
         <p><a href="user/signin">로그인</a></p>
-        <p><a href="user/signup">회원가입</a></p>
+        <p><a href="tos">회원가입</a></p>
         
         </c:if>
         <c:if test="${sessionScope.user != null}">
-                <p>${user.name}/${user.dept.name}</p>
+                <p>${user.name} / ${user.dept.name}</p>
         <p><a href="mypage">My page</a></p>
         <p><a href="user/signout">로그아웃</a></p>
         </c:if>
@@ -58,7 +59,7 @@
             <c:if test="${sessionScope.user != null}">            
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
-      		   <tr>
+      		   <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                 <td>${board.id}</td>
                 <td>${board.title}</td>
                 <td>${board.user.dept.name}</td>
@@ -71,60 +72,7 @@
               	<td>재정특별기획부</td>
               	<td>2022-06-01</td>
               </tr>
-              <tr>
-              	<td>2</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>3</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>4</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>5</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>6</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>7</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>8</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>9</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
-                            <tr>
-              	<td>10</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>            
+                          
             </table> 
             </c:if>           
           </div>
@@ -140,7 +88,7 @@
             <c:if test="${sessionScope.user != null}">
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
-              <tr>
+              <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                 <td>${board.id}</td>
                 <td>${board.title}</td>
                 <td>${board.user.dept.name}</td>
@@ -166,7 +114,7 @@
           
           <c:if test="${sessionScope.user != null}">
           <table class="table table-hover">
-            <tr>
+            <tr >
             <c:forEach items="${starList}" var="board">
               <td>${board.title}</td>
               <td>${board.user.dept.name}</td>
