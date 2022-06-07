@@ -64,32 +64,50 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public Map<String, Object> searchDetail(Map<String, Object> map) {
 		
-		if(map.get("hashtagList") == null) {
+		if (map.get("hashtagList") == null || map.get("hashtagList").equals("")) {
+			map.put("hashtagList", null);
 		}else {
 			String hashtagList = (String) map.get("hashtagList");
 			String[] hashtagArray = hashtagList.split(",");
 			map.put("hashtagList", hashtagArray);
 		}
-		if(map.get("dateRange") == null) {
+		if(map.get("dateRange") == null || map.get("dateRange").equals("null")) {
 			map.put("start", null);
-			map.put("end", null);			
-		}else { // dateRange 지정 함
+			map.put("end", null);
+			map.put("dateRange", null);
+		}else { 
 			Long dateRange = Long.parseLong((String) map.get("dateRange"));
-			if(dateRange == 999) { // 개별지 하기로 선택 함
+			if(dateRange == 999) { 
 				map.put("dateRange", null);
 			}else {
 				map.put("start", null);
 				map.put("end", null);
 			}
 		}
-		if(map.get("page") == null) {
-			map.put("page", 0);
+		if(map.get("page") == null || map.get("page").equals("")) {
+			Long page = 0L;
+			map.put("page", page);
 		}else {
 			Long page = Long.parseLong((String) map.get("page"));
 			page = ( page - 1 ) * 10;
 			map.put("page", page);
 		}
+		if(map.get("text") == null || map.get("text").equals("")) {
+			map.put("text", null);
+			map.put("sel", null);
+		}
+		if(map.get("position") == null || map.get("position").equals("null")) {
+			map.put("position", null);
+		}
+		if(map.get("fileName") == null || map.get("fileName").equals("")) {
+			map.put("fileName", null);
+		}
+		if(map.get("fileNum") == null || map.get("fileNum").equals("")) {
+			map.put("fileNum", null);
+		}
 		List<BoardDto> boardList = new ArrayList<>();
+		
+		
 		boardList = boardDao.searchDetail(map);
 		Long listSize = boardDao.searchDetailSize(map);
 		
@@ -97,7 +115,13 @@ public class SearchServiceImpl implements SearchService {
 		resultMap.put("listSize", listSize);
 		resultMap.put("boardList", boardList);
 		
+		System.out.println(map);
+		System.out.println(resultMap);
 		
+		map.forEach((strKey, value)->{
+			System.out.println(strKey + " : key and    value :" + value);
+			System.out.println(map.get(strKey) == null);
+		});
 		return resultMap;
 	}
 
