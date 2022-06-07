@@ -1,38 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%--
+ Class Name : Tos.JavaScript
+ Description : 약관동의서
+ Author : 문예빈
+ Since : 2022-06-03
+--%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>약관동의</title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="</script'>http://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="</script'>http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script scr="../resources/js/login.js"></script>
+  <link rel="stylesheet" href="../resources/css/bootstrap.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/css/comp.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
    <style type="text/css">
-    #d1{
+
+        #d1{
      width:770px;
      margin:0 auto;
     }
-    
    </style>
-   <!-- accordion 접히는 Script 선언 -->
-  <script>
-  $(function() {
-    $( "#accordion" ).accordion();
-    $('#accordion input[type="checkbox"]').click(function(e) {
-        e.stopPropagation();
-    });
-  });
-  </script>
+
 </head>
 
 
 <body>
+
+<!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
+
 <form action="writepage.html" method="get" id="form1">
 <div id="d1">
- <img src="img/logo.png"/>
  <h2 align="center">회원가입을 환영합니다.</h2><br/><br/>
   <tr>
    <td align="left"><font size="2">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</font></td>
@@ -104,14 +110,24 @@
  
  <div align="center">
   <br/>
-  <button><a href="join"></a>동의</button>
-  <button><a href="main"></a>비동의</button>
+  <button><a href="join">동의</a></button>
+  <button><a href="main">비동의</a></button>
   <br/>
  </div>
 </div>
 </form>
-<!-- check Box 이벤트처리를 위한 Script -->
+
+
+
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+
+</body>
 <script>
+//check Box 이벤트처리를 위한 Script
+
 var doc = document; 
   var form1 = doc.getElementById('form1'); 
   var inputs = form1.getElementsByTagName('INPUT'); 
@@ -171,6 +187,17 @@ var doc = document;
  
    this.submit(); 
   }; 
+  
+  
+  
+// accordion 접히는 Script 선언 
+	$(function() {
+    $( "#accordion" ).accordion();
+    $('#accordion input[type="checkbox"]').click(function(e) {
+        e.stopPropagation();
+    });
+  });
+
 </script>
-</body>
+
 </html>

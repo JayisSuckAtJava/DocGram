@@ -16,14 +16,13 @@
     <title>수정페이지</title>
     
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="../resources/css/board.css">
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="/resources/css/board.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
 
 </head>
 
@@ -39,9 +38,9 @@
 
 <div class="all">
 
+		<form action="" method="post">
     <div class="writebody">
-		<form action="" method="post" enctype="multipart/form-data">
-        <div class="titlename"> <!-- 제목 작성 부분-->
+        <div class="titlename" name="title"> <!-- 제목 작성 부분-->
             <div>
             	<input type="text" name="title" class="title" placeholder="제목을 입력해 주세요." value="${board.title}">
             </div>
@@ -73,13 +72,11 @@
         </div>
     
     </div>
-    <div>   <!-- 수정 완료, 뒤로가기-->
-     <button onclick="location.href='board/id'">수정 완료</button> 
+     <button type="submit">수정 완료</button> 
     
-    <button onclick="location.href='read/search'">뒤로가기</button>
+    <button onclick="history.back()">뒤로가기</button>
 
     </form>
-    </div>
 </div>
 	
 <!-- footer -->
