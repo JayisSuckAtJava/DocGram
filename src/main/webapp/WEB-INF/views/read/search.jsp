@@ -44,7 +44,7 @@
     <dl class="dl-table">
       <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
       <dd class="dd-keyword">
-        <form action="" method=""> <!-- form-->
+        <form action="" method="get"> <!-- form-->
         <select class="ss" name="searchField" id="searchCategory" title="검색어 분류 선택">
           <option value="all" selected="selected">제목</option>
           <option value="title">내용</option>
@@ -159,11 +159,11 @@
             </c:if>
             </td>
             <td>${board.user.name}</td>
-            <td>${유저 아이디 (이메일)}</td>
-            <td>${개인번호}</td>
-            <td>${부서번호}</td>
-            <td>${소속}</td>
-            <td>부서관</td>
+            <td>${board.title}</td>
+            <td>${board.fileId}</td>
+            <td>${board.user.dept.name}</td>
+            <td>${board.date}</td>
+            <td>${board.user.name}</td>
           </tr>
         </c:forEach>
 

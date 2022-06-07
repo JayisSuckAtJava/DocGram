@@ -111,18 +111,18 @@ public class BoardController {
 	 */
 	@PostMapping("board/create")
 	public String boardCreate(HttpSession session,BoardDto board,String hashtagList, MultipartFile mFile,String relatedBoardList) {
-		//UserDto user = (UserDto) session.getAttribute("user");
-		//Long userId = user.getId();
-		board.setUserId(1L);
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		board.setUserId(userId);
 		
 		String fileName = mFile.getOriginalFilename();
 			
 		String savedFileName = boardService.createBoard(board,hashtagList,relatedBoardList,fileName);
 		if(savedFileName == null) {
-			return "redirect:../board";
+			return "redirect:/board/list";
 		}else {
 			fileService.createFile(savedFileName, mFile);
-			return "redirect:../board";
+			return "redirect:/board/list";
 		}
 	}
 	
@@ -172,28 +172,11 @@ public class BoardController {
 	 * @since 2022. 5. 30.
 	 */
 	@PostMapping("board/update/{id}")
-	public String boardUpdate(@PathVariable("id")Long id,BoardDto board, String hashtagList, String relatedBoardList) {
+	public String boardUpdate(@PathVariable("id")Long id,BoardDto board, String hashtagList, String relatedBoardList, MultipartFile mFile) {
 		board.setId(id);
 		boardService.boardUpdate(board, hashtagList, relatedBoardList);
-		return "redirect:../"+id;
+		return "redirect:/board/"+id;
 	}
-	
-	/**
-	 * 관련 문서 선택을 위한 조회 후 표시 페이지
-	 * 
-	 * @param page 페이징 처리를 위한 Long 함수
-	 * @return 해당 페이지 표시
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 30.
-	 */
-	@GetMapping("rest/rel")
-	public String popup(Model model,@RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
-		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList(page);
-		return "board/popup";
-	}
-	
 	
 	/**
 	 * DocGram 의 메인 페이지 공지사항, 부서별 알림, 즐겨찾기 목록 등을 user 정보로 조회 표현
@@ -207,11 +190,13 @@ public class BoardController {
 	 */
 	@GetMapping("main")
 	public String mainPage(HttpSession session,Model model) {
+		
 		UserDto user = (UserDto) session.getAttribute("user");
-		//Long userId = user.getId();
-		//Long deptId = user.getDeptId();
-		Long userId = 1L;
-		Long deptId = 11110000L;
+		if(user == null) {
+			return "board/main";
+		}else {
+		Long userId = user.getId();
+		Long deptId = user.getDeptId();
 		
 		List<BoardDto> starList = boardService.readStarmarkList(userId);
 		List<BoardDto> deptList = boardService.readDeptmarkList(deptId);
@@ -221,8 +206,8 @@ public class BoardController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("starList", starList);
 		model.addAttribute("noticeList", noticeList);
-		
 		return "board/main";
+		}
 	}
 	
 	/**
@@ -238,7 +223,6 @@ public class BoardController {
 	public String noticeList(Model model) {
 		List<BoardDto> noticeList = boardService.readNoticeList();
 		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("test","ab");
 		return "board/notice";
 	}
 	
@@ -258,6 +242,11 @@ public class BoardController {
 		notice = boardService.readBoard(boardId);
 		model.addAllAttributes(notice);
 		return "board/detail";
+	}
+	
+	@GetMapping("notice/create")
+	public String noticeCreate() {
+		return "board/create";
 	}
 	
 	/**
@@ -281,7 +270,7 @@ public class BoardController {
 		board.setUserId(userId);
 		board.setSecurity(0);
 		boardCreate(session,board,hashtagList,mFile,relatedBoardList);
-		return "redirect:../notice";
+		return "redirect:/notice/list";
 	}
 	
 	/**
@@ -294,23 +283,15 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 6. 1.
 	 */
-	@PostMapping("board/delete/{id}")
-	public String delectBoard(@PathVariable("id")Long id,HttpSession session) {
+	@GetMapping("board/delete/{id}")
+	public void delectBoard(@PathVariable("id")Long id,HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long positionId = user.getPositionId();
 		Long boardUserId = boardService.readBoardUserId(id);
 		if(userId == boardUserId || positionId > 6) {
 			boardService.deleteBoard(id);
-			return "redirect:../../board";
 		}
-		return "";
-	}
-	
-	@GetMapping("bo/del/{id}")
-	public String dee(@PathVariable("id")Long id) {
-		boardService.deleteBoard(id);
-		return "redirect:../../read";
 	}
 	
 }

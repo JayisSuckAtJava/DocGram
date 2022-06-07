@@ -107,6 +107,11 @@ public class UserController {
 		return "login/join";
 	}
 	
+	@GetMapping("user/tos")
+	public String userTos() {
+		return "login/tos";
+	}
+	
 	/**
 	 * 가입 처리
 	 * 
