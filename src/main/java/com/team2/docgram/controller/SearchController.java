@@ -65,12 +65,12 @@ public class SearchController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 30.
 	 */
-	@GetMapping("search")
+	@GetMapping("search/list")
 	public String read(Model model, @RequestParam Map<String, Object>map) {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 
 		model.addAllAttributes(resultMap);
-		return "read/detail";
+		return "read/search";
 	}
 	
 	@GetMapping("rest/dept")
