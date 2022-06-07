@@ -75,6 +75,15 @@ public class SearchController {
 		return "read/search";
 	}
 	
+	/**
+	 * 소속 부서에 관한 검색
+	 * 
+	 * @param name 검색할 부서의 이름
+	 * @return 해당 name 이 포함되어 있는 부서들의 리스트
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("rest/dept")
 	@ResponseBody
 	public List<DeptDto> searchDept(String name) {
@@ -84,10 +93,19 @@ public class SearchController {
 		return deptList;
 	}
 	
+	/**
+	 * 연관 게시글 검색
+	 * 
+	 * @param text 검색어가 입력되는 text
+	 * @param sel 검색어의 종류를 선택하는 sel
+	 * @return 해당 검색 결과로 반환되는 게시글 목록
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("rest/relation")
 	@ResponseBody
 	public List<BoardDto> searchRelation(String text,String sel) {
-		System.out.println(text + "        " + sel);
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = searchService.searchRelation(text,sel);
 		return boardList;
