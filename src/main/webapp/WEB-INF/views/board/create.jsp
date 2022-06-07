@@ -76,7 +76,7 @@
             <div> <!-- 관계 게시글 설정-->
                 <h3>관계문서 지정</h3>
                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" id="modal-block">
-                <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList">
+                <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList" id="inputRelList" disabled>
                 </button>
                 
             </div>
@@ -128,6 +128,7 @@
                         <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
+                        let relSum = 0;
                 function ajax() {
                 	console.log("hi");
                 	
@@ -143,7 +144,6 @@
                 		}
                 		});
                 		data.then(function (result) {
-                		console.log(result.data);
                 		const board_list = result.data;
                 		
                 		const body = document.querySelector("#board_list_search_body");
@@ -151,7 +151,7 @@
                 		
                 		board_list.forEach((v)=>{
                 			
-                			html = html + "<tr>";
+                			html = html + "<tr id='rel_list'>";
                 			html = html + `<td>\${v.id}</td>`;
                 			html = html + `<td>\${v.title}</td>`;
                 			html = html + `<td>\${v.user.dept.name}</td>`;
@@ -159,10 +159,33 @@
                 			html = html + "</tr>";
                 		})
                 		body.innerHTML = html;
-                		
+                		const relList = document.querySelectorAll("#rel_list");
+       	             	const relListSum = document.querySelector("#rel_list_sum");
+       	                
+       	            	 relList.forEach((v)=>{
+       	            		 let id = v.firstElementChild.innerHTML
+       	            		 v.addEventListener("click",()=>{
+       	            			 console.log("test");
+       	            			 
+       	            			 if(relSum != 3){
+       	            			 if(relListSum.value == "") {
+       	            				relListSum.value = relListSum.value + `\${id}`;
+       	            				relSum++;
+       	            			 }else {
+       	            				relListSum.value = relListSum.value + ',' +`\${id}`;
+       	            				relSum++;
+       	            			 }
+       	            			 }else {
+       	            				 alert("관계 문서는 3개만 지정 가능합니다.")
+       	            			 }
+       	            			 
+       	            		 })
+       	            	 })
                 		});
 
+                		
                 }
+				 
                 
                 const tagInput = document.querySelector("#tagInput");
                 tagInput.addEventListener("blur",()=>{
@@ -181,13 +204,23 @@
                 	hashtagListInput.value = hashtagList;
                 	
                 })
+                
+               
+                function checkRelation() {
+                	const relListSum = document.querySelector("#rel_list_sum");
+                	const relList = document.querySelector("#inputRelList");
+                	
+                	relList.value = relListSum.value;
+                }
                 </script>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
                     <!--Modal Body-->
-
+					<div>
+						<input type="text" disabled id="rel_list_sum"/>
+					</div>
                     <div class="modal-body">
                     
                     
