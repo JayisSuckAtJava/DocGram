@@ -107,6 +107,14 @@ public class UserController {
 		return "login/join";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("user/tos")
 	public String userTos() {
 		return "login/tos";
@@ -168,6 +176,7 @@ public class UserController {
 		String password = (String) map.get("password");
 		String deptNumber = (String) map.get("deptNumber");
 		String phoneNumber= (String) map.get("phoneNumber");
+		
 		UserDto user = new UserDto();
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		Long userId = sessionUser.getId();
@@ -278,6 +287,15 @@ public class UserController {
 		return "mypage/mypage";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("rest/star")
 	@ResponseBody
 	public List<BoardDto> mypageStarmark(Long userId) {
@@ -333,7 +351,7 @@ public class UserController {
 	public void createDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
-		if(postionId > 5) {d
+		if(postionId > 5) {
 			Long deptId = user.getDeptId();
 			starmarkService.createDeptmark(deptId,boardId);			
 		}
@@ -358,11 +376,60 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @param model
+	 * @param name
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("admin/user")
-	public String adminUserPage(HttpSession session) {
+	public String adminUserPage(HttpSession session, Model model, String name) {
+		List<UserDto> userList = new ArrayList<UserDto>();
+		if(name == null) {
+			userList = userService.readUserList();			
+		}else {
+			userList = userService.readUserList(name);
+		}
+		model.addAttribute("userList",userList);
 		return "admin/user";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
+	@PostMapping("admin/user/update")
+	@ResponseBody
+	public Integer adminUserUpdate(@RequestBody Map<String, Object> map, HttpSession session) {
+		String deptString = (String) map.get("deptId");
+		String userString = (String) map.get("userId");
+		Long deptId = Long.parseLong(deptString);
+		Long userId = Long.parseLong(userString);
+		Integer result = userService.updateDept(deptId,userId);
+		return result;
+		
+	}
+	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("admin/board")
 	public String adminBoardPage(HttpSession session) {
 		return "admin/board";
