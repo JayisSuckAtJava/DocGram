@@ -44,7 +44,8 @@ select u.id as user_id,
 	u.dept_id as user_dept_id,
 	u.hashtag_id as user_hashtag_id,
 	d.name as dept_name,
-	h.name as hashtag_name
+	h.name as hashtag_name,
+	u.password as user_password
 from user u
 left outer join dept d on u.dept_id = d.id 
 left outer join hashtag h on u.hashtag_id = h.id
@@ -163,6 +164,7 @@ where name like "%${name}%"
 	<result column="user_position_id" property="positionId"/>
 	<result column="user_dept_id" property="deptId"/>
 	<result column="user_hashtag_id" property="hashtagId"/>
+	<result column="user_password" property="password"/>
 	<association property="dept" javaType="dept">
 		<id column="user_dept_id" property="id"/>
 		<result column="dept_name" property="name"/>
