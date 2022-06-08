@@ -1,5 +1,6 @@
 # KDT _ HRD 풀스택 개발자 양성과정 ( JAVA )
 
+https://img.shields.io/badge/logo-test-blue?logo=facebook
 ## 최종 프로젝트
 
 	- 주제 : 공공문서 분류 시스템
