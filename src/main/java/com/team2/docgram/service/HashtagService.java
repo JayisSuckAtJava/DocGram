@@ -18,4 +18,8 @@ public interface HashtagService {
 
 	List<HashtagDto> readHashtagList(Long id);
 
+	void deleteHashtag(Long boardId, Long hashtagId);
+
+	void createHashtag(Long boardId, String hashtagName);
+
 }
