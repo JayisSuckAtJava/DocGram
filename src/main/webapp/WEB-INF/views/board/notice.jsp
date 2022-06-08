@@ -57,8 +57,10 @@
             <th>소속 기관</th>
             <th>작성일</th>
             <th>작성자</th>
+            <c:if test="${sessionScope.user.positionId >= '6' }">
             <th>수정하기</th>
             <th>삭제하기</th>
+            </c:if>
           </tr>
         </thead>
   
@@ -70,6 +72,7 @@
             <td>세종특별청사</td>
             <td>5/19</td>
             <td>부서관</td>
+            <c:if test="${sessionScope.user.positionId >= '6' }">
             <td>
               <button class="btn btn-danger pull-right"  
                       type="button" onclick="getUserName1()">수정</button>
@@ -78,6 +81,7 @@
               <button class="btn btn-danger pull-right"  
                       type="button" onclick="getUserName2()">삭제</button>
             </td>
+            </c:if>
           </tr>
 
           </tr>
@@ -89,6 +93,7 @@
               <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
               <td>${board.user.name}</td>
+              <c:if test="${sessionScope.user.positionId >= '6' }">
               <td>
                 <button class="btn btn-danger pull-right"  
                         type="button" onclick="getUserName1()">수정</button>
@@ -97,14 +102,17 @@
                 <button class="btn btn-danger pull-right"  
                         type="button" onclick="getUserName2()">삭제</button>
               </td>
+              </c:if>
            </tr>
           </c:forEach> 
            <script src="../resources/js/read.js"></script>
         </tbody>
       </table>
+      <c:if test="${sessionScope.user.positionId >= '6' }">
       <div class="bb">
           	<a href="create"><button>작성하기</button></a>
           </div>
+          </c:if>
       </div>
       
       
