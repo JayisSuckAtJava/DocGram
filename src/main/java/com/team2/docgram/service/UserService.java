@@ -20,9 +20,9 @@ public interface UserService {
 
 	void updateHashtag(UserDto user);
 
-	List<UserDto> readUserList();
+	List<UserDto> readUserList(Long page);
 
-	List<UserDto> readUserList(String name);
+	List<UserDto> readUserList(Long page, String name);
 
 	void deleteUser(Long userId);
 

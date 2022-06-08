@@ -15,7 +15,7 @@ public interface BoardDao {
 
 	List<BoardDto> readBoardList(BoardDto board);
 
-	BoardDto readBoard(Long id);
+	BoardDto readBoard(Map<String, Object> searchMap);
 
 	BoardDto readRelationBoard(Long i);
 
@@ -46,5 +46,7 @@ public interface BoardDao {
 	List<BoardDto> searchRelation(Map<String, Object> map);
 
 	List<BoardDto> readDeptBoardList(BoardDto board);
+
+	List<BoardDto> readBoardList(Map<String, Object> map);
 
 }

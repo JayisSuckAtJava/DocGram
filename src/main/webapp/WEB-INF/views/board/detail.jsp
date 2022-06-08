@@ -18,9 +18,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
-  <link rel="stylesheet" href="../resources/css/main.css">
-    <link rel="stylesheet" href="../resources/css/comp.css">
-
+<link rel="stylesheet" href="../resources/css/main.css">
+<link rel="stylesheet" href="../resources/css/comp.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function starDelete(id) {
+    	const data = axios({
+			   url: '/starmark/delete',
+			   data: {
+			   'boardId': `\${id}`
+			   },
+			   dataType : 'text',
+				   method: 'post'
+			   });
+        	data.then(function (result) {
+        		location.reload();
+    		});
+}
+function starCreate(id) {
+	const data = axios({
+		   url: '/starmark/create',
+		   data: {
+		   'boardId': `\${id}`
+		   },
+		   dataType : 'text',
+			   method: 'post'
+		   });
+ 	data.then(function (result) {
+ 			location.reload();
+		});
+}
+</script>
 
   </head>
 <body>
@@ -79,8 +107,18 @@
     
         <hr>
         <div class="btnlist">
-            <button class="btn"><i class="bi bi-star"></i></button> 
-            <button class="btn"><i class="bi bi-megaphone"></i></button> 
+        	<c:if test="${board.starmarkId != null}">
+            <button class="btn" onclick="starDelete(${board.id})"><i class="bi bi-star-fill"></i></button>
+            </c:if>
+        	<c:if test="${board.starmarkId == null}">
+            <button class="btn" onclick="starCreate(${board.id})"><i class="bi bi-star"></i></button>
+            </c:if>
+            <c:if test="${board.deptmarkId != null}"> 
+            <button class="btn"><i class="bi bi-megaphone-fill"></i></button>
+            </c:if> 
+            <c:if test="${board.deptmarkId == null}"> 
+            <button class="btn"><i class="bi bi-megaphone"></i></button>
+            </c:if>
         </div>
         <hr>
     

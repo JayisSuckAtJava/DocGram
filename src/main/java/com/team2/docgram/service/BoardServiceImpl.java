@@ -77,9 +77,13 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public Map<String, Object> readBoard(Long id) {
-		BoardDto board = boardDao.readBoard(id);
-		System.out.println(board+"here");
+	public Map<String, Object> readBoard(Long id, Long userId, Long deptId) {
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("userId", userId);
+		searchMap.put("deptId", deptId);
+		searchMap.put("boardId", id);
+		
+		BoardDto board = boardDao.readBoard(searchMap);
 		
 		if(board.getFile() == null) {
 			board.setFile(null);
@@ -98,8 +102,8 @@ public class BoardServiceImpl implements BoardService {
 		hashtagList = boardHashtagDao.readList(boardId);
 		
 		UserDto user = board.getUser();
-		Long deptId = user.getDeptId();
-		DeptDto dept = deptDao.readDeptList(deptId);
+		Long boardDeptId = user.getDeptId();
+		DeptDto dept = deptDao.readDeptList(boardDeptId);
 		
 		// 만약에 넣는 값이 null 이면 어쩌냐?
 		Long[] relationListId = {board.getRelation1(), board.getRelation2(), board.getRelation3()};

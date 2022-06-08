@@ -59,9 +59,11 @@ public class StarmarkController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("starmark/create")
+	@ResponseBody
 	public void createStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
+		Long boardId = Long.parseLong((String) map.get("boardId"));
 		starmarkService.createStarmark(userId,boardId);
 	}
 	
@@ -80,7 +82,6 @@ public class StarmarkController {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long boardId = Long.parseLong((String) map.get("boardId")); 
-		System.out.println(boardId);
 		starmarkService.deleteStarmark(userId,boardId);
 	}
 	

@@ -218,39 +218,6 @@ public class UserController {
 	}
 	
 	/**
-	 * 관리자 페이지 - 사용자 조회
-	 * 
-	 * @param model 사용자 들의 값을 심기 위한 model
-	 * @return 사용자 목록 + 페이지
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@GetMapping("mypage/user")
-	public String searchUserPage(Model model) {
-		List<UserDto> userList = userService.readUserList();
-		model.addAttribute("userList", userList);
-		return "mypage/mypage";
-	}
-	
-	/**
-	 * 사용자 목록중 이름으로 사용자 검색
-	 * 
-	 * @param model 값 표현을 위한 model
-	 * @param name 검색할 사용자의 이름
-	 * @return 
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("mypage/user")
-	public String searchUser(Model model,String name) {
-		List<UserDto> userList = userService.readUserList(name);
-		model.addAttribute("", model);
-		return "";
-	}
-
-	/**
 	 * 사용자의 MYtag 수정 로직
 	 * 
 	 * @param tagName 지정한 tag 이름 받음
@@ -305,12 +272,12 @@ public class UserController {
 	 * @since 2022. 6. 7.
 	 */
 	@GetMapping("admin/user")
-	public String adminUserPage(HttpSession session, Model model, String name) {
+	public String adminUserPage(HttpSession session, Model model, String name, Long page) {
 		List<UserDto> userList = new ArrayList<UserDto>();
 		if(name == null) {
-			userList = userService.readUserList();			
+			userList = userService.readUserList(page);			
 		}else {
-			userList = userService.readUserList(name);
+			userList = userService.readUserList(page, name);
 		}
 		model.addAttribute("userList",userList);
 		return "admin/user";

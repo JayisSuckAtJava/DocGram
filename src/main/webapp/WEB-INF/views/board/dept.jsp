@@ -57,15 +57,16 @@
       <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
       <dd class="dd-keyword">
         <form  action="" method=""> <!-- form-->
-        <select class="ss" name="searchField" id="searchCategory" title="검색어 분류 선택">
-          <option value="all" selected="selected">제목</option>
-          <option value="title">내용</option>
-          <option value="dept_nm">작성자</option>
+        <select class="ss" name="sel" id="searchCategory" title="검색어 분류 선택">
+          <option value="title" selected="selected">제목</option>
+          <option value="content">내용</option>
+          <option value="name">작성자</option>
+          <option value="dept">소속 부서</option>
 
         </select>
-        <input class="ss" name="searchKeyword" type="text" id="searchKeyword"
-          placeholder="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)"
-          title="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)" value="">
+        <input class="ss" name="text" type="text" id="searchKeyword"
+          placeholder="검색어를 입력하세요."
+          title="검색어를 입력하세요." value="">
           <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
         </form>
       </dd>

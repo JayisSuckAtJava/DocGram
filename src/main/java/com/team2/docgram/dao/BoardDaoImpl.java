@@ -47,8 +47,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public BoardDto readBoard(Long id) {
-		return sqlSession.selectOne(mapper+"readBoard",id);
+	public BoardDto readBoard(Map<String, Object> searchMap) {
+		return sqlSession.selectOne(mapper+"readBoard",searchMap);
 	}
 
 	 /**
@@ -256,6 +256,20 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<BoardDto> readDeptBoardList(BoardDto board) {
 		return sqlSession.selectList(mapper+"readDeptBoardList", board);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readBoardList(Map<String, Object> map) {
+		return sqlSession.selectList("search.readBoardList", map);
 	}
 
 	
