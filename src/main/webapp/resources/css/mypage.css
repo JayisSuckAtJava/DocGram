@@ -47,10 +47,6 @@
   
       
   /* 문서 목록 리스트 css */
-  #mypage_mywriting h2 {
-    margin-top: 40px;
-  }
-  
   .document {
     margin-bottom: 15%;
     border: 1px solid #bcbcbc;
