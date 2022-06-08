@@ -190,6 +190,8 @@ public class UserController {
 		user.setDeptNumber(deptNumber);
 		user.setPhoneNumber(phoneNumber);
 		userService.updateUser(user);
+		UserDto userDetail = userService.readUser(user);
+		session.setAttribute("user", userDetail);
 	}
 	
 	/**
@@ -266,6 +268,8 @@ public class UserController {
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		user.setHashtagId(hashtagId);
 		userService.updateHashtag(user);
+		UserDto userDetail = userService.readUser(user);
+		session.setAttribute("user", userDetail);
 		return tagName;
 	}
 	
@@ -345,9 +349,8 @@ public class UserController {
 	 */
 	@GetMapping("admin/board")
 	public String adminBoardPage(HttpSession session, Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
-		//UserDto user = (UserDto) session.getAttribute("user");
-		//Long deptId = user.getDeptId();
-		Long deptId = 30000000L;
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long deptId = user.getDeptId();
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readDeptBoardList(page, deptId);
 		model.addAttribute("boardList", boardList);
