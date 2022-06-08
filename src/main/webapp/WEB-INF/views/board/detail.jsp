@@ -75,7 +75,7 @@
                 </tbody>
             </table>
     
-        </div>
+        </div> 
     
         <hr>
         <div class="btnlist">
