@@ -68,7 +68,7 @@
                     <tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>
-                      <td><a href="피일다운로드경로"><i class="bi bi-file-earmark-pdf"></i></a></td>
+                      <td><a href="/download/${board.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>
                       <td>세종특별청사</td>
                       <td>5/19</td>
                       <td>부서관</td>
@@ -105,17 +105,7 @@
                     </tr>
                   </thead>
                   <tbody class="list-body" id="star-mark">
-                   <c:forEach items="${boardList}" var="board">
-                      <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                        <td>${board.id}</td>
-                        <td>${board.title}</td>
-                        <td>${board.fileId}</td>
-                        <td>${board.user.dept.name}</td>
-                        <td>${board.date}</td>
-                        <td>${board.user.name}</td>
-                        <td><button>삭제</button></td>
-                      </tr>
-                    </c:forEach>
+                  
                     <tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>
@@ -344,11 +334,11 @@
                 html = html + "<tr>";
                 html = html + `<td>\${v.id}</td>`;
                 html = html + `<td>\${v.title}</td>`;
-                html = html + `<td><a href="dwonalod/\${v.fileId}"></a></td>`;
+                html = html + `<td><a href="/download/\${v.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>`;
                 html = html + `<td>\${v.user.dept.name}</td>`;
                 html = html + `<td>\${v.date}</td>`;
                 html = html + `<td>\${v.user.name}</td>`;
-                html = html + `<td><a onclick="starDelete(\${v.id})"><button>수정</button></a></td>`;
+                html = html + `<td><a onclick="starDelete(\${v.id})"><button>삭제</button></a></td>`;
                 html = html + "</tr>";
                 
         });
@@ -359,11 +349,11 @@
         var2.style.display = "none";
         var3.style.display = "block";
         var4.style.display = "none";
-        
+     
         const data = axios({
         	url: 'mypage/update',
         	method: 'get'
-        	});
+        	});   
         	data.then(function (result) {
         	const v = result.data;
         	

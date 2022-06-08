@@ -34,8 +34,8 @@
       <div class="col-sm-2 sidenav">
         <c:if test="${sessionScope.user == null}">
         <p>로그인이 필요합니다.</p>
-        <p><a href="user/signin">로그인</a></p>
-        <p><a href="tos">회원가입</a></p>
+        <p><a href="/user/signin">로그인</a></p>
+        <p><a href="/user/tos">회원가입</a></p>
         
         </c:if>
         <c:if test="${sessionScope.user != null}">
@@ -114,13 +114,13 @@
           
           <c:if test="${sessionScope.user != null}">
           <table class="table table-hover">
-            <tr >
             <c:forEach items="${starList}" var="board">
+            <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
               <td>${board.title}</td>
               <td>${board.user.dept.name}</td>
-              <td>${board.date}</td>
+<%--               <td>${board.date}</td>  --%>
+              </tr>
             </c:forEach>
-            </tr>
           </table>
           </c:if>
         </div>

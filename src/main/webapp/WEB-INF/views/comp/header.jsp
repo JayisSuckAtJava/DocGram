@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
  Class Name : Header.JavaScript
  Description : header
@@ -37,15 +38,12 @@
 
             </div>
         </nav>
-        <c:if test="${sessionScope.user.id
-         == admin }">
+
+        <c:if test="${sessionScope.user.positionId >= '6' }">
 	        <div class="navbar-nav">
 	            <li class="nav-item" id="admin-nav">
 	                <a class="nav-link" href="/admin/board">관리자 페이지</a>
 	                <span class="sr-only">(current)</span>
 	            </li>
 	        </div>
-        </c:if>
-        <c:if test="${sessionScope.user.id != 1 }">
-        	<span class="sr-only">(current)</span>
         </c:if>
