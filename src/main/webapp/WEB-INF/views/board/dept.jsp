@@ -151,9 +151,15 @@
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
 <script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-	page();
+	
+	if(console.log(location.search == "")){
+		page();			
+	}else {
+		pageinget();
+	}
 }
 </script>
 </body>
