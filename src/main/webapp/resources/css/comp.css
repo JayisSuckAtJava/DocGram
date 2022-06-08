@@ -53,3 +53,10 @@ padding: 15px;
 }
 
 
+/* header */
+#admin-nav {
+	display: inline-block;
+	float: right;
+}
+ 
+
