@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
     <link rel="stylesheet" href="../resources/css/read.css">
-  <script src="../resources/js/read.js"></script>
+
   
 </head>
 <body>
@@ -143,7 +143,7 @@
         </tr>
       </thead>
 
-      <tbody class="table table-hover">
+      <tbody class="table table-hover list-body-star">
         <tr>
           <td><i class="bi bi-star"></i></td>
           <td >김띵띵</td>
@@ -154,7 +154,7 @@
           <td>부서관</td>
         </tr>
         <c:forEach items="${boardList}" var="board">
-          <tr>
+          <tr style='cursor:pointer;'>
             
             <!--  아래 c:if를 통해서 즐찾 리스트가 맞으면 출력 하는걸로 -->
             <c:if test="${board.starmarkId == null}">
@@ -171,27 +171,14 @@
             <td>${board.user.name}</td>
           </tr>
         </c:forEach>
-
+  <script src="/resources/js/read.js"></script>
       </tbody>
     </table>
       
       
       <!-- 페이징 -->
       <div class="page">
-        <nav aria-label="Page navigation example" style="text-align: center;" >
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
+        <nav aria-label="Page navigation example" style="text-align: center;" id="pagenation">
         </nav>
       </div>
 
@@ -206,7 +193,19 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
-
+<!-- pagenation -->
+<script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	
+	if(console.log(location.search == "")){
+		page();			
+	}else {
+		pageinget();
+	}
+}
+</script>
 
 </body>
 </html>
