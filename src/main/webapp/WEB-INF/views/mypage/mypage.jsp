@@ -104,9 +104,8 @@
                       <th>삭 제</th>
                     </tr>
                   </thead>
-                  <tbody class="list-body" id="star-mark">
-                  
-                    <tr>
+                  <tbody class="list-body" id="star-mark"> 
+                  	<tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>
                       <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
@@ -115,7 +114,7 @@
                       <td>부서관</td>
                       <td><button>삭제</button></td>
                     </tr>
-                    
+            
                   </tbody>
                 </table>
   
@@ -167,8 +166,7 @@
                   <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" disabled="disabled" 
-                      required>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" disabled="disabled" >
                     &nbsp;
 
                     <!-- Button trigger modal
@@ -260,9 +258,6 @@
           
                   </div>
 
-
-                 
-  
   
               </span>
   
@@ -331,7 +326,7 @@
             let html = "";
             data.forEach((v) => {
                 
-                html = html + "<tr>";
+                html = html + `<tr onclick="location.href = 'board/\${v.id}'" style='cursor:pointer;'>`;
                 html = html + `<td>\${v.id}</td>`;
                 html = html + `<td>\${v.title}</td>`;
                 html = html + `<td><a href="/download/\${v.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>`;
