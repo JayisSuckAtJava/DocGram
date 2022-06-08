@@ -107,6 +107,14 @@ public class UserController {
 		return "login/join";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("user/tos")
 	public String userTos() {
 		return "login/tos";
@@ -279,6 +287,15 @@ public class UserController {
 		return "mypage/mypage";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param userId
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("rest/star")
 	@ResponseBody
 	public List<BoardDto> mypageStarmark(Long userId) {
@@ -359,6 +376,17 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @param model
+	 * @param name
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("admin/user")
 	public String adminUserPage(HttpSession session, Model model, String name) {
 		List<UserDto> userList = new ArrayList<UserDto>();
@@ -371,6 +399,16 @@ public class UserController {
 		return "admin/user";
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@PostMapping("admin/user/update")
 	@ResponseBody
 	public Integer adminUserUpdate(@RequestBody Map<String, Object> map, HttpSession session) {
@@ -383,6 +421,15 @@ public class UserController {
 		
 	}
 	
+	/**
+	 * 설명
+	 * 
+	 * @param session
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@GetMapping("admin/board")
 	public String adminBoardPage(HttpSession session) {
 		return "admin/board";
