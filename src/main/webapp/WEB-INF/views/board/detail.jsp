@@ -44,7 +44,6 @@
         <!-- 문서 상세 정보 -->
         <div class="table-wrap">
             <table class="table table-response">
-                <caption> 문서상세 정보 - 작성자 /작성일 / 문서 관리 번호 / 전화번호 /소속기관 </caption>
                 <colgroup>
                     <col style="width:15%">
                     <col style="width:35%">
@@ -71,12 +70,12 @@
     
                     <tr>
                         <th scope="row">소속기관</th>
-                        <td colspan="3" style="flex-wrap: nowrap"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
+                        <td colspan="3" style="flex-wrap: nowrap; font-size: large;"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
                     </tr>
                 </tbody>
             </table>
     
-        </div>
+        </div> 
     
         <hr>
         <div class="btnlist">

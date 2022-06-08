@@ -16,9 +16,35 @@
   <link rel="stylesheet" href="../resources/css/bootstrap.css">
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
+    <link rel="stylesheet" href="../resources/css/board.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+function deleteBoard(e, id) {
+	e.stopPropagation();
+	const check = confirm("게시글을 삭제 하시겠습니까?");
+	if(check) {
+		const data = axios({
+			url: `/board/delete/\${id}`,
+			method: 'get'
+			});
+			data.then(function (result) {
+				console.log(result)
+				const dataCheck = result.data;
+				if(dataCheck == 1) {
+				location.reload();					
+				}
+			});
+
+	}
+}
+function updateBtn(e, id) {
+	e.stopPropagation();
+	location.href='/board/update/'+id;
+}
+</script>
 
 </head>
 <body>
@@ -45,7 +71,7 @@
         <!-- 공공문서 리스트 -->
 
          <!-- 목록 리스트 -->
-    <div class="col-8">
+    <div class="col-12">
       <table class="table table-hover">
   
         <thead id="list_title">
@@ -65,26 +91,7 @@
         </thead>
   
         <tbody class="list-body">
-          <tr>
-            <td>10</td>
-            <td>공공문서 관련한 문서 관리</td>
-            <td><i class="bi bi-file-earmark-pdf"></i></td>
-            <td>세종특별청사</td>
-            <td>5/19</td>
-            <td>부서관</td>
-            <c:if test="${sessionScope.user.positionId >= '6' }">
-            <td>
-              <button class="btn btn-danger pull-right"  
-                      type="button" onclick="getUserName1()">수정</button>
-            </td>
-            <td>
-              <button class="btn btn-danger pull-right"  
-                      type="button" onclick="getUserName2()">삭제</button>
-            </td>
-            </c:if>
-          </tr>
 
-          </tr>
           <c:forEach items="${noticeList}" var="board">
           <tr>
               <td>${board.id}</td>
@@ -96,11 +103,11 @@
               <c:if test="${sessionScope.user.positionId >= '6' }">
               <td>
                 <button class="btn btn-danger pull-right"  
-                        type="button" onclick="getUserName1()">수정</button>
+                        type="button" onclick="updateBtn(event, ${board.id})">수정</button>
               </td>
               <td>
                 <button class="btn btn-danger pull-right"  
-                        type="button" onclick="getUserName2()">삭제</button>
+                        type="button" onclick="deleteBoard(event, ${board.id})">삭제</button>
               </td>
               </c:if>
            </tr>
@@ -115,26 +122,9 @@
           </c:if>
       </div>
       
-      
-
-    
               <!-- 페이징 -->
               <div class="page">
-                <nav aria-label="Page navigation example" style="text-align: center;" >
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                    
-                      <a class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                    </li>
-                  </ul>
+                <nav aria-label="Page navigation example" style="text-align: center;" id="pagenation">
                 </nav>
               </div>
 
@@ -152,6 +142,22 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
+
+<!-- pagenation -->
+<script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	
+	if(console.log(location.search == "")){
+		page();			
+	}else {
+		pageinget();
+	}
+}
+
+
+</script>
 
 
 </body>
