@@ -11,13 +11,12 @@
 <head>
   <title>소속 관리</title>
   <meta charset="utf-8">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
-
-  <link rel="stylesheet" href="../resources/css/bootstrap.css">
-  <link rel="stylesheet" href="../resources/css/main.css">
-    <link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/css/main.css">
+<link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -47,11 +46,11 @@
    <dl class="dl-table">
      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
      <dd class="dd-keyword">
-       <form action="" method=""> <!-- form-->
+       <form action="" method="get"> <!-- form-->
        
-       <input class="ss"  name="searchKeyword" type="text" id="searchKeyword"
-         placeholder="이름을 검색해주세요 (예 홍길동, 김철수)"
-         title="이름을 검색해주세요 (예 홍길동, 김철수)" value="">
+       <input class="ss"  name="name" type="text" id="searchKeyword"
+         placeholder="이름을 검색해주세요 (예 홍길동)"
+         title="이름을 검색해주세요 (예 홍길동)" value="">
          <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
         </form>
       
@@ -89,68 +88,62 @@
                   이동</button>
 
 
-                                      <!-- Modal: modalCart -->
-                                      <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
-                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                          <!--Modal Header-->
-                                          <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">
-                                              <a class="">
-                                                <i class="bi bi-patch-question"></i>
-                                                기관검색
-                                              </a>
-                                            </h4>
-                                            <form class="d-flex" method="" action="" role="search" style="display: flex;">
-                                              <input class="form-control me-2" type="search" name="search" placeholder="Search"
-                                                aria-label="Search">
-                                              <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
-                                            </form>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">×</span>
-                                            </button>
-                                          </div>
-                                          <!--Modal Body-->
-                                          <div class="modal-body">
-                
-                                            <table class="table table-hover">
-                                              <thead>
-                                                <tr>
-                                                  <th>#</th>
-                                                  <th>기 관 명</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr>
-                                                  <th scope="row">1</th>
-                                                  <td>${dept.name}</td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                
-                                          </div>
-                                          <!--Footer-->
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                                                         <!-- Modal: modalCart -->
+                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <!--Modal Header-->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                              <a class="navbar-brand">
+                                <i class="bi bi-patch-question"></i>
+                                기관검색
+                              </a>
+                            </h4>
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
+                                aria-label="Search">
+                              <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <!--Modal Body-->
+                          <div class="modal-body">
+
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>기 관 명</th>
+                                </tr>
+                              </thead>
+                              <tbody id="deptList">
+                              </tbody>
+                            </table>
+
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal: modalCart -->
                 
 
               </td>
 
             </tr>
-            <c:forEach items="${boardList}" var="board">
+            <c:forEach items="${userList}" var="user">
               <tr>
-                <td>${board.user.name}</td>
-                <td>${유저 아이디 (이메일)}</td>
-                <td>${개인번호}</td>
-                <td>${부서번호}</td>
-                <td>${소속}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.deptNumber}</td>
+                <td>${user.dept.name}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" onclick="saveUserId(${user.id})">소속기관
                     이동</button>
                 </td>
               </tr>
@@ -201,5 +194,75 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function saveUserId(id) {
+	alert(id);
+	sessionStorage.setItem("id", id);
+}
+
+function ajax() {
+	  
+    const search = document.querySelector("#searchDept");
+    let text = searchDept.value;
+    
+    const data = axios({
+    url: '../rest/dept',
+    method: 'get',
+    params: {
+    'name': text
+    }
+    });
+    data.then(function (result) {
+    
+    let deptList = result.data;
+    const table = document.querySelector("#deptList")
+    let html = "";
+    
+    deptList.forEach((v)=>{
+        let id;
+        let name;
+    	id = v.id;
+    	name = v.name; 
+
+        html = html + "<tr id='deptTrs'>";
+        html = html + `<td value=\${id} scope="row" id="deptValue" data-dismiss="modal">\${name}</td>`
+	    html = html + "</tr>";
+    })
+    table.innerHTML = html;
+
+			
+		const trs = document.querySelectorAll("#deptTrs");
+		trs.forEach((v)=>{
+			let deptId = v.firstElementChild.getAttribute("value");
+			
+			v.addEventListener("click",()=>{
+				let check = confirm("정말 수정하시겠습니까?");
+				if(check) {
+					
+					const data = axios({
+			        	url: '/admin/user/update',
+			        	data : {
+			        		'deptId' : `\${deptId}`,
+			        		'userId' : `\${sessionStorage.getItem("id")}`
+			        	},
+			        	dataType : 'text',
+			        	method: 'post'
+			        	});
+						data.then(function (result) {
+							console.log(result.data)
+							if(result.data == 1) {
+							location.reload();
+							}
+						})
+			        	}
+
+			})
+		})
+        
+})
+
+}
+</script>
 </body>
 </html>

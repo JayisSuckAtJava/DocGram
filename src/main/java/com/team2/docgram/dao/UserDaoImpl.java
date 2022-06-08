@@ -1,6 +1,7 @@
 package com.team2.docgram.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,9 +117,32 @@ public class UserDaoImpl implements UserDao {
 		sqlSession.delete(mapper+"deleteUser", userId);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public UserDto readUserOne(UserDto user) {
 		return sqlSession.selectOne(mapper+"readUserOne", user);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
+	@Override
+	public Integer updateDept(Map<String, Object> map) {
+		return sqlSession.update(mapper+"updateDept", map);
 	}
 	
 }

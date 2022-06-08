@@ -1,6 +1,8 @@
 package com.team2.docgram.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,9 +121,36 @@ public class UserServiceImpl implements UserService {
 		return userDao.readUserList(name);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public UserDto readUserOne(UserDto user) {
 		return userDao.readUserOne(user);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param deptId
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
+	@Override
+	public Integer updateDept(Long deptId, Long userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deptId", deptId);
+		map.put("userId", userId);
+		return userDao.updateDept(map);
 	}
 
 }
