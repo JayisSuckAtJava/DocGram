@@ -20,7 +20,7 @@
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/search">상세 검색</a>
+                        <a class="nav-link" href="/search/list">상세 검색</a>
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">

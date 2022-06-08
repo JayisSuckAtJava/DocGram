@@ -3,7 +3,7 @@
 
 <%--
  Class Name : Create.JavaScript
- Description : 작성 페이지 (업데이크)
+ Description : 작성 페이지 (업데이트)
  Author : 조윤구
  Since : 2022-05-25
 --%>
@@ -14,8 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>수정페이지</title>
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
 <link rel="stylesheet" href="/resources/css/board.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/css/main.css">
