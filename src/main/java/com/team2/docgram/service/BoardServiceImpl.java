@@ -422,8 +422,8 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public void deleteBoard(Long id) {
-		boardDao.deleteBoard(id);
+	public Integer deleteBoard(Long id) {
+		return boardDao.deleteBoard(id);
 	}
 
 	/**
@@ -438,6 +438,31 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> readMyBoardList(Long userId) {
 		return boardDao.readMyBoardList(userId);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param page
+	 * @param deptId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readDeptBoardList(Long page, Long deptId) {
+		BoardDto board = new BoardDto();
+		UserDto user = new UserDto();
+		user.setDeptId(deptId);
+		if(page > 0) {
+			page = ( page - 1 ) * 10; 
+		}
+		board.setStart(page);
+		board.setUser(user);
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardDao.readDeptBoardList(board);
+		return boardList;
 	}
 	
 }

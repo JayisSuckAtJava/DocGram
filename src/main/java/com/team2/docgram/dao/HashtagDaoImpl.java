@@ -1,5 +1,7 @@
 package com.team2.docgram.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -61,5 +63,19 @@ public class HashtagDaoImpl implements HashtagDao {
 	@Override
 	public String readHashtag(Long hashtagId) {
 		return sqlSession.selectOne(mapper+"readHashtagName", hashtagId);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param id
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<HashtagDto> readHashtagList(Long id) {
+		return sqlSession.selectList(mapper+"readHashtagList", id);
 	}
 }

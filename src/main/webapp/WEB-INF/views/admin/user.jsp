@@ -13,7 +13,6 @@
   <meta charset="utf-8">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
-
 <link rel="stylesheet" href="../resources/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <link rel="stylesheet" href="../resources/css/comp.css">
@@ -198,7 +197,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 function saveUserId(id) {
-	alert(id);
 	sessionStorage.setItem("id", id);
 }
 
@@ -251,7 +249,6 @@ function ajax() {
 			        	method: 'post'
 			        	});
 						data.then(function (result) {
-							console.log(result.data)
 							if(result.data == 1) {
 							location.reload();
 							}

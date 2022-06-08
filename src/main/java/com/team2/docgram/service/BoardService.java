@@ -34,8 +34,10 @@ public interface BoardService {
 
 	Long readBoardUserId(Long id);
 
-	void deleteBoard(Long id);
+	Integer deleteBoard(Long id);
 
 	List<BoardDto> readMyBoardList(Long userId);
+
+	List<BoardDto> readDeptBoardList(Long page, Long deptId);
 
 }

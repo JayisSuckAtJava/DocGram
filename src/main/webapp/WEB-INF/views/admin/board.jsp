@@ -11,19 +11,59 @@
 <head>
   <title>게시물 관리</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
 
 <link rel="stylesheet" href="../resources/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <link rel="stylesheet" href="../resources/css/comp.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+        <!-- js 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <!-- js 링크 -->
 <script src="../resources/js/admin.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function deleteBoard(id) {
+	const check = confirm("게시글을 삭제 하시겠습니까?");
+	if(check) {
+		const data = axios({
+			url: `/board/delete/\${id}`,
+			method: 'get'
+			});
+			data.then(function (result) {
+				console.log(result)
+				const dataCheck = result.data;
+				if(dataCheck == 1) {
+				location.reload();					
+				}
+			});
 
+	}
+}
+function hashtagUpdate(id) {
+	const data = axios({
+		url: `/admin/board/\${id}`,
+		method: 'get'
+		});
+		data.then(function (result) {
+		console.log(result.data);
+		});
+}
+function deptMarkCreate(id) {
+	const check = confirm("부서 알림에 등록 하시겠습니까?")
+	if(check) {
+		console.log(id)
+	}
+}
+function deptMarkDelete(id) {
+	const check = confirm("부서 알림에 등록 취소 하시겠습니까?")
+	if(check) {
+		console.log(id)
+	}
+}
+</script>
 
 
 
@@ -109,16 +149,23 @@
               <tr>
                 <td>${board.id}</td>
                 <td>${board.title}</td>
-                <td>${board.dept.name}</td>
+                <td>${board.user.dept.name}</td>
                 <td>${board.date}</td>
                 <td>${board.user.name}</td>
-                <td>🗑</td>
+                <td><button onclick='deleteBoard(${board.id})'>🗑</button></td>
                 <td>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">#</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" onclick="hashtagUpdate(${board.id})">#</button>
                 </td>
+                <c:if test="${board.starmarkId == null}">
                 <td>
-                  <button class="btn btn-outline-success input-group-append" type="submit" style="height: 35px;"><i class="bi bi-megaphone"></i></button>
+                  <button class="btn btn-outline-success input-group-append" type="submit" style="height: 35px;" onclick='deptMarkCreate(${board.id})'><i class="bi bi-megaphone"></i></button>
                 </td>
+                </c:if>
+                <c:if test="${board.starmarkId != null}">
+                <td>
+                  <button class="btn btn-outline-success input-group-append" type="submit" style="height: 35px;" onclick='deptMarkDelete(${board.id})'><i class="bi bi-megaphone-fill"></i></button>
+                </td>
+                </c:if>
               </tr>
             </c:forEach>
 
@@ -154,10 +201,8 @@
             <!--Modal Header-->
             <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel">
-                <a class="">
                   <i class="bi bi-patch-question"></i>
                   태그 수정
-                </a>
               </h4>
               <form class="d-flex" method="" action="" role="search" style="display: flex;">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search"
@@ -203,7 +248,7 @@
       </div>
       						<!-- a태그 -->
       <div class="well">
-        <a href="/boarddd">게시물 관리</a>
+        <a href="board">게시물 관리</a>
       </div>
     </div>
   </div>

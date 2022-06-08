@@ -184,8 +184,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public void deleteBoard(Long id) {
-		sqlSession.delete(mapper+"deleteBoard", id);
+	public Integer deleteBoard(Long id) {
+		return sqlSession.delete(mapper+"deleteBoard", id);
 	}
 
 	/**
@@ -230,9 +230,32 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(mapper+"readMyBoardList", userId);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param map
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
 	@Override
 	public List<BoardDto> searchRelation(Map<String, Object> map) {
 		return sqlSession.selectList(mapper+"searchRelation", map);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param board
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readDeptBoardList(BoardDto board) {
+		return sqlSession.selectList(mapper+"readDeptBoardList", board);
 	}
 
 	
