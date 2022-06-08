@@ -1,5 +1,7 @@
 package com.team2.docgram.dao;
 
+import java.util.List;
+
 import com.team2.docgram.dto.HashtagDto;
 
 /**  HashtagDao.java
@@ -15,5 +17,7 @@ public interface HashtagDao {
 	Long readHashtag(String tagName);
 
 	String readHashtag(Long hashtagId);
+
+	List<HashtagDto> readHashtagList(Long id);
 
 }

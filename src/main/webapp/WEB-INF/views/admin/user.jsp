@@ -198,7 +198,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 function saveUserId(id) {
-	alert(id);
 	sessionStorage.setItem("id", id);
 }
 
@@ -251,7 +250,6 @@ function ajax() {
 			        	method: 'post'
 			        	});
 						data.then(function (result) {
-							console.log(result.data)
 							if(result.data == 1) {
 							location.reload();
 							}

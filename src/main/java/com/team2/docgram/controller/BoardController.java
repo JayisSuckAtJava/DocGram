@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dto.BoardDto;
@@ -284,14 +285,17 @@ public class BoardController {
 	 * @since 2022. 6. 1.
 	 */
 	@GetMapping("board/delete/{id}")
-	public void delectBoard(@PathVariable("id")Long id,HttpSession session) {
+	@ResponseBody
+	public Integer delectBoard(@PathVariable("id")Long id,HttpSession session) {
+		Integer result = 0;
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long positionId = user.getPositionId();
 		Long boardUserId = boardService.readBoardUserId(id);
 		if(userId == boardUserId || positionId > 6) {
-			boardService.deleteBoard(id);
+			result = boardService.deleteBoard(id);
 		}
+		return result;
 	}
 	
 }
