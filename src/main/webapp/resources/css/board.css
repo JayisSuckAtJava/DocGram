@@ -10,9 +10,9 @@
   margin-bottom: 15px;
     border-radius: 5px;
     padding: 10px 0;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 700;
-    text-align: center;
+    text-align: end;
 }
 
 .title-article {
@@ -455,3 +455,5 @@ input::placeholder {color:#434343;}
           }
 
           /* 페이징 부트 스트랩 */
+          
+          
