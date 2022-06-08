@@ -155,20 +155,7 @@
         <!-- 페이징 -->
         <!-- 페이징 -->
         <div class="page">
-          <nav aria-label="Page navigation example" style="text-align: center;" >
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
+          <nav aria-label="Page navigation example" style="text-align: center;" id="pagenation">
           </nav>
         </div>
 
@@ -260,6 +247,19 @@ function ajax() {
         
 })
 
+}
+</script>
+<!-- pagenation -->
+<script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	
+	if(console.log(location.search == "")){
+		page();			
+	}else {
+		pageinget();
+	}
 }
 </script>
 </body>

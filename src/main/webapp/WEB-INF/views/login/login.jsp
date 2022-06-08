@@ -22,8 +22,8 @@
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" action="" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일을 작성해주세요" required autofocus value="admin@korea.kr">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호를 작성해주세요" required value="admin">
                 
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >로그인 하기</button>
             </form><!-- /form -->

@@ -7,7 +7,6 @@
     let first = v.firstElementChild.innerHTML;
     console.log(first)
     v.addEventListener("click", () => {
-      alert(`hi u are in ${first}`)
       window.location.href = `/board/${first}`
     })
   })
@@ -18,7 +17,6 @@
     let first = v.firstElementChild.nextElementSibling.innerHTML;
     console.log(first)
     v.addEventListener("click", () => {
-      alert(`hi u are in ${first}`)
       window.location.href = `/board/${first}`
     })
   })

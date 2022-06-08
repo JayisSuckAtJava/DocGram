@@ -115,9 +115,6 @@ public class SearchServiceImpl implements SearchService {
 		resultMap.put("listSize", listSize);
 		resultMap.put("boardList", boardList);
 		
-		System.out.println(map);
-		System.out.println(resultMap);
-		
 		map.forEach((strKey, value)->{
 			System.out.println(strKey + " : key and    value :" + value);
 			System.out.println(map.get(strKey) == null);
