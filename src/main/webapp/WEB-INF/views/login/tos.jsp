@@ -110,7 +110,7 @@
  
  <div align="center">
   <br/>
-  <button><a href="join">동의</a></button>
+  <button><a href="/user/signup">동의</a></button>
   <button><a href="main">비동의</a></button>
   <br/>
  </div>

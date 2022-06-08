@@ -72,7 +72,7 @@
     </div>
     
              <!-- 목록 리스트 -->
-        <div class="col-8">
+        <div class="col-12">
           <table class="table table-hover">
           
       
@@ -160,7 +160,7 @@
   </div>
 </div>
 
-<!-- footer -->
+  <!-- footer -->
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>

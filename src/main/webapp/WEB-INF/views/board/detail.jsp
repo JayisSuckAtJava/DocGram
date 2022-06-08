@@ -187,6 +187,7 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
+
 <script>
         const tds = document.querySelectorAll("tag");
         tds.forEach((v) => {

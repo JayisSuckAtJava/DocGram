@@ -121,11 +121,30 @@ public class UserServiceImpl implements UserService {
 		return userDao.readUserList(name);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param user
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public UserDto readUserOne(UserDto user) {
 		return userDao.readUserOne(user);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param deptId
+	 * @param userId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 7.
+	 */
 	@Override
 	public Integer updateDept(Long deptId, Long userId) {
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -13,7 +13,6 @@
   <meta charset="utf-8">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
-
 <link rel="stylesheet" href="../resources/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <link rel="stylesheet" href="../resources/css/comp.css">
