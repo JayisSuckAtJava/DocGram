@@ -67,12 +67,16 @@
 		u.DEPT_ID AS user_dept_id,
 		b.RELATION_1 AS board_relation_1,
 		b.RELATION_2 AS board_relation_2,
-		b.RELATION_3 AS board_relation_3
+		b.RELATION_3 AS board_relation_3,
+		us.id as starmark_id,
+		ds.id as deptmark_id
 	FROM board b
 	left outer JOIN file f ON b.FILE_ID = f.ID
 	JOIN user u ON b.USER_ID = u.id
 	JOIN position p ON u.POSITION_ID = p.ID
-	WHERE b.ID = #{id}
+	left join user_starmark us on b.id = us.board_id and us.user_id = #{userId}
+	left join dept_starmark ds on b.id = ds.board_id and ds.dept_id = #{deptId}
+	WHERE b.ID = #{boardId}
 </select>
 
 <!--
@@ -213,6 +217,7 @@ insert into board (
 	<result property="relation2" column="board_relation_2"/>
 	<result property="relation3" column="board_relation_3"/>
 	<result property="starmarkId" column="starmark_id"/>
+	<result property="deptmarkId" column="deptmark_id"/>
 	
 	<association property="file" javaType="file">
 		<id property="id" column="file_id"/>

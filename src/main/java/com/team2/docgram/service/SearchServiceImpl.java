@@ -156,6 +156,31 @@ public class SearchServiceImpl implements SearchService {
 		map.put("sel", sel);
 		return boardDao.searchRelation(map);
 	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param page
+	 * @param userId
+	 * @param sel
+	 * @param text
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readBoardList(Long page, Long userId, String sel, String text) {
+		if(page > 0) {
+			page = ( page - 1 ) * 10; 
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("text", text);
+		map.put("sel", sel);
+		map.put("userId", userId);
+		map.put("page", page);
+		return boardDao.readBoardList(map);
+	}
 	
 
 }

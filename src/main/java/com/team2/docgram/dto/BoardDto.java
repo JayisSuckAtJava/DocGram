@@ -35,4 +35,5 @@ public class BoardDto {
 	private UserDto user;
 	private Long start;
 	private Long starmarkId;
+	private Long deptmarkId;
 }
