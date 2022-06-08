@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.docgram.dto.BoardDto;
@@ -92,12 +93,13 @@ public class StarmarkController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("deptmark/create")
-	public void createDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
+	@GetMapping("deptmark/create")
+	@ResponseBody
+	public void createDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
+		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {
-			Long deptId = user.getDeptId();
 			starmarkService.createDeptmark(deptId,boardId);			
 		}
 	}
@@ -111,12 +113,13 @@ public class StarmarkController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@PostMapping("deptmark/delete")
-	public void deleteDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
+	@GetMapping("deptmark/delete")
+	@ResponseBody
+	public void deleteDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
+		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {
-			Long deptId = user.getDeptId();
 			starmarkService.deleteDeptmark(deptId,boardId);			
 		}
 	}

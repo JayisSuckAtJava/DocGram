@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team2.docgram.dao.BoardHashtagDao;
 import com.team2.docgram.dao.HashtagDao;
+import com.team2.docgram.dto.BoardHashtagDto;
 import com.team2.docgram.dto.HashtagDto;
 /**  HashtagServiceImpl.java
  *   설명
@@ -18,6 +20,9 @@ public class HashtagServiceImpl implements HashtagService {
 	
 	@Autowired
 	private HashtagDao hashtagDao;
+	
+	@Autowired
+	private BoardHashtagDao boardHashtagDao; 
 
 	 /**
 	 * 설명
@@ -59,6 +64,48 @@ public class HashtagServiceImpl implements HashtagService {
 	@Override
 	public List<HashtagDto> readHashtagList(Long id) {
 		return hashtagDao.readHashtagList(id);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param hashtagId 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public void deleteHashtag(Long boardId, Long hashtagId) {
+		BoardHashtagDto boardHashtag = new BoardHashtagDto();
+		boardHashtag.setBoardId(boardId);
+		boardHashtag.setHashtagId(hashtagId);
+		boardHashtagDao.deleteHashtag(boardHashtag);
+		
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param boardId
+	 * @param hashtagName 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public void createHashtag(Long boardId, String hashtagName) {
+		HashtagDto hashtag = new HashtagDto();
+		
+		hashtag.setName(hashtagName);
+		hashtag = hashtagDao.createHashtag(hashtag);
+		Long hashtagId = hashtag.getId();
+		
+		BoardHashtagDto boardHashtag = new BoardHashtagDto();
+		
+		boardHashtag.setBoardId(boardId);
+		boardHashtag.setHashtagId(hashtagId);
+		boardHashtagDao.createBoardHashtag(boardHashtag);
 	}
 
 }

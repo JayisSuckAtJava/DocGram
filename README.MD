@@ -1,51 +1,52 @@
-# KDT _ HRD 풀스택 개발자 양성과정 ( JAVA )
-## 최종 프로젝트
-
-
-	- 주제 : 공공문서 분류 시스템
-	- 참여자 : 조윤구 문예빈 이재범	
+# KDT _ HRD 풀스택 개발자 양성과정 프로젝트 ( JAVA )
 ## 프로젝트 Description
 ### 프로젝트명 : Docgram
 
-선정이유: 방대한 데이터 베이스의 G 클라우드 환경에서 간편하고, 빠른 분류 및 조회 방법.
+공공문서 분류 시스템 
+기존에 있던 공공문서 사이트 이용자가 보다 편하고 빠르게 원하는 정보를 
+얻을 수 있도록
 
--기존의 문제점들-
-첫 이용자들이 사용시 불편성
-필요한 정보만 얻기 쉽지 않은 점
-속도 및 정확성
- 
--개선방안- 
-중첩으로 검색하여 더욱 정확한 검색 
-해시태그 기능은 MZ세대에게 친숙한 기능이기에 편의하고 쉬운 기능
+검색 기능 , 즐겨찾기 기능 및 해시태그 기능 구현
 
--기대효과-
-항목별 상세 검색을 세분화 – 중첩 시켜 원하는 정보를 검색할 수 있게 함.
-SNS 와 같이 태그를 사용하여 원하는 정보를 보다 빠르게 검색.
+1. 항목별 상세 검색을 세분화 – 중첩 시켜 원하는 정보를 검색할 수 있게 함.
+
+2. 문서별 즐겨 찾기 - 문서별 즐겨찾기 기능 추가 및 소속 부서 즐겨 찾기
+
+3. 해시태그 기능 - 문서별 작성자가 직접 문서 관련 태그 지정 
 
 ## 프로젝트 정보
 #### 사용된 기술
 ![java](https://camo.githubusercontent.com/64fff471582dc0763edf9abaebaf343ba03c7a34021313b77c9b4cd00368caf8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a6176612d3030364435433f7374796c653d666c61742d737175617265266c6f676f3d4a617661266c6f676f436f6c6f723d7768697465)
-![sts](https://camo.githubusercontent.com/a402eebe32e5a869953349838e2e034243fd22845566c41837b9b01c784dd45b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f537072696e672d677265656e3f7374796c653d666c61742d737175617265266c6f676f3d737072696e67266c6f676f436f6c6f723d7768697465)
-![MYsql](https://camo.githubusercontent.com/373d4fa9ba9245d811336f29bdca4617c00739b772ec8f2ef6ed0f9e7a42e81d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d7953514c2d3434373941313f7374796c653d666c61742d737175617265266c6f676f3d4d7953514c266c6f676f436f6c6f723d7768697465)
+<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=flat-square&logo=Apache Tomcat&logoColor=black"/></a>
+<img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=MariaDB&logoColor=white"/></a> 
 
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Amazon AWS-FF9900?style=flat-square&logo=Amazon AWS&logoColor=white"/></a>
+
+개발 환경 OS - windows 
 
 Spring Legacy (3.점 버전)
 
 WAS 는 Tomcat을 사용
 
-MyBatis를 통해 DB와 연결
+MyBatis를 통해 DB와 연결  - Mybatis 3.5.9
 
 DataBase는 mariaDB (10.6.7)로 구현
 
-프론트 엔드 브트스트랩 사용
+프론트 엔드 부트스트랩 사용
 
-웹페이지는 JSP 로 제작
+웹페이지는 JSP 로 제작 jsp - encoding = utf-8
 
-추후 개발 진행과정을 확인 후 상의 후 AWS의 E2C를 통한 배포한다.
+개발 진행과정을 확인 후 상의 후 AWS의 E2C를 통한 배포
 
-## 프로젝트 기능 
+## 프로젝트 주요 기능 
 
-Login 페이지
+
+
+
+
+
 
 ## 진행 과정 순서1
 

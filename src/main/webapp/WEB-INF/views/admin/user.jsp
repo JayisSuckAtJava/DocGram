@@ -179,11 +179,11 @@
     <div class="col-sm-2 sidenav">
     							<!-- a 태그  -->
 				<div class="well">
-					<a href="board">개인정보관리</a>
+					<a href="user">개인정보관리</a>
 				</div>
 								<!-- a 태그  -->
 				<div class="well">
-					<a href="user">게시물 관리</a>
+					<a href="board">게시물 관리</a>
 				</div>
 			</div>
   </div>
