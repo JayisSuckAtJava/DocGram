@@ -14,6 +14,7 @@ import com.team2.docgram.dao.DeptDao;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dao.HashtagDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.BoardHashtagDto;
 import com.team2.docgram.dto.DeptDto;
 import com.team2.docgram.dto.FileDto;
 import com.team2.docgram.dto.HashtagDto;
@@ -154,7 +155,7 @@ public class BoardServiceImpl implements BoardService {
 		String[] relatedBoardListArray = relatedBoardList.split(",");
 		Integer relatedListArrayLength = relatedBoardListArray.length;
 		
-		if(relatedBoardList.isBlank()) {
+		if(relatedBoardList.equals("")) {
 			board.setRelation1(null);
 			board.setRelation2(null);
 			board.setRelation3(null);
@@ -190,10 +191,10 @@ public class BoardServiceImpl implements BoardService {
 					hashtagId = hashtag.getId();
 				}
 				
-				Map<String,Object> map = new HashMap<>();
-				map.put("boardId", boardId);
-				map.put("hashtagId", hashtagId);
-				boardHashtagDao.createBoardHashtag(map);
+				BoardHashtagDto boardHashtag = new BoardHashtagDto();
+				boardHashtag.setBoardId(boardId);
+				boardHashtag.setHashtagId(hashtagId);
+				boardHashtagDao.createBoardHashtag(boardHashtag);
 			}
 		}
 		

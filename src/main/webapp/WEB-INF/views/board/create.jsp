@@ -77,6 +77,7 @@
                 <h3>관계문서 지정</h3>
                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" id="modal-block">
                 <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList" id="inputRelList" disabled>
+                <input type="hidden" name="relatedBoardList" id="inputRelListReal" >
                 </button>
                 
             </div>
@@ -164,17 +165,21 @@
        	                
        	            	 relList.forEach((v)=>{
        	            		 let id = v.firstElementChild.innerHTML
+       	            		 let checkArray = new Array();
        	            		 v.addEventListener("click",()=>{
-       	            			 console.log("test");
        	            			 
        	            			 if(relSum != 3){
-       	            			 if(relListSum.value == "") {
-       	            				relListSum.value = relListSum.value + `\${id}`;
-       	            				relSum++;
-       	            			 }else {
-       	            				relListSum.value = relListSum.value + ',' +`\${id}`;
-       	            				relSum++;
-       	            			 }
+       	            				if(checkArray.includes(id)){      	            			 		
+       	            			 	}else {
+       	            					checkArray.push(id);  
+       	            					if(relListSum.value == "") {
+       	       	            				relListSum.value = relListSum.value + `\${id}`;
+       	       	            				relSum++;
+       	       	            			 }else {
+       	       	            				relListSum.value = relListSum.value + ',' +`\${id}`;
+       	       	            				relSum++;
+       	       	            			 }
+       	            			 	}
        	            			 }else {
        	            				 alert("관계 문서는 3개만 지정 가능합니다.")
        	            			 }
@@ -209,8 +214,19 @@
                 function checkRelation() {
                 	const relListSum = document.querySelector("#rel_list_sum");
                 	const relList = document.querySelector("#inputRelList");
+                	const relListReal = document.querySelector("#inputRelListReal");
                 	
                 	relList.value = relListSum.value;
+                	relListReal.value = relListSum.value;
+                }
+                
+                function cancel() {
+                	const relListSum = document.querySelector("#rel_list_sum");
+                	const relList = document.querySelector("#inputRelList");
+                	const relListReal = document.querySelector("#inputRelListReal");
+                	relListSum.value = "";
+                	relList.value = "";
+                	relListReal.value = "";
                 }
                 </script>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
@@ -243,8 +259,8 @@
                     </div>
                     <!--Footer-->
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                    </div>
+              			<button type="button" class="btn btn-outline-primary" data-dismiss="modal" onclick="cancel()">취소</button>
+           			 </div>
                   </div>
                 </div>
               </div>

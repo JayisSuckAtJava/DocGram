@@ -44,23 +44,99 @@ function deleteBoard(id) {
 }
 function hashtagUpdate(id) {
 	const data = axios({
-		url: `/admin/board/\${id}`,
+		url: `/hashtag/board/\${id}`,
 		method: 'get'
 		});
 		data.then(function (result) {
-		console.log(result.data);
+		const list = result.data;
+		const body = document.querySelector("#hashtagBody");
+		let html ="";
+		list.forEach((v)=>{
+			
+			 html = html + "<tr>";
+             html = html + `<td>\${v.name}</td>`;
+             html = html + `<td><button onclick='hashtagDelete(\${id},\${v.id})' ><i class="bi bi-x"></i></button></td>`;  
+             html = html + "</tr>";
+		})
+		body.innerHTML = html;
+		const search = document.querySelector("#hashtagSearch");
+		search.addEventListener("keydown",(e)=>{
+			const keyCode = e.keyCode;
+	    	   if(keyCode == 13){
+	    		   
+	    		   hashtagCreate(id,search.value);	    		   
+	    	   }
+		})
 		});
+}
+function hashtagCreate(boardId,hashtagName) {
+	const data = axios({
+		url: '/hashtag/board/create',
+		method: 'get',
+		params: {
+			'boardId': `\${boardId}`,
+			'hashtagName': `\${hashtagName}`
+		}
+		});
+		data.then(function (result) {
+		hashtagUpdate(boardId);
+		});
+
+}
+
+function hashtagDelete(boardId,hashtagId) {
+		const data = axios({
+			url: '/hashtag/board/delete',
+			method: 'get',
+			params: {
+			'boardId': `\${boardId}`,
+			'hashtagId': `\${hashtagId}`
+			}
+			});
+			data.then(function (result) {
+			hashtagUpdate(boardId);
+			});
+
 }
 function deptMarkCreate(id) {
 	const check = confirm("부서 알림에 등록 하시겠습니까?")
 	if(check) {
 		console.log(id)
+		console.log(${sessionScope.user.dept.id})
+		
+		const data = axios({
+			url: '/deptmark/create',
+			method: 'get',
+			params: {
+				'boardId': `\${id}`,
+				'deptId': `${sessionScope.user.dept.id}`
+			}
+			});
+			data.then(function (result) {
+			console.log(result.data);
+			location.reload();
+			});
+
 	}
 }
 function deptMarkDelete(id) {
 	const check = confirm("부서 알림에 등록 취소 하시겠습니까?")
 	if(check) {
 		console.log(id)
+		console.log(${sessionScope.user.dept.id})
+		const data = axios({
+			url: '/deptmark/delete',
+			method: 'get',
+			params: {
+				'boardId': `\${id}`,
+				'deptId': `${sessionScope.user.dept.id}`
+			}
+			});
+			data.then(function (result) {
+			console.log(result.data);
+			location.reload();
+			});
+
 	}
 }
 </script>
@@ -204,11 +280,8 @@ function deptMarkDelete(id) {
                   <i class="bi bi-patch-question"></i>
                   태그 수정
               </h4>
-              <form class="d-flex" method="" action="" role="search" style="display: flex;">
-                <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                <input class="form-control me-2" type="search" name="search" placeholder="Search" id="hashtagSearch"
                   aria-label="Search">
-                <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
-              </form>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -222,10 +295,7 @@ function deptMarkDelete(id) {
                     <th>태그</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>${board.hashtag.name}<button class="btn" ><i class="bi bi-x"></i></button></td>
-                  </tr>
+                <tbody id="hashtagBody">
                 </tbody>
               </table>
 
