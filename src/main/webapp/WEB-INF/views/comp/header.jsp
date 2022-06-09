@@ -16,7 +16,7 @@
                 </a>
                 <div class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/notice/list">공지 소식</a>
+                        <a class="nav-link" href="/notice/list">공지</a>
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">

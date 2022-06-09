@@ -50,7 +50,7 @@ from user u
 left outer join dept d on u.dept_id = d.id 
 left outer join hashtag h on u.hashtag_id = h.id
 where u.email = #{email}
-and u.password = #{password}
+	and u.password = #{password}
 </select>
 
 <!--
@@ -131,6 +131,7 @@ join dept d on d.id = u.dept_id
 <if test="name != null">
 where u.name = #{name}
 </if>
+order by u.id desc
 limit #{page}, 10
 </select>
 

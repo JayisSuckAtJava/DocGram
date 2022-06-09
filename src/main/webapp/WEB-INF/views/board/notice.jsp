@@ -66,7 +66,7 @@ function updateBtn(e, id) {
       <div class="all">
         <!-- 타이틀 부분 -->
 
-        <h3 class="title-article">공지사항 (모두알림) </h3>
+        <h3 class="title-article">공지</h3>
 
         <!-- 공공문서 리스트 -->
 
@@ -102,11 +102,11 @@ function updateBtn(e, id) {
               <td>${board.user.name}</td>
               <c:if test="${sessionScope.user.positionId >= '6' }">
               <td>
-                <button class="btn btn-danger pull-right"  
+                <button class="btn btn-outline-danger"  
                         type="button" onclick="updateBtn(event, ${board.id})">수정</button>
               </td>
               <td>
-                <button class="btn btn-danger pull-right"  
+                <button class="btn btn-outline-danger"  
                         type="button" onclick="deleteBoard(event, ${board.id})">삭제</button>
               </td>
               </c:if>

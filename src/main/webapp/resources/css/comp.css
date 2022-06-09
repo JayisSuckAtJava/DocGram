@@ -60,3 +60,27 @@ padding: 15px;
 }
  
 
+
+/* tos ===================================================================== */
+.tos, .login, .join {
+    background-image: url(/resources/images/background.jpg);
+    color: #2E4866;
+}
+
+.disagree a, .agree a {
+    color: #2E4866;
+}
+
+.disagree, .agree {
+    margin-bottom: 15px;
+}
+
+
+/* signup ===================================================================== */
+.btn btn-outline-secondary {
+	margin-bottom: 5px;
+}
+
+.faqs {
+	color : black;
+}

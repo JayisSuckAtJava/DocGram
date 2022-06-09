@@ -32,3 +32,6 @@ justify-content: space-around;
 #pagenation{
 	text-align: center;
 }
+.pagination {
+          	justify-content: center;
+          }

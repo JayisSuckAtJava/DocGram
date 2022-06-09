@@ -10,15 +10,6 @@
   margin-right: auto;
 }
 
-#list_title {
-  border: solid;
-}
-
-#list_title>tr>th {
-  border: 1px solid;
-  border-radius: 5px;
-}
-
 #page-title {
   border: 1pxsolid;
   text-align: right;

@@ -14,7 +14,7 @@
 
 
     <!-- 바디 부분 -->
-<body>
+<body class="login">
     <div class="container">
         <div class="card card-container">
         
@@ -29,7 +29,7 @@
             </form><!-- /form -->
             
             <!-- 회원가입 a태그 -->
-            <a href="signup" class="join">
+            <a href="/user/tos" class="join">
                 회원가입
             </a>
             

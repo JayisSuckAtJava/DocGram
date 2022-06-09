@@ -231,7 +231,7 @@ function starCreate(id) {
             let text = v.innerHTML;
             let tag = text.substring(1);
             v.addEventListener("click" , ()=>{
-            	window.location.href = `../search?hashtagList=\${tag}`;     
+            	window.location.href = `../search/list?hashtagList=\${tag}`;     
             })
             })
             

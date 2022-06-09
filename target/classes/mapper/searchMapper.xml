@@ -51,6 +51,7 @@ select b.id as board_id,
 			</foreach>
 		</if>
 	</trim>
+	order by b.id desc
 	limit #{page}, 10
 </select>
 
@@ -151,6 +152,7 @@ select count(b.id)
 				<when test=' sel == "dept" '>and d.name like "%${text}%"</when>
 		</choose>
 	</if>
+	order by b.id desc
 	limit #{page}, 10
 </select>
 
