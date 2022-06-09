@@ -184,7 +184,6 @@ public class BoardServiceImpl implements BoardService {
 		}else {
 			
 			for(String i : hashtagListArray) {
-				System.out.println(i);
 								
 				Long hashtagId = hashtagDao.readHashtag(i);
 				

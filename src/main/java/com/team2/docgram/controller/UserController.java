@@ -173,6 +173,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("mypage/update")
+	@ResponseBody
 	public void update(@RequestBody Map<String, Object> map, HttpSession session) {
 		String password = (String) map.get("password");
 		String deptNumber = (String) map.get("deptNumber");
@@ -181,6 +182,7 @@ public class UserController {
 		UserDto user = new UserDto();
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		Long userId = sessionUser.getId();
+		String email = sessionUser.getEmail();
 		user.setId(userId);
 		if(password == "") {
 			user.setPassword(null);
@@ -189,8 +191,13 @@ public class UserController {
 		}
 		user.setDeptNumber(deptNumber);
 		user.setPhoneNumber(phoneNumber);
+		user.setEmail(email);
 		userService.updateUser(user);
 		UserDto userDetail = userService.readUser(user);
+		System.out.println(userDetail);
+		System.out.println(user);
+		System.out.println(sessionUser);
+		session.removeAttribute("user");
 		session.setAttribute("user", userDetail);
 	}
 	
