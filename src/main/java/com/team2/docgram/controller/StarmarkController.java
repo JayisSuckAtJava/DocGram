@@ -97,7 +97,6 @@ public class StarmarkController {
 	@GetMapping("deptmark/create")
 	@ResponseBody
 	public void createDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
-		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {
@@ -117,7 +116,6 @@ public class StarmarkController {
 	@GetMapping("deptmark/delete")
 	@ResponseBody
 	public void deleteDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
-		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {

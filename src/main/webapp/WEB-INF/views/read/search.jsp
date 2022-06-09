@@ -156,11 +156,11 @@
           <tr style='cursor:pointer;'>
             
             <!--  아래 c:if를 통해서 즐찾 리스트가 맞으면 출력 하는걸로 -->
-            <c:if test="${board.starmarkId == null}">
-               <td><i class="bi bi-star"></i></td>
+           <c:if test="${board.starmarkId == null}">
+               <td id="emptyStar"><i class="bi bi-star"></i></td>
                </c:if>
                <c:if test="${board.starmarkId != null}">
-               <td><i class="bi bi-star-fill"></i></td>
+               <td id="filledStar"><i class="bi bi-star-fill"></i></td>
                </c:if>
             <td>${board.id}</td>
             <td>${board.title}</td>
@@ -205,6 +205,53 @@ window.onload = function() {
 	}
 }
 </script>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+    
+    const emptyStar = document.querySelectorAll("#emptyStar")
+    emptyStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starCreate(e, boardId);
+        });
+    });
+    
+    const filledStar = document.querySelectorAll("#filledStar")
+    filledStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starDelete(e, boardId);
+        });
+    });
+    
+function starDelete(e, id) {
+	e.stopPropagation();
+    	const data = axios({
+			   url: '/starmark/delete',
+			   data: {
+			   'boardId': `\${id}`
+			   },
+			   dataType : 'text',
+				   method: 'post'
+			   });
+        	data.then(function (result) {
+        		location.reload();
+    		});
+}
+function starCreate(e, id) {
+	e.stopPropagation();
+	const data = axios({
+		   url: '/starmark/create',
+		   data: {
+		   'boardId': `\${id}`
+		   },
+		   dataType : 'text',
+			   method: 'post'
+		   });
+ 	data.then(function (result) {
+ 			location.reload();
+		});
+}
+</script>
 </body>
 </html>

@@ -95,17 +95,23 @@ public class HashtagServiceImpl implements HashtagService {
 	 */
 	@Override
 	public void createHashtag(Long boardId, String hashtagName) {
-		HashtagDto hashtag = new HashtagDto();
+		Long hashtagId = hashtagDao.readHashtag(hashtagName);
 		
-		hashtag.setName(hashtagName);
-		hashtag = hashtagDao.createHashtag(hashtag);
-		Long hashtagId = hashtag.getId();
+		if(hashtagId == null) {
+			HashtagDto hashtag = new HashtagDto();
+			hashtag.setName(hashtagName);
+			hashtag = hashtagDao.createHashtag(hashtag);
+			hashtagId = hashtag.getId();			
+		}
 		
 		BoardHashtagDto boardHashtag = new BoardHashtagDto();
 		
 		boardHashtag.setBoardId(boardId);
 		boardHashtag.setHashtagId(hashtagId);
-		boardHashtagDao.createBoardHashtag(boardHashtag);
+		Long boardHashtagId = boardHashtagDao.readBoardHashtag(boardHashtag);
+		if(boardHashtagId == null) {
+			boardHashtagDao.createBoardHashtag(boardHashtag);			
+		}
 	}
 
 }
