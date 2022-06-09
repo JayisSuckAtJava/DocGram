@@ -12,13 +12,13 @@
 
         <ul class="nav justify-content-center pb-3" id="footer-ul">
           <li class="nav-item">
-            <a href="main" class="nav-link px-2">Home</a>
+            <a href="/main" class="nav-link px-2">Home</a>
           </li>
           <li class="nav-item">
             <a href="https://github.com/JayisSuckAtJava/DocGram" target='_blank' class="nav-link px-2">github</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2" data-toggle="modal" data-target="#modalCart" style="cursor:pointer;">FAQs</a>
+            <a class="nav-link px-2" data-toggle="modal" data-target="#modalCartfooter" style="cursor:pointer;">FAQs</a>
           </li>
         </ul>
         <hr>
@@ -27,7 +27,7 @@
         
 
                     <!-- Modal: modalCart -->
-                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalCartfooter" tabindex="-1" role="dialog"
                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
