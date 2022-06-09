@@ -155,7 +155,7 @@
                             <input type="password" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인"
                               reaquired></input>
                               <input type="hidden" name="password" id="pwd"/>
-                              <input type="hidden" name="password" id="dbPwd"/>
+                              <input type="hidden" id="dbPwd"/>
                             <div class="col-md-10 mb-3">
                               &nbsp;
                               <div class="alert alert-success" id="alert-success" style="display: none;">비밀번호가 일치합니다.</div>
@@ -512,17 +512,22 @@
         	const data = axios({
         	url: 'mypage/update',
         	data : {
-        		'password' : `\${pwd.value}`,
+        		'password' : `\${pwd0.value}`,
         		'phoneNumber' : `\${phoneNum.value}`,
         		'deptNumber' : `\${deptNum.value}`
         	},
         	dataType : 'text',
         	method: 'post'
         	});
+        	data.then( function(result){
+        		console.log("axios done");
+        		body_convert(mypage_personalInfo);
+        	})
         	}else {
         		alert("기존 사용 비밀번호를 틀리셨습니다.");
         	}
         	}
+        	
         }
   
     <!-- 즐겨찾기 삭제 -->

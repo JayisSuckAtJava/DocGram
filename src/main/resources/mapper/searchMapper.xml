@@ -27,13 +27,10 @@ select b.id as board_id,
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
 	left join user_starmark s on b.id = s.board_id and s.user_id = #{userId}
-	left outer join board_hashtag bh on b.id = bh.board_id
 	<if test="fileName != null or fileNum != null">	
 	left outer join file f on b.file_id = f.id
 	</if>
-	<if test="hashtagList != null">
-	left outer join hashtag h on bh.hashtag_id = h.id
-	</if>
+
 	<trim prefix="where" prefixOverrides="and">
 		<if test="sel != null and text != null"><choose>
 				<when test=' sel == "title" '>and b.title like "%${text}%"</when>
@@ -46,9 +43,11 @@ select b.id as board_id,
 		<if test="dateRange != null">and b.date >= (DATE_SUB(NOW(), INTERVAL #{dateRange} DAY))</if>
 		<if test="start != null and end != null">and b.date between #{start} and #{end}</if>
 		<if test="hashtagList != null">
-			<foreach collection="hashtagList" item="hashtagName" separator="and" open="and">
-				h.name = #{hashtagName}
+			and b.id in (
+			<foreach collection="hashtagList" item="hashtagName" separator=" and board_id in ">
+					(select board_id from board_hashtag where hashtag_id = (select id from hashtag where name = #{hashtagName})
 			</foreach>
+			${foreachEnd}
 		</if>
 	</trim>
 	order by b.id desc
