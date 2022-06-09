@@ -315,6 +315,7 @@ function deptMarkDelete(id) {
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
+
 <!-- pagenation -->
 <script src="/resources/js/page.js"></script>
 <script src="/resources/js/pageinget.js"></script>

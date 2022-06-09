@@ -143,15 +143,6 @@
       </thead>
 
       <tbody class="table table-hover list-body-star">
-        <tr>
-          <td><i class="bi bi-star"></i></td>
-          <td >김띵띵</td>
-          <td>cho@gmail.com</td>
-          <td>010-2345-342</td>
-          <td>부서 번호</td>
-          <td>물전환특별팀</td>
-          <td>부서관</td>
-        </tr>
         <c:forEach items="${boardList}" var="board">
           <tr style='cursor:pointer;'>
             
@@ -164,7 +155,7 @@
                </c:if>
             <td>${board.id}</td>
             <td>${board.title}</td>
-            <td>${board.fileId}</td>
+            <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
             <td>${board.user.dept.name}</td>
             <td>${board.date}</td>
             <td>${board.user.name}</td>

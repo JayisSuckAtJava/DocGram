@@ -51,6 +51,7 @@ select b.id as board_id,
 			</foreach>
 		</if>
 	</trim>
+	order by b.id desc
 	limit #{page}, 10
 </select>
 
