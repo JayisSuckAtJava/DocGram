@@ -21,9 +21,9 @@
 <link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/resources/js/board.js"></script>
 
 </head>
 
@@ -56,7 +56,6 @@
         <div>
             <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
             <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf" disabled="disabled">
-            <button>취소</button>
             <hr>
         </div>
 
