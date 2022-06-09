@@ -28,7 +28,7 @@ if(obj2.page == null || obj2.page == "") {
             <a class="page-link" href="${url}?page=${i}">${i}</a>
             </li>`;
         }  
-        html = html + `<li class="page-item"><a class="page-link" href="${url}?page=${endPage}">Previous</a></li>`;
+        html = html + `<li class="page-item"><a class="page-link" href="${url}?page=${endPage}">Next</a></li>`;
         html += '</ul>';
         
         const pagenation = document.querySelector("#pagenation");

@@ -71,6 +71,8 @@ public class SearchController {
 		map.put("userId", user.getId());
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap = searchService.searchDetail(map); 
+		System.out.println(resultMap);
+		System.out.println(((List)resultMap.get("boardList")).size());
 		model.addAllAttributes(resultMap);
 		return "read/search";
 	}

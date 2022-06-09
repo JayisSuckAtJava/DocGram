@@ -69,6 +69,12 @@ public class SearchServiceImpl implements SearchService {
 		}else {
 			String hashtagList = (String) map.get("hashtagList");
 			String[] hashtagArray = hashtagList.split(",");
+			Integer hashtagSize = hashtagArray.length;
+			String foreachEnd ="";
+			for (Integer i=0; i <= hashtagSize; i++) {
+				foreachEnd =  foreachEnd + ")";
+			}
+			map.put("foreachEnd", foreachEnd);
 			map.put("hashtagList", hashtagArray);
 		}
 		if(map.get("dateRange") == null || map.get("dateRange").equals("null")) {
@@ -107,7 +113,6 @@ public class SearchServiceImpl implements SearchService {
 		}
 		List<BoardDto> boardList = new ArrayList<>();
 		
-		
 		boardList = boardDao.searchDetail(map);
 		Long listSize = boardDao.searchDetailSize(map);
 		
@@ -115,10 +120,6 @@ public class SearchServiceImpl implements SearchService {
 		resultMap.put("listSize", listSize);
 		resultMap.put("boardList", boardList);
 		
-		map.forEach((strKey, value)->{
-			System.out.println(strKey + " : key and    value :" + value);
-			System.out.println(map.get(strKey) == null);
-		});
 		return resultMap;
 	}
 
