@@ -26,11 +26,15 @@ var obj = QueryStringToJSON(string);
 let queryIs = "";
 let page = 0;
 for(let key in obj) {
-    console.log(key + "   " + obj[key])
     if(key == "page"){
         page = obj[key];
     }else{
-        queryIs = queryIs + key + "=" + obj[key]
+    	if(queryIs == ""){
+	        queryIs = queryIs + key + "=" + obj[key];
+    	}else {
+    		queryIs = queryIs + "&" + key + "=" + obj[key];
+    	}
+        
     }
 }
         let url = path+"?"+queryIs;

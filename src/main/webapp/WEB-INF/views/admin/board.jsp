@@ -25,6 +25,9 @@
 <script src="../resources/js/admin.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+
+
+
 function deleteBoard(id) {
 	const check = confirm("게시글을 삭제 하시겠습니까?");
 	if(check) {
@@ -43,6 +46,7 @@ function deleteBoard(id) {
 	}
 }
 function hashtagUpdate(id) {
+	sessionStorage.setItem("boardId",id);
 	const data = axios({
 		url: `/hashtag/board/\${id}`,
 		method: 'get'
@@ -59,15 +63,9 @@ function hashtagUpdate(id) {
              html = html + "</tr>";
 		})
 		body.innerHTML = html;
-		const search = document.querySelector("#hashtagSearch");
-		search.addEventListener("keydown",(e)=>{
-			const keyCode = e.keyCode;
-	    	   if(keyCode == 13){
-	    		   
-	    		   hashtagCreate(id,search.value);	    		   
-	    	   }
-		})
 		});
+		
+		
 }
 function hashtagCreate(boardId,hashtagName) {
 	const data = axios({
@@ -167,16 +165,16 @@ function deptMarkDelete(id) {
    <dl class="dl-table">
      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
      <dd class="dd-keyword">
-       <form action="" method=""> <!-- form-->
-       <select class="ss" name="searchField" id="searchCategory" title="검색어 분류 선택">
-         <option value="all" selected="selected">제목</option>
-         <option value="title">내용</option>
-         <option value="dept_nm">작성자</option>
-         <option value="writer">기관</option>
+       <form action="" method="get"> <!-- form-->
+       <select class="ss" name="sel" id="searchCategory" title="검색어 분류 선택">
+         <option value="title" selected="selected">제목</option>
+         <option value="content">내용</option>
+         <option value="name">작성자</option>
+         <option value="dept">소속 기관</option>
        </select>
-       <input class="ss"  name="searchKeyword" type="text" id="searchKeyword"
-         placeholder="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)"
-         title="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)" value="">
+       <input class="ss"  name="text" type="text" id="searchKeyword"
+         placeholder="검색어를 입력하세요."
+         title="검색어를 입력하세요." value="">
          <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
         </form>
       
@@ -328,6 +326,17 @@ window.onload = function() {
 		pageinget();
 	}
 }
+const search = document.querySelector("#hashtagSearch");
+search.addEventListener("keydown",(e)=>{
+	e.stopPropagation();
+	let id = sessionStorage.getItem("boardId");
+	console.log(id);
+	const keyCode = e.keyCode;
+	   if(keyCode == 13){
+		   console.log(id+"이게 아이디");
+		   hashtagCreate(id,search.value);	    		   
+	   }
+})
 </script>
 </body>
 </html>

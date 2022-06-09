@@ -59,9 +59,11 @@ public class StarmarkController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("starmark/create")
+	@ResponseBody
 	public void createStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
+		Long boardId = Long.parseLong((String) map.get("boardId"));
 		starmarkService.createStarmark(userId,boardId);
 	}
 	
@@ -80,7 +82,6 @@ public class StarmarkController {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long boardId = Long.parseLong((String) map.get("boardId")); 
-		System.out.println(boardId);
 		starmarkService.deleteStarmark(userId,boardId);
 	}
 	
@@ -96,7 +97,6 @@ public class StarmarkController {
 	@GetMapping("deptmark/create")
 	@ResponseBody
 	public void createDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
-		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {
@@ -116,7 +116,6 @@ public class StarmarkController {
 	@GetMapping("deptmark/delete")
 	@ResponseBody
 	public void deleteDeptmark(HttpSession session, @RequestParam("boardId")Long boardId, @RequestParam("deptId")Long deptId) {
-		System.out.println(boardId+"           "+deptId);
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long postionId = user.getPositionId();
 		if(postionId > 5) {

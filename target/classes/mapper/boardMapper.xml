@@ -67,12 +67,16 @@
 		u.DEPT_ID AS user_dept_id,
 		b.RELATION_1 AS board_relation_1,
 		b.RELATION_2 AS board_relation_2,
-		b.RELATION_3 AS board_relation_3
+		b.RELATION_3 AS board_relation_3,
+		us.id as starmark_id,
+		ds.id as deptmark_id
 	FROM board b
 	left outer JOIN file f ON b.FILE_ID = f.ID
 	JOIN user u ON b.USER_ID = u.id
 	JOIN position p ON u.POSITION_ID = p.ID
-	WHERE b.ID = #{id}
+	left join user_starmark us on b.id = us.board_id and us.user_id = #{userId}
+	left join dept_starmark ds on b.id = ds.board_id and ds.dept_id = #{deptId}
+	WHERE b.ID = #{boardId}
 </select>
 
 <!--
@@ -213,6 +217,7 @@ insert into board (
 	<result property="relation2" column="board_relation_2"/>
 	<result property="relation3" column="board_relation_3"/>
 	<result property="starmarkId" column="starmark_id"/>
+	<result property="deptmarkId" column="deptmark_id"/>
 	
 	<association property="file" javaType="file">
 		<id property="id" column="file_id"/>
@@ -371,7 +376,7 @@ join dept d on u.dept_id = d.id
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 6. 8.
 -->
-<select id="readDeptBoardList" resultMap="detailBoard" parameterType="board">
+<select id="readDeptBoardList" resultMap="detailBoard" parameterType="map">
 	select b.id as board_id,
 		b.title as board_title,
 		d.name as dept_name,
@@ -382,9 +387,13 @@ join dept d on u.dept_id = d.id
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	left join dept_starmark s on b.id = s.board_id and s.dept_id = #{user.deptId}
+	left join dept_starmark s on b.id = s.board_id and s.dept_id = #{board.user.deptId}
 	where b.security >= 1
-	limit #{start}, 10
+<if test="sel == 'title'">and b.title like '%${text}%'</if>
+<if test="sel == 'content'">and b.content like '%${text}%'</if>
+<if test="sel == 'name'">and u.name = #{text}</if>
+<if test="sel == 'dept'">and d.name like '%${text}%'</if>
+	limit #{board.start}, 10
 </select>
 
 </mapper>

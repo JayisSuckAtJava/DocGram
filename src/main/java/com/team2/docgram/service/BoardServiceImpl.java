@@ -77,9 +77,13 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public Map<String, Object> readBoard(Long id) {
-		BoardDto board = boardDao.readBoard(id);
-		System.out.println(board+"here");
+	public Map<String, Object> readBoard(Long id, Long userId, Long deptId) {
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("userId", userId);
+		searchMap.put("deptId", deptId);
+		searchMap.put("boardId", id);
+		
+		BoardDto board = boardDao.readBoard(searchMap);
 		
 		if(board.getFile() == null) {
 			board.setFile(null);
@@ -98,8 +102,8 @@ public class BoardServiceImpl implements BoardService {
 		hashtagList = boardHashtagDao.readList(boardId);
 		
 		UserDto user = board.getUser();
-		Long deptId = user.getDeptId();
-		DeptDto dept = deptDao.readDeptList(deptId);
+		Long boardDeptId = user.getDeptId();
+		DeptDto dept = deptDao.readDeptList(boardDeptId);
 		
 		// 만약에 넣는 값이 null 이면 어쩌냐?
 		Long[] relationListId = {board.getRelation1(), board.getRelation2(), board.getRelation3()};
@@ -384,14 +388,14 @@ public class BoardServiceImpl implements BoardService {
 					hashtag = hashtagDao.createHashtag(hashtag);					
 					hashtagId = hashtag.getId();
 				}
-
-				Map<String,Object> map = new HashMap<>();				
-				map.put("boardId", boardId);
-				map.put("hashtagId", hashtagId);
-				Long result = boardHashtagDao.readBoardHashtag(map);
+				
+				BoardHashtagDto boardHashtag = new BoardHashtagDto();
+				boardHashtag.setBoardId(boardId);
+				boardHashtag.setHashtagId(hashtagId);
+				Long result = boardHashtagDao.readBoardHashtag(boardHashtag);
 				
 				if(result == null) {
-					boardHashtagDao.createBoardHashtag(map);										
+					boardHashtagDao.createBoardHashtag(boardHashtag);										
 				}
 				
 			}
@@ -452,7 +456,7 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 6. 8.
 	 */
 	@Override
-	public List<BoardDto> readDeptBoardList(Long page, Long deptId) {
+	public List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text) {
 		BoardDto board = new BoardDto();
 		UserDto user = new UserDto();
 		user.setDeptId(deptId);
@@ -462,7 +466,12 @@ public class BoardServiceImpl implements BoardService {
 		board.setStart(page);
 		board.setUser(user);
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardDao.readDeptBoardList(board);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("board", board);
+		map.put("sel", sel);
+		map.put("text", text);
+		boardList = boardDao.readDeptBoardList(map);
 		return boardList;
 	}
 	

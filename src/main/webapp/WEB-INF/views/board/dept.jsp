@@ -24,7 +24,7 @@
 
 
     <link rel="stylesheet" href="../resources/css/board.css">
-    <script src="../resources/js/board.js"></script>
+    
 </head>
 <body>
 
@@ -57,15 +57,16 @@
       <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
       <dd class="dd-keyword">
         <form  action="" method=""> <!-- form-->
-        <select class="ss" name="searchField" id="searchCategory" title="검색어 분류 선택">
-          <option value="all" selected="selected">제목</option>
-          <option value="title">내용</option>
-          <option value="dept_nm">작성자</option>
+        <select class="ss" name="sel" id="searchCategory" title="검색어 분류 선택">
+          <option value="title" selected="selected">제목</option>
+          <option value="content">내용</option>
+          <option value="name">작성자</option>
+          <option value="dept">소속 부서</option>
 
         </select>
-        <input class="ss" name="searchKeyword" type="text" id="searchKeyword"
-          placeholder="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)"
-          title="검색어를 입력하세요. 각 단어는 콤마로 구분합니다. (예 : 보고, 지출, 납부)" value="">
+        <input class="ss" name="text" type="text" id="searchKeyword"
+          placeholder="검색어를 입력하세요."
+          title="검색어를 입력하세요." value="">
           <button class="btn btn-outline-success input-group-append" type="submit" style="height: 38px;"><i class="bi bi-search"></i></button>
         </form>
       </dd>
@@ -105,10 +106,10 @@
               <c:forEach items="${boardList}" var="board">
               <tr>
                <c:if test="${board.starmarkId == null}">
-               <td><i class="bi bi-star"></i></td>
+               <td id="emptyStar"><i class="bi bi-star"></i></td>
                </c:if>
                <c:if test="${board.starmarkId != null}">
-               <td><i class="bi bi-star-fill"></i></td>
+               <td id="filledStar"><i class="bi bi-star-fill"></i></td>
                </c:if>
                 <td>${board.id}</td>
                   <td>${board.title}</td>
@@ -161,6 +162,54 @@ window.onload = function() {
 	}else {
 		pageinget();
 	}
+}
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+    
+    const emptyStar = document.querySelectorAll("#emptyStar")
+    emptyStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starCreate(e, boardId);
+        });
+    });
+    
+    const filledStar = document.querySelectorAll("#filledStar")
+    filledStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starDelete(e, boardId);
+        });
+    });
+    
+function starDelete(e, id) {
+	e.stopPropagation();
+    	const data = axios({
+			   url: '/starmark/delete',
+			   data: {
+			   'boardId': `\${id}`
+			   },
+			   dataType : 'text',
+				   method: 'post'
+			   });
+        	data.then(function (result) {
+        		location.reload();
+    		});
+}
+function starCreate(e, id) {
+	e.stopPropagation();
+	const data = axios({
+		   url: '/starmark/create',
+		   data: {
+		   'boardId': `\${id}`
+		   },
+		   dataType : 'text',
+			   method: 'post'
+		   });
+ 	data.then(function (result) {
+ 			location.reload();
+		});
 }
 </script>
 </body>
