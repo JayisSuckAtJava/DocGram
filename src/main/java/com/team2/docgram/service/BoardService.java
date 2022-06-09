@@ -38,6 +38,6 @@ public interface BoardService {
 
 	List<BoardDto> readMyBoardList(Long userId);
 
-	List<BoardDto> readDeptBoardList(Long page, Long deptId);
+	List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text);
 
 }

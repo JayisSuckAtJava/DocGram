@@ -61,8 +61,8 @@ public class BoardHashtagDaoImpl implements BoardHashtagDao {
 	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public Long readBoardHashtag(Map<String, Object> map) {
-		return sqlSession.selectOne(mapper+"readBoardHashtag", map);
+	public Long readBoardHashtag(BoardHashtagDto boardHashtag) {
+		return sqlSession.selectOne(mapper+"readBoardHashtag", boardHashtag);
 	}
 
 	 /**

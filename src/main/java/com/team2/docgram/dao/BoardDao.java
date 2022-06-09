@@ -45,7 +45,7 @@ public interface BoardDao {
 
 	List<BoardDto> searchRelation(Map<String, Object> map);
 
-	List<BoardDto> readDeptBoardList(BoardDto board);
+	List<BoardDto> readDeptBoardList(Map<String, Object> map);
 
 	List<BoardDto> readBoardList(Map<String, Object> map);
 

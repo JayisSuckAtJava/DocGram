@@ -92,6 +92,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> readUserList(Long page) {
 		Map<String, Object> map = new HashMap<>();
+		if(page == null) {
+			page = 0L;
+		}else {
+			page = ( page - 1 ) * 10; 
+		}
 		map.put("page", page);
 		return userDao.readUserList(map);
 	}

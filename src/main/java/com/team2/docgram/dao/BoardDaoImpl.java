@@ -254,8 +254,8 @@ public class BoardDaoImpl implements BoardDao {
 	 * @since 2022. 6. 8.
 	 */
 	@Override
-	public List<BoardDto> readDeptBoardList(BoardDto board) {
-		return sqlSession.selectList(mapper+"readDeptBoardList", board);
+	public List<BoardDto> readDeptBoardList(Map<String, Object> map) {
+		return sqlSession.selectList(mapper+"readDeptBoardList", map);
 	}
 
 	/**

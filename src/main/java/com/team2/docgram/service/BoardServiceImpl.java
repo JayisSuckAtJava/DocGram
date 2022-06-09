@@ -388,14 +388,14 @@ public class BoardServiceImpl implements BoardService {
 					hashtag = hashtagDao.createHashtag(hashtag);					
 					hashtagId = hashtag.getId();
 				}
-
-				Map<String,Object> map = new HashMap<>();				
-				map.put("boardId", boardId);
-				map.put("hashtagId", hashtagId);
-				Long result = boardHashtagDao.readBoardHashtag(map);
+				
+				BoardHashtagDto boardHashtag = new BoardHashtagDto();
+				boardHashtag.setBoardId(boardId);
+				boardHashtag.setHashtagId(hashtagId);
+				Long result = boardHashtagDao.readBoardHashtag(boardHashtag);
 				
 				if(result == null) {
-					boardHashtagDao.createBoardHashtag(map);										
+					boardHashtagDao.createBoardHashtag(boardHashtag);										
 				}
 				
 			}
@@ -456,7 +456,7 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 6. 8.
 	 */
 	@Override
-	public List<BoardDto> readDeptBoardList(Long page, Long deptId) {
+	public List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text) {
 		BoardDto board = new BoardDto();
 		UserDto user = new UserDto();
 		user.setDeptId(deptId);
@@ -466,7 +466,12 @@ public class BoardServiceImpl implements BoardService {
 		board.setStart(page);
 		board.setUser(user);
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardDao.readDeptBoardList(board);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("board", board);
+		map.put("sel", sel);
+		map.put("text", text);
+		boardList = boardDao.readDeptBoardList(map);
 		return boardList;
 	}
 	

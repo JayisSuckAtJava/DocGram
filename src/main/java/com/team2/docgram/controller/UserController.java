@@ -315,20 +315,13 @@ public class UserController {
 	 * @since 2022. 6. 7.
 	 */
 	@GetMapping("admin/board")
-	public String adminBoardPage(HttpSession session, Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
+	public String adminBoardPage(HttpSession session, Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page, String sel, String text) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long deptId = user.getDeptId();
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readDeptBoardList(page, deptId);
+		boardList = boardService.readDeptBoardList(page, deptId, sel, text);
 		model.addAttribute("boardList", boardList);
 		return "admin/board";
-	}
-	
-	@PostMapping("admin/board")
-	public String adminBoard(HttpSession session, @RequestParam("sel") String sel, @RequestParam("text") String text, Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
-		System.out.println(sel +"       " + text);
-		return "admin/board";
-		
 	}
 	
 }

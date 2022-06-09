@@ -376,7 +376,7 @@ join dept d on u.dept_id = d.id
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 6. 8.
 -->
-<select id="readDeptBoardList" resultMap="detailBoard" parameterType="board">
+<select id="readDeptBoardList" resultMap="detailBoard" parameterType="map">
 	select b.id as board_id,
 		b.title as board_title,
 		d.name as dept_name,
@@ -387,9 +387,13 @@ join dept d on u.dept_id = d.id
 	from board b
 	join user u on b.user_id = u.id
 	join dept d on u.dept_id = d.id
-	left join dept_starmark s on b.id = s.board_id and s.dept_id = #{user.deptId}
+	left join dept_starmark s on b.id = s.board_id and s.dept_id = #{board.user.deptId}
 	where b.security >= 1
-	limit #{start}, 10
+<if test="sel == 'title'">and b.title like '%${text}%'</if>
+<if test="sel == 'content'">and b.content like '%${text}%'</if>
+<if test="sel == 'name'">and u.name = #{text}</if>
+<if test="sel == 'dept'">and d.name like '%${text}%'</if>
+	limit #{board.start}, 10
 </select>
 
 </mapper>
