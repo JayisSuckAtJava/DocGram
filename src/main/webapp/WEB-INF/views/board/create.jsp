@@ -81,31 +81,7 @@
                 </button>
                 
             </div>
-
-          	<div>
-            <button type="submit">작성 완료</button> 
-            <button onclick="history.back()" >뒤로가기</button>
-            </div>
-          	</form>
-          </div>
-          
-          						
-        </div>
-      </div>
-      <div class="col-sm-2 sidenav">
-        
-        
-      </div>
-    </div>
-  </div>
-  
-<!-- footer -->
-<footer class="container-fluid text-center py-3" >
-	<jsp:include page="../comp/footer.jsp"></jsp:include>
-</footer>
-  
-  
-   <!-- Modal: modalCart -->
+<!-- Modal: modalCart -->
                 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -118,23 +94,22 @@
                           관련문서검색
                         </a>
                       </h4>
+                      <form class="d-flex" method="" action="" role="search">
                       <select id="search-sel">
                         <option value="title">제목</option>
                         <option value="context">내용</option>
                         <option value="name">이름</option>
                         <option value="dept">소속 부서</option>
                       </select>
-       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text">
-       <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
-                        
+			       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text">
+			       <button class="btn btn-outline-success" type="submit" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
+                    </form>    
                         
                         
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
                         let relSum = 0;
-                function ajax() {
-                	console.log("hi");
-                	
+                function ajax() {          	
                 	let sel = document.querySelector("#search-sel").value
                 	let text = document.querySelector("#search-text").value
                 	
@@ -264,5 +239,30 @@
                   </div>
                 </div>
               </div>
+
+          	<div>
+            <button type="submit">작성 완료</button> 
+            <button onclick="history.back()" >뒤로가기</button>
+            </div>
+          	</form>
+          </div>
+          
+          						
+        </div>
+      </div>
+      <div class="col-sm-2 sidenav">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+  
+  
+   
 </body>
 </html>

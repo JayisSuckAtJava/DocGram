@@ -112,11 +112,11 @@
       </dd>
       
     </dl>
-
+ </form>
   </div>
   <!--// .dl-table-wrap -->
 
-  </form>
+ 
     <hr>
   </div>
     <!-- 상세 검색 부분  끝 -->
@@ -226,7 +226,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.reload();
+        		location.href="/search/list";
     		});
 }
 function starCreate(e, id) {
@@ -240,7 +240,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.reload();
+ 			location.href="/search/list";
 		});
 }
 </script>

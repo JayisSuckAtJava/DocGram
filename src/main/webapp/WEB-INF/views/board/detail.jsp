@@ -48,6 +48,23 @@ function starCreate(id) {
  			location.reload();
 		});
 }
+function deleteBoard(id) {
+	const check = confirm("게시글을 삭제 하시겠습니까?");
+	if(check) {
+		const data = axios({
+			url: `/board/delete/\${id}`,
+			method: 'get'
+			});
+			data.then(function (result) {
+				console.log(result)
+				const dataCheck = result.data;
+				if(dataCheck == 1) {
+					history.back();
+				}
+			});
+
+	}
+}
 </script>
 
   </head>
@@ -149,7 +166,7 @@ function starCreate(id) {
                     <hr>
             <div class="right">
                 <a href="update/${board.id}"><button>수정</button></a>
-                <button>삭제</button>
+                <button onclick="deleteBoard(${board.id})">삭제</button>
                 <button onclick="history.back()">목록</button>
             </div>
         </div>

@@ -17,15 +17,14 @@
 
   <body>
     <div class="wrap">
-      <div class="logo"><h1 onclick="location.href='/main'">Docgram</h1></div>
+      <div class="logo"><h1 onclick="location.href='/main'" style="cursor:pointer;">Docgram</h1></div>
       <div class="contents">
         <form action="/" method="POST" id="form__wrap">
           <div class="terms__check__all">
             <input type="checkbox" name="checkAll" id="checkAll"" />
-            <label for="checkAll"
-              >Docgram 이용약관, 개인정보 수집 및 이용, 프로모션 정보
-              수신(선택)에<br />모두 동의합니다.</label
-            >
+            <label for="checkAll">
+            	Docgram 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.
+              </label>
           </div>
           <ul class="terms__list">
             <li class="terms__box">
