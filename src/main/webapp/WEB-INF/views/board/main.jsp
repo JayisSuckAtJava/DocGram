@@ -61,9 +61,9 @@
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
       		   <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-                <td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
           	  </tr>
               </c:forEach>
 
@@ -84,9 +84,9 @@
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
               <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-				<td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
                </tr>
               </c:forEach>
             </table>

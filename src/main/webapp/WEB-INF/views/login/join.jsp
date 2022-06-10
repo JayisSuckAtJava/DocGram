@@ -28,6 +28,11 @@
 
 
     <body class="join">
+    
+    <!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
 
    <div class="all">
       <form action="" method="post" class="sign-form">
@@ -175,6 +180,12 @@
         </div>
       </form>
 </div>
+
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+
     </body>
 
     <!--비밀번호 동일성 확인-->
