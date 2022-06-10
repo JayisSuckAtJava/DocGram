@@ -48,7 +48,7 @@
 
                 <div class="col-md-10 mb-3">
                   <label for="email">이메일</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com"
+                  <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" id="emailInput" onblur="emailCheck()"
                     required>
                   <div class="invalid-feedback">
                     이메일을 입력해주세요.
@@ -180,6 +180,11 @@
     <!--비밀번호 동일성 확인-->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
+    
+    	function emailCheck() {
+    		console.log("checkchekc")
+    	}
+    
       function test() {
         var p1 = document.getElementById('pwd1').value;
         var p2 = document.getElementById('pwd2').value;
@@ -198,8 +203,20 @@
       let correct = document.getElementById('alert-success');
       let wrong = document.getElementById('alert-danger');
 
+      p1.addEventListener("focusout", () => {
+  		let p1v = p1.value;
+        let p2v = p2.value;
+        if (p1v == p2v) {
+          correct.style.display = "block";
+          wrong.style.display = "none";
+        } else {
+          correct.style.display = "none";
+          wrong.style.display = "block";
+        }
+      })
+      
       p2.addEventListener("focusout", () => {
-        let p1v = p1.value;
+  		let p1v = p1.value;
         let p2v = p2.value;
         if (p1v == p2v) {
           correct.style.display = "block";
