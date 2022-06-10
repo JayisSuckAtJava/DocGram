@@ -25,7 +25,6 @@
 
     </head>
 
-
     <body class="join">
     
     <!-- header -->
@@ -52,8 +51,7 @@
 
                 <div class="col-md-10 mb-3">
                   <label for="email">이메일</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" id="emailInput" onblur="emailCheck()"
-                    required>
+                  <input type="email" name="email" class="form-control"  required id="email" placeholder="you@example.com">
                   <div class="invalid-feedback">
                     이메일을 입력해주세요.
                   </div>
@@ -136,7 +134,7 @@
                       <!-- position Selection -->
                    <label for="position-select">직급 : </label>
                    <select id="position-select">
-                      <option value="">== 직급을 선택해주세요 ==</option>
+                      <option value="0">== 직급을 선택해주세요 ==</option>
                       <option value="1">서기보</option>
                       <option value="2">서기</option>
                       <option value="3">주사보</option>
@@ -169,7 +167,7 @@
                   <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                 </div>
                 <div class="mb-4"></div>
-                <button class="check-btn btn btn-primary btn-lg btn-block" onclick="check()">가입 완료</button>
+                <button class="check-btn btn btn-primary btn-lg btn-block" onclick="check(event)">가입 완료</button>
               </form>
             </div>
           </div>
@@ -188,9 +186,27 @@
     <!--비밀번호 동일성 확인-->      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
     
-    	function emailCheck() {
-    		console.log("checkchekc")
-    	}
+    		const emailInput = document.querySelector("#email");
+    		emailInput.addEventListener("focusout",()=>{
+	    		let email = emailInput.value;
+    				
+    		const data = axios({
+    		    url: '/rest/email',
+    		    method: 'get',
+    		    params: {
+    		    'email': email
+    		    }
+    		    });
+    	        data.then(function (result) {
+    	        	let row = result.data;
+    	        	if(row > 0){
+    	        		alert("중복되는 이메일이 확인되었습니다.")
+    	        		emailInput.value = "";
+    	        	}
+    	        })
+    		})
+
+    
     
       function test() {
         var p1 = document.getElementById('pwd1').value;
@@ -235,16 +251,24 @@
       })
       
         
-        function check() {
+        function check(e) {
       		const pwd1= document.querySelector("#pwd1");
         	const pwd =document.querySelector("#pwd");
         	const dept=document.querySelector("#inputdept");
         	const po=document.querySelector("#position-select");
         	const dc=document.querySelector("#deptCode");
         
-        	pwd.value = pwd1.value;
-        	dc.value = Number(dept.value) + Number(po.value);
-        	submit();
+        	if(po.value == 0){
+        		alert("직급을 선택해 주세요.")
+        		
+        	}else if(dept.value == ""){
+        		alert("부서를 선택해 주세요.")	
+        	}else{
+	        	pwd.value = pwd1.value;
+    	    	dc.value = Number(dept.value) + Number(po.value);
+        		submit();
+        	}
+    	  	e.preventDefault();
         }
 	      
 	      
