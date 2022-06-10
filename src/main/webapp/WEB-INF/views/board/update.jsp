@@ -12,6 +12,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="icon" href="/resources/images/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>수정페이지</title>
 

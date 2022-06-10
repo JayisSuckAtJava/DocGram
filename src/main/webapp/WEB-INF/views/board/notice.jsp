@@ -11,7 +11,7 @@
 <head>
   <title>공지사항 페이지</title>
   <meta charset="utf-8">
-
+  <link rel="icon" href="/resources/images/favicon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../resources/css/bootstrap.css">
   <link rel="stylesheet" href="../resources/css/main.css">
@@ -95,7 +95,12 @@ function updateBtn(e, id) {
           <tr style="cursor:pointer;">
               <td>${board.id}</td>
               <td>${board.title}</td>
-              <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
+                                <c:if test="${board.fileId != null}">
+                  <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></a></td>
+                  </c:if>
+                  <c:if test="${board.fileId == null}">
+                  <td></td>
+                  </c:if>
               <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
               <td>${board.user.name}</td>
@@ -132,7 +137,6 @@ function updateBtn(e, id) {
 
     </div>
     <div class="col-sm-2 sidenav">
-
     </div>
   </div>
 </div>
