@@ -259,7 +259,7 @@
                 <h2> 마이태그 수정 <i class="bi bi-bookmark"></i></h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
                   <div style="display: flex;" id="tag-body">
-                    <input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
+                    <i class="bi bi-bookmark-check"></i><input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
                     data-bs-toggle="tooltip" title="tooltip"/>
                   </div>
 
