@@ -21,7 +21,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="/resources/js/board.js"></script>
-
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
   
 </head>
 
@@ -80,7 +87,7 @@
                 <input type="hidden" name="relatedBoardList" id="inputRelListReal" >
                 </button>
                 
-            </div>
+            
 
           	<div>
             <button type="submit">작성 완료</button> 
@@ -103,9 +110,8 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
-  
-  
-   <!-- Modal: modalCart -->
+  </div>
+<!-- Modal: modalCart -->
                 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -124,17 +130,16 @@
                         <option value="name">이름</option>
                         <option value="dept">소속 부서</option>
                       </select>
-       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text">
-       <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
-                        
+			       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-text" onkeydown="typeRel(event)" >
+			       <button class="btn btn-outline-success" type="submit" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
                         
                         
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
+                        
+                        
                         let relSum = 0;
-                function ajax() {
-                	console.log("hi");
-                	
+                function ajax() {          	
                 	let sel = document.querySelector("#search-sel").value
                 	let text = document.querySelector("#search-text").value
                 	
@@ -264,5 +269,7 @@
                   </div>
                 </div>
               </div>
+  
+   
 </body>
 </html>

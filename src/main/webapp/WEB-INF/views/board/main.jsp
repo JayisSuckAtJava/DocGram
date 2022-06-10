@@ -16,9 +16,9 @@
   <link rel="stylesheet" href="../resources/css/bootstrap.css">
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="/resources/js/bootstrap.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 
@@ -61,9 +61,9 @@
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
       		   <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-                <td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
           	  </tr>
               </c:forEach>
 
@@ -84,9 +84,9 @@
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
               <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-				<td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
                </tr>
               </c:forEach>
             </table>

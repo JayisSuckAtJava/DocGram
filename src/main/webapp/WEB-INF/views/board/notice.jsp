@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
     <link rel="stylesheet" href="../resources/css/board.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -31,7 +31,6 @@ function deleteBoard(e, id) {
 			method: 'get'
 			});
 			data.then(function (result) {
-				console.log(result)
 				const dataCheck = result.data;
 				if(dataCheck == 1) {
 				location.reload();					
@@ -77,15 +76,15 @@ function updateBtn(e, id) {
         <thead id="list_title">
   
           <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>다운로드</th>
-            <th>소속 기관</th>
-            <th>작성일</th>
-            <th>작성자</th>
+            <th style="width: 7%">번호</th>
+            <th style="width: 27%">제목</th>
+            <th style="width: 5%"></th>
+            <th style="width: 15%">소속 기관</th>
+            <th style="width: 13%">작성일</th>
+            <th style="width: 13%">작성자</th>
             <c:if test="${sessionScope.user.positionId >= '6' }">
-            <th>수정하기</th>
-            <th>삭제하기</th>
+            <th style="width: 9%">수정</th>
+            <th style="width: 9%">삭제</th>
             </c:if>
           </tr>
         </thead>
@@ -93,7 +92,7 @@ function updateBtn(e, id) {
         <tbody class="list-body">
 
           <c:forEach items="${noticeList}" var="board">
-          <tr>
+          <tr style="cursor:pointer;">
               <td>${board.id}</td>
               <td>${board.title}</td>
               <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
@@ -102,11 +101,11 @@ function updateBtn(e, id) {
               <td>${board.user.name}</td>
               <c:if test="${sessionScope.user.positionId >= '6' }">
               <td>
-                <button class="btn btn-outline-danger"  
+                <button class="btn btn-outline-danger btn-sm"  
                         type="button" onclick="updateBtn(event, ${board.id})">수정</button>
               </td>
               <td>
-                <button class="btn btn-outline-danger"  
+                <button class="btn btn-outline-danger btn-sm"  
                         type="button" onclick="deleteBoard(event, ${board.id})">삭제</button>
               </td>
               </c:if>
@@ -149,7 +148,7 @@ function updateBtn(e, id) {
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if((location.search == "")){
 		page();			
 	}else {
 		pageinget();

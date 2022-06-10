@@ -20,7 +20,6 @@ function QueryStringToJSON(str) {
 }
 let query = location.search
 let path = location.pathname
-console.log(path+query)
 string = query.substring(1);
 var obj = QueryStringToJSON(string);
 let queryIs = "";

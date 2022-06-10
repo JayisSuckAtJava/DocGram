@@ -24,7 +24,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="/resources/js/board.js"></script>
-
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
 </head>
 
 <!-- 헤더 끝 -->
@@ -105,7 +112,7 @@
                         <option value="name">이름</option>
                         <option value="dept">소속 부서</option>
                       </select>
-       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text">
+       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text" onkeydown="typeRel(event)">
        <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
                         
                         
@@ -114,8 +121,6 @@
                         <script>
                         let relSum = 0;
                 function ajax() {
-                	console.log("hi");
-                	
                 	let sel = document.querySelector("#search-sel").value
                 	let text = document.querySelector("#search-text").value
                 	
