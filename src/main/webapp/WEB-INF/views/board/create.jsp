@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="/resources/css/main.css">
 <link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/resources/js/board.js"></script>
 
   
 </head>
@@ -38,7 +38,7 @@
     <div class="col-sm-2 sidenav">
       
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8"> 
       
       <div class="all">
 
@@ -51,7 +51,7 @@
             </div>
             <hr>
             <div class="wirtearea"> <!-- 내용 작성 부분-->
-                <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
+                <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>S
     
             </div>
             <hr>
@@ -231,16 +231,14 @@
                 	relListReal.value = "";
                 }
                 </script>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
-                        <span aria-hidden="true">×</span>
-                      </button>
+                      
                     </div>
                     <!--Modal Body-->
-					<div>
-						<input type="text" disabled id="rel_list_sum"/>
-					</div>
                     <div class="modal-body">
-                    
+					<input type="text" disabled id="rel_list_sum"/>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
+                        <span aria-hidden="true"><i class="bi bi-check-square"></i></span>
+                      </button>
                     
 
                       <table class="table table-hover">
