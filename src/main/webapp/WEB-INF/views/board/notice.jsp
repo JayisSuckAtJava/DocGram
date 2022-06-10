@@ -95,7 +95,12 @@ function updateBtn(e, id) {
           <tr style="cursor:pointer;">
               <td>${board.id}</td>
               <td>${board.title}</td>
-              <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
+                                <c:if test="${board.fileId != null}">
+                  <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></a></td>
+                  </c:if>
+                  <c:if test="${board.fileId == null}">
+                  <td></td>
+                  </c:if>
               <td>${board.user.dept.name}</td>
               <td>${board.date}</td>
               <td>${board.user.name}</td>
