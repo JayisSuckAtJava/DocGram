@@ -132,7 +132,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("user/signup")
-	public String createUser(UserDto user,Long deptCode) {
+	public String signup(UserDto user,Long deptCode) {
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
 		user.setPositionId(positionId);
