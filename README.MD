@@ -103,6 +103,6 @@
 ## 참여자
 
 *  이재범
-* Backend Developer
-** EMAIL : zavacxva@gmail.com
+	* Backend Developer
+	* EMAIL : zavacxva@gmail.com
 
