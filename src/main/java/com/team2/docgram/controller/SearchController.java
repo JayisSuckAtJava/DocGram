@@ -88,10 +88,9 @@ public class SearchController {
 	 */
 	@GetMapping("rest/dept")
 	@ResponseBody
-	public List<DeptDto> searchDept(String name) {
+	public List<DeptDto> searchDept(@RequestParam("name") String name) {
 		List<DeptDto> deptList = new ArrayList<>();
 		deptList = searchService.searchDept(name);
-		
 		return deptList;
 	}
 	

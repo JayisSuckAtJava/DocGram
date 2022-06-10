@@ -15,13 +15,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../resources/css/board.css">
 <link rel="stylesheet" href="../resources/css/bootstrap.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
 <link rel="stylesheet" href="../resources/css/main.css">
 <link rel="stylesheet" href="../resources/css/comp.css">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+function back() {
+	let url = document.referrer;
+	location.href = url;
+}
+
 function starDelete(id) {
     	const data = axios({
 			   url: '/starmark/delete',
@@ -56,10 +61,9 @@ function deleteBoard(id) {
 			method: 'get'
 			});
 			data.then(function (result) {
-				console.log(result)
 				const dataCheck = result.data;
 				if(dataCheck == 1) {
-					history.back();
+					back();
 				}
 			});
 
@@ -83,7 +87,7 @@ function deleteBoard(id) {
       
       <div class="all">
         <!-- 출력 문서 제목 -->
-            <h3 class="title-article">${board.title}<h3>
+            <h3 class="title-article">${board.title}<h3></h3>
 
     
         <!-- 문서 상세 정보 -->
@@ -165,9 +169,11 @@ function deleteBoard(id) {
                     </div>
                     <hr>
             <div class="right">
+            <c:if test="${(sessionScope.user.positionId >= '6') || (sessionScope.user.id == board.user.id)}">
                 <a href="update/${board.id}"><button>수정</button></a>
                 <button onclick="deleteBoard(${board.id})">삭제</button>
-                <button onclick="history.back()">목록</button>
+            </c:if>
+                <button onclick="back()">목록</button>
             </div>
         </div>
             

@@ -21,7 +21,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="/resources/js/board.js"></script>
-
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
   
 </head>
 
@@ -80,7 +87,30 @@
                 <input type="hidden" name="relatedBoardList" id="inputRelListReal" >
                 </button>
                 
+            
+
+          	<div>
+            <button type="submit">작성 완료</button> 
+            <button onclick="history.back()" >뒤로가기</button>
             </div>
+          	</form>
+          </div>
+          
+          						
+        </div>
+      </div>
+      <div class="col-sm-2 sidenav">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+  </div>
 <!-- Modal: modalCart -->
                 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -94,20 +124,20 @@
                           관련문서검색
                         </a>
                       </h4>
-                      <form class="d-flex" method="" action="" role="search">
                       <select id="search-sel">
                         <option value="title">제목</option>
                         <option value="context">내용</option>
                         <option value="name">이름</option>
                         <option value="dept">소속 부서</option>
                       </select>
-			       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="search-text">
+			       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-text" onkeydown="typeRel(event)" >
 			       <button class="btn btn-outline-success" type="submit" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
-                    </form>    
                         
                         
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
+                        
+                        
                         let relSum = 0;
                 function ajax() {          	
                 	let sel = document.querySelector("#search-sel").value
@@ -239,29 +269,6 @@
                   </div>
                 </div>
               </div>
-
-          	<div>
-            <button type="submit">작성 완료</button> 
-            <button onclick="history.back()" >뒤로가기</button>
-            </div>
-          	</form>
-          </div>
-          
-          						
-        </div>
-      </div>
-      <div class="col-sm-2 sidenav">
-        
-        
-      </div>
-    </div>
-  </div>
-  
-<!-- footer -->
-<footer class="container-fluid text-center py-3" >
-	<jsp:include page="../comp/footer.jsp"></jsp:include>
-</footer>
-  
   
    
 </body>

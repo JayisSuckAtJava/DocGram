@@ -333,7 +333,7 @@
                 html = html + `<td>\${v.user.dept.name}</td>`;
                 html = html + `<td>\${v.date}</td>`;
                 html = html + `<td>\${v.user.name}</td>`;
-                html = html + `<td><a onclick="starDelete(\${v.id})"><button>삭제</button></a></td>`;
+                html = html + `<td><a onclick="starDelete(\${v.id}, event)"><button>삭제</button></a></td>`;
                 html = html + "</tr>";
                 
         });
@@ -520,7 +520,6 @@
         	method: 'post'
         	});
         	data.then( function(result){
-        		console.log("axios done");
         		body_convert(mypage_personalInfo);
         	})
         	}else {
@@ -531,8 +530,9 @@
         }
   
     <!-- 즐겨찾기 삭제 -->
-    function starDelete(id) {
-    	let check = confirm("정말로 삭제 하시겠습니까?");
+    function starDelete(id, event) {
+    	event.stopPropagation();
+    	let check = confirm("정말로 즐겨찾기를 해지 하시겠습니까?");
     	if(check) {
 
         	const data = axios({

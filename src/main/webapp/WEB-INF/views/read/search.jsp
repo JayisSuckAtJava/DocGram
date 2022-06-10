@@ -189,7 +189,7 @@
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if(location.search == ""){
 		page();			
 	}else {
 		pageinget();
