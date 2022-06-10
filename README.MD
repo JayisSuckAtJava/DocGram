@@ -101,14 +101,8 @@
 		- 소속별 알림 지정 가능 
 	
 ## 참여자
-	
-	- 조윤구
-	  - 조장
-	
-	-  문예빈
-	  -DB
-	
-	*  이재범
-	  * Backend Developer
-		** EMAIL : zavacxva@gmail.com
+
+*  이재범
+* Backend Developer
+** EMAIL : zavacxva@gmail.com
 
