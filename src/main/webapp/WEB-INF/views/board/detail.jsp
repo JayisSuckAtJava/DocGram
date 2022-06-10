@@ -66,7 +66,6 @@ function deleteBoard(id) {
 					back();
 				}
 			});
-
 	}
 }
 </script>
@@ -181,7 +180,7 @@ function deleteBoard(id) {
     
     
         <!-- 문서 다운 파트 -->
-        <div>    
+          
             <div>
                 <h4 id="attachment">첨부된 문서 (다운로드)</h4>
             </div>
@@ -190,6 +189,7 @@ function deleteBoard(id) {
             </div>
             <div>
                 <ul class="list-attachment">
+                <c:if test="${board.file.id != null}">
                     <li>
                         <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
                             <p class="title-down">${board.file.name}</p> 
@@ -203,11 +203,13 @@ function deleteBoard(id) {
                                 </a> 
                             </span>
                     </li>
+                    </c:if>
+                    <c:if test="${board.file.id == null}">
+                    <span>첨부된 문서가 없습니다.</span>
+                    </c:if>
                 </ul>
             </div>
-        </div> 
         <hr>
-       
         
         <!-- 관련 문서 파트 -->
     
