@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
     <link rel="stylesheet" href="../resources/css/board.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="../resources/js/board.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -31,7 +31,6 @@ function deleteBoard(e, id) {
 			method: 'get'
 			});
 			data.then(function (result) {
-				console.log(result)
 				const dataCheck = result.data;
 				if(dataCheck == 1) {
 				location.reload();					
@@ -149,7 +148,7 @@ function updateBtn(e, id) {
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if((location.search == "")){
 		page();			
 	}else {
 		pageinget();

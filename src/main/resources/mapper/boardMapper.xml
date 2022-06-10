@@ -62,6 +62,7 @@
 		b.file_id as file_id,
 		f.Num as file_num,
 		f.NAME as file_name,
+		u.id as user_id,
 		u.name as user_name,
 		u.DEPT_NUMBER as user_dept_number,
 		p.NAME as position_name,
@@ -231,6 +232,7 @@ insert into board (
 	</association>
 	
 	<association property="user" javaType="user">
+		<id property="id" column="user_id"/>
 		<result property="name" column="user_name"/>
 		<result property="deptNumber" column="user_dept_number"/>
 		<result property="deptId" column="user_dept_id"/>

@@ -37,7 +37,6 @@ function deleteBoard(id) {
 			method: 'get'
 			});
 			data.then(function (result) {
-				console.log(result)
 				const dataCheck = result.data;
 				if(dataCheck == 1) {
 				location.href="/board/list";					
@@ -100,9 +99,6 @@ function hashtagDelete(boardId,hashtagId) {
 function deptMarkCreate(id) {
 	const check = confirm("부서 알림에 등록 하시겠습니까?")
 	if(check) {
-		console.log(id)
-		console.log(${sessionScope.user.dept.id})
-		
 		const data = axios({
 			url: '/deptmark/create',
 			method: 'get',
@@ -112,7 +108,6 @@ function deptMarkCreate(id) {
 			}
 			});
 			data.then(function (result) {
-			console.log(result.data);
 			location.reload();
 			});
 
@@ -121,8 +116,6 @@ function deptMarkCreate(id) {
 function deptMarkDelete(id) {
 	const check = confirm("부서 알림에 등록 취소 하시겠습니까?")
 	if(check) {
-		console.log(id)
-		console.log(${sessionScope.user.dept.id})
 		const data = axios({
 			url: '/deptmark/delete',
 			method: 'get',
@@ -132,7 +125,6 @@ function deptMarkDelete(id) {
 			}
 			});
 			data.then(function (result) {
-			console.log(result.data);
 			location.reload();
 			});
 
@@ -321,7 +313,7 @@ function deptMarkDelete(id) {
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if((location.search == "")){
 		page();			
 	}else {
 		pageinget();
@@ -331,10 +323,8 @@ const search = document.querySelector("#hashtagSearch");
 search.addEventListener("keydown",(e)=>{
 	e.stopPropagation();
 	let id = sessionStorage.getItem("boardId");
-	console.log(id);
 	const keyCode = e.keyCode;
 	   if(keyCode == 13){
-		   console.log(id+"이게 아이디");
 		   hashtagCreate(id,search.value);	    		   
 	   }
 })
