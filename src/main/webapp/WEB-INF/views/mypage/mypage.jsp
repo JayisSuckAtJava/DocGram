@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" href="/resources/images/favicon.png">
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mypage</title>

@@ -11,6 +11,7 @@
 <head>
   <title>작성페이지</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
 
 <link rel="stylesheet" href="/resources/css/board.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
