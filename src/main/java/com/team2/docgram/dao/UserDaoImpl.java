@@ -131,5 +131,19 @@ public class UserDaoImpl implements UserDao {
 	public Integer updateDept(Map<String, Object> map) {
 		return sqlSession.update(mapper+"updateDept", map);
 	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param email
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 10.
+	 */
+	@Override
+	public Integer searchEmail(String email) {
+		return sqlSession.selectOne(mapper+"searchEmail", email);
+	}
 	
 }

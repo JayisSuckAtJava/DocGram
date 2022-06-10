@@ -214,5 +214,11 @@ update user set hashtag_id = #{hashtagId} where id = #{id}
 update user set dept_id = #{deptId} where id = #{userId}
 </update>
 
+<select id="searchEmail" parameterType="String" resultType="int">
+	select count(id)
+	from user
+	where email = #{email}
+</select>
+
 </mapper>
 

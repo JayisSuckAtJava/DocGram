@@ -30,4 +30,6 @@ public interface UserService {
 
 	Integer updateDept(Long deptId, Long userId);
 
+	Integer searchEmail(String email);
+
 }
