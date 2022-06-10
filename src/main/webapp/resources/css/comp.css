@@ -47,7 +47,7 @@ margin-bottom: 20px;
 /* Set black background color, white text and some padding */
 footer,
 header {
-background-color: #555;
+background-color: #2E4866;
 color: white;
 padding: 15px;
 }
@@ -62,7 +62,7 @@ padding: 15px;
 
 
 /* tos ===================================================================== */
-.tos, .login, .join {
+.login, .join {
     background-image: url(/resources/images/background.jpg);
     color: #2E4866;
 }
@@ -74,6 +74,11 @@ padding: 15px;
 .disagree, .agree {
     margin-bottom: 15px;
 }
+
+.tos h3 {
+	font-weight: bold;
+}
+
 
 
 /* signup ===================================================================== */

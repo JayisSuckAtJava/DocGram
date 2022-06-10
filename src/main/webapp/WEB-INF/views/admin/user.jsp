@@ -18,11 +18,18 @@
 <link rel="stylesheet" href="../resources/css/comp.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <!-- js 링크 -->
 <script src="../resources/js/admin.js"></script>
-
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
 </head>
 <body>
 
@@ -101,7 +108,7 @@
                                 기관검색
                               </a>
                             </h4>
-                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept" onkeydown="typeRel(event)"
                                 aria-label="Search">
                               <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -255,7 +262,7 @@ function ajax() {
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if(location.search == ""){
 		page();			
 	}else {
 		pageinget();

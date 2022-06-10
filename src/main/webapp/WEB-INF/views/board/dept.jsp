@@ -17,9 +17,8 @@
     <link rel="stylesheet" href="../resources/css/comp.css">
     <link rel="stylesheet" href="../resources/css/board.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
   
 
 
@@ -46,7 +45,7 @@
        <div class="all">
             <!-- 타이틀 부분 -->
     
-            <h3 class="title-article">${sessionScope.user.dept.name}의 알림  </h3>
+            <h3 class="title-article">${sessionScope.user.dept.name}의 게시판  </h3>
     
 
 
@@ -81,30 +80,19 @@
             <thead id="list_title">
       
               <tr>
-                <th><i class="bi bi-star-fill"></i></th>
-                <th>번호</th>
-                <th>제목</th>
-                <th>다운로드</th>
-                <th>소속 기관</th>
-                <th>작성일</th>
-                <th>작성자</th>
+          <th style="width: 7%"><i class="bi bi-star"></i></th>
+          <th style="width: 7%">번호</th>
+          <th style="width: 38%">제목</th>
+          <th style="width: 7%"></th>
+          <th style="width: 15%">소속기관</th>
+          <th style="width: 13%">작성일</th>
+          <th style="width: 13%">작성자</th>
               </tr>
             </thead>
       
             <tbody class="list-body-star">
-              <tr>
-                <td><i class="bi bi-star-fill"></i></td>
-                <td>10</td>
-                <td>공공문서 관련한 문서 관리</td>
-                <td>파일</td>
-                <td>세종특별청사</td>
-                <td>5/19</td>
-                <td>부서관</td>
-              </tr>
-             
-              
               <c:forEach items="${boardList}" var="board">
-              <tr>
+              <tr style="cursor:pointer;">
                <c:if test="${board.starmarkId == null}">
                <td id="emptyStar"><i class="bi bi-star"></i></td>
                </c:if>
@@ -157,7 +145,7 @@
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if(location.search == ""){
 		page();			
 	}else {
 		pageinget();
@@ -194,7 +182,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.reload();
+        		location.href="/board/list";
     		});
 }
 function starCreate(e, id) {
@@ -208,7 +196,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.reload();
+ 			location.href="/board/list";
 		});
 }
 </script>

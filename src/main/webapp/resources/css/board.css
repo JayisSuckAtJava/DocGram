@@ -292,7 +292,7 @@ input::placeholder {color:#434343;}
 .dl-table dd input[type="text"],
 .dl-table dd select,
 .dl-table dd .date-box {float: left;}
-.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #f8eff3;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
+.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #ffcfcf;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
 .dl-table dt label, .dl-table dt span {font-size: inherit;font-weight: inherit;}
 .dl-table dt span em {font-weight: 400;}
 .dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
