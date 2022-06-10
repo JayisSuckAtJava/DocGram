@@ -163,4 +163,18 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateDept(map);
 	}
 
+	/**
+	 * 설명
+	 * 
+	 * @param email
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 10.
+	 */
+	@Override
+	public Integer searchEmail(String email) {
+		return userDao.searchEmail(email);
+	}
+
 }

@@ -38,9 +38,12 @@ public class SignInAspect {
 	private void main() {}
 	
 	@Pointcut("execution (* com.team2.docgram.controller.SearchController.searchDept(..))")
-	private void searchAjax() {}
+	private void searchDept() {}
 	
-	@Around("!searchAjax() && !main() && !tos() && !signup() && !login() && execution(* com.team2.docgram.controller.*Controller.*(..))")
+	@Pointcut("execution (* com.team2.docgram.controller.SearchController.searchEmail(..))")
+	private void searchEmail() {}
+	
+	@Around("!searchDept() && !searchEmail() && !main() && !tos() && !signup() && !login() && execution(* com.team2.docgram.controller.*Controller.*(..))")
 	public Object sesssionCheck(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.currentRequestAttributes())).getRequest().getSession();

@@ -19,6 +19,7 @@ import com.team2.docgram.dto.DeptDto;
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.SearchService;
+import com.team2.docgram.service.UserService;
 
 /**  SearchController.java
  *   상세 검색 기능 구현 컨트롤러
@@ -34,6 +35,9 @@ public class SearchController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 검색 전 전체 리스트를 가져오는 기본 리스트 페이지
@@ -110,5 +114,21 @@ public class SearchController {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = searchService.searchRelation(text,sel);
 		return boardList;
+	}
+	
+	/**
+	 * 설명
+	 * 
+	 * @param email
+	 * @return
+	 * 
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 10.
+	 */
+	@GetMapping("rest/email")
+	@ResponseBody
+	public Integer searchEmail(@RequestParam("email") String email) {
+		Integer result = userService.searchEmail(email);
+		return result;
 	}
 }

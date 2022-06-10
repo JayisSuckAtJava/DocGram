@@ -29,4 +29,6 @@ public interface UserDao {
 
 	Integer updateDept(Map<String, Object> map);
 
+	Integer searchEmail(String email);
+
 }
