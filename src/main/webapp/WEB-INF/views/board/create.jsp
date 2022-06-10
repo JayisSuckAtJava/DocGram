@@ -53,7 +53,7 @@ function typeRel(e) {
        <form action="" method="post" enctype="multipart/form-data">
             <div class="titlename"> <!-- 제목 작성 부분-->
                 <div>
-                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요">
+                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요" required>
                 </div>
             </div>
             <hr>
