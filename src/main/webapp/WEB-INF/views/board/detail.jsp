@@ -182,7 +182,7 @@ function deleteBoard(id) {
         <!-- 문서 다운 파트 -->
           
             <div>
-                <h4 id="attachment">첨부된 문서 (다운로드)</h4>
+                <h4 id="attachment">첨부된 문서</h4>
             </div>
             <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
                     
