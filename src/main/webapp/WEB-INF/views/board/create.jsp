@@ -11,6 +11,7 @@
 <head>
   <title>작성페이지</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
 
 <link rel="stylesheet" href="/resources/css/board.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
@@ -53,7 +54,7 @@ function typeRel(e) {
        <form action="" method="post" enctype="multipart/form-data">
             <div class="titlename"> <!-- 제목 작성 부분-->
                 <div>
-                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요">
+                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요" required>
                 </div>
             </div>
             <hr>

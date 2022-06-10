@@ -12,6 +12,7 @@
 <head>
   <title>상세 검색</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -155,7 +156,12 @@
                </c:if>
             <td>${board.id}</td>
             <td>${board.title}</td>
-            <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></i></a></td>
+                  <c:if test="${board.fileId != null}">
+                  <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></a></td>
+                  </c:if>
+                  <c:if test="${board.fileId == null}">
+                  <td></td>
+                  </c:if>
             <td>${board.user.dept.name}</td>
             <td>${board.date}</td>
             <td>${board.user.name}</td>
