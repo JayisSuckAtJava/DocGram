@@ -14,20 +14,24 @@
       <meta http-equiv="Content-Type" content="text/html">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>회원가입 화면</title>
-
       <link href="/resources/css/comp.css" rel="stylesheet">
       <link href="/resources/css/login.css" rel="stylesheet">
       <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
       <link href="/resources/css/bootstrap.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="/resources/js/bootstrap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     </head>
 
 
     <body class="join">
+    
+    <!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
 
    <div class="all">
       <form action="" method="post" class="sign-form">
@@ -99,11 +103,9 @@
                                 기관검색
                               </a>
                             </h4>
-                            <form class="d-flex" method="" action="" role="search">
                               <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
                                 aria-label="Search">
                               <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
-                            </form>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
@@ -175,10 +177,15 @@
         </div>
       </form>
 </div>
+
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+
     </body>
 
-    <!--비밀번호 동일성 확인-->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--비밀번호 동일성 확인-->      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
     
     	function emailCheck() {
@@ -242,17 +249,17 @@
 	      
 	      
       function ajax() {
-      	  
-            const search = document.querySelector("#searchDept");
-            let text = searchDept.value;
-            
-            const data = axios({
-            url: '../rest/dept',
-            method: 'get',
-            params: {
-            'name': text
-            }
-            });
+      	  	
+    	    const search = document.querySelector("#searchDept");
+    	    let text = searchDept.value;
+    	    
+    	    const data = axios({
+    	    url: '../rest/dept',
+    	    method: 'get',
+    	    params: {
+    	    'name': text
+    	    }
+    	    });
             data.then(function (result) {
             
             let deptList = result.data;

@@ -6,7 +6,6 @@ function page() {
 let query = location.search;
 let url = location.pathname;
 const searchParams = new URLSearchParams(query);
-console.log(searchParams);
 const obj2 = Object.fromEntries(searchParams);
 let page;
 if(obj2.page == null || obj2.page == "") {

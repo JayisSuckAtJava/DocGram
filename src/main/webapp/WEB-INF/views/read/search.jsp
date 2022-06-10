@@ -106,17 +106,17 @@
           <option value="365">1년</option>
         </select>
           <div class="btn-search">
-    <button type="submit" class="btn btn-search">검색</button>
+    <button type="submit" class="btn btn-outline-secondary btn-search">검색</button>
   </div>
 
       </dd>
       
     </dl>
-
+ </form>
   </div>
   <!--// .dl-table-wrap -->
 
-  </form>
+ 
     <hr>
   </div>
     <!-- 상세 검색 부분  끝 -->
@@ -132,13 +132,13 @@
       <thead id="list_title">
 
         <tr>
-          <th>즐쳐찾기</th>
-          <th>번호</th>
-          <th>제목</th>
-          <th>다운로드</th>
-          <th>소속기관</th>
-          <th>작성일</th>
-          <th>작성자</th>
+          <th style="width: 7%"><i class="bi bi-star"></i></th>
+          <th style="width: 7%">번호</th>
+          <th style="width: 38%">제목</th>
+          <th style="width: 7%"></th>
+          <th style="width: 15%">소속기관</th>
+          <th style="width: 13%">작성일</th>
+          <th style="width: 13%">작성자</th>
         </tr>
       </thead>
 
@@ -189,7 +189,7 @@
 <script type="text/javascript">
 window.onload = function() {
 	
-	if(console.log(location.search == "")){
+	if(location.search == ""){
 		page();			
 	}else {
 		pageinget();
@@ -226,7 +226,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.reload();
+        		location.href="/search/list";
     		});
 }
 function starCreate(e, id) {
@@ -240,7 +240,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.reload();
+ 			location.href="/search/list";
 		});
 }
 </script>

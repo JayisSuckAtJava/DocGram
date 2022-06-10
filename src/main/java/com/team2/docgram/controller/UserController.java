@@ -69,13 +69,13 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("user/signin")
-	public String login(UserDto user,HttpSession session) {
+	public String login(UserDto user,HttpSession session, Model model) {
 		UserDto userDetail = userService.readUser(user);
 		if(userDetail == null) {
-			return "redirect:signin";
+			model.addAttribute("fail","이메일 혹은 비밀번호를 다시 확인해 주세요.");
+			return "login/login";
 		}else {
 			session.setAttribute("user", userDetail);
-			
 			return "redirect:../main";			
 		}
 	}
@@ -132,7 +132,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("user/signup")
-	public String createUser(UserDto user,Long deptCode) {
+	public String signup(UserDto user,Long deptCode) {
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
 		user.setPositionId(positionId);
