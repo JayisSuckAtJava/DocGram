@@ -11,20 +11,18 @@
 <head>
   <title>게시물 관리</title>
   <meta charset="utf-8">
+  <link rel="icon" href="/resources/images/favicon.png">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
-
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" href="../resources/css/comp.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-        <!-- js 링크 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../resources/css/bootstrap.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/css/comp.css">
+    <link rel="stylesheet" href="../resources/css/board.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../resources/js/admin.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="../resources/js/board.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 
 
@@ -131,11 +129,11 @@ function deptMarkDelete(id) {
 	}
 }
 </script>
-
-
-
-
 </head>
+
+
+
+
 <body>
 
 	<!-- header -->
@@ -150,11 +148,10 @@ function deptMarkDelete(id) {
     </div>
     <div class="col-sm-8 text-left"> 
       
-      <!-- 문서 검색부분 -->
-
+<div class="all">
       <h3 class="title-article">게시물 관리</h3>
 
- <div class="dl-table-wrap">
+
    <dl class="dl-table">
      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
      <dd class="dd-keyword">
@@ -174,15 +171,11 @@ function deptMarkDelete(id) {
      </dd>
    </dl>
 
-      
-      <h3>목록</h3>
+
       <!-- 목록 리스트 -->
-      <div class="col-8">
+      <div class="col-12">
         <table class="table table-hover">
-
-
           <thead id="list_title">
-
             <tr>
               <th>번호</th>
               <th>제목</th>
@@ -194,24 +187,8 @@ function deptMarkDelete(id) {
               <th><i class="bi bi-megaphone-fill"></th>
             </tr>
           </thead>
-
+          
           <tbody class="table table-hover">
-            <tr>
-              <td >10</td>
-              <td>제목들</td>
-              <td>소속기관</td>
-              <td>작성일</td>
-              <td>작성자</td>
-              <td>🗑</td>
-
-              <td>
-                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">#</button>                              
-              </td>
-              <td>
-                <button class="btn btn-outline-success input-group-append" type="submit" style="height: 35px;"><i class="bi bi-megaphone-fill"></i></button>
-              </td>
-
-            </tr>
             <c:forEach items="${boardList}" var="board">
               <tr>
                 <td>${board.id}</td>
@@ -287,10 +264,12 @@ function deptMarkDelete(id) {
       </div>
         
       </div>
+
     </div>
+
     </div>
     <div class="col-sm-2 sidenav">
-      <div class="well">
+          <div class="well">
       						<!-- a태그 -->
         <a href="user">개인정보관리</a>
       </div>
@@ -301,6 +280,7 @@ function deptMarkDelete(id) {
     </div>
   </div>
 </div>
+
 
 <!-- footer -->
 <footer class="container-fluid text-center py-3" >
