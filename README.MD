@@ -30,18 +30,18 @@
 <img src="https://img.shields.io/badge/Amazon AWS-FF9900?style=flat-square&logo=Amazon AWS&logoColor=white"/></a>
 
 # 개발 환경 
-OS - windows ( 21H2(build 19044.1706))
-Spring 5.3.20 - MyBatis 2.0.7
-MariaDB 10.6.7
-JAVA jdk 11.0.13
-Tomcat 8.5.78
+- OS - windows ( 21H2(build 19044.1706))
+- Spring 5.3.20 - MyBatis 2.0.7
+- MariaDB 10.6.7
+- JAVA jdk 11.0.13
+- Tomcat 8.5.78
 
 # 배포 환경
-AWS - EC2 ( t2.micro )
-OS - Linux ( ubuntu 18.04 LTS (build 2021110029))
-MariaDB 10.1.48
-JAVA jdk 11.0.15
-Tomcat 8.5.78
+- AWS - EC2 ( t2.micro )
+- OS - Linux ( ubuntu 18.04 LTS (build 2021110029))
+- MariaDB 10.1.48
+- JAVA jdk 11.0.15
+- Tomcat 8.5.78
 
 
 ## features( 구현 기능들)
