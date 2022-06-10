@@ -29,64 +29,20 @@
 <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Amazon AWS-FF9900?style=flat-square&logo=Amazon AWS&logoColor=white"/></a>
 
-개발 환경 OS - windows 
+# 개발 환경 
+OS - windows ( 21H2(build 19044.1706))
+Spring 5.3.20 - MyBatis 2.0.7
+MariaDB 10.6.7
+JAVA jdk 11.0.13
+Tomcat 8.5.78
 
-Spring Legacy (3.점 버전)
+# 배포 환경
+AWS - EC2 ( t2.micro )
+OS - Linux ( ubuntu 18.04 LTS (build 2021110029))
+MariaDB 10.1.48
+JAVA jdk 11.0.15
+Tomcat 8.5.78
 
-WAS 는 Tomcat을 사용
-
-MyBatis를 통해 DB와 연결  
-
-DataBase는 mariaDB로 구현
-
-프론트 엔드 부트스트랩 사용
-
-웹페이지는 JSP 로 제작 jsp - encoding = utf-8
-
-개발 진행과정을 확인 후 상의 후 AWS의 E2C를 통한 배포
-
-### Front-End
-
-jsp 논리적 위치.
-src\main\webapp\WEB-INF\views\[ dir 1 ][ dir 2 ]를 기본
-
-[ dir 1 ][ dir 2 ]를 [ 객체 ][ 기능 ].jsp로 한다.
-
-#### css
-
-스타일은 css를 사용한rh 폼을 서버로 전송하는 방식은 get과 post를 사용한다.
-해당 jsp file에서만 사용하는 java script를 제외하고는 java script 소스를 jsp에 작성하지 않고,
-별도의 js파일에 작성하여 공유한다.
-
-
-
-### back-End
- ${프로젝트 명} = 총괄 도메인명
-
-
-### Prerequisite
-
-Extends - 확장 프로그램
-
-Eclipse web developer Tools 3.23
- 
--- dependency--
-
-	Spring frameWork 5.3.20
- 
-	Mybatis 3.5.9
- 
-	Apache Commons IO 2.11.0
- 
-	MariaDB java client 3.0.4
- 
--- ENcoding 설정 ---
-
-Window - Preferences
-
-xml jsp css  - encoding = utf-8
-
-workspace - text file encoding - other - utf-8
 
 ## features( 구현 기능들)
 
