@@ -40,7 +40,7 @@ function deleteBoard(id) {
 				console.log(result)
 				const dataCheck = result.data;
 				if(dataCheck == 1) {
-				location.reload();					
+				location.href="/board/list";					
 				}
 			});
 
