@@ -39,10 +39,10 @@
                     <h2>My page</h2>
                     <div class="mypage-category-list">
                       <ul>
-                        <li onclick="body_convert(mypage_mywriting)">나의 작성글</li>
-                        <li onclick="body_convert(mypage_starmark)">즐겨찾기</li>
-                        <li onclick="body_convert(mypage_personalInfo)">개인정보 조회</li>
-                        <li onclick="body_convert(mypage_mytag)">마이태그 수정</li>
+                        <li onclick="body_convert(mypage_mywriting)" style="cursor:pointer">나의 작성글</li>
+                        <li onclick="body_convert(mypage_starmark)" style="cursor:pointer">즐겨찾기</li>
+                        <li onclick="body_convert(mypage_personalInfo)" style="cursor:pointer">개인정보 조회</li>
+                        <li onclick="body_convert(mypage_mytag)" style="cursor:pointer">마이태그 수정</li>
                       </ul>
                     </div>
                   </div>
@@ -56,23 +56,15 @@
                 <table class="table table-hover">
                   <thead id="list_title">
                     <tr>
-                      <th>번호</th>
-                      <th>제목</th>
-                      <th>다운로드</th>
-                      <th>소속 기관</th>
-                      <th>작성일</th>
-                      <th>작성자</th>
+			            <th style="width: 7%">번호</th>
+			            <th style="width: 50%">제목</th>
+			            <th style="width: 5%"></th>
+			            <th style="width: 13%">소속 기관</th>
+			            <th style="width: 13%">작성일</th>
+			            <th style="width: 12%">작성자</th>
                     </tr>
                   </thead>
                   <tbody class="list-body">
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a href="/download/${board.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
                     <c:forEach items="${boardList}" var="board">
                       <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                         <td>${board.id}</td>
@@ -95,13 +87,13 @@
                 <table class="table table-hover">
                   <thead id="list_title">
                     <tr>
-                      <th>번호</th>
-                      <th>제목</th>
-                      <th>다운로드</th>
-                      <th>소속 기관</th>
-                      <th>작성일</th>
-                      <th>작성자</th>
-                      <th>삭 제</th>
+			            <th style="width: 7%">번호</th>
+			            <th style="width: 43%">제목</th>
+			            <th style="width: 5%"></th>
+			            <th style="width: 15%">소속 기관</th>
+			            <th style="width: 13%">작성일</th>
+			            <th style="width: 10%">작성자</th>
+                        <th style="width: 7%">삭 제</th>
                     </tr>
                   </thead>
                   <tbody class="list-body" id="star-mark"> 
@@ -263,7 +255,7 @@
   
               <!-- 마이태그 수정 -->
               <span id="mypage_mytag">
-                <h2> 마이태그 수정 </h2>
+                <h2> 마이태그 수정 <i class="bi bi-bookmark"></i></h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
                   <div style="display: flex;" id="tag-body">
                     <input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
