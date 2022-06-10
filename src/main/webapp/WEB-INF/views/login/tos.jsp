@@ -11,7 +11,7 @@
   <head>
     <title>tos</title>
     <meta charset="UTF-8" />
-
+  <link rel="icon" href="/resources/images/favicon.png">
     <link rel="stylesheet" href="/resources/css/tos.css">
   </head>
 
