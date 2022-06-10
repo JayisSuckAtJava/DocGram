@@ -109,5 +109,6 @@
 	  -DB
 	
 	-  이재범
-	  -
+	  - Backend Developer
+		-- EMAIL : zavacxva@gmail.com
 
