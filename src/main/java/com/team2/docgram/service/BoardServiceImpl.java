@@ -14,6 +14,7 @@ import com.team2.docgram.dao.DeptDao;
 import com.team2.docgram.dao.FileDao;
 import com.team2.docgram.dao.HashtagDao;
 import com.team2.docgram.dto.BoardDto;
+import com.team2.docgram.dto.BoardHashtagDto;
 import com.team2.docgram.dto.DeptDto;
 import com.team2.docgram.dto.FileDto;
 import com.team2.docgram.dto.HashtagDto;
@@ -76,9 +77,13 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 5. 28.
 	 */
 	@Override
-	public Map<String, Object> readBoard(Long id) {
-		BoardDto board = boardDao.readBoard(id);
-		System.out.println(board+"here");
+	public Map<String, Object> readBoard(Long id, Long userId, Long deptId) {
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("userId", userId);
+		searchMap.put("deptId", deptId);
+		searchMap.put("boardId", id);
+		
+		BoardDto board = boardDao.readBoard(searchMap);
 		
 		if(board.getFile() == null) {
 			board.setFile(null);
@@ -97,8 +102,8 @@ public class BoardServiceImpl implements BoardService {
 		hashtagList = boardHashtagDao.readList(boardId);
 		
 		UserDto user = board.getUser();
-		Long deptId = user.getDeptId();
-		DeptDto dept = deptDao.readDeptList(deptId);
+		Long boardDeptId = user.getDeptId();
+		DeptDto dept = deptDao.readDeptList(boardDeptId);
 		
 		// 만약에 넣는 값이 null 이면 어쩌냐?
 		Long[] relationListId = {board.getRelation1(), board.getRelation2(), board.getRelation3()};
@@ -154,7 +159,7 @@ public class BoardServiceImpl implements BoardService {
 		String[] relatedBoardListArray = relatedBoardList.split(",");
 		Integer relatedListArrayLength = relatedBoardListArray.length;
 		
-		if(relatedBoardList.isBlank()) {
+		if(relatedBoardList.equals("")) {
 			board.setRelation1(null);
 			board.setRelation2(null);
 			board.setRelation3(null);
@@ -179,7 +184,6 @@ public class BoardServiceImpl implements BoardService {
 		}else {
 			
 			for(String i : hashtagListArray) {
-				System.out.println(i);
 								
 				Long hashtagId = hashtagDao.readHashtag(i);
 				
@@ -190,10 +194,10 @@ public class BoardServiceImpl implements BoardService {
 					hashtagId = hashtag.getId();
 				}
 				
-				Map<String,Object> map = new HashMap<>();
-				map.put("boardId", boardId);
-				map.put("hashtagId", hashtagId);
-				boardHashtagDao.createBoardHashtag(map);
+				BoardHashtagDto boardHashtag = new BoardHashtagDto();
+				boardHashtag.setBoardId(boardId);
+				boardHashtag.setHashtagId(hashtagId);
+				boardHashtagDao.createBoardHashtag(boardHashtag);
 			}
 		}
 		
@@ -383,14 +387,14 @@ public class BoardServiceImpl implements BoardService {
 					hashtag = hashtagDao.createHashtag(hashtag);					
 					hashtagId = hashtag.getId();
 				}
-
-				Map<String,Object> map = new HashMap<>();				
-				map.put("boardId", boardId);
-				map.put("hashtagId", hashtagId);
-				Long result = boardHashtagDao.readBoardHashtag(map);
+				
+				BoardHashtagDto boardHashtag = new BoardHashtagDto();
+				boardHashtag.setBoardId(boardId);
+				boardHashtag.setHashtagId(hashtagId);
+				Long result = boardHashtagDao.readBoardHashtag(boardHashtag);
 				
 				if(result == null) {
-					boardHashtagDao.createBoardHashtag(map);										
+					boardHashtagDao.createBoardHashtag(boardHashtag);										
 				}
 				
 			}
@@ -422,8 +426,8 @@ public class BoardServiceImpl implements BoardService {
 	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public void deleteBoard(Long id) {
-		boardDao.deleteBoard(id);
+	public Integer deleteBoard(Long id) {
+		return boardDao.deleteBoard(id);
 	}
 
 	/**
@@ -438,6 +442,36 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> readMyBoardList(Long userId) {
 		return boardDao.readMyBoardList(userId);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param page
+	 * @param deptId
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text) {
+		BoardDto board = new BoardDto();
+		UserDto user = new UserDto();
+		user.setDeptId(deptId);
+		if(page > 0) {
+			page = ( page - 1 ) * 10; 
+		}
+		board.setStart(page);
+		board.setUser(user);
+		List<BoardDto> boardList = new ArrayList<>();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("board", board);
+		map.put("sel", sel);
+		map.put("text", text);
+		boardList = boardDao.readDeptBoardList(map);
+		return boardList;
 	}
 	
 }

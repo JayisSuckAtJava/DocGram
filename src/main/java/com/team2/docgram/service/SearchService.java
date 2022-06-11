@@ -24,4 +24,6 @@ public interface SearchService {
 
 	List<BoardDto> searchRelation(String text, String sel);
 
+	List<BoardDto> readBoardList(Long page, Long userId, String sel, String text);
+
 }

@@ -11,18 +11,26 @@
 <head>
   <title>소속 관리</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
   <!-- css 링크 -->
 <link rel="stylesheet" href="../resources/css/admin.css">
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" href="../resources/css/comp.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/comp.css">
+	<link rel="stylesheet" href="../resources/css/main.css">
+	<link rel="stylesheet" href="../resources/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
         <!-- js 링크 -->
 <script src="../resources/js/admin.js"></script>
-
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
 </head>
 <body>
 
@@ -57,10 +65,8 @@
      </dd>
    </dl>
 
-      
-      <h3>목록</h3>
       <!-- 목록 리스트 -->
-      <div class="col-8">
+      <div class="col-12">
         <table class="table table-hover">
 
 
@@ -77,20 +83,52 @@
           </thead>
 
           <tbody class="table table-hover">
-            <tr>
-              <td >김ㅇㅇ</td>
-              <td>cho@gmail.com</td>
-              <td>010-2345-342</td>
-              <td>부서 번호</td>
-              <td>물전환특별팀</td>
-              <td>
-                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
-                  이동</button>
+                
 
+            <c:forEach items="${userList}" var="user">
+              <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.deptNumber}</td>
+                <td>${user.dept.name}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" onclick="saveUserId(${user.id})">
+                  소속기관 이동
+                  </button>
+                </td>
+              </tr>
+            </c:forEach>
 
-                                                         <!-- Modal: modalCart -->
-                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+          </tbody>
+        </table>
+
+        <!-- 페이징 -->
+        <!-- 페이징 -->
+        <div class="page">
+          <nav aria-label="Page navigation example" style="text-align: center;" id="pagenation">
+          </nav>
+        </div>
+
+        
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+    							<!-- a 태그  -->
+				<div class="well">
+					<a href="user">개인정보관리</a>
+				</div>
+								<!-- a 태그  -->
+				<div class="well">
+					<a href="board">게시물 관리</a>
+				</div>
+			</div>
+  </div>
+</div>
+
+ <!-- Modal: modalCart -->
+                    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <!--Modal Header-->
@@ -101,7 +139,7 @@
                                 기관검색
                               </a>
                             </h4>
-                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
+                              <input class="form-control me-2" type="search" placeholder="Search" id="searchDept" onkeydown="typeRel(event)"
                                 aria-label="Search">
                               <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -130,64 +168,6 @@
                       </div>
                     </div>
                     <!-- Modal: modalCart -->
-                
-
-              </td>
-
-            </tr>
-            <c:forEach items="${userList}" var="user">
-              <tr>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.phoneNumber}</td>
-                <td>${user.deptNumber}</td>
-                <td>${user.dept.name}</td>
-                <td>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" onclick="saveUserId(${user.id})">소속기관
-                    이동</button>
-                </td>
-              </tr>
-            </c:forEach>
-
-          </tbody>
-        </table>
-
-        <!-- 페이징 -->
-        <!-- 페이징 -->
-        <div class="page">
-          <nav aria-label="Page navigation example" style="text-align: center;" >
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        
-      </div>
-    </div>
-    </div>
-    <div class="col-sm-2 sidenav">
-    							<!-- a 태그  -->
-				<div class="well">
-					<a href="board">개인정보관리</a>
-				</div>
-								<!-- a 태그  -->
-				<div class="well">
-					<a href="user">게시물 관리</a>
-				</div>
-			</div>
-  </div>
-</div>
 
 
 <!-- footer -->
@@ -197,7 +177,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 function saveUserId(id) {
-	alert(id);
 	sessionStorage.setItem("id", id);
 }
 
@@ -250,7 +229,6 @@ function ajax() {
 			        	method: 'post'
 			        	});
 						data.then(function (result) {
-							console.log(result.data)
 							if(result.data == 1) {
 							location.reload();
 							}
@@ -262,6 +240,19 @@ function ajax() {
         
 })
 
+}
+</script>
+<!-- pagenation -->
+<script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	
+	if(location.search == ""){
+		page();			
+	}else {
+		pageinget();
+	}
 }
 </script>
 </body>

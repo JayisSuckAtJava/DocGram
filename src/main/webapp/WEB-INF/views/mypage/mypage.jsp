@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" href="/resources/images/favicon.png">
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mypage</title>
@@ -39,10 +40,10 @@
                     <h2>My page</h2>
                     <div class="mypage-category-list">
                       <ul>
-                        <li onclick="body_convert(mypage_mywriting)">나의 작성글</li>
-                        <li onclick="body_convert(mypage_starmark)">즐겨찾기</li>
-                        <li onclick="body_convert(mypage_personalInfo)">개인정보 조회</li>
-                        <li onclick="body_convert(mypage_mytag)">마이태그 수정</li>
+                        <li onclick="body_convert(mypage_mywriting)" style="cursor:pointer">나의 작성글</li>
+                        <li onclick="body_convert(mypage_starmark)" style="cursor:pointer">즐겨찾기</li>
+                        <li onclick="body_convert(mypage_personalInfo)" style="cursor:pointer">개인정보 조회</li>
+                        <li onclick="body_convert(mypage_mytag)" style="cursor:pointer">마이태그 수정</li>
                       </ul>
                     </div>
                   </div>
@@ -56,23 +57,15 @@
                 <table class="table table-hover">
                   <thead id="list_title">
                     <tr>
-                      <th>번호</th>
-                      <th>제목</th>
-                      <th>다운로드</th>
-                      <th>소속 기관</th>
-                      <th>작성일</th>
-                      <th>작성자</th>
+			            <th style="width: 7%">번호</th>
+			            <th style="width: 50%">제목</th>
+			            <th style="width: 5%"></th>
+			            <th style="width: 13%">소속 기관</th>
+			            <th style="width: 13%">작성일</th>
+			            <th style="width: 12%">작성자</th>
                     </tr>
                   </thead>
                   <tbody class="list-body">
-                    <tr>
-                      <td>10</td>
-                      <td>공공문서 관련한 문서 관리</td>
-                      <td><a href="/download/${board.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>
-                      <td>세종특별청사</td>
-                      <td>5/19</td>
-                      <td>부서관</td>
-                    </tr>
                     <c:forEach items="${boardList}" var="board">
                       <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
                         <td>${board.id}</td>
@@ -95,18 +88,17 @@
                 <table class="table table-hover">
                   <thead id="list_title">
                     <tr>
-                      <th>번호</th>
-                      <th>제목</th>
-                      <th>다운로드</th>
-                      <th>소속 기관</th>
-                      <th>작성일</th>
-                      <th>작성자</th>
-                      <th>삭 제</th>
+			            <th style="width: 7%">번호</th>
+			            <th style="width: 43%">제목</th>
+			            <th style="width: 5%"></th>
+			            <th style="width: 15%">소속 기관</th>
+			            <th style="width: 13%">작성일</th>
+			            <th style="width: 10%">작성자</th>
+                        <th style="width: 7%">삭 제</th>
                     </tr>
                   </thead>
-                  <tbody class="list-body" id="star-mark">
-                  
-                    <tr>
+                  <tbody class="list-body" id="star-mark"> 
+                  	<tr>
                       <td>10</td>
                       <td>공공문서 관련한 문서 관리</td>
                       <td><a><i class="bi bi-file-earmark-pdf"></i></a></td>
@@ -115,7 +107,7 @@
                       <td>부서관</td>
                       <td><button>삭제</button></td>
                     </tr>
-                    
+            
                   </tbody>
                 </table>
   
@@ -156,7 +148,7 @@
                             <input type="password" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인"
                               reaquired></input>
                               <input type="hidden" name="password" id="pwd"/>
-                              <input type="hidden" name="password" id="dbPwd"/>
+                              <input type="hidden" id="dbPwd"/>
                             <div class="col-md-10 mb-3">
                               &nbsp;
                               <div class="alert alert-success" id="alert-success" style="display: none;">비밀번호가 일치합니다.</div>
@@ -167,8 +159,7 @@
                   <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" disabled="disabled" 
-                      required>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" disabled="disabled" >
                     &nbsp;
 
                     <!-- Button trigger modal
@@ -260,15 +251,12 @@
           
                   </div>
 
-
-                 
-  
   
               </span>
   
               <!-- 마이태그 수정 -->
               <span id="mypage_mytag">
-                <h2> 마이태그 수정 </h2>
+                <h2> 마이태그 수정 <i class="bi bi-bookmark"></i></h2>
                 <div style="margin-top:40px; margin-left:40px;" class="content">
                   <div style="display: flex;" id="tag-body">
                     <input type="text" id="mytag"  size="20" placeholder="태그입력" disabled="readonly" value="${user.mytag.name}" 
@@ -331,14 +319,14 @@
             let html = "";
             data.forEach((v) => {
                 
-                html = html + "<tr>";
+                html = html + `<tr onclick="location.href = 'board/\${v.id}'" style='cursor:pointer;'>`;
                 html = html + `<td>\${v.id}</td>`;
                 html = html + `<td>\${v.title}</td>`;
                 html = html + `<td><a href="/download/\${v.id}"><i class="bi bi-file-earmark-pdf"></i></a></td>`;
                 html = html + `<td>\${v.user.dept.name}</td>`;
                 html = html + `<td>\${v.date}</td>`;
                 html = html + `<td>\${v.user.name}</td>`;
-                html = html + `<td><a onclick="starDelete(\${v.id})"><button>삭제</button></a></td>`;
+                html = html + `<td><a onclick="starDelete(\${v.id}, event)"><button>삭제</button></a></td>`;
                 html = html + "</tr>";
                 
         });
@@ -517,22 +505,27 @@
         	const data = axios({
         	url: 'mypage/update',
         	data : {
-        		'password' : `\${pwd.value}`,
+        		'password' : `\${pwd0.value}`,
         		'phoneNumber' : `\${phoneNum.value}`,
         		'deptNumber' : `\${deptNum.value}`
         	},
         	dataType : 'text',
         	method: 'post'
         	});
+        	data.then( function(result){
+        		body_convert(mypage_personalInfo);
+        	})
         	}else {
         		alert("기존 사용 비밀번호를 틀리셨습니다.");
         	}
         	}
+        	
         }
   
     <!-- 즐겨찾기 삭제 -->
-    function starDelete(id) {
-    	let check = confirm("정말로 삭제 하시겠습니까?");
+    function starDelete(id, event) {
+    	event.stopPropagation();
+    	let check = confirm("정말로 즐겨찾기를 해지 하시겠습니까?");
     	if(check) {
 
         	const data = axios({

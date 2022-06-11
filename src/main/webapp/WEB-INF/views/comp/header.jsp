@@ -16,19 +16,19 @@
                 </a>
                 <div class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/notice/list">공지 소식</a>
+                        <a class="nav-link" href="/notice/list">공지</a>
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/search">상세 검색</a>
+                        <a class="nav-link" href="/search/list">상세 검색</a>
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/board/list">부서별 알림</a>
+                        <a class="nav-link" href="/board/list">부서별 게시판</a>
                         <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/search?hashtagList=${user.mytag.name}">My tag :
+                        <a class="nav-link" href="/search/list?hashtagList=${user.mytag.name}">My tag :
                             ${user.mytag.name}</a>
                         <span class="sr-only">(current)</span>
                     </li>

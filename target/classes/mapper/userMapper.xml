@@ -44,12 +44,13 @@ select u.id as user_id,
 	u.dept_id as user_dept_id,
 	u.hashtag_id as user_hashtag_id,
 	d.name as dept_name,
-	h.name as hashtag_name
+	h.name as hashtag_name,
+	u.password as user_password
 from user u
 left outer join dept d on u.dept_id = d.id 
 left outer join hashtag h on u.hashtag_id = h.id
 where u.email = #{email}
-and u.password = #{password}
+	and u.password = #{password}
 </select>
 
 <!--
@@ -118,7 +119,7 @@ where id = #{id}
 	작성자 : JAY - 이재범
 	최초 작성일 : 2022. 5. 31.
 -->
-<select id="readUserList" parameterType="String" resultMap="userDetail">
+<select id="readUserList" parameterType="map" resultMap="userDetail">
 select u.id as user_id, 
 	u.name as user_name,
 	u.email as user_email,
@@ -130,6 +131,8 @@ join dept d on d.id = u.dept_id
 <if test="name != null">
 where u.name = #{name}
 </if>
+order by u.id desc
+limit #{page}, 10
 </select>
 
 <!--
@@ -163,6 +166,7 @@ where name like "%${name}%"
 	<result column="user_position_id" property="positionId"/>
 	<result column="user_dept_id" property="deptId"/>
 	<result column="user_hashtag_id" property="hashtagId"/>
+	<result column="user_password" property="password"/>
 	<association property="dept" javaType="dept">
 		<id column="user_dept_id" property="id"/>
 		<result column="dept_name" property="name"/>
@@ -209,6 +213,12 @@ update user set hashtag_id = #{hashtagId} where id = #{id}
 <update id="updateDept" parameterType="map">
 update user set dept_id = #{deptId} where id = #{userId}
 </update>
+
+<select id="searchEmail" parameterType="String" resultType="int">
+	select count(id)
+	from user
+	where email = #{email}
+</select>
 
 </mapper>
 

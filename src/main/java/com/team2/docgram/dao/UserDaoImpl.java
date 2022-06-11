@@ -80,19 +80,6 @@ public class UserDaoImpl implements UserDao {
 	 /**
 	 * 설명
 	 * 
-	 * @return 
-	 *
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@Override
-	public List<UserDto> readUserList() {
-		return sqlSession.selectList(mapper+"readUserList");
-	}
-
-	 /**
-	 * 설명
-	 * 
 	 * @param name
 	 * @return 
 	 *
@@ -100,8 +87,8 @@ public class UserDaoImpl implements UserDao {
 	 * @since 2022. 5. 31.
 	 */
 	@Override
-	public List<UserDto> readUserList(String name) {
-		return sqlSession.selectList(mapper+"readUserList", name);
+	public List<UserDto> readUserList(Map<String, Object> map) {
+		return sqlSession.selectList(mapper+"readUserList", map);
 	}
 
 	 /**
@@ -143,6 +130,20 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public Integer updateDept(Map<String, Object> map) {
 		return sqlSession.update(mapper+"updateDept", map);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param email
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 10.
+	 */
+	@Override
+	public Integer searchEmail(String email) {
+		return sqlSession.selectOne(mapper+"searchEmail", email);
 	}
 	
 }

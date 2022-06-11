@@ -11,16 +11,64 @@
 <head>
   <title>문서상세보기</title>
   <meta charset="utf-8">  
-  
+    <link rel="icon" href="/resources/images/favicon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="../resources/css/board.css">
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
-  <link rel="stylesheet" href="../resources/css/main.css">
-    <link rel="stylesheet" href="../resources/css/comp.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/resources/js/board.js"></script>
+<link rel="stylesheet" href="/resources/css/board.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/comp.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function back() {
+	let url = document.referrer;
+	location.href = url;
+}
 
+function starDelete(id) {
+    	const data = axios({
+			   url: '/starmark/delete',
+			   data: {
+			   'boardId': `\${id}`
+			   },
+			   dataType : 'text',
+				   method: 'post'
+			   });
+        	data.then(function (result) {
+        		location.reload();
+    		});
+}
+function starCreate(id) {
+	const data = axios({
+		   url: '/starmark/create',
+		   data: {
+		   'boardId': `\${id}`
+		   },
+		   dataType : 'text',
+			   method: 'post'
+		   });
+ 	data.then(function (result) {
+ 			location.reload();
+		});
+}
+function deleteBoard(id) {
+	const check = confirm("게시글을 삭제 하시겠습니까?");
+	if(check) {
+		const data = axios({
+			url: `/board/delete/\${id}`,
+			method: 'get'
+			});
+			data.then(function (result) {
+				const dataCheck = result.data;
+				if(dataCheck == 1) {
+					back();
+				}
+			});
+	}
+}
+</script>
 
   </head>
 <body>
@@ -38,13 +86,12 @@
       
       <div class="all">
         <!-- 출력 문서 제목 -->
-            <h3 class="title-article">${board.title}<h3>
+            <h3 class="title-article">${board.title}<h3></h3>
 
     
         <!-- 문서 상세 정보 -->
         <div class="table-wrap">
             <table class="table table-response">
-                <caption> 문서상세 정보 - 작성자 /작성일 / 문서 관리 번호 / 전화번호 /소속기관 </caption>
                 <colgroup>
                     <col style="width:15%">
                     <col style="width:35%">
@@ -71,17 +118,27 @@
     
                     <tr>
                         <th scope="row">소속기관</th>
-                        <td colspan="3" style="flex-wrap: nowrap"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
+                        <td colspan="3" style="flex-wrap: nowrap; "> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
                     </tr>
                 </tbody>
             </table>
     
-        </div>
+        </div> 
     
         <hr>
         <div class="btnlist">
-            <button class="btn"><i class="bi bi-star"></i></button> 
-            <button class="btn"><i class="bi bi-megaphone"></i></button> 
+        	<c:if test="${board.starmarkId != null}">
+            <button class="btn" onclick="starDelete(${board.id})"><i class="bi bi-star-fill"></i></button>
+            </c:if>
+        	<c:if test="${board.starmarkId == null}">
+            <button class="btn" onclick="starCreate(${board.id})"><i class="bi bi-star"></i></button>
+            </c:if>
+            <c:if test="${board.deptmarkId != null}"> 
+            <button class="btn"><i class="bi bi-megaphone-fill"></i></button>
+            </c:if> 
+            <c:if test="${board.deptmarkId == null}"> 
+            <button class="btn"><i class="bi bi-megaphone"></i></button>
+            </c:if>
         </div>
         <hr>
     
@@ -111,9 +168,11 @@
                     </div>
                     <hr>
             <div class="right">
+            <c:if test="${(sessionScope.user.positionId >= '6') || (sessionScope.user.id == board.user.id)}">
                 <a href="update/${board.id}"><button>수정</button></a>
-                <button>삭제</button>
-                <button onclick="history.back()">목록</button>
+                <button onclick="deleteBoard(${board.id})">삭제</button>
+            </c:if>
+                <button onclick="back()">목록</button>
             </div>
         </div>
             
@@ -121,7 +180,7 @@
     
     
         <!-- 문서 다운 파트 -->
-        <div>    
+          
             <div>
                 <h4 id="attachment">첨부된 문서 (다운로드)</h4>
             </div>
@@ -130,6 +189,7 @@
             </div>
             <div>
                 <ul class="list-attachment">
+                <c:if test="${board.file.id != null}">
                     <li>
                         <div class="comm-view-article print-no" tabindex="110" title="첨부된 문서">
                             <p class="title-down">${board.file.name}</p> 
@@ -143,11 +203,13 @@
                                 </a> 
                             </span>
                     </li>
+                    </c:if>
+                    <c:if test="${board.file.id == null}">
+                    <span>첨부된 문서가 없습니다.</span>
+                    </c:if>
                 </ul>
             </div>
-        </div> 
         <hr>
-       
         
         <!-- 관련 문서 파트 -->
     
@@ -181,6 +243,8 @@
 
     </div>
   </div>
+	    <div class="col-sm-2 sidenav">
+    </div>
 </div>
 
 <!-- footer -->
@@ -194,7 +258,7 @@
             let text = v.innerHTML;
             let tag = text.substring(1);
             v.addEventListener("click" , ()=>{
-            	window.location.href = `../search?hashtagList=\${tag}`;     
+            	window.location.href = `../search/list?hashtagList=\${tag}`;     
             })
             })
             
