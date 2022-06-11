@@ -66,8 +66,7 @@
                 <div class="col-md-10 mb-3">
                   <label for="inputPasswordCheck">비밀번호확인</label>
                   &nbsp;
-                  <input type="password" id="pwd2" class="form-control" placeholder="비밀번호 확인"
-                    reaquired></input> 
+                  <input type="password" id="pwd2" class="form-control" placeholder="비밀번호 확인" required></input> 
                     <input type="hidden" name="password" id="pwd"/>
                   <div class="col-md-10 mb-3">
                     &nbsp;
@@ -81,13 +80,13 @@
                 <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
-                      required>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" required >
                     &nbsp;
 
                     <!-- Button trigger modal-->
-                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
-                      찾기</button>
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">
+                    소속기관 찾기
+                    </button>
                     &nbsp;
                     <!-- Modal: modalCart -->
                     <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"

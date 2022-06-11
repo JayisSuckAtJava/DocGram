@@ -9,7 +9,7 @@
 }
 
 #footer-ul .nav-item a {
-    color: rgba(240, 255, 255, 0.658);
+    color: azure;
 }
 
  /* side bar ===================================================================== */
@@ -23,6 +23,7 @@ border-radius: 0;
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
 height: 100%;
+margin-bottom: 20px;
 }
 
 /* Set gray background color and 100% height */
@@ -40,6 +41,7 @@ margin-bottom: 20px;
 
 .row.content {
  height: auto;
+ padding: 15px;
 }
 }
 
@@ -48,10 +50,10 @@ margin-bottom: 20px;
 footer,
 header {
 background-color: #2E4866;
-color: white;
+color: #8d9cbf;
 padding: 15px;
 }
-
+S
 
 /* header */
 #admin-nav {

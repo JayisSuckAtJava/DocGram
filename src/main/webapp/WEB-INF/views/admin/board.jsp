@@ -151,7 +151,7 @@ function deptMarkDelete(id) {
 <div class="all">
       <h3 class="title-article">게시물 관리</h3>
 
-
+<div class="dl-table-wrap">
    <dl class="dl-table">
      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
      <dd class="dd-keyword">
@@ -267,6 +267,7 @@ function deptMarkDelete(id) {
 
     </div>
 
+    </div>
     </div>
     <div class="col-sm-2 sidenav">
           <div class="well">
