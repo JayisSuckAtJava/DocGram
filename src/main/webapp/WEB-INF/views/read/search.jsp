@@ -44,15 +44,15 @@
   <div>
   <form action="" method="get">
     <dl class="dl-table">
-      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
+      <dt class="dt-keyword"><label for="sel">검색어</label></dt>
       <dd class="dd-keyword">
-        <select class="ss" name="sel" id="searchCategory" title="검색어 분류 선택">
+        <select class="ss" name="sel" id="sel" title="검색어 분류 선택">
           <option value="title" selected="selected">제목</option>
           <option value="content">내용</option>
           <option value="name">작성자</option>
           <option value="dept">기관</option>
         </select>
-        <input class="ss" name="text" type="text" id="searchKeyword" style="margin-left: 3%;"
+        <input class="ss" name="text" type="text" id="text" style="margin-left: 3%;"
           placeholder="검색어를 입력하세요."
           title="검색어를 입력하세요." value="">
       </dd>
@@ -61,7 +61,7 @@
     <dl class="dl-table">
       <dt class="dt-open"><span>항목<em>(다중선택)</em></span></dt>
       <dd class="dd-date">
-        <select name="position" id="rangeDateUi" title="기간설정 선택">
+        <select name="position" id="position" title="기간설정 선택">
           <option value="null" selected="selected">직책(전체)</option>
           <option value="1">서기보</option>
           <option value="2">서기</option>
@@ -74,10 +74,10 @@
           <option value="9">관리관</option>
         </select>
         
-        <input name="fileName" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%;" 
+        <input name="fileName" type="text" id="fileName" style="margin-left: 3%; width: 30%;" 
         placeholder="원하시는 파일명을 입력하세요"
           title="원하시는 파일명을 입력하세요" value="">
-          <input name="fileNum" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%"
+          <input name="fileNum" type="text" id="fileNum" style="margin-left: 3%; width: 30%"
         placeholder="문서 번호"
           title="문서번호" value="">
 
@@ -88,7 +88,7 @@
     <dl class="dl-table">
       <dt class="dt-open"><span>태그검색<em>(다중입력 , 로 구분)</em></span></dt>
       <dd class="dd-date">
-        <input name="hashtagList" type="text" id="searchKeyword" style="width: 30%;"
+        <input name="hashtagList" type="text" id="hashtagList" style="width: 30%;"
         placeholder="태그를 입력하세요 (예 행정,공공기관 )"
           title="태그를 입력하세요 (예 행정,공공기관 )" value="">
         </dd>
@@ -97,9 +97,9 @@
 
 
     <dl class="dl-table">
-      <dt class="dt-date"><label for="rangeDateUi">검색기간</label></dt>
+      <dt class="dt-date"><label for="dateRange">검색기간</label></dt>
       <dd class="dd-date">
-        <select name="dateRange" id="rangeDateUi" title="기간설정 선택">
+        <select name="dateRange" id="dateRange" title="기간설정 선택">
           <option value="null" selected="selected">전체</option>
           <option value="31">1개월</option>
           <option value="92">3개월</option>
@@ -199,7 +199,38 @@ window.onload = function() {
 		page();			
 	}else {
 		pageinget();
+		let search = location.search;
+    	let result = {}
+		let keyValue = new Array();
+		keyValue = search.substring(1).split("&");
+	    keyValue.forEach((v) => {
+	    	console.log(v);
+	    	let set = v.split("=");
+	    	console.log(set);
+	    	let key = set[0];
+	    	let text = set[1];
+	    	console.log(text);
+	    	let value = decodeURIComponent(text);
+	    	result[key] = value;
+    })
+    	console.log(result)
+		const sel = document.querySelector("#sel");
+		const text = document.querySelector("#text");
+		const position = document.querySelector("#position");
+		const fileName = document.querySelector("#fileName");
+		const fileNum = document.querySelector("#fileNum");
+		const hashtagList = document.querySelector("#hashtagList");
+		const dateRange = document.querySelector("#dateRange");
+		sel.value = ( result['sel'] == undefined ) ? "title" : result['sel'];
+		text.value = ( result['text'] == undefined ) ? "" : result['text'];
+		position.value = ( result['position'] == undefined ) ? "null" : result['position'];
+		fileName.value = ( result['fileName'] == undefined ) ? "" : result['fileName'];
+		fileNum.value = ( result['fileNum'] == undefined ) ? "" : result['fileNum'];
+		hashtagList.value = ( result['hashtagList'] == undefined ) ? "" : result['hashtagList'];
+		dateRange.value = ( result['dateRange'] == undefined ) ? "null" : result['dateRange'];
 	}
+		
+;
 }
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -232,7 +263,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.href="/search/list";
+        		location.reload();
     		});
 }
 function starCreate(e, id) {
@@ -246,7 +277,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.href="/search/list";
+    		location.reload();
 		});
 }
 </script>
