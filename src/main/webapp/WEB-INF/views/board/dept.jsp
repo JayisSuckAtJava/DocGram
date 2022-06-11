@@ -188,7 +188,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.href="/board/list";
+        		location.reload();
     		});
 }
 function starCreate(e, id) {
@@ -202,7 +202,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.href="/board/list";
+			location.reload();
 		});
 }
 </script>
