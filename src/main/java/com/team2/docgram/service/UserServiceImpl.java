@@ -177,4 +177,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.searchEmail(email);
 	}
 
+	@Override
+	public Long readUserListSize() {
+		return userDao.readUserListSize();
+	}
+
+	@Override
+	public Long readUserListSize(String name) {
+		return userDao.readUserListSize(name);
+	}
+
 }

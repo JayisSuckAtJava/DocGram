@@ -293,11 +293,11 @@ function deptMarkDelete(id) {
 <script src="/resources/js/pageinget.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-	
+	let test = ${listSize}
 	if((location.search == "")){
-		page();			
+		page(${listSize});			
 	}else {
-		pageinget();
+		pageinget(${listSize});
 	}
 }
 const search = document.querySelector("#hashtagSearch");

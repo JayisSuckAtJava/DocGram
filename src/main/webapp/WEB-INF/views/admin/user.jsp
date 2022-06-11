@@ -249,9 +249,9 @@ function ajax() {
 window.onload = function() {
 	
 	if(location.search == ""){
-		page();			
+		page(${listSize});			
 	}else {
-		pageinget();
+		pageinget(${listSize});
 	}
 }
 </script>

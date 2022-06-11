@@ -153,9 +153,9 @@ function updateBtn(e, id) {
 window.onload = function() {
 	
 	if((location.search == "")){
-		page();			
+		page(${listSize});			
 	}else {
-		pageinget();
+		pageinget(${listSize});
 	}
 }
 

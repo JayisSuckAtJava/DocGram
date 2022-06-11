@@ -281,11 +281,16 @@ public class UserController {
 	@GetMapping("admin/user")
 	public String adminUserPage(HttpSession session, Model model, String name, Long page) {
 		List<UserDto> userList = new ArrayList<UserDto>();
+		Long listSize;
 		if(name == null) {
-			userList = userService.readUserList(page);			
+			userList = userService.readUserList(page);
+			listSize = userService.readUserListSize();
+			
 		}else {
 			userList = userService.readUserList(page, name);
+			listSize = userService.readUserListSize(name);
 		}
+		model.addAttribute("listSize", listSize);
 		model.addAttribute("userList",userList);
 		return "admin/user";
 	}
@@ -327,7 +332,9 @@ public class UserController {
 		Long deptId = user.getDeptId();
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.readDeptBoardList(page, deptId, sel, text);
+		Long listSize = boardService.readDeptBoardListSize(deptId, sel, text);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("listSize", listSize);
 		return "admin/board";
 	}
 	

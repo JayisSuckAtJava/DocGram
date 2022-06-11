@@ -41,12 +41,12 @@ for(let key in obj) {
         let prev = ( startPage == 1 ) ? 1 : startPage-2
         let endPage = startPage +9;
         if(startPage * 10 > totalSize / 10){
-        	endPage = (totalSize / 10 ) + 1;
+        	endPage = (parseInt(totalSize / 10 )+1);
         }
 
         let html = '<ul class="pagination">';
             html = html + `<li class="page-item"><a class="page-link" href="${url}&page=${prev}">Previous</a></li>`;
-            for (let i = startPage; i < endPage; i++ ){
+            for (let i = startPage; i <= endPage; i++ ){
         html += `<li class="page-item ${page == i ? 'active' : ''}">
             <a class="page-link" href="${url}&page=${i}">${i}</a>
             </li>`;

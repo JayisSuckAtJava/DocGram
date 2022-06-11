@@ -155,5 +155,22 @@ select count(b.id)
 	limit #{page}, 10
 </select>
 
+<select id="readBoardListSize" parameterType="map" resultType="Long">
+	select count(b.id)
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	left join user_starmark s on b.id = s.board_id and s.user_id = #{userId}
+	where b.security >= 1
+	<if test="sel != null and text != null">
+		<choose>
+				<when test=' sel == "title" '>and b.title like "%${text}%"</when>
+				<when test=' sel == "content"'>and b.content like "%${text}%"</when>
+				<when test=' sel == "name" '>and u.name = #{text}</when>
+				<when test=' sel == "dept" '>and d.name like "%${text}%"</when>
+		</choose>
+	</if>
+</select>
+
 </mapper>
 
