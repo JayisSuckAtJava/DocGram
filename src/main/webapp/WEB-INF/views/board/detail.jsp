@@ -13,13 +13,13 @@
   <meta charset="utf-8">  
     <link rel="icon" href="/resources/images/favicon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="../resources/css/board.css">
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" href="../resources/css/comp.css">
+<script src="/resources/js/board.js"></script>
+<link rel="stylesheet" href="/resources/css/board.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/comp.css">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 function back() {
@@ -118,7 +118,7 @@ function deleteBoard(id) {
     
                     <tr>
                         <th scope="row">소속기관</th>
-                        <td colspan="3" style="flex-wrap: nowrap; font-size: large;"> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
+                        <td colspan="3" style="flex-wrap: nowrap; "> ${dept.upperNdName} > ${dept.upperStName} > ${dept.name}</td>
                     </tr>
                 </tbody>
             </table>
@@ -243,6 +243,8 @@ function deleteBoard(id) {
 
     </div>
   </div>
+	    <div class="col-sm-2 sidenav">
+    </div>
 </div>
 
 <!-- footer -->

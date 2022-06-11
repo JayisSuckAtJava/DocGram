@@ -59,7 +59,7 @@
   height: 38px;
 }
 
-.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
+.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; margin-bottom:20px; }
 .dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
 .dl-table-wrap .dl-table:first-child {  border-top: 0; }
 .dl-table-wrap .dl-table:last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
@@ -96,7 +96,7 @@ input::placeholder {color:#434343;}
 .dl-table-wrap.open .dl-table.dl-organ dt {border-bottom-left-radius: 0}
 
 /* .dl-table  검색 크기 */
-.dl-table dd.dd-keyword input[type="text"] {width: 50%}
+.dl-table dd.dd-keyword input[type="text"] {width: 74%}
 
 .dl-table-wrap .dl-table:first-child dt {border-top-left-radius: 5px;}
 .dl-table-wrap .dl-table:last-child dt {border-bottom-left-radius: 5px;}

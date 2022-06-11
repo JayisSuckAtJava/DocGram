@@ -52,7 +52,7 @@
           <option value="name">작성자</option>
           <option value="dept">기관</option>
         </select>
-        <input class="ss" name="text" type="text" id="searchKeyword" style="margin-left: 3%;"
+        <input class="ss" name="text" type="text" id="searchKeyword" style="margin-left: 3%; width:78%;"
           placeholder="검색어를 입력하세요."
           title="검색어를 입력하세요." value="">
       </dd>
@@ -74,10 +74,10 @@
           <option value="9">관리관</option>
         </select>
         
-        <input name="fileName" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%;" 
+        <input name="fileName" type="text" id="searchKeyword" style="margin-left: 3%; width: 40%;" 
         placeholder="원하시는 파일명을 입력하세요"
           title="원하시는 파일명을 입력하세요" value="">
-          <input name="fileNum" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%"
+          <input name="fileNum" type="text" id="searchKeyword" style="margin-left: 3%; width: 35%"
         placeholder="문서 번호"
           title="문서번호" value="">
 
@@ -88,7 +88,7 @@
     <dl class="dl-table">
       <dt class="dt-open"><span>태그검색<em>(다중입력 , 로 구분)</em></span></dt>
       <dd class="dd-date">
-        <input name="hashtagList" type="text" id="searchKeyword" style="width: 30%;"
+        <input name="hashtagList" type="text" id="searchKeyword" style="width: 100%;"
         placeholder="태그를 입력하세요 (예 행정,공공기관 )"
           title="태그를 입력하세요 (예 행정,공공기관 )" value="">
         </dd>
@@ -97,7 +97,7 @@
 
 
     <dl class="dl-table">
-      <dt class="dt-date"><label for="rangeDateUi">검색기간</label></dt>
+      <dt class="dt-open"><label for="rangeDateUi">검색기간</label></dt>
       <dd class="dd-date">
         <select name="dateRange" id="rangeDateUi" title="기간설정 선택">
           <option value="null" selected="selected">전체</option>
@@ -107,12 +107,13 @@
           <option value="365">1년</option>
         </select>
           <div class="btn-search">
-    <button type="submit" class="btn btn-outline-secondary btn-search">검색</button>
+   
   </div>
 
       </dd>
-      
-    </dl>
+      <button type="submit" class="btn btn-outline-secondary btn-search" style="float: right;">검색</button>
+    </dl> 
+    
  </form>
   </div>
   <!--// .dl-table-wrap -->
@@ -126,7 +127,7 @@
     <!-- 목록 리스트 -->
     <table class="table table-hover">
 
-	<div>
+	<div class="resultNum">
 	<span> 검색된 데이터의 총 합은 : ${listSize} 개 입니다.</span>
 	</div>
 

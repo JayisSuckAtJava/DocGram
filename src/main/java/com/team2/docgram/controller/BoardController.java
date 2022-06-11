@@ -105,7 +105,7 @@ public class BoardController {
 	 */
 	@GetMapping("board/create")
 	public String boardCreatePage() {
-		return "board/create";
+		return "board/create";		
 	}
 	
 	/**

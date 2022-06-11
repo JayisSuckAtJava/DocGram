@@ -36,11 +36,11 @@
 
 
 .dl-table {display: table;width: 100%;border-top: 1px dashed #b5b5b5;}
-.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
-.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
-.dl-table dd { padding: 4px 10px; }
-
+.dl-table dd {display: table-cell;width: 850px; padding: 4px 10px; font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2; border: 1px solid #b5b5b5;border-radius: 5px;}
+.resultNum { float: right; }
 input::placeholder {color:#434343;}
+
 /* .dl-table */
 
 .dl-table dd select {min-width: 19%;border: 1px solid #b5b5b5;border-radius: 5px;font-size: 1em;}
