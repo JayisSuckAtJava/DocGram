@@ -272,5 +272,30 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("search.readBoardList", map);
 	}
 
+	@Override
+	public Long readNoticeListSize() {
+		return sqlSession.selectOne(mapper+"readNoticeListSize");
+	}
+
+	@Override
+	public List<BoardDto> readNoticeList(Long page) {
+		return sqlSession.selectList(mapper+"readNoticeList",page);
+	}
+
+	@Override
+	public Long readBoardListSize(Long userId) {
+		return sqlSession.selectOne(mapper+"readBoardListSize",userId);
+	}
+
+	@Override
+	public Long readBoardListSize(Map<String, Object> map) {
+		return sqlSession.selectOne("search.readBoardListSize",map);
+	}
+
+	@Override
+	public Long readDeptBoardListSize(Map<String, Object> map) {
+		return sqlSession.selectOne(mapper+"readDeptBoardListSize", map);
+	}
+
 	
 }

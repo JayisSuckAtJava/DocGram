@@ -196,9 +196,9 @@
 window.onload = function() {
 	
 	if(location.search == ""){
-		page();			
+		page(${listSize});			
 	}else {
-		pageinget();
+		pageinget(${listSize});
 		let search = location.search;
     	let result = {}
 		let keyValue = new Array();

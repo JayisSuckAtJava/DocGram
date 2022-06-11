@@ -179,6 +179,15 @@ public class SearchServiceImpl implements SearchService {
 		map.put("page", page);
 		return boardDao.readBoardList(map);
 	}
+
+	@Override
+	public Long readBoardListSize(Long page, Long userId, String sel, String text) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("text", text);
+		map.put("sel", sel);
+		map.put("userId", userId);
+		return boardDao.readBoardListSize(map);
+	}
 	
 
 }

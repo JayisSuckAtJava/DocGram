@@ -220,5 +220,15 @@ update user set dept_id = #{deptId} where id = #{userId}
 	where email = #{email}
 </select>
 
+
+<select id="readUserListSize" parameterType="String" resultType="Long">
+select count(u.id)
+from user u
+join dept d on d.id = u.dept_id
+<if test="name != null">
+where u.name = #{name}
+</if>
+</select>
+
 </mapper>
 

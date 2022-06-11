@@ -31,4 +31,8 @@ public interface UserDao {
 
 	Integer searchEmail(String email);
 
+	Long readUserListSize(String name);
+
+	Long readUserListSize();
+
 }
