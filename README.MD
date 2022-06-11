@@ -104,7 +104,7 @@
 *  조윤구
 	* 조장
 	* Front
-	* EMAIL : 
+	* EMAIL : cyk1999@naver.com
 *  문예빈
 	* DB
 	* EMAIL : 
