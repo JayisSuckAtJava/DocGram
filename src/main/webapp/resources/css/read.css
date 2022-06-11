@@ -10,15 +10,6 @@
   margin-right: auto;
 }
 
-#list_title {
-  border: solid;
-}
-
-#list_title>tr>th {
-  border: 1px solid;
-  border-radius: 5px;
-}
-
 #page-title {
   border: 1pxsolid;
   text-align: right;
@@ -31,7 +22,7 @@
 }
 
 /* 상단 검색 */
-.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; }
+.dl-table-wrap {  position: relative;  border: 1px solid #b5b5b5;  border-radius: 5px;  padding: 4px 10px; margin-bottom: 10px; }
 .dl-table-wrap:after {  content: '';  clear: both;  display: block;  }
 .dl-table-wrap .dl-table:first-child {  border-top: 0; }
 .dl-table-wrap .dl-table:last-child {  border-bottom-left-radius: 5px;  border-bottom-right-radius: 5px; }
@@ -45,19 +36,20 @@
 
 
 .dl-table {display: table;width: 100%;border-top: 1px dashed #b5b5b5;}
-.dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}
-.dl-table dd input[type="text"] {background: #f2f2f2;border: 1px solid #b5b5b5;border-radius: 5px;}
-.dl-table dd { padding: 4px 10px; }
-
+.dl-table dd {display: table-cell;width: 850px; padding: 4px 10px; font-size: 0.8125em}
+.dl-table dd input[type="text"] {background: #f2f2f2; border: 1px solid #b5b5b5;border-radius: 5px;}
+.resultNum { float: right; }
 input::placeholder {color:#434343;}
+
 /* .dl-table */
 
 .dl-table dd select {min-width: 19%;border: 1px solid #b5b5b5;border-radius: 5px;font-size: 1em;}
 .dl-table dd * {vertical-align: middle;}
+.btn .btn-outline-secondary .btn-search { float: right; }
 .dl-table dd input[type="text"],
 .dl-table dd select,
-.dl-table dd .date-box {float: left;}
-.dl-table dt {display: table-cell;width: 150px;padding: 6px 0 6px 10px;background: #f8eff3;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
+.dl-table dd .date-box {float: left; height: 30px;}
+.dl-table dt {display: table-cell;width: 160px;padding: 6px 0 6px 10px;background: #FFCFCF;font-weight: 700;font-size: 0.8125em;vertical-align: middle;}
 .dl-table dt label, .dl-table dt span {font-size: inherit;font-weight: inherit;}
 .dl-table dt span em {font-weight: 400;}
 .dl-table dd {display: table-cell;width: 850px;padding: 4px 10px;font-size: 0.8125em}

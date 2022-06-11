@@ -27,3 +27,11 @@ table-layout: fixed;
 justify-content: space-around;
 }
 
+
+/*pagenation*/
+#pagenation{
+	text-align: center;
+}
+.pagination {
+          	justify-content: center;
+          }

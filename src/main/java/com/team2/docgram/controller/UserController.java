@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,13 +69,13 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("user/signin")
-	public String login(UserDto user,HttpSession session) {
+	public String login(UserDto user,HttpSession session, Model model) {
 		UserDto userDetail = userService.readUser(user);
 		if(userDetail == null) {
-			return "redirect:signin";
+			model.addAttribute("fail","이메일 혹은 비밀번호를 다시 확인해 주세요.");
+			return "login/login";
 		}else {
 			session.setAttribute("user", userDetail);
-			
 			return "redirect:../main";			
 		}
 	}
@@ -131,7 +132,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("user/signup")
-	public String createUser(UserDto user,Long deptCode) {
+	public String signup(UserDto user,Long deptCode) {
 		Long positionId = deptCode % 10;
 		Long deptId = deptCode - positionId;
 		user.setPositionId(positionId);
@@ -172,6 +173,7 @@ public class UserController {
 	 * @since 2022. 5. 31.
 	 */
 	@PostMapping("mypage/update")
+	@ResponseBody
 	public void update(@RequestBody Map<String, Object> map, HttpSession session) {
 		String password = (String) map.get("password");
 		String deptNumber = (String) map.get("deptNumber");
@@ -180,6 +182,7 @@ public class UserController {
 		UserDto user = new UserDto();
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		Long userId = sessionUser.getId();
+		String email = sessionUser.getEmail();
 		user.setId(userId);
 		if(password == "") {
 			user.setPassword(null);
@@ -188,7 +191,14 @@ public class UserController {
 		}
 		user.setDeptNumber(deptNumber);
 		user.setPhoneNumber(phoneNumber);
+		user.setEmail(email);
 		userService.updateUser(user);
+		UserDto userDetail = userService.readUser(user);
+		System.out.println(userDetail);
+		System.out.println(user);
+		System.out.println(sessionUser);
+		session.removeAttribute("user");
+		session.setAttribute("user", userDetail);
 	}
 	
 	/**
@@ -215,39 +225,6 @@ public class UserController {
 	}
 	
 	/**
-	 * 관리자 페이지 - 사용자 조회
-	 * 
-	 * @param model 사용자 들의 값을 심기 위한 model
-	 * @return 사용자 목록 + 페이지
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@GetMapping("mypage/user")
-	public String searchUserPage(Model model) {
-		List<UserDto> userList = userService.readUserList();
-		model.addAttribute("userList", userList);
-		return "mypage/mypage";
-	}
-	
-	/**
-	 * 사용자 목록중 이름으로 사용자 검색
-	 * 
-	 * @param model 값 표현을 위한 model
-	 * @param name 검색할 사용자의 이름
-	 * @return 
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("mypage/user")
-	public String searchUser(Model model,String name) {
-		List<UserDto> userList = userService.readUserList(name);
-		model.addAttribute("", model);
-		return "";
-	}
-
-	/**
 	 * 사용자의 MYtag 수정 로직
 	 * 
 	 * @param tagName 지정한 tag 이름 받음
@@ -265,6 +242,8 @@ public class UserController {
 		Long hashtagId = hashtagService.readHashtag(tagName);
 		user.setHashtagId(hashtagId);
 		userService.updateHashtag(user);
+		UserDto userDetail = userService.readUser(user);
+		session.setAttribute("user", userDetail);
 		return tagName;
 	}
 	
@@ -287,94 +266,6 @@ public class UserController {
 		return "mypage/mypage";
 	}
 	
-	/**
-	 * 설명
-	 * 
-	 * @param userId
-	 * @return
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 6. 7.
-	 */
-	@GetMapping("rest/star")
-	@ResponseBody
-	public List<BoardDto> mypageStarmark(Long userId) {
-		List<BoardDto> starList = boardService.readStarmarkList(userId);
-		return starList;
-	}
-	
-	/**
-	 * 즐겨찾기 추가 로직
-	 * 
-	 * @param boardId 즐겨찾기에 추가할 게시판 id
-	 * @param session user의 id를 포함한 session
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("starmark/create")
-	public void createStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long userId = user.getId();
-		starmarkService.createStarmark(userId,boardId);
-	}
-	
-	/**
-	 * 즐겨찾기 삭제 로직
-	 * 
-	 * @param boardId 삭제할 대상 board의 id
-	 * @param session 사용자의 정보를 조회할 session
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("starmark/delete")
-	@ResponseBody
-	public void deleteStarmark(@RequestBody Map<String, Object> map, HttpSession session) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long userId = user.getId();
-		Long boardId = Long.parseLong((String) map.get("boardId")); 
-		System.out.println(boardId);
-		starmarkService.deleteStarmark(userId,boardId);
-	}
-	
-	/**
-	 * 부서 알림 추가 로직
-	 * 
-	 * @param boardId 추가할 board 의 id
-	 * @param session 사용자가 속한 부서 정보를 가진 session
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("deptmark/create")
-	public void createDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long postionId = user.getPositionId();
-		if(postionId > 5) {
-			Long deptId = user.getDeptId();
-			starmarkService.createDeptmark(deptId,boardId);			
-		}
-	}
-	
-	/**
-	 * 부서 알림 삭제 로직
-	 * 
-	 * @param boardId 삭제할 board 의 id
-	 * @param session 사용자가 속한 부서 정보를 가진 session
-	 * 
-	 * @author JAY - 이재범
-	 * @since 2022. 5. 31.
-	 */
-	@PostMapping("deptmark/delete")
-	public void deleteDeptmark(@RequestBody Map<String, Object> map, HttpSession session) {
-		UserDto user = (UserDto) session.getAttribute("user");
-		Long postionId = user.getPositionId();
-		if(postionId > 5) {
-			Long deptId = user.getDeptId();
-			starmarkService.deleteDeptmark(deptId,boardId);			
-		}
-	}
 	
 	/**
 	 * 설명
@@ -388,12 +279,12 @@ public class UserController {
 	 * @since 2022. 6. 7.
 	 */
 	@GetMapping("admin/user")
-	public String adminUserPage(HttpSession session, Model model, String name) {
+	public String adminUserPage(HttpSession session, Model model, String name, Long page) {
 		List<UserDto> userList = new ArrayList<UserDto>();
 		if(name == null) {
-			userList = userService.readUserList();			
+			userList = userService.readUserList(page);			
 		}else {
-			userList = userService.readUserList(name);
+			userList = userService.readUserList(page, name);
 		}
 		model.addAttribute("userList",userList);
 		return "admin/user";
@@ -431,7 +322,12 @@ public class UserController {
 	 * @since 2022. 6. 7.
 	 */
 	@GetMapping("admin/board")
-	public String adminBoardPage(HttpSession session) {
+	public String adminBoardPage(HttpSession session, Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page, String sel, String text) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long deptId = user.getDeptId();
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.readDeptBoardList(page, deptId, sel, text);
+		model.addAttribute("boardList", boardList);
 		return "admin/board";
 	}
 	

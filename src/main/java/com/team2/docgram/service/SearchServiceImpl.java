@@ -69,6 +69,12 @@ public class SearchServiceImpl implements SearchService {
 		}else {
 			String hashtagList = (String) map.get("hashtagList");
 			String[] hashtagArray = hashtagList.split(",");
+			Integer hashtagSize = hashtagArray.length;
+			String foreachEnd ="";
+			for (Integer i=0; i <= hashtagSize; i++) {
+				foreachEnd =  foreachEnd + ")";
+			}
+			map.put("foreachEnd", foreachEnd);
 			map.put("hashtagList", hashtagArray);
 		}
 		if(map.get("dateRange") == null || map.get("dateRange").equals("null")) {
@@ -107,7 +113,6 @@ public class SearchServiceImpl implements SearchService {
 		}
 		List<BoardDto> boardList = new ArrayList<>();
 		
-		
 		boardList = boardDao.searchDetail(map);
 		Long listSize = boardDao.searchDetailSize(map);
 		
@@ -115,13 +120,6 @@ public class SearchServiceImpl implements SearchService {
 		resultMap.put("listSize", listSize);
 		resultMap.put("boardList", boardList);
 		
-		System.out.println(map);
-		System.out.println(resultMap);
-		
-		map.forEach((strKey, value)->{
-			System.out.println(strKey + " : key and    value :" + value);
-			System.out.println(map.get(strKey) == null);
-		});
 		return resultMap;
 	}
 
@@ -155,6 +153,31 @@ public class SearchServiceImpl implements SearchService {
 		map.put("text", text);
 		map.put("sel", sel);
 		return boardDao.searchRelation(map);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param page
+	 * @param userId
+	 * @param sel
+	 * @param text
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public List<BoardDto> readBoardList(Long page, Long userId, String sel, String text) {
+		if(page > 0) {
+			page = ( page - 1 ) * 10; 
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("text", text);
+		map.put("sel", sel);
+		map.put("userId", userId);
+		map.put("page", page);
+		return boardDao.readBoardList(map);
 	}
 	
 

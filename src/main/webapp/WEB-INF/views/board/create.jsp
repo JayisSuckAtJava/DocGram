@@ -11,17 +11,25 @@
 <head>
   <title>작성페이지</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/resources/images/favicon.png">
 
 <link rel="stylesheet" href="/resources/css/board.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/main.css">
 <link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="../resources/js/board.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/resources/js/board.js"></script>
+<script type="text/javascript">
+function typeRel(e) {
+	const keyCode = e.keyCode;
+	if(keyCode == 13) {
+		ajax();
+	}
+}
+</script>
   
 </head>
 
@@ -36,34 +44,36 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8"> 
       
       <div class="all">
+              <!-- 타이틀 부분 -->
+
+        <h3 class="title-article">문서작성</h3>
 
         <div class="writebody">    
        <form action="" method="post" enctype="multipart/form-data">
-            <div class="titlename"> <!-- 제목 작성 부분-->
+            <div class="titlename writing"> <!-- 제목 작성 부분-->
                 <div>
-                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요">
+                    <input class="size" type="text" name="title" placeholder="제목을 입력해주세요" required>
                 </div>
             </div>
             <hr>
-            <div class="wirtearea"> <!-- 내용 작성 부분-->
+            <div class="wirtearea writing"> <!-- 내용 작성 부분-->
                 <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
     
             </div>
             <hr>
             
-            <div>
-                <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
+            <div class="writing">
+                <h5 class="upload">파일 업로드 </h5> <!--파일 업로드-->
                 <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
                 <hr>
             </div>
     
-            <div>
-                <h3> 해시태그 지정</h3>
+            <div class="writing">
+                <h5> 해시태그 지정</h5>
                 <input class="size" type="text" placeholder="태그를 입력하세요 예시:) #해시 #태그" id="tagInput">
                 <input type="hidden" name="hashtagList" id="hashtagList">
                 
@@ -73,17 +83,18 @@
     
     
     			
-            <div> <!-- 관계 게시글 설정-->
-                <h3>관계문서 지정</h3>
-                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" id="modal-block">
+            <div class="writing"> <!-- 관계 게시글 설정-->
+                <h5>관계문서 지정</h5>
+                 <button type="button" class="btn btn-outline-secondary size" data-toggle="modal" data-target="#modalCart" id="modal-block">
                 <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList" id="inputRelList" disabled>
+                <input type="hidden" name="relatedBoardList" id="inputRelListReal" >
                 </button>
-                
-            </div>
+                </div>
+            
 
-          	<div>
-            <button type="submit">작성 완료</button> 
-            <button onclick="history.back()" >뒤로가기</button>
+          	<div class="writing mm">
+            <button type="submit"class="btn btn-outline-dark">작성 완료</button> 
+            <button onclick="history.back()" type="button" class="btn btn-outline-dark">뒤로가기</button>
             </div>
           	</form>
           </div>
@@ -91,20 +102,18 @@
           						
         </div>
       </div>
-      <div class="col-sm-2 sidenav">
-        
-        
-      </div>
+    <div class="col-sm-2 sidenav"> 
     </div>
+    </div>
+    
   </div>
   
 <!-- footer -->
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
-  
-  
-   <!-- Modal: modalCart -->
+  </div>
+<!-- Modal: modalCart -->
                 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -123,15 +132,16 @@
                         <option value="name">이름</option>
                         <option value="dept">소속 부서</option>
                       </select>
-                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
-                          aria-label="Search" id="search-text">
-                        <button class="btn btn-outline-success" type="button" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
+			       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-text" onkeydown="typeRel(event)" >
+			       <button class="btn btn-outline-success" type="submit" style="height: 38px;" onclick="ajax()"><i class="bi bi-search"></i></button>
+                        
+                        
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script>
+                        
+                        
                         let relSum = 0;
-                function ajax() {
-                	console.log("hi");
-                	
+                function ajax() {          	
                 	let sel = document.querySelector("#search-sel").value
                 	let text = document.querySelector("#search-text").value
                 	
@@ -164,17 +174,21 @@
        	                
        	            	 relList.forEach((v)=>{
        	            		 let id = v.firstElementChild.innerHTML
+       	            		 let checkArray = new Array();
        	            		 v.addEventListener("click",()=>{
-       	            			 console.log("test");
        	            			 
        	            			 if(relSum != 3){
-       	            			 if(relListSum.value == "") {
-       	            				relListSum.value = relListSum.value + `\${id}`;
-       	            				relSum++;
-       	            			 }else {
-       	            				relListSum.value = relListSum.value + ',' +`\${id}`;
-       	            				relSum++;
-       	            			 }
+       	            				if(checkArray.includes(id)){      	            			 		
+       	            			 	}else {
+       	            					checkArray.push(id);  
+       	            					if(relListSum.value == "") {
+       	       	            				relListSum.value = relListSum.value + `\${id}`;
+       	       	            				relSum++;
+       	       	            			 }else {
+       	       	            				relListSum.value = relListSum.value + ',' +`\${id}`;
+       	       	            				relSum++;
+       	       	            			 }
+       	            			 	}
        	            			 }else {
        	            				 alert("관계 문서는 3개만 지정 가능합니다.")
        	            			 }
@@ -209,20 +223,29 @@
                 function checkRelation() {
                 	const relListSum = document.querySelector("#rel_list_sum");
                 	const relList = document.querySelector("#inputRelList");
+                	const relListReal = document.querySelector("#inputRelListReal");
                 	
                 	relList.value = relListSum.value;
+                	relListReal.value = relListSum.value;
+                }
+                
+                function cancel() {
+                	const relListSum = document.querySelector("#rel_list_sum");
+                	const relList = document.querySelector("#inputRelList");
+                	const relListReal = document.querySelector("#inputRelListReal");
+                	relListSum.value = "";
+                	relList.value = "";
+                	relListReal.value = "";
                 }
                 </script>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
-                        <span aria-hidden="true">×</span>
-                      </button>
+                      
                     </div>
                     <!--Modal Body-->
-					<div>
-						<input type="text" disabled id="rel_list_sum"/>
-					</div>
                     <div class="modal-body">
-                    
+					<input type="text" disabled id="rel_list_sum"/>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="checkRelation()">
+                        <span aria-hidden="true"><i class="bi bi-check-square"></i></span>
+                      </button>
                     
 
                       <table class="table table-hover">
@@ -243,10 +266,12 @@
                     </div>
                     <!--Footer-->
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                    </div>
+              			<button type="button" class="btn btn-outline-primary" data-dismiss="modal" onclick="cancel()">취소</button>
+           			 </div>
                   </div>
                 </div>
               </div>
+  
+   
 </body>
 </html>

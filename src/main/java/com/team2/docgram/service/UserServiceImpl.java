@@ -90,8 +90,15 @@ public class UserServiceImpl implements UserService {
 	 * @since 2022. 5. 31.
 	 */
 	@Override
-	public List<UserDto> readUserList() {
-		return userDao.readUserList();
+	public List<UserDto> readUserList(Long page) {
+		Map<String, Object> map = new HashMap<>();
+		if(page == null) {
+			page = 0L;
+		}else {
+			page = ( page - 1 ) * 10; 
+		}
+		map.put("page", page);
+		return userDao.readUserList(map);
 	}
 
 	  /**
@@ -117,8 +124,11 @@ public class UserServiceImpl implements UserService {
 	 * @since 2022. 5. 31.
 	 */
 	@Override
-	public List<UserDto> readUserList(String name) {
-		return userDao.readUserList(name);
+	public List<UserDto> readUserList(Long page, String name) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("page", page);
+		map.put("name", name);
+		return userDao.readUserList(map);
 	}
 
 	/**
@@ -151,6 +161,20 @@ public class UserServiceImpl implements UserService {
 		map.put("deptId", deptId);
 		map.put("userId", userId);
 		return userDao.updateDept(map);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param email
+	 * @return 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 10.
+	 */
+	@Override
+	public Integer searchEmail(String email) {
+		return userDao.searchEmail(email);
 	}
 
 }

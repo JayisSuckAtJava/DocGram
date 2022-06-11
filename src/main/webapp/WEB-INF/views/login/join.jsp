@@ -11,22 +11,27 @@
 
     <head>
       <meta charset="UTF-8">
+        <link rel="icon" href="/resources/images/favicon.png">
       <meta http-equiv="Content-Type" content="text/html">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>회원가입 화면</title>
-
+      <link href="/resources/css/comp.css" rel="stylesheet">
       <link href="/resources/css/login.css" rel="stylesheet">
       <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
       <link href="/resources/css/bootstrap.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="/resources/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     </head>
 
-
-    <body>
+    <body class="join">
+    
+    <!-- header -->
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<jsp:include page="../comp/header.jsp"></jsp:include>
+</header>
 
    <div class="all">
       <form action="" method="post" class="sign-form">
@@ -47,8 +52,7 @@
 
                 <div class="col-md-10 mb-3">
                   <label for="email">이메일</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com"
-                    required>
+                  <input type="email" name="email" class="form-control"  required id="email" placeholder="you@example.com">
                   <div class="invalid-feedback">
                     이메일을 입력해주세요.
                   </div>
@@ -62,8 +66,7 @@
                 <div class="col-md-10 mb-3">
                   <label for="inputPasswordCheck">비밀번호확인</label>
                   &nbsp;
-                  <input type="password" id="pwd2" class="form-control" placeholder="비밀번호 확인"
-                    reaquired></input> 
+                  <input type="password" id="pwd2" class="form-control" placeholder="비밀번호 확인" required></input> 
                     <input type="hidden" name="password" id="pwd"/>
                   <div class="col-md-10 mb-3">
                     &nbsp;
@@ -77,13 +80,13 @@
                 <div class="col-md-10 mb-3">
                   <div class="department">
                     <label for="department">소속기관</label>
-                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요"
-                      required>
+                    <input type="tel" class="form-control" id="inputdept" placeholder="소속기관 입력해 주세요" required >
                     &nbsp;
 
                     <!-- Button trigger modal-->
-                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">소속기관
-                      찾기</button>
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart">
+                    소속기관 찾기
+                    </button>
                     &nbsp;
                     <!-- Modal: modalCart -->
                     <div class="modal fade" id="modalCart" tabindex="-1" role="dialog"
@@ -98,11 +101,9 @@
                                 기관검색
                               </a>
                             </h4>
-                            <form class="d-flex" method="" action="" role="search">
                               <input class="form-control me-2" type="search" placeholder="Search" id="searchDept"
                                 aria-label="Search">
                               <button class="btn btn-outline-success" type="submit" onclick="ajax()" style="height: 38px;"><i class="bi bi-search"></i></button>
-                            </form>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
@@ -133,7 +134,7 @@
                       <!-- position Selection -->
                    <label for="position-select">직급 : </label>
                    <select id="position-select">
-                      <option value="">== 직급을 선택해주세요 ==</option>
+                      <option value="0">== 직급을 선택해주세요 ==</option>
                       <option value="1">서기보</option>
                       <option value="2">서기</option>
                       <option value="3">주사보</option>
@@ -166,7 +167,7 @@
                   <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                 </div>
                 <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" onclick="check()">가입 완료</button>
+                <button class="check-btn btn btn-primary btn-lg btn-block" onclick="check(event)">가입 완료</button>
               </form>
             </div>
           </div>
@@ -174,11 +175,39 @@
         </div>
       </form>
 </div>
+
+<!-- footer -->
+<footer class="container-fluid text-center py-3" >
+	<jsp:include page="../comp/footer.jsp"></jsp:include>
+</footer>
+
     </body>
 
-    <!--비밀번호 동일성 확인-->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--비밀번호 동일성 확인-->      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
+    
+    		const emailInput = document.querySelector("#email");
+    		emailInput.addEventListener("focusout",()=>{
+	    		let email = emailInput.value;
+    				
+    		const data = axios({
+    		    url: '/rest/email',
+    		    method: 'get',
+    		    params: {
+    		    'email': email
+    		    }
+    		    });
+    	        data.then(function (result) {
+    	        	let row = result.data;
+    	        	if(row > 0){
+    	        		alert("중복되는 이메일이 확인되었습니다.")
+    	        		emailInput.value = "";
+    	        	}
+    	        })
+    		})
+
+    
+    
       function test() {
         var p1 = document.getElementById('pwd1').value;
         var p2 = document.getElementById('pwd2').value;
@@ -197,8 +226,20 @@
       let correct = document.getElementById('alert-success');
       let wrong = document.getElementById('alert-danger');
 
+      p1.addEventListener("focusout", () => {
+  		let p1v = p1.value;
+        let p2v = p2.value;
+        if (p1v == p2v) {
+          correct.style.display = "block";
+          wrong.style.display = "none";
+        } else {
+          correct.style.display = "none";
+          wrong.style.display = "block";
+        }
+      })
+      
       p2.addEventListener("focusout", () => {
-        let p1v = p1.value;
+  		let p1v = p1.value;
         let p2v = p2.value;
         if (p1v == p2v) {
           correct.style.display = "block";
@@ -210,31 +251,39 @@
       })
       
         
-        function check() {
+        function check(e) {
       		const pwd1= document.querySelector("#pwd1");
         	const pwd =document.querySelector("#pwd");
         	const dept=document.querySelector("#inputdept");
         	const po=document.querySelector("#position-select");
         	const dc=document.querySelector("#deptCode");
         
-        	pwd.value = pwd1.value;
-        	dc.value = Number(dept.value) + Number(po.value);
-        	submit();
+        	if(po.value == 0){
+        		alert("직급을 선택해 주세요.")
+        		
+        	}else if(dept.value == ""){
+        		alert("부서를 선택해 주세요.")	
+        	}else{
+	        	pwd.value = pwd1.value;
+    	    	dc.value = Number(dept.value) + Number(po.value);
+        		submit();
+        	}
+    	  	e.preventDefault();
         }
 	      
 	      
       function ajax() {
-      	  
-            const search = document.querySelector("#searchDept");
-            let text = searchDept.value;
-            
-            const data = axios({
-            url: '../rest/dept',
-            method: 'get',
-            params: {
-            'name': text
-            }
-            });
+      	  	
+    	    const search = document.querySelector("#searchDept");
+    	    let text = searchDept.value;
+    	    
+    	    const data = axios({
+    	    url: '../rest/dept',
+    	    method: 'get',
+    	    params: {
+    	    'name': text
+    	    }
+    	    });
             data.then(function (result) {
             
             let deptList = result.data;

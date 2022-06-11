@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team2.docgram.dto.BoardHashtagDto;
 import com.team2.docgram.dto.HashtagDto;
 
 /**  BoardHashtagDaoImpl.java
@@ -60,8 +61,8 @@ public class BoardHashtagDaoImpl implements BoardHashtagDao {
 	 * @since 2022. 6. 1.
 	 */
 	@Override
-	public Long readBoardHashtag(Map<String, Object> map) {
-		return sqlSession.selectOne(mapper+"readBoardHashtag", map);
+	public Long readBoardHashtag(BoardHashtagDto boardHashtag) {
+		return sqlSession.selectOne(mapper+"readBoardHashtag", boardHashtag);
 	}
 
 	 /**
@@ -76,5 +77,33 @@ public class BoardHashtagDaoImpl implements BoardHashtagDao {
 	public void deleteHashtagList(Long boardId) {
 		sqlSession.delete(mapper+"deleteHashtagList", boardId);
 	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param boardHashtag 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public void deleteHashtag(BoardHashtagDto boardHashtag) {
+		sqlSession.delete(mapper+"deleteHashtag",boardHashtag);
+	}
+
+	/**
+	 * 설명
+	 * 
+	 * @param boardHashtag 
+	 *
+	 * @author JAY - 이재범
+	 * @since 2022. 6. 8.
+	 */
+	@Override
+	public void createBoardHashtag(BoardHashtagDto boardHashtag) {
+		sqlSession.insert(mapper+"createBoardHashtag", boardHashtag);
+	}
+	
+	
 	
 }

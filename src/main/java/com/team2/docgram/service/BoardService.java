@@ -18,7 +18,7 @@ public interface BoardService {
 
 	List<BoardDto> readBoardList(Long page,Long userId);
 
-	Map<String, Object> readBoard(Long id);
+	Map<String, Object> readBoard(Long id, Long userId, Long deptId);
 
 	String createBoard(BoardDto board, String hashtagList, String relatedBoardList,String fileName);
 	
@@ -34,8 +34,10 @@ public interface BoardService {
 
 	Long readBoardUserId(Long id);
 
-	void deleteBoard(Long id);
+	Integer deleteBoard(Long id);
 
 	List<BoardDto> readMyBoardList(Long userId);
+
+	List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text);
 
 }

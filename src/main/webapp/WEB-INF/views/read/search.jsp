@@ -12,8 +12,8 @@
 <head>
   <title>상세 검색</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/css/comp.css">
     <link rel="stylesheet" href="../resources/css/read.css">
-  <script src="../resources/js/read.js"></script>
+
   
 </head>
 <body>
@@ -44,15 +44,15 @@
   <div>
   <form action="" method="get">
     <dl class="dl-table">
-      <dt class="dt-keyword"><label for="searchKeyword">검색어</label></dt>
+      <dt class="dt-keyword"><label for="sel">검색어</label></dt>
       <dd class="dd-keyword">
-        <select class="ss" name="sel" id="searchCategory" title="검색어 분류 선택">
+        <select class="ss" name="sel" id="sel" title="검색어 분류 선택">
           <option value="title" selected="selected">제목</option>
           <option value="content">내용</option>
           <option value="name">작성자</option>
           <option value="dept">기관</option>
         </select>
-        <input class="ss" name="text" type="text" id="searchKeyword" style="margin-left: 3%;"
+        <input class="ss" name="text" type="text" id="text" style="margin-left: 3%;"
           placeholder="검색어를 입력하세요."
           title="검색어를 입력하세요." value="">
       </dd>
@@ -61,7 +61,7 @@
     <dl class="dl-table">
       <dt class="dt-open"><span>항목<em>(다중선택)</em></span></dt>
       <dd class="dd-date">
-        <select name="position" id="rangeDateUi" title="기간설정 선택">
+        <select name="position" id="position" title="기간설정 선택">
           <option value="null" selected="selected">직책(전체)</option>
           <option value="1">서기보</option>
           <option value="2">서기</option>
@@ -74,10 +74,10 @@
           <option value="9">관리관</option>
         </select>
         
-        <input name="fileName" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%;" 
+        <input name="fileName" type="text" id="fileName" style="margin-left: 3%; width: 30%;" 
         placeholder="원하시는 파일명을 입력하세요"
           title="원하시는 파일명을 입력하세요" value="">
-          <input name="fileNum" type="text" id="searchKeyword" style="margin-left: 3%; width: 30%"
+          <input name="fileNum" type="text" id="fileNum" style="margin-left: 3%; width: 30%"
         placeholder="문서 번호"
           title="문서번호" value="">
 
@@ -88,7 +88,7 @@
     <dl class="dl-table">
       <dt class="dt-open"><span>태그검색<em>(다중입력 , 로 구분)</em></span></dt>
       <dd class="dd-date">
-        <input name="hashtagList" type="text" id="searchKeyword" style="width: 30%;"
+        <input name="hashtagList" type="text" id="hashtagList" style="width: 30%;"
         placeholder="태그를 입력하세요 (예 행정,공공기관 )"
           title="태그를 입력하세요 (예 행정,공공기관 )" value="">
         </dd>
@@ -97,9 +97,9 @@
 
 
     <dl class="dl-table">
-      <dt class="dt-date"><label for="rangeDateUi">검색기간</label></dt>
+      <dt class="dt-date"><label for="dateRange">검색기간</label></dt>
       <dd class="dd-date">
-        <select name="dateRange" id="rangeDateUi" title="기간설정 선택">
+        <select name="dateRange" id="dateRange" title="기간설정 선택">
           <option value="null" selected="selected">전체</option>
           <option value="31">1개월</option>
           <option value="92">3개월</option>
@@ -107,17 +107,18 @@
           <option value="365">1년</option>
         </select>
           <div class="btn-search">
-    <button type="submit" class="btn btn-search">검색</button>
+   
   </div>
 
       </dd>
-      
-    </dl>
-
+      <button type="submit" class="btn btn-outline-secondary btn-search" style="float: right;">검색</button>
+    </dl> 
+    
+ </form>
   </div>
   <!--// .dl-table-wrap -->
 
-  </form>
+ 
     <hr>
   </div>
     <!-- 상세 검색 부분  끝 -->
@@ -126,72 +127,55 @@
     <!-- 목록 리스트 -->
     <table class="table table-hover">
 
-	<div>
+	<div class="resultNum">
 	<span> 검색된 데이터의 총 합은 : ${listSize} 개 입니다.</span>
 	</div>
 
       <thead id="list_title">
 
         <tr>
-          <th>즐쳐찾기</th>
-          <th>번호</th>
-          <th>제목</th>
-          <th>다운로드</th>
-          <th>소속기관</th>
-          <th>작성일</th>
-          <th>작성자</th>
+          <th style="width: 7%"><i class="bi bi-star"></i></th>
+          <th style="width: 7%">번호</th>
+          <th style="width: 38%">제목</th>
+          <th style="width: 7%"></th>
+          <th style="width: 15%">소속기관</th>
+          <th style="width: 13%">작성일</th>
+          <th style="width: 13%">작성자</th>
         </tr>
       </thead>
 
-      <tbody class="table table-hover">
-        <tr>
-          <td><i class="bi bi-star"></i></td>
-          <td >김띵띵</td>
-          <td>cho@gmail.com</td>
-          <td>010-2345-342</td>
-          <td>부서 번호</td>
-          <td>물전환특별팀</td>
-          <td>부서관</td>
-        </tr>
+      <tbody class="table table-hover list-body-star">
         <c:forEach items="${boardList}" var="board">
-          <tr>
+          <tr style='cursor:pointer;'>
             
             <!--  아래 c:if를 통해서 즐찾 리스트가 맞으면 출력 하는걸로 -->
-            <c:if test="${board.starmarkId == null}">
-               <td><i class="bi bi-star"></i></td>
+           <c:if test="${board.starmarkId == null}">
+               <td id="emptyStar"><i class="bi bi-star"></i></td>
                </c:if>
                <c:if test="${board.starmarkId != null}">
-               <td><i class="bi bi-star-fill"></i></td>
+               <td id="filledStar"><i class="bi bi-star-fill"></i></td>
                </c:if>
             <td>${board.id}</td>
             <td>${board.title}</td>
-            <td>${board.fileId}</td>
+                  <c:if test="${board.fileId != null}">
+                  <td><a href="/download/${board.fileId}" ><i class="bi bi-file-earmark-pdf"></a></td>
+                  </c:if>
+                  <c:if test="${board.fileId == null}">
+                  <td></td>
+                  </c:if>
             <td>${board.user.dept.name}</td>
             <td>${board.date}</td>
             <td>${board.user.name}</td>
           </tr>
         </c:forEach>
-
+  <script src="/resources/js/read.js"></script>
       </tbody>
     </table>
       
       
       <!-- 페이징 -->
       <div class="page">
-        <nav aria-label="Page navigation example" style="text-align: center;" >
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
+        <nav aria-label="Page navigation example" style="text-align: center;" id="pagenation">
         </nav>
       </div>
 
@@ -206,7 +190,97 @@
 <footer class="container-fluid text-center py-3" >
 	<jsp:include page="../comp/footer.jsp"></jsp:include>
 </footer>
-
-
+<!-- pagenation -->
+<script src="/resources/js/page.js"></script>
+<script src="/resources/js/pageinget.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	
+	if(location.search == ""){
+		page();			
+	}else {
+		pageinget();
+		let search = location.search;
+    	let result = {}
+		let keyValue = new Array();
+		keyValue = search.substring(1).split("&");
+	    keyValue.forEach((v) => {
+	    	console.log(v);
+	    	let set = v.split("=");
+	    	console.log(set);
+	    	let key = set[0];
+	    	let text = set[1];
+	    	console.log(text);
+	    	let value = decodeURIComponent(text);
+	    	result[key] = value;
+    })
+    	console.log(result)
+		const sel = document.querySelector("#sel");
+		const text = document.querySelector("#text");
+		const position = document.querySelector("#position");
+		const fileName = document.querySelector("#fileName");
+		const fileNum = document.querySelector("#fileNum");
+		const hashtagList = document.querySelector("#hashtagList");
+		const dateRange = document.querySelector("#dateRange");
+		sel.value = ( result['sel'] == undefined ) ? "title" : result['sel'];
+		text.value = ( result['text'] == undefined ) ? "" : result['text'];
+		position.value = ( result['position'] == undefined ) ? "null" : result['position'];
+		fileName.value = ( result['fileName'] == undefined ) ? "" : result['fileName'];
+		fileNum.value = ( result['fileNum'] == undefined ) ? "" : result['fileNum'];
+		hashtagList.value = ( result['hashtagList'] == undefined ) ? "" : result['hashtagList'];
+		dateRange.value = ( result['dateRange'] == undefined ) ? "null" : result['dateRange'];
+	}
+		
+;
+}
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+    
+    const emptyStar = document.querySelectorAll("#emptyStar")
+    emptyStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starCreate(e, boardId);
+        });
+    });
+    
+    const filledStar = document.querySelectorAll("#filledStar")
+    filledStar.forEach((v)=>{
+        v.addEventListener("click",(e)=>{
+            let boardId = v.nextElementSibling.innerHTML;
+            starDelete(e, boardId);
+        });
+    });
+    
+function starDelete(e, id) {
+	e.stopPropagation();
+    	const data = axios({
+			   url: '/starmark/delete',
+			   data: {
+			   'boardId': `\${id}`
+			   },
+			   dataType : 'text',
+				   method: 'post'
+			   });
+        	data.then(function (result) {
+        		location.reload();
+    		});
+}
+function starCreate(e, id) {
+	e.stopPropagation();
+	const data = axios({
+		   url: '/starmark/create',
+		   data: {
+		   'boardId': `\${id}`
+		   },
+		   dataType : 'text',
+			   method: 'post'
+		   });
+ 	data.then(function (result) {
+    		location.reload();
+		});
+}
+</script>
 </body>
 </html>

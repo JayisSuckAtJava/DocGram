@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team2.docgram.dto.BoardDto;
 import com.team2.docgram.dto.UserDto;
 import com.team2.docgram.service.BoardService;
 import com.team2.docgram.service.FileService;
+import com.team2.docgram.service.SearchService;
 
 
 
@@ -40,6 +42,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private SearchService searchService;
+	
 
 	/**
 	 * 게시판 리스트 조회 페이지, 게시판 조회 + 페이징 처리
@@ -52,14 +57,18 @@ public class BoardController {
 	 * @since 2022. 5. 28.
 	 */
 	@GetMapping("board/list")
-	public String boardList(Model model,Long page,HttpSession session) {
+	public String boardList(Model model,Long page,HttpSession session, String sel, String text) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		if(page == null) {
 			page = 1L;
 		}
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.readBoardList(page,userId);
+		if(sel == null || text == null) {
+			boardList = boardService.readBoardList(page, userId);			
+		}else {
+			boardList = searchService.readBoardList(page, userId, sel, text);
+		}
 		model.addAttribute("boardList", boardList);
 		return "board/dept";
 	}
@@ -75,9 +84,12 @@ public class BoardController {
 	 * @since 2022. 5. 28.
 	 */
 	@GetMapping("board/{id}")
-	public String board(@PathVariable("id")Long id,Model model) {
+	public String board(@PathVariable("id")Long id, Model model, HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		Long deptId = user.getDeptId();
 		Map<String, Object> map = new HashMap<>();
-		map = boardService.readBoard(id);
+		map = boardService.readBoard(id, userId, deptId);
 		
 		model.addAllAttributes(map);
 		return "board/detail";
@@ -93,7 +105,7 @@ public class BoardController {
 	 */
 	@GetMapping("board/create")
 	public String boardCreatePage() {
-		return "board/create";
+		return "board/create";		
 	}
 	
 	/**
@@ -188,7 +200,7 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("main")
+	@GetMapping(value = {"main","/"})
 	public String mainPage(HttpSession session,Model model) {
 		
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -237,9 +249,12 @@ public class BoardController {
 	 * @since 2022. 5. 30.
 	 */
 	@GetMapping("notice/{id}")
-	public String notice(Model model,@PathVariable("id")Long boardId) {
+	public String notice(Model model,@PathVariable("id")Long boardId, HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		Long userId = user.getId();
+		Long deptId = user.getDeptId();
 		Map<String, Object> notice = new HashMap<>();
-		notice = boardService.readBoard(boardId);
+		notice = boardService.readBoard(boardId, userId, deptId);
 		model.addAllAttributes(notice);
 		return "board/detail";
 	}
@@ -284,14 +299,17 @@ public class BoardController {
 	 * @since 2022. 6. 1.
 	 */
 	@GetMapping("board/delete/{id}")
-	public void delectBoard(@PathVariable("id")Long id,HttpSession session) {
+	@ResponseBody
+	public Integer delectBoard(@PathVariable("id")Long id,HttpSession session) {
+		Integer result = 0;
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
 		Long positionId = user.getPositionId();
 		Long boardUserId = boardService.readBoardUserId(id);
 		if(userId == boardUserId || positionId > 6) {
-			boardService.deleteBoard(id);
+			result = boardService.deleteBoard(id);
 		}
+		return result;
 	}
 	
 }

@@ -12,11 +12,14 @@
 <head>
   <title>main</title>
   <meta charset="utf-8">
+    <link rel="icon" href="/resources/images/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../resources/css/bootstrap.css">
-  <link rel="stylesheet" href="../resources/css/main.css">
-    <link rel="stylesheet" href="../resources/css/comp.css">
+  
+  <link rel="stylesheet" href="/resources/css/bootstrap.css">
+  <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/comp.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="/resources/js/bootstrap.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
@@ -48,7 +51,7 @@
         <div class="row">
         
           <div class="col-sm-6">
-            <h3>공지사항</h3>
+            <h3>공지</h3>
             
             <c:if test="${sessionScope.user == null}">
           <br><br><br><br><br><br><br><br>
@@ -60,18 +63,12 @@
             <table class="table table-hover">
               <c:forEach items="${noticeList}" var="board">
       		   <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.id}</td>
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-                <td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
           	  </tr>
               </c:forEach>
-              <tr>
-              	<td>1</td>
-              	<td>공문서 어쩌구 저쩌구 제목 어라어ㅏ러아러ㅏㅇ러ㅏ어러알ㅇ</td>
-              	<td>재정특별기획부</td>
-              	<td>2022-06-01</td>
-              </tr>
+
                           
             </table> 
             </c:if>           
@@ -89,10 +86,9 @@
             <table class="table table-hover">
               <c:forEach items="${deptList}" var="board">
               <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
-                <td>${board.id}</td>
-                <td>${board.title}</td>
-                <td>${board.user.dept.name}</td>
-                <td>${board.date}</td>
+                <td style="width: 60%">${board.title}</td>
+                <td style="width: 20%">${board.user.dept.name}</td>
+				<td style="width: 20%">${board.date}</td>
                </tr>
               </c:forEach>
             </table>
@@ -117,7 +113,7 @@
             <c:forEach items="${starList}" var="board">
             <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
               <td>${board.title}</td>
-              <td>${board.user.dept.name}</td>
+<%--               <td style="width: 30%">${board.user.dept.name}</td> --%>
 <%--               <td>${board.date}</td>  --%>
               </tr>
             </c:forEach>

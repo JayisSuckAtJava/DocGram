@@ -21,14 +21,14 @@ public interface UserDao {
 
 	void updateHashtag(UserDto user);
 
-	List<UserDto> readUserList();
-
-	List<UserDto> readUserList(String name);
+	List<UserDto> readUserList(Map<String, Object> map);
 
 	void deleteUser(Long userId);
 
 	UserDto readUserOne(UserDto user);
 
 	Integer updateDept(Map<String, Object> map);
+
+	Integer searchEmail(String email);
 
 }
