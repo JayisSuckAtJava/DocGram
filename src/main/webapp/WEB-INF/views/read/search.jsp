@@ -107,12 +107,13 @@
           <option value="365">1년</option>
         </select>
           <div class="btn-search">
-    <button type="submit" class="btn btn-outline-secondary btn-search">검색</button>
+   
   </div>
 
       </dd>
-      
-    </dl>
+      <button type="submit" class="btn btn-outline-secondary btn-search" style="float: right;">검색</button>
+    </dl> 
+    
  </form>
   </div>
   <!--// .dl-table-wrap -->
@@ -126,7 +127,7 @@
     <!-- 목록 리스트 -->
     <table class="table table-hover">
 
-	<div>
+	<div class="resultNum">
 	<span> 검색된 데이터의 총 합은 : ${listSize} 개 입니다.</span>
 	</div>
 

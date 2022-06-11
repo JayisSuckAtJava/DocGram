@@ -118,7 +118,7 @@
           </table>
           
           <div class="bb">
-          	<a href="create"><button>작성하기</button></a>
+          	<a href="create"><button type="button" class="btn btn-outline-dark">작성하기</button></a>
           </div>
     
           

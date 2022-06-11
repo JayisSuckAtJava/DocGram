@@ -109,7 +109,7 @@ public class BoardController {
 	 */
 	@GetMapping("board/create")
 	public String boardCreatePage() {
-		return "board/create";
+		return "board/create";		
 	}
 	
 	/**
@@ -204,7 +204,7 @@ public class BoardController {
 	 * @author JAY - 이재범
 	 * @since 2022. 5. 31.
 	 */
-	@GetMapping("main")
+	@GetMapping(value = {"main","/"})
 	public String mainPage(HttpSession session,Model model) {
 		
 		UserDto user = (UserDto) session.getAttribute("user");
