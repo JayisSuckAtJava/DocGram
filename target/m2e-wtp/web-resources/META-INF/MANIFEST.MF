@@ -1,4 +1,3 @@
-
 Manifest-Version: 1.0
 Built-By: ￬ﾠﾄ￬ﾂﾰ1-12
 Build-Jdk: 11.0.13
