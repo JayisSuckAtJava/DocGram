@@ -32,7 +32,7 @@ public class FileServiceImpl implements FileService {
 	private FileDao fileDao;
 
 	private String root = "C:\\ProjectTeam2\\file\\";
-	private String linux = "\\usr\\local\\tomcat8.5\\webapps\\ROOT\\resources\\static\\pdf\\";
+	private String linux = "/usr/local/tomcat8.5/webapps/ROOT/resources/static/pdf/";
 	
 	/** 파일을 Root 에 저장하는 메소드
 	 * 
@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
 	 */
 	@Override
 	public void createFile(String savedFileName,MultipartFile file) {
-		File path = new File(root+savedFileName);
+		File path = new File(linux+savedFileName);
 		
 		try {
 			file.transferTo(path);
@@ -85,7 +85,7 @@ public class FileServiceImpl implements FileService {
 	 */
 	private ResponseEntity<Resource> download(String fileName) throws FileNotFoundException, UnsupportedEncodingException {
 		
-		File file = new File(root+fileName);
+		File file = new File(linux+fileName);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 		Integer underbar = fileName.indexOf("_");
 		String fileOriginalName = fileName.substring(underbar+1);
