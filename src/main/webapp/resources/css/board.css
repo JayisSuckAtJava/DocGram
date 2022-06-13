@@ -211,28 +211,38 @@ table {
                                                     /* create css */
 /* 작성 부분 전체 */
 .writebody{
-    margin-top: 5px;
     border: 1px solid;
 }
 /* 제목 부분 */
 .titlename {
-    
-    margin-bottom: 15px;
-    
-}
-
-.title {
-    width: 80%;
+    margin: 20px;   
 }
 
 /* 내용 작성 부분 */
-
 .wirtearea {
-    margin-bottom: 15px;
+    margin: 20px;
 }
 
-.size{
-    width: 80%; height: 30%;
+.wirtearea .size{
+     height: 190px;
+}
+
+.size {
+	width: 100%;
+	padding: 10px;
+}
+
+.writing {
+	margin: 10px;
+}
+
+.mm {
+	float: right;
+}
+
+h5 {
+	float: left;
+	padding 3%;
 }
 
                                                             /* create css */
@@ -275,6 +285,7 @@ margin: auto;
 .dl-table-wrap.open .dl-table.dl-organ dt { border-bottom-left-radius: 0 }
 .dl-table-wrap .dl-table:first-child dt { border-top-left-radius: 5px;}
 .dl-table-wrap .dl-table:last-child dt { border-bottom-left-radius: 5px;}
+.btn .btn-outline-secondary .btn-search { float: right; }
 
 /* 상단검색 결과 */
 
@@ -303,7 +314,7 @@ input::placeholder {color:#434343;}
 .dl-table-wrap.open .dl-table.dl-organ dt {border-bottom-left-radius: 0}
 
 /* .dl-table  검색 크기 */
-.dl-table dd.dd-keyword input[type="text"] {width: 50%}
+.dl-table dd.dd-keyword input[type="text"] {width: 65%}
 
 .dl-table-wrap .dl-table:first-child dt {border-top-left-radius: 5px;}
 .dl-table-wrap .dl-table:last-child dt {border-bottom-left-radius: 5px;}

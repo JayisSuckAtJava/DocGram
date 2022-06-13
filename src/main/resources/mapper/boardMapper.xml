@@ -170,7 +170,12 @@
 	join dept d on u.dept_id = d.id
 	where b.security = 0
 	order by b.id desc
+	<if test="page == null">
 	limit 0,15
+	</if>
+	<if test="page != null">
+	limit #{page},15
+	</if>
 </select>
 
 <!--
@@ -403,6 +408,37 @@ join dept d on u.dept_id = d.id
 	order by b.id desc
 	limit #{board.start}, 10
 </select>
+
+<select id="readNoticeListSize" resultType="Long">
+	select count(b.id)
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	where b.security = 0
+</select>
+
+<select id="readBoardListSize" parameterType="Long" resultType="Long">
+	select count(b.id)
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	left join user_starmark s on b.id = s.board_id and s.user_id = #{userId}
+	where b.security >= 1
+</select>
+
+<select id="readDeptBoardListSize" parameterType="map" resultType="Long">
+select count(b.id)
+	from board b
+	join user u on b.user_id = u.id
+	join dept d on u.dept_id = d.id
+	left join dept_starmark s on b.id = s.board_id and s.dept_id = #{board.user.deptId}
+	where b.security >= 1
+<if test="sel == 'title'">and b.title like '%${text}%'</if>
+<if test="sel == 'content'">and b.content like '%${text}%'</if>
+<if test="sel == 'name'">and u.name = #{text}</if>
+<if test="sel == 'dept'">and d.name like '%${text}%'</if>
+</select>
+
 
 </mapper>
 

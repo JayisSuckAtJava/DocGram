@@ -49,4 +49,14 @@ public interface BoardDao {
 
 	List<BoardDto> readBoardList(Map<String, Object> map);
 
+	Long readNoticeListSize();
+
+	List<BoardDto> readNoticeList(Long page);
+
+	Long readBoardListSize(Long userId);
+
+	Long readBoardListSize(Map<String, Object> map);
+
+	Long readDeptBoardListSize(Map<String, Object> map);
+
 }

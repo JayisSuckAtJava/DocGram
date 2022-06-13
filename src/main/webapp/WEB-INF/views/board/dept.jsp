@@ -118,7 +118,7 @@
           </table>
           
           <div class="bb">
-          	<a href="create"><button>작성하기</button></a>
+          	<a href="create"><button type="button" class="btn btn-outline-dark">작성하기</button></a>
           </div>
     
           
@@ -152,9 +152,9 @@
 window.onload = function() {
 	
 	if(location.search == ""){
-		page();			
+		page(${listSize});			
 	}else {
-		pageinget();
+		pageinget(${listSize});
 	}
 }
 </script>
@@ -188,7 +188,7 @@ function starDelete(e, id) {
 				   method: 'post'
 			   });
         	data.then(function (result) {
-        		location.href="/board/list";
+        		location.reload();
     		});
 }
 function starCreate(e, id) {
@@ -202,7 +202,7 @@ function starCreate(e, id) {
 			   method: 'post'
 		   });
  	data.then(function (result) {
- 			location.href="/board/list";
+			location.reload();
 		});
 }
 </script>

@@ -331,8 +331,9 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public List<BoardDto> readNoticeList() {
-		return boardDao.readNoticeList();
-	}
+		List<BoardDto> noticeList = boardDao.readNoticeList();
+		return noticeList;
+			}
 
 	 /**
 	 * 설명
@@ -473,5 +474,38 @@ public class BoardServiceImpl implements BoardService {
 		boardList = boardDao.readDeptBoardList(map);
 		return boardList;
 	}
+
+	/**
+	 *
+	 */
+	@Override
+	public Map<String, Object> readNoticeList(Long page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BoardDto> noticeList = boardDao.readNoticeList(page);
+		Long listSize = boardDao.readNoticeListSize();
+		map.put("listSize", listSize);
+		map.put("noticeList", noticeList);
+		return map;
+	}
+
+	@Override
+	public Long readBoardListSize(Long userId) {
+		return boardDao.readBoardListSize(userId); 
+	}
+
+	@Override
+	public Long readDeptBoardListSize(Long deptId, String sel, String text) {
+		BoardDto board = new BoardDto();
+		UserDto user = new UserDto();
+		user.setDeptId(deptId);
+		board.setUser(user);		
+		Map<String, Object> map = new HashMap<>();
+		map.put("board", board);
+		map.put("sel", sel);
+		map.put("text", text);
+		Long listSize = boardDao.readDeptBoardListSize(map);
+		return listSize;
+	}
+
 	
 }

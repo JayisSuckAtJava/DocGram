@@ -145,5 +145,15 @@ public class UserDaoImpl implements UserDao {
 	public Integer searchEmail(String email) {
 		return sqlSession.selectOne(mapper+"searchEmail", email);
 	}
+
+	@Override
+	public Long readUserListSize(String name) {
+		return sqlSession.selectOne(mapper+"readUserListSize",name);
+	}
+
+	@Override
+	public Long readUserListSize() {
+		return sqlSession.selectOne(mapper+"readUserListSize");
+	}
 	
 }

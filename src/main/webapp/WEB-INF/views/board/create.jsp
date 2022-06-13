@@ -11,15 +11,15 @@
 <head>
   <title>작성페이지</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/resources/images/favicon.png">
 
 <link rel="stylesheet" href="/resources/css/board.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/main.css">
 <link rel="stylesheet" href="/resources/css/comp.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="/resources/js/board.js"></script>
 <script type="text/javascript">
@@ -44,34 +44,36 @@ function typeRel(e) {
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      
     </div>
     <div class="col-sm-8"> 
       
       <div class="all">
+              <!-- 타이틀 부분 -->
+
+        <h3 class="title-article">문서작성</h3>
 
         <div class="writebody">    
        <form action="" method="post" enctype="multipart/form-data">
-            <div class="titlename"> <!-- 제목 작성 부분-->
+            <div class="titlename writing"> <!-- 제목 작성 부분-->
                 <div>
                     <input class="size" type="text" name="title" placeholder="제목을 입력해주세요" required>
                 </div>
             </div>
             <hr>
-            <div class="wirtearea"> <!-- 내용 작성 부분-->
-                <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>S
+            <div class="wirtearea writing"> <!-- 내용 작성 부분-->
+                <textarea class="size" placeholder="내용을 입력하세요." name="content"></textarea>
     
             </div>
             <hr>
             
-            <div>
-                <h3 class="upload">파일 업로드</h3> <!--파일 업로드-->
+            <div class="writing">
+                <h5 class="upload">파일 업로드 </h5> <!--파일 업로드-->
                 <input type="file" name="mFile" id="imageFileOpenInput" accept=".pdf">
                 <hr>
             </div>
     
-            <div>
-                <h3> 해시태그 지정</h3>
+            <div class="writing">
+                <h5> 해시태그 지정</h5>
                 <input class="size" type="text" placeholder="태그를 입력하세요 예시:) #해시 #태그" id="tagInput">
                 <input type="hidden" name="hashtagList" id="hashtagList">
                 
@@ -81,18 +83,18 @@ function typeRel(e) {
     
     
     			
-            <div> <!-- 관계 게시글 설정-->
-                <h3>관계문서 지정</h3>
-                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCart" id="modal-block">
+            <div class="writing"> <!-- 관계 게시글 설정-->
+                <h5>관계문서 지정</h5>
+                 <button type="button" class="btn btn-outline-secondary size" data-toggle="modal" data-target="#modalCart" id="modal-block">
                 <input class="size" class="tt" type="text" placeholder="관련 문서들" name="relatedBoardList" id="inputRelList" disabled>
                 <input type="hidden" name="relatedBoardList" id="inputRelListReal" >
                 </button>
-                
+                </div>
             
 
-          	<div>
-            <button type="submit">작성 완료</button> 
-            <button onclick="history.back()" >뒤로가기</button>
+          	<div class="writing mm">
+            <button type="submit"class="btn btn-outline-dark">작성 완료</button> 
+            <button onclick="history.back()" type="button" class="btn btn-outline-dark">뒤로가기</button>
             </div>
           	</form>
           </div>
@@ -100,11 +102,10 @@ function typeRel(e) {
           						
         </div>
       </div>
-      <div class="col-sm-2 sidenav">
-        
-        
-      </div>
+    <div class="col-sm-2 sidenav"> 
     </div>
+    </div>
+    
   </div>
   
 <!-- footer -->

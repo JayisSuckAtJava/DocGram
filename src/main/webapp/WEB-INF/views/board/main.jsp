@@ -14,9 +14,10 @@
   <meta charset="utf-8">
     <link rel="icon" href="/resources/images/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../resources/css/bootstrap.css">
-  <link rel="stylesheet" href="../resources/css/main.css">
-    <link rel="stylesheet" href="../resources/css/comp.css">
+  
+  <link rel="stylesheet" href="/resources/css/bootstrap.css">
+  <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/comp.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="/resources/js/bootstrap.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -112,7 +113,7 @@
             <c:forEach items="${starList}" var="board">
             <tr onclick="location.href = 'board/${board.id}'" style="cursor:pointer;">
               <td>${board.title}</td>
-              <td>${board.user.dept.name}</td>
+<%--               <td style="width: 30%">${board.user.dept.name}</td> --%>
 <%--               <td>${board.date}</td>  --%>
               </tr>
             </c:forEach>

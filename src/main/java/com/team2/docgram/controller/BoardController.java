@@ -60,16 +60,20 @@ public class BoardController {
 	public String boardList(Model model,Long page,HttpSession session, String sel, String text) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		Long userId = user.getId();
+		Long listSize;
 		if(page == null) {
 			page = 1L;
 		}
 		List<BoardDto> boardList = new ArrayList<>();
 		if(sel == null || text == null) {
-			boardList = boardService.readBoardList(page, userId);			
+			boardList = boardService.readBoardList(page, userId);
+			listSize = boardService.readBoardListSize(userId);
 		}else {
 			boardList = searchService.readBoardList(page, userId, sel, text);
+			listSize = searchService.readBoardListSize(page, userId, sel, text);
 		}
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("listSize",listSize);
 		return "board/dept";
 	}
 	
@@ -105,7 +109,7 @@ public class BoardController {
 	 */
 	@GetMapping("board/create")
 	public String boardCreatePage() {
-		return "board/create";
+		return "board/create";		
 	}
 	
 	/**
@@ -232,9 +236,9 @@ public class BoardController {
 	 * @since 2022. 5. 31.
 	 */
 	@GetMapping("notice/list")
-	public String noticeList(Model model) {
-		List<BoardDto> noticeList = boardService.readNoticeList();
-		model.addAttribute("noticeList", noticeList);
+	public String noticeList(Model model, @RequestParam(defaultValue = "1", required = false, name= "page")Long page) {
+		Map<String, Object> map = boardService.readNoticeList(page);
+		model.addAllAttributes(map);
 		return "board/notice";
 	}
 	
