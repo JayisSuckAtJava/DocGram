@@ -32,4 +32,8 @@ public interface UserService {
 
 	Integer searchEmail(String email);
 
+	Long readUserListSize();
+
+	Long readUserListSize(String name);
+
 }

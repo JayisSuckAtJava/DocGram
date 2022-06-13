@@ -40,4 +40,10 @@ public interface BoardService {
 
 	List<BoardDto> readDeptBoardList(Long page, Long deptId, String sel, String text);
 
+	Map<String, Object> readNoticeList(Long page);
+
+	Long readBoardListSize(Long userId);
+
+	Long readDeptBoardListSize(Long deptId, String sel, String text);
+
 }

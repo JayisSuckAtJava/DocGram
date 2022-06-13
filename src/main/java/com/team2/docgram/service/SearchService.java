@@ -26,4 +26,6 @@ public interface SearchService {
 
 	List<BoardDto> readBoardList(Long page, Long userId, String sel, String text);
 
+	Long readBoardListSize(Long page, Long userId, String sel, String text);
+
 }
