@@ -113,3 +113,11 @@
 	* Backend Developer
 	* EMAIL : zavacxva@gmail.com
 
+## 산출물
+	 * WBS : https://docs.google.com/spreadsheets/d/1--2Tbr1ljM9DPjTy-Tl9HprD75HMcuC_/edit?usp=sharing&ouid=116696750002682505678&rtpof=true&sd=true
+	 * 개발 환경 구축 가이드 : https://docs.google.com/document/d/1gJEMN0L2oX9k81BR-3WctGSlmXeOSKTESIZrpbzUYpA/edit?usp=sharing
+	 * ERD : https://docs.google.com/presentation/d/1sNnSK-v3Yo6k1csXf-K4iOYZrFP_f4VF/edit?usp=sharing&ouid=116696750002682505678&rtpof=true&sd=true
+	 * 계획서 : https://docs.google.com/document/d/1N5Ofc7YDVvSNh1E-GzKAWelt6h1q8aYIfc9tzaWxDDU/edit?usp=sharing
+	 * 화면 구상 : https://docs.google.com/presentation/d/10IkVgkF0D3nmsoSY3PJ2Q9SCh20rDVda/edit?usp=sharing&ouid=116696750002682505678&rtpof=true&sd=true
+	 * 사용자 가이드 : https://docs.google.com/document/d/1QI-lApt1R2RPwayEYTY4Flql885ss9Vp/edit?usp=sharing&ouid=116696750002682505678&rtpof=true&sd=true
+	 * 시연 영상 : https://drive.google.com/file/d/1kbPzXXe8HBsmKoHU5Jy_6INKNgkDxh-3/view?usp=sharing
