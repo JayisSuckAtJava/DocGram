@@ -107,7 +107,7 @@
 	* EMAIL : cyk1999@naver.com
 *  문예빈
 	* DB
-	* EMAIL : 
+	* EMAIL : yebinmoon99@naver.com
 	
 *  이재범
 	* Backend Developer
