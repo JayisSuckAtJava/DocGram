@@ -21,7 +21,8 @@
 
 ## 프로젝트 Environment
 #### 사용된 기술
-![java](https://camo.githubusercontent.com/64fff471582dc0763edf9abaebaf343ba03c7a34021313b77c9b4cd00368caf8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a6176612d3030364435433f7374796c653d666c61742d737175617265266c6f676f3d4a617661266c6f676f436f6c6f723d7768697465)
+
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/></a>&nbsp 
 <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=flat-square&logo=Apache Tomcat&logoColor=black"/></a>
 <img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=MariaDB&logoColor=white"/></a> 
 
